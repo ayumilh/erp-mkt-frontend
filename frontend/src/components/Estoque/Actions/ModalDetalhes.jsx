@@ -8,7 +8,7 @@ import { SwipeableDrawer } from "@mui/material";
 import Modal from "react-modal";
 
 Modal.setAppElement("body");
-export default function ModalDetalhes({ onClose, sku }) {
+function ModalDetalhes({ onClose, sku }) {
   const [isOpen, setIsOpen] = useState(true);
 
   const modalClose = () => {
@@ -93,3 +93,4 @@ export default function ModalDetalhes({ onClose, sku }) {
     </div>
   );
 }
+export default ModalDetalhes;

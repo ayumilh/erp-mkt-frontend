@@ -1,4 +1,4 @@
-import { ChartContentLucros } from "./Charts/ChartContentlucros"
+import { ChartContentLucros } from "./Charts/ChartContentLucros"
 import { LucrosResumoMiniTabela } from "./Tabela/LucrosResumoMiniTabela"
 import LucrosTabela from "./Tabela/LucrosTabela"
 

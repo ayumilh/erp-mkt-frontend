@@ -15,7 +15,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
 import SettingsIcon from '@mui/icons-material/Settings';
-import BtnSignOut from "../btnSignOut";
+import BtnSignOut from "../BtnSignOut";
 import { Zoom } from "@mui/material";
 
 const iconsNav = [
