@@ -3,7 +3,7 @@ import { nextAuthOptions } from '../../../app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 
 import Content from "@/components/Drawer/desktop/SidebarContent";
-import SincronizarContent from "@/components/Estoque/sincronizarAnuncios/SincronizarContent";
+import SincronizarContent from "@/components/Estoque/SincronizarAnuncios/SincronizarContent";
 
 const SincronizarAnuncios = async () => { 
   const session = await getServerSession(nextAuthOptions)

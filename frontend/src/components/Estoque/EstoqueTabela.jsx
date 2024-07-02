@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 import EstoqueRow from "./EstoqueRow";
-import ModalDetalhes from "./actions/ModalDetalhes";
+import ModalDetalhes from "./Actions/ModalDetalhes";
 import { EstoqueMenuMoreResponsive } from "./Actions/EstoqueMenuMoreResponsive";
 
 const EstoqueTabela = () => {
