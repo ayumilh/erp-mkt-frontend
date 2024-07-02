@@ -1,7 +1,7 @@
 import HamburgerContent from "@/components/Drawer/mobile/HamburgerContent"
 import ActionsHeader from "../../ActionsHeader"
 import SincronizarActionsFilter from "./SincronizarActionsFilter"
-import SincronizarTabela from "./SincronizarTabela"
+import Sincronizartabela from "./Sincronizartabela"
 import SincronizarHeader from "./SincronizarHeader"
 import TitlePage from "@/components/Geral/TitlePage"
 
@@ -20,7 +20,7 @@ const SincronizarContent = () => {
       <div className='mx-auto flex flex-col justify-start items-center' style={{height: '1000px'}}>
         <SincronizarHeader/>
         <SincronizarActionsFilter/>
-        <SincronizarTabela/>
+        <Sincronizartabela/>
       </div>
     </div>
   )
