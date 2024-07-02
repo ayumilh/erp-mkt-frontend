@@ -1,7 +1,7 @@
 import SincronizarRow from "./SincronizarRow";
 import { SincronizarMenuMoreResponsive } from './SincronizarMenuMoreResponsive';
 
-const SincronizarTabela = () => {
+function SincronizarTabela(){
   return (
     <div className="bg-primaria-900 rounded-2xl w-[373px] md:w-[720px] lg:w-[876px] xl:w-[1264px] flex flex-col mx-auto lg:mx-0 mb-10 overflow-x-auto">
       <SincronizarMenuMoreResponsive />
