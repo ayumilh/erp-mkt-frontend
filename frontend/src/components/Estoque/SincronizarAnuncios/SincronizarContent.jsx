@@ -5,6 +5,7 @@ import SincronizarTabela from "./SincronizarTabela"
 import SincronizarHeader from "./SincronizarHeader"
 import TitlePage from "@/components/Geral/TitlePage"
 
+
 const SincronizarContent = () => {
   return (
     <div className='w-full xl:mx-0 lg:pt-6'>
