@@ -1,0 +1,51 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "pm2": "npm run dev",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@amcharts/amcharts5": "^5.8.7",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.12",
+    "@mui/material": "^5.15.12",
+    "@mui/x-data-grid": "^7.1.1",
+    "apexcharts": "^3.49.1",
+    "axios": "^1.6.8",
+    "date-fns": "^3.6.0",
+    "install": "^0.13.0",
+    "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0",
+    "next": "^14.2.4",
+    "next-auth": "^4.24.7",
+    "next.js": "^1.0.3",
+    "react": "^18.3.1",
+    "react-apexcharts": "^1.4.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.2.1",
+    "react-modal": "^3.16.1",
+    "react-router-dom": "^6.22.3",
+    "react-to-print": "^2.15.1",
+    "tailwind-variants": "^0.2.1",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.1.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0"
+  },
+  "proxy": "https://erp-mkt.vercel.app/api",
+  "description": "erp-mkt",
+  "main": "pages/index.js",
+  "repository": "https://github.com/LucasPasseti/ERP_MKT.git",
+  "author": "LucasPasseti",
+  "license": "MIT"
+}
