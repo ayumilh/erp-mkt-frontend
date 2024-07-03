@@ -1,9 +1,8 @@
-'use client'
 import  { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactApexChart from 'react-apexcharts';
 
-const ChartLineVendas = ({ selectedItem }) => {
+const MultipleYAxis = ({selectedItem}) => {
   const [sales, setSales] = useState([]);
   const [valoresParaYAxis, setValoresParaYAxis] = useState([]);
 
@@ -25,6 +24,7 @@ const ChartLineVendas = ({ selectedItem }) => {
               VendasPorCliente: sales["Vendas por Cliente"],       
             };
           });
+          console.log(restructuredData);
           setSales(restructuredData);
         } else {
           setSales([]);
@@ -72,7 +72,7 @@ const ChartLineVendas = ({ selectedItem }) => {
       }
     }));
   }, [sales, selectedItem]);
-  
+
 
   const [chartData, setChartData] = useState({
     series: [{
@@ -81,27 +81,30 @@ const ChartLineVendas = ({ selectedItem }) => {
     }],
     options: {
       chart: {
-        height: 290,
+        height: 350,
         type: 'line',
-        zoom: {
-          enabled: true
-        }
+        stacked: false,
       },
-      colors: ['#8b5cf6'],
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
-        curve: 'straight'
+        width: [1, 1, 4],
       },
-      grid: {
-        row: {
-          colors: ['#f3f3f3', 'transparent'],
-          opacity: 0.5
+      tooltip: {
+        fixed: {
+          enabled: true,
+          position: 'topLeft',
+          offsetY: 30,
+          offsetX: 60,
         },
       },
-    },
-  });
+      legend: {
+        horizontalAlign: 'left',
+        offsetX: 40,
+      },
+    }
+  })
 
   return (
     <div>
@@ -109,15 +112,8 @@ const ChartLineVendas = ({ selectedItem }) => {
         <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={290} />
       </div>
       <div id="html-dist"></div>
-        <div className='flex justify-around items-center'>
-          <button className='bg-violet-400 hover:bg-gray-200 rounded-lg p-2 font-medium text-neutral-800 transition duration-300 ease-out'>1D</button>
-          <button className='hover:bg-gray-200 rounded-lg p-2 font-medium text-neutral-800 transition duration-300 ease-out'>1M</button>
-          <button className='hover:bg-gray-200 rounded-lg p-2 font-medium text-neutral-800 transition duration-300 ease-out'>3M</button>
-          <button className='hover:bg-gray-200 rounded-lg p-2 font-medium text-neutral-800 transition duration-300 ease-out'>6M</button>
-          <button className='hover:bg-gray-200 rounded-lg p-2 font-medium text-neutral-800 transition duration-300 ease-out'>12M</button>
-        </div>
     </div>
   );
 };
 
-export default ChartLineVendas;
+export default MultipleYAxis;

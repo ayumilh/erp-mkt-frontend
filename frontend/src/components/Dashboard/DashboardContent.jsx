@@ -4,8 +4,6 @@ import DashboardTarefas from './DashboardTarefas';
 import ChartLojasContent from './ChartLojas/ChartLojasContent';
 import PieAnalysisContent from './PieAnalysis/PieAnalysisContent';
 import QuickActions from '../QuickActions';
-import CodeMagalu from '../Token/CodeMagalu';
-import CodeToken from '../Token/CodeToken';
 import TitlePage from '../Geral/TitlePage';
 
 
