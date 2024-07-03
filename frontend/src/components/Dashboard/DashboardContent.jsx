@@ -17,8 +17,6 @@ const DashboardContent = () => {
           <HamburgerContent/>
           <TitlePage title='Dashboard'/>
         </div>
-        <CodeMagalu/>
-        <CodeToken/>
         <ActionsHeader/>
       </div>
 
