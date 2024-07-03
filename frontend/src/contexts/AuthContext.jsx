@@ -1,8 +1,9 @@
 'use client'
-import { createContext, useState, useEffect, use } from "react";
+import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
+import { redirect } from 'next/navigation';
 
 export const AuthContext = createContext();
 
@@ -14,8 +15,9 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (inputs) => {
     try {
       const res = await axios.post("https://erp-mkt.vercel.app/api/auth/login", inputs, { withCredentials: true });
-      Cookies.set('loginResponse', JSON.stringify(res.data));
-      setCurrentUser(res.data);
+        Cookies.set('loginResponse', JSON.stringify(res.data));
+        setCurrentUser(res.data);
+        setIsAuthenticated(true);
     } catch (error) {
       console.error('Error:', error);
     }

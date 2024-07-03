@@ -18,12 +18,12 @@ const AnliseActionsFilter = () => {
         </div>
 
         <div className="flex mt-4 md:mt-0 xl:ml-5">
-          <select title='Lojas' className="rounded p-2 mr-2 w-1/2 lg:w-[160px] xl:w-[200px] text-xs md:text-sm opacity-80 font-normal" name="lojas" id="lojas">
+          <select title='Lojas' className="rounded px-3 py-2 mr-2 w-1/2 lg:w-[160px] xl:w-[200px] text-xs md:text-sm opacity-80 font-normal" name="lojas" id="lojas">
             <option className="text-sm opacity-80 font-normal" value="lojas">Lojas</option>
             <option className="text-sm opacity-80 font-normal" value="magalu">Magalu</option>
             <option className="text-sm opacity-80 font-normal" value="mercadoLivre">Mercado Livre</option>
           </select>
-          <select title='Status do produto' className="rounded p-2 w-1/2 lg:w-[160px] xl:w-[200px] text-xs md:text-sm opacity-80 font-normal" name="status" id="status">
+          <select title='Status do produto' className="rounded px-3 py-2 w-1/2 lg:w-[160px] xl:w-[200px] text-xs md:text-sm opacity-80 font-normal" name="status" id="status">
             <option className="text-sm opacity-80 font-normal" value="status">Status</option>
             <option className="text-sm opacity-80 font-normal" value="inativo">Inativo</option>
             <option className="text-sm opacity-80 font-normal" value="quantidade">Quantidade</option>

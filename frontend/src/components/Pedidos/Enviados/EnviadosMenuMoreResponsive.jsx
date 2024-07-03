@@ -35,7 +35,7 @@ export const EnviadosMenuMoreResponsive = ({showCheckboxes, showCheckboxesAll, s
         <MoreVertIcon className="h-5 w-5" />
       </button>
       {isOpenMenu && (
-        <div className="top-10 left-10 absolute z-10 mt-2 px-2 rounded-md bg-white">
+        <div className="top-10 left-10 absolute z-10 mt-3 px-2 rounded-md bg-white">
          {/* <DropdownSelectOrAll 
             title={'Enviar'}
             setShowCheckboxes={setShowCheckboxes} 

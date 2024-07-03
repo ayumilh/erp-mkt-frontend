@@ -18,12 +18,12 @@ const PedidosActionsFilter = () => {
         </div>
 
         <div className="flex mt-4 md:mt-0 xl:ml-5">
-          <select title='Número da estante' className="rounded p-2 mr-2 w-1/2 lg:w-[160px] xl:w-[200px] text-xs md:text-sm opacity-80 font-normal" name="nEstante" id="nEstante">
+          <select title='Número da estante' className="rounded px-3 py-2 mr-2 w-1/2 lg:w-[160px] xl:w-[200px] text-xs md:text-sm opacity-80 font-normal" name="nEstante" id="nEstante">
             <option className="text-sm opacity-80 font-normal" value="nEstante">N° da Estante</option>
             <option className="text-sm opacity-80 font-normal" value="1">1</option>
             <option className="text-sm opacity-80 font-normal" value="2">2</option>
           </select>
-          <select title='Armazém' className="rounded p-2 w-1/2 lg:w-[160px] xl:w-[200px] text-xs md:text-sm opacity-80 font-normal" name="status" id="Armazem">
+          <select title='Armazém' className="rounded px-3 py-2 w-1/2 lg:w-[160px] xl:w-[200px] text-xs md:text-sm opacity-80 font-normal" name="status" id="Armazem">
             <option className="text-sm opacity-80 font-normal" value="Armazem">Armazém</option>
             <option className="text-sm opacity-80 font-normal" value="saoPaulo">São Paulo</option>
             <option className="text-sm opacity-80 font-normal" value="Guarulhos">Guarulhos</option>

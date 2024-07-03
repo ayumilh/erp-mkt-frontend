@@ -42,10 +42,9 @@
     "postcss": "^8",
     "tailwindcss": "^3.3.0"
   },
-  "proxy": "https://erp-mkt.vercel.app/api",
   "description": "erp-mkt",
   "main": "pages/index.js",
-  "repository": "https://github.com/LucasPasseti/ERP_MKT.git",
-  "author": "LucasPasseti",
+  "repository": "https://github.com/ayumilh/erp-mkt-frontend.git",
+  "author": "ayumilh",
   "license": "MIT"
 }
