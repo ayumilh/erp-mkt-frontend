@@ -81,9 +81,16 @@ const PieVendasPorLojas = () =>{
         </div>
       </div>
       <div id="chart">
-        <ReactApexChart options={options} series={series} type="pie" height={400} />
+        <ReactApexChart options={options} series={series} type="pie" height={350} />
       </div>
       <div id="html-dist"></div>
+      <div className='flex justify-around items-center mt-6'>
+        <button className='bg-violet-400 hover:bg-gray-200 rounded-lg p-2 font-medium text-neutral-800 transition duration-300 ease-out'>1D</button>
+        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>1M</button>
+        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>3M</button>
+        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>6M</button>
+        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>12M</button>
+      </div>
     </div>
   );
 }
