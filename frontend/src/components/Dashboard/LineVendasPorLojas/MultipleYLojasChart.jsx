@@ -19,7 +19,6 @@ const MultipleYLojasChart = () => {
         height: 350,
         type: 'candlestick',
         toolbar: {
-          autoSelected: 'pan',
           show: false
         },
       },
