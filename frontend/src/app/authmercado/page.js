@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { nextAuthOptions } from '../../app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 
-export default function authmercado() {
+export default async function authmercado() {
   const session = await getServerSession(nextAuthOptions)
   if(!session) {
     redirect('/login')
