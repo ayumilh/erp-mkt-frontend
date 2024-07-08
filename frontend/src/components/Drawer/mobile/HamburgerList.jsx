@@ -14,6 +14,7 @@ import SacIcon from "@mui/icons-material/Help";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import HelpIcon from '@mui/icons-material/Help';
+import ModalConectarLojas from "@/components/Config/ModalConectarLojas";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LinkIcon from '@mui/icons-material/Link';
 import { EmailAddressUser } from "../EmailAddressUser";
@@ -130,6 +131,7 @@ const HamburgerList = ({ open }) => {
         </button>
       </li>
     </ul>
+    {isModalOpen && <ModalConectarLojas onClose={toggleModal} />}
   </>);
 };
 
