@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactApexChart from 'react-apexcharts';
 
@@ -103,7 +103,7 @@ const MultipleYAxis = ({selectedItem}) => {
         horizontalAlign: 'left',
         offsetX: 40,
       },
-    }
+    },
   })
 
   return (

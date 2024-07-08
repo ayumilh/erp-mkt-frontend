@@ -4,6 +4,7 @@ import axios from "axios";
 const ChartCardsLucros = ({onItemSelected}) => {
   const [selectedItem, setSelectedItem] = useState('Lucro Total');
   const [lucros, setLucros] = useState([]);
+
   const info = [
     { titulo: 'Lucro Total', valor: lucros.TaxaDeADS, porcentagem: '6,2%' },
     { titulo: 'Taxa Média de Lucro', valor: lucros.ValorDoPedido, porcentagem: '2,0%' },
@@ -58,7 +59,7 @@ const ChartCardsLucros = ({onItemSelected}) => {
     if (lucros.TaxaDeADS) {
       onItemSelected({ titulo: 'Valor Total de Vendas', valor: lucros.TaxaDeADS });
     }
-  }, [lucros]);
+  }, [lucros, onItemSelected]);
 
   const handleItemClick = (item) => {
     onItemSelected(item);

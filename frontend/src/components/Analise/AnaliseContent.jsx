@@ -22,7 +22,6 @@ const AnaliseContent = () => {
 
       <div className='w-full flex flex-col items-center' style={{height: '1000px'}}>
         <AnaliseHeader setActiveTable={setActiveTable} />
-        {/* <AnaliseActionsFilter />   */}
         {activeTable === 'Geral' && <GeralContent />}
         {activeTable === 'Lucros' && <LucrosContent />}
         {activeTable === 'Vendas' && <VendasContent />}

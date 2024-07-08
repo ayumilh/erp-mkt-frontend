@@ -1,6 +1,9 @@
+import dynamic from "next/dynamic";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PieAnalysisHeader from "./PieAnalysisHeader";
-import Pie from "./Pie";
+
+const PieRankingChart = dynamic(() => import('./PieRankingChart'), { ssr: false });
+
 
 const PieAnalysisContent = () => {
   return (
@@ -12,15 +15,15 @@ const PieAnalysisContent = () => {
           <KeyboardArrowDownIcon className="-mr-1 ml-2 h-5 w-5"/>
         </button>
 
-        <Pie />
+        <PieRankingChart />
 
         <div className="pt-4">
           <button
             aria-controls="btn-pie"
             aria-haspopup="true"
-            className="w-[182px] px-2 py-1 rounded-md border-gray-200 hover:border-[#c7c7c7] focus:outline-none focus:ring-1 focus:ring-[#d4d4d4]"
+            className="bg-primaria-900 inline-flex justify-center w-full rounded-md border border-gray-200 hover:border-[#c7c7c7] focus:outline-none focus:ring-1 focus:ring-[#d4d4d4] px-2 py-1 transition duration-300 ease-in-out"
           >
-            <span className="opacity-90 hover:opacity-100 text-sm font-medium">Ranking de vendas</span>
+            <span className="opacity-90 hover:opacity-100 text-sm font-medium transition duration-300 ease-in-out">Ranking de vendas</span>
             <KeyboardArrowDownIcon className="-mr-1 ml-2 h-5 w-5"/>
           </button>
         </div>

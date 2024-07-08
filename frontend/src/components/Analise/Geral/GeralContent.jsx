@@ -1,12 +1,10 @@
 'use client'
-import dynamic from 'next/dynamic';
-import UltimasVendas from '../Tabelas/UltimasVendas';
-import { AreaContent } from '../Charts/AreaSazonais/AreaSazonaisContent';
-import { LineVendasContent } from '../Charts/LineVendas/LineVendasContent';
-
-const BlockAnaliseGeral = dynamic(() => import('./BlockAnaliseGeral'), { ssr: false });
-const BarProdutosVendidos = dynamic(() => import('../Charts/BarProdutosVendidos'), { ssr: false });
-const PieVendasPorLojas = dynamic(() => import('../Charts/PieVendasPorLojas'), { ssr: false });
+import UltimasVendas from './Tabelas/UltimasVendas';
+import { AreaContent } from './Charts/AreaSazonais/AreaSazonaisContent';
+import { LineVendasContent } from './Charts/LineVendas/LineVendasContent';
+import { PieProdutosContent } from './Charts/PieProdutos/PieProdutosContent';
+import { BarEstoqueContent } from './Charts/BarEstoque/BarEstoqueContent';
+import BlockAnaliseGeral from './BlockAnaliseGeral';
 
 export const GeralContent = () => {
   return (
@@ -17,8 +15,8 @@ export const GeralContent = () => {
       </div>
 
       <div className='lg:flex lg:w-full lg:gap-7 mt-7 justify-center items-center'>
-        <PieVendasPorLojas />
-        <BarProdutosVendidos/>
+        <PieProdutosContent />
+        <BarEstoqueContent/>
       </div>
 
       <div className='lg:flex lg:w-full lg:gap-7 my-7 justify-center items-center'>

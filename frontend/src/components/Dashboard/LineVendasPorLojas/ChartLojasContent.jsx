@@ -1,11 +1,22 @@
-import ChartLojasButton from "./ChartLojasButton";
+'use client'
+import { useState } from "react";
+import dynamic from "next/dynamic";
+import ChartFilterLojas from "../../Geral/Dropdown/ChartFilterLojas";
+import { ChartTypeSelector } from "@/components/Geral/Dropdown/ChartTypeSelector";
+
+const LineLojasChart = dynamic(() => import('./LineLojasChart'), { ssr: false });
+const MultipleYAxis = dynamic(() => import('@/components/Analise/Vendas/Charts/MultipleYAxis'), { ssr: false });
 
 const ChartLojasContent = () => {
+  const [chartTypeSelected, setChartTypeSelected] = useState('bar');
   return (
     <div className="bg-primaria-900 shadow-lg border border-slate-100 rounded-20 max-w-[373px] md:max-w-[688px] lg:max-w-[596px] lg:mx-0 xl:min-w-[958px] px-4 lg:px-5 xl:px-8 py-5 xl:py-7 mb-7 lg:mb-0 mx-2 xs:mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h2 className='text-base text-colorFont-200 font-semibold'>Lojas</h2> 
-        <ChartLojasButton />
+        <div className="flex items-center gap-2">
+          <ChartTypeSelector onChartTypeSelected={setChartTypeSelected} />
+          <ChartFilterLojas />
+        </div>
       </div>
      
       <div className="flex flex-row flex-wrap gap-6">
@@ -22,6 +33,12 @@ const ChartLojasContent = () => {
           </h2>
         </div>
       </div>
+      
+      {chartTypeSelected === 'candlestick' ? (
+        <MultipleYAxis  />
+      ) : (
+        <LineLojasChart  />
+      )}
     </div>
   );
 };

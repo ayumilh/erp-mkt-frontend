@@ -6,7 +6,7 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-export default function ImprimirRow({ setOrder, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }){
+export default function RetiradaRow({ setOrder, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }){
   const [pedido, setPedido] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
@@ -16,8 +16,8 @@ export default function ImprimirRow({ setOrder, toggleShowCheckboxes, toggleShow
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/ready`);
-        console.log(response.data)
+        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/printed`);
+        console.log(response.data);
         if (response.data && Array.isArray(response.data.orders)) {
           const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
             if (order.shipping_id !== null) {

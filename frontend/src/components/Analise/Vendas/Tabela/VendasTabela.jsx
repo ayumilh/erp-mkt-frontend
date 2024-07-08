@@ -1,5 +1,5 @@
 import VendasRow from './VendasRow';
-import { VendasMenuMoreResponsive } from '../VendasMenuMoreResponsive';
+import { VendasMenuMoreResponsive } from '../Actions/VendasMenuMoreResponsive';
 
 export default function VendasTabela() {
   return (

@@ -19,7 +19,7 @@ export default function ChartCardVendas({ onItemSelected }) {
     if (sales.ValorTotalDeVendas) {
       onItemSelected({ titulo: 'Valor Total de Vendas', valor: sales.ValorTotalDeVendas });
     }
-  }, [sales]);
+  }, [sales, onItemSelected]);
 
   useEffect(() => {
     const fetchSales = async () => {

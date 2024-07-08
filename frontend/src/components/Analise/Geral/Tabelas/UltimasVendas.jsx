@@ -11,7 +11,7 @@ const UltimasVendas = () => {
   return (
     <div className="bg-primaria-900 shadow-md rounded-3xl w-full md:w-[320px] lg:max-w-[320px] xl:w-[340px] mt-7 lg:mt-0 p-5 md:px-4 md:py-8 xl:px-6">
       <h2 className='text-base text-neutral-800 font-semibold'>Últimas Vendas</h2>
-      <div className="overflow-y-auto max-h-[380px] pr-3 mt-4">
+      <div className="overflow-y-auto max-h-[470px] pr-3 mt-4">
         <table className="min-w-full leading-normal">
           <thead className="sticky top-0 bg-primaria-900">
             <tr>

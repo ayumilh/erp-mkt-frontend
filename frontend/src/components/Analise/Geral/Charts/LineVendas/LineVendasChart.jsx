@@ -14,10 +14,10 @@ const LineVendasChart = () => {
         type: 'line',
         zoom: {
           enabled: true
-        }
-      },
-      toolbar: {
-        position: 'bottom',
+        },
+        toolbar: {
+          show: false
+        },
       },
       colors: ['#8b5cf6'],
       dataLabels: {

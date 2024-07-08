@@ -73,7 +73,9 @@ export const DropdownHeader = ({ setActiveTable }) => {
               className="flex w-full opacity-90 text-sm font-medium px-2 my-2 hover:text-black hover:bg-white" role="menuitem">
               Imprimir
             </button>
-            <button className="flex w-full opacity-90 text-sm font-medium px-2 my-2 hover:text-black hover:bg-white" role="menuitem">
+            <button 
+              onClick={() => handleClickEmitir('Retirada')}
+              className="flex w-full opacity-90 text-sm font-medium px-2 my-2 hover:text-black hover:bg-white" role="menuitem">
               Retirada
             </button>
             <button 
