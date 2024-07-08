@@ -4,6 +4,7 @@ import * as React from "react";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 import HamburgerList from "./HamburgerList";
 import HamburgerHeader from "./HamburgerHeader";
@@ -30,29 +31,50 @@ export default function HamburgerContent() {
       <IconButton
         color="inherit"
         aria-label="open drawer"
-        onClick={handleDrawerOpen}
+        onClick={handleDrawerToggle}
         edge="start"
         sx={{ mr: 2, ...(open && { display: "none" }) }}
       >
         <MenuRoundedIcon sx={{fontSize: '28px'}}/>
       </IconButton>
 
-      <Drawer
-        sx={{
-          width: "100%",
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <HamburgerHeader handleDrawerToggle={handleDrawerToggle} open={open}/>
-        <HamburgerList open={open}/>
-      </Drawer>
+      {open ? (
+        <ClickAwayListener onClickAway={handleDrawerClose}>
+          <Drawer
+            sx={{
+              width: "100%",
+              flexShrink: 0,
+              "& .MuiDrawer-paper": {
+                width: drawerWidth,
+                boxSizing: "border-box",
+              },
+            }}
+            variant="persistent"
+            anchor="left"
+            open={open}
+          >
+            <HamburgerHeader handleDrawerToggle={handleDrawerToggle} open={open}/>
+            <HamburgerList open={open}/>
+          </Drawer>
+        </ClickAwayListener>
+      ) : (
+        <Drawer
+          sx={{
+            width: "100%",
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <HamburgerHeader handleDrawerToggle={handleDrawerToggle} open={open}/>
+          <HamburgerList open={open}/>
+        </Drawer>
+      )}
     </div>
   );
 }

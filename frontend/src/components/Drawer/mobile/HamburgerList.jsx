@@ -1,9 +1,10 @@
+'use client'
+import { useState } from "react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { Divider } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ProductsIcon from "@mui/icons-material/Store";
 import OrdersIcon from "@mui/icons-material/ShoppingCart";
 import BuyIcon from "@mui/icons-material/LocalAtm";
@@ -14,6 +15,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import HelpIcon from '@mui/icons-material/Help';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import LinkIcon from '@mui/icons-material/Link';
 import { EmailAddressUser } from "../EmailAddressUser";
 
 const iconsNav = [
@@ -32,6 +34,8 @@ const iconConfig = [
   <SettingsIcon key="settings" className="w-8 text-segundaria-900" />,
 ];
 const HamburgerList = ({ open }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
   return (<>
     <ul className="flex flex-col px-4 my-10">
       {["Dashboard","Produtos", "Pedidos", "Comprar", "Analise", "Estoque", "SAC"].map(
@@ -80,6 +84,19 @@ const HamburgerList = ({ open }) => {
           <div className="flex">
             <EmailAddressUser />
           </div>
+        </button>
+      </li>
+
+      <li className="flex flex-col mb-1">
+        <button onClick={toggleModal} 
+          className="flex w-[160px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-200"
+        >
+          <span
+            className={`flex justify-center text-segundaria-900 ${
+              open ? "mr-3" : "mr-auto"
+            }`}
+          > <LinkIcon fontSize="medium" className="ml-2 text-segundaria-900"/> </span>
+          <span className="text-neutral-800 font-medium whitespace-nowrap">Conectar Conta</span>
         </button>
       </li>
 
