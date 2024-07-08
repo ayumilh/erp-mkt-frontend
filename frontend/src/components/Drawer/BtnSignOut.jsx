@@ -5,10 +5,10 @@ const BtnSignOut = () => {
   return (
     <button 
       onClick={() => signOut()}
-      className="flex w-full px-0 py-0 text-sm hover:bg-gray-100"
+      className="flex items-center w-full px-0 py-0 hover:bg-gray-100 active:bg-gray-200"
     >
-      <span><LogoutIcon className="h-4 w-4 mr-2"></LogoutIcon></span>
-      <span>Sair</span>
+      <span><LogoutIcon fontSize="small" className="mr-2"></LogoutIcon></span>
+      <span className="text-sm text-neutral-800 font-medium">Sair</span>
     </button>
   )
 }

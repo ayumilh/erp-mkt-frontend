@@ -6,6 +6,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 import ProductsIcon from "@mui/icons-material/Store";
+import LinkIcon from '@mui/icons-material/Link';
 import OrdersIcon from "@mui/icons-material/ShoppingCart";
 import BuyIcon from "@mui/icons-material/LocalAtm";
 import AnalysisIcon from "@mui/icons-material/BarChart";
@@ -16,6 +17,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 
 import SettingsIcon from '@mui/icons-material/Settings';
 import BtnSignOut from "../BtnSignOut";
+import ModalConectarLojas from "@/components/Config/ModalConectarLojas";
 import { Zoom } from "@mui/material";
 
 const iconsNav = [
@@ -29,9 +31,12 @@ const iconsNav = [
 ];
 
 const SidebarList = ({ open }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -97,18 +102,37 @@ const SidebarList = ({ open }) => {
                 'aria-labelledby': 'basic-button',
               }}
               sx={{ '.MuiPaper-root': { borderRadius: 2 } }}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
             >
               <MenuItem onClick={handleClose}>
-                <button className="flex w-full text-sm hover:bg-gray-100">
-                  <span><SettingsIcon className="h-4 w-4 mr-2"></SettingsIcon></span>
-                  <span>Ajuste</span>
+                <button onClick={toggleModal} 
+                  className="flex w-full hover:bg-gray-100 active:bg-gray-200"
+                >
+                  <span> <LinkIcon fontSize="small" className="mr-2"/> </span>
+                  <span className="text-sm text-neutral-800 font-medium">Conectar Conta</span>
                 </button>
               </MenuItem>
-              <MenuItem onClick={handleClose}><BtnSignOut/></MenuItem>
+              <MenuItem onClick={handleClose}>
+                <button className="flex w-full hover:bg-gray-100 active:bg-gray-200">
+                  <span> <SettingsIcon fontSize="small" className="mr-2"></SettingsIcon> </span>
+                  <span className="text-sm text-neutral-800 font-medium">Ajuste</span>
+                </button>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <BtnSignOut/>
+              </MenuItem>
             </Menu>
           </div>
         </li>
       </ul>
+      {isModalOpen && <ModalConectarLojas onClose={toggleModal} />}
     </>
   );
 };
