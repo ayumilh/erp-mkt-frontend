@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
 import PedidoRow from "./PedidoRow";
-import ModalDetalhes from "./Actions/ModalDetalhes";
+import ModalDetailsContent from "./Actions/ModalDetailsPedidos/ModalDetailsContent";
 import { PedidosMenuMoreResponsive } from './Actions/PedidosMenuMoreResponsive';
 
 const PedidosTabela = () => {
@@ -37,7 +37,7 @@ const PedidosTabela = () => {
         <PedidoRow setOrder={handleOrderSelect} />
         </tbody>
       </table>
-      {isModalTr && <ModalDetalhes onClose={closeModal} order={selectedOrder}/>}
+      {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder}/>}
     </div>
   );
 };

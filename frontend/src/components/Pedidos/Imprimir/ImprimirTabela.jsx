@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ImprimirRow from './ImprimirRow';
-import ModalDetalhes from '../Actions/ModalDetalhes';
+import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsContent';
 import { ImprimirMenuMoreResponsive } from './ImprimirMenuMoreResponsive';
 
 export default function ImprimirTabela() {
@@ -46,7 +46,7 @@ export default function ImprimirTabela() {
           />
         </tbody>
       </table>
-      {isModalTr && <ModalDetalhes onClose={closeModal} order={selectedOrder}/>}
+      {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder}/>}
     </div>
   );
 };

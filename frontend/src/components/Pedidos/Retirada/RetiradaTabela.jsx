@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ModalDetalhes from '../Actions/ModalDetalhes';
+import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsContent';
 import RetiradaRow from './RetiradaRow';
 import { RetiradaMenuMoreResponsive } from './RetiradaMenuMoreResponsive';
 
@@ -46,7 +46,7 @@ export default function RetiradaTabela() {
           />
         </tbody>
       </table>
-      {isModalTr && <ModalDetalhes onClose={closeModal} order={selectedOrder}/>}
+      {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder}/>}
     </div>
   );
 };

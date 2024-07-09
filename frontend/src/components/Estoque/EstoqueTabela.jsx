@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 import EstoqueRow from "./EstoqueRow";
-import ModalDetalhes from "./Actions/ModalDetalhes";
+import ModalDetailsEstoque from "./Actions/ModalDetailsEstoque";
 import { EstoqueMenuMoreResponsive } from "./Actions/EstoqueMenuMoreResponsive";
 
 const EstoqueTabela = () => {
@@ -33,7 +33,7 @@ const EstoqueTabela = () => {
           <EstoqueRow setSku={handleSkuSelect}/>
         </tbody>
       </table>
-      {isModalTr && <ModalDetalhes onClose={closeModal} sku={selectedSku}/>}
+      {isModalTr && <ModalDetailsEstoque onClose={closeModal} sku={selectedSku}/>}
     </div>
   );
 };

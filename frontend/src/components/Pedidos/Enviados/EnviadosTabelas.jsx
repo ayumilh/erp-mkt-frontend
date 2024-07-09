@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import EnviadosRow from './EnviadosRow';
-import ModalDetalhes from '../Actions/ModalDetalhes';
+import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsContent';
 import {EnviadosMenuMoreResponsive} from './EnviadosMenuMoreResponsive';
 
 export default function EnviadosTabela() {
@@ -52,7 +52,7 @@ export default function EnviadosTabela() {
           />
         </tbody>
       </table>
-      {isModalTr && <ModalDetalhes onClose={closeModal} order={selectedOrder}/>}
+      {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder}/>}
     </div>
   );
 };

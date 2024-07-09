@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import EmitirRow from './EmitirRow';
-import ModalDetalhes from '../Actions/ModalDetalhes';
+import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsContent';
 import { EmitirMenuMoreResponsive } from './EmitirMenuMoreResponsive';
 import SuccessNotification from '../../Geral/Notifications/SuccessNotification';
 import ErrorNotification from '../../Geral/Notifications/ErrorNotification';
@@ -54,7 +54,7 @@ export default function EmitirTabela() {
           />
         </tbody>
       </table>
-      {isModalTr && <ModalDetalhes onClose={closeModal} order={selectedOrder}/>}
+      {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder}/>}
       {
         statusRequestEmitirPedido === true && <SuccessNotification message='Pedidos emitidos com sucesso!' />
       }

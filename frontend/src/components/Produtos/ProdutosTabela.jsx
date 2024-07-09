@@ -5,7 +5,7 @@ import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import EditIcon from '@mui/icons-material/Edit';
-import ModalDetalhes from "./Actions/ModalDetalhes";
+import ModalDetailsProdutos from "./Actions/ModalDetailsProdutos";
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import ModalGerarProdutos from "./Actions/ModalGerarProdutos";
@@ -175,7 +175,7 @@ const ProdutosTabela = () => {
       {isModalGerar && (
         <ModalGerarProdutos onClose={() => setIsModalGerar(false)} idProduct={idProduct} />
       )}
-      {isModalTr && <ModalDetalhes onClose={closeModal} selectedSku={selectedSku} />}
+      {isModalTr && <ModalDetailsProdutos onClose={closeModal} selectedSku={selectedSku} />}
     </div>
   );
 };
