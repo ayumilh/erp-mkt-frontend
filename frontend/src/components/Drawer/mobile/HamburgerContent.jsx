@@ -5,19 +5,30 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-
+import ModalConectarLojas from "@/components/Config/ModalConectarLojas";
 import HamburgerList from "./HamburgerList";
 import HamburgerHeader from "./HamburgerHeader";
 
 const drawerWidth = 240;
 export default function HamburgerContent() {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  }
+
+  const handleSetIsModalOpen = (isModalOpen) => {
+    setIsModalOpen(isModalOpen);
+  };
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
   const handleDrawerToggle = () => {
     if (open) {
       handleDrawerClose();
@@ -54,7 +65,7 @@ export default function HamburgerContent() {
             open={open}
           >
             <HamburgerHeader handleDrawerToggle={handleDrawerToggle} open={open}/>
-            <HamburgerList open={open}/>
+            <HamburgerList open={open}  onSetIsModalOpen={handleSetIsModalOpen} onIsModalOpen={isModalOpen}/>
           </Drawer>
         </ClickAwayListener>
       ) : (
@@ -72,9 +83,10 @@ export default function HamburgerContent() {
           open={open}
         >
           <HamburgerHeader handleDrawerToggle={handleDrawerToggle} open={open}/>
-          <HamburgerList open={open}/>
+          <HamburgerList open={open} onSetIsModalOpen={handleSetIsModalOpen} onIsModalOpen={isModalOpen}/>
         </Drawer>
       )}
+      {isModalOpen && <ModalConectarLojas onClose={toggleModal} drawerClose={handleDrawerClose} />}
     </div>
   );
 }

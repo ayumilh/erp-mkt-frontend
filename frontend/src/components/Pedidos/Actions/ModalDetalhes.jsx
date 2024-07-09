@@ -11,12 +11,19 @@ Modal.setAppElement('body');
 export default function ModalDetalhes ({ onClose, order }){
   const [isOpen, setIsOpen] = useState(true);
   const [activeContent, setActiveContent] = useState('Resumo');
-  const [changeDetailContent, setChangeDetailContent] = useState(null);
+  const [changeDetailContent, setChangeDetailContent] = useState();
+
+  useEffect(() => {
+    if (activeContent === 'Resumo') {
+      setChangeDetailContent(/* valor ou lógica desejada */);
+    }
+  }, []);
 
   const modalClose = () => {
     setIsOpen(false);
     onClose();
   }
+  // componentizar as div do setChangeDetailContent para deixar o resumo como defaul
 
   const handleDetailContent = (detailContent) => {
     setActiveContent(detailContent);
@@ -186,7 +193,7 @@ export default function ModalDetalhes ({ onClose, order }){
           </div>
         
           <div className='flex flex-col justify-around mt-8 md:mx-5 lg:mx-7'>
-            <form className="bg-zinc-200 rounded-xl pl-5 md:px-7 lg:px-5 py-5 mt-5">
+            <form className="bg-gray-50 rounded-xl pl-5 md:px-7 lg:px-5 py-5 mt-5">
               <div>
                 <table>
                 <tbody className='flex flex-col md:flex-row gap-2 md:gap-7 lg:gap-10 xl:gap-auto'>

@@ -34,9 +34,11 @@ const iconConfig = [
   <HelpIcon key="help" className="w-8 text-segundaria-900" />,
   <SettingsIcon key="settings" className="w-8 text-segundaria-900" />,
 ];
-const HamburgerList = ({ open }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => setIsModalOpen(!isModalOpen);
+const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
+  const toggleModal = () => {
+    onSetIsModalOpen(!onIsModalOpen);
+  }
+  
   return (<>
     <ul className="flex flex-col px-4 my-10">
       {["Dashboard","Produtos", "Pedidos", "Comprar", "Analise", "Estoque", "SAC"].map(
@@ -131,7 +133,7 @@ const HamburgerList = ({ open }) => {
         </button>
       </li>
     </ul>
-    {isModalOpen && <ModalConectarLojas onClose={toggleModal} />}
+    {/* {isModalOpen && <ModalConectarLojas onClose={toggleModal} />} */}
   </>);
 };
 

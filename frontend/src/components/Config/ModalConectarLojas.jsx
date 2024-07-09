@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const ModalConectarLojas = ({ onClose }) => {
+const ModalConectarLojas = ({ onClose, drawerClose }) => {
   const [nomeLoja, setNomeLoja] = useState('');
   const [plataforma, setPlataforma] = useState('');
+  
+  useEffect(() => {
+    drawerClose();
+  }, [drawerClose]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(nomeLoja, plataforma);
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" onClick={onClose}>
+    <div className="fixed inset-0 z-10 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" onClick={onClose}>
       <div className="relative flex-col top-60 mx-auto py-5 px-6 border max-w-min rounded-md bg-primaria-900 shadow-lg" onClick={e => e.stopPropagation()}>
         <div className='flex items-center justify-between'>
           <h3 className="text-lg text-gray-800 font-medium">Conectar Conta</h3>
