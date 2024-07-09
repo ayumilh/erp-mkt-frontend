@@ -10,7 +10,7 @@ export const BarEstoqueContent = () => {
   const [chartTypeSelected, setChartTypeSelected] = useState('bar');
 
   return (
-    <div className='bg-primaria-900 shadow-md rounded-3xl w-full p-5 md:px-4 md:py-8 xl:px-6'>
+    <div className='bg-primaria-900 shadow-md rounded-3xl w-[345px] md:w-full mx-auto p-5 mt-7 md:px-4 md:py-8 xl:px-6'>
       <div>
         <div className='flex items-end flex-col'>
           <h2 className='mb-1 md:mb-2 text-sm md:text-base text-neutral-800 font-semibold'>Estoque</h2>

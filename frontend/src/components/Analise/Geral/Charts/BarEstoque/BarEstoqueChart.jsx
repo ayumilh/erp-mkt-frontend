@@ -34,12 +34,22 @@ const BarEstoqueChart = () => {
       font: {
         size: '20px'
       }
-    }
+    },
+    responsive: [
+      {
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 300
+          }
+        }
+      }
+    ]
   });
 
 
   return (
-    <div>
+    <div className="pr-4">
       <div id="chart"> 
         <ReactApexChart options={options} series={series} type="bar" height={350} width={450} />
       </div>

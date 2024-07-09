@@ -208,9 +208,9 @@ export default function ImprimirRow({ setOrder, toggleShowCheckboxes, toggleShow
     ) : (
       <tr>
           <td className="text-center" colSpan="7">
-            <div className="w-52 ml-10 md:ml-0 md:px-10 md:w-full py-12">
+            <div className="w-full py-12">
               <span><ProductionQuantityLimitsIcon style={{ width: 46, height: 46 }}/></span>
-              <p className="mt-8">Uh-oh! Parece que há pedidos, estamos ansiosos para apoiar suas próximas vendas!</p>
+              <p className="mt-8 mx-10">Uh-oh! Parece que há pedidos, estamos ansiosos para apoiar suas próximas vendas!</p>
             </div>
           </td>
         </tr>

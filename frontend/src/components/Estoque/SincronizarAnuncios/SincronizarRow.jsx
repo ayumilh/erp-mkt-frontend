@@ -59,9 +59,9 @@ export default function SincronizarRow () {
     ) : (
       <tr>
         <td className="text-center" colSpan="7">
-          <div className="w-52 ml-10 md:ml-0 md:px-10 md:w-full py-12">
+          <div className="w-full py-12">
             <span><ProductionQuantityLimitsIcon style={{ width: 46, height: 46 }}/></span>
-            <p className="mt-8">Ei, parece que você ainda não sincronizou nenhum produto. Sincronize seus produtos e comece a gerenciar seu estoque de maneira eficiente!</p>
+            <p className="mt-8 mx-10">Ei, parece que você ainda não sincronizou nenhum produto. Sincronize seus produtos e comece a gerenciar seu estoque de maneira eficiente!</p>
           </div>
         </td>
       </tr>
