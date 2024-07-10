@@ -40,7 +40,7 @@ export const ChartContentVendas = () => {
         </div>
       </div>
       {chartTypeSelected === 'candlestick' ? (
-        <MultipleYAxis selectedItem={valoresParaYAxis} />
+        <MultipleYAxis />
       ) : (
         <ChartLineVendas selectedItem={valoresParaYAxis} />
       )}

@@ -31,7 +31,6 @@ export default function PedidoRow ({ setOrder }) {
           setGroupOrdersProducts(groupedOrderByShippingId)
           setPedido(response.data.orders);
         } else {
-          console.error('Não foi possível obter os pedidos');
           setPedido([]);
         }
       } catch (error) {
@@ -88,6 +87,24 @@ export default function PedidoRow ({ setOrder }) {
         return '';
     }
   }
+
+  function translateStatus(status) {
+    switch (status) {
+      case 'delivered':
+        return 'Entregue';
+      case 'ready_to_ship':
+        return 'Enviar';
+      case 'shipped':
+        return 'Enviado';
+      case 'pending':
+        return 'Pendente';
+      case 'cancelled':
+        return 'Cancelado';
+      default:
+        return status; 
+    }
+  }
+  
 
 
   const dropdownGroupOrderRef = useRef(null);
@@ -160,7 +177,7 @@ export default function PedidoRow ({ setOrder }) {
                     <td className="px-4 py-4 md:py-5 text-sm font-medium text-center">{pedido.tracking_method}</td>
                     <td className="px-4 py-4 md:py-5 text-center"><span className='text-sm font-medium'>{pedido.seller_nickname}</span></td>
                     <td className="pr-6 pl-4 py-2 md:py-5 text-sm font-medium text-center">
-                      <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{pedido.status}</span>
+                      <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status)}</span>
                     </td>
                   </tr>
                 );
@@ -180,7 +197,7 @@ export default function PedidoRow ({ setOrder }) {
                   <td className="px-4 py-2 md:py-5 text-sm font-medium text-center">{pedido.tracking_method}</td>
                   <td className="px-4 py-2 md:py-5 text-sm font-medium text-center">{pedido.seller_nickname}</td>
                   <td className="pr-6 pl-4 py-2 md:py-5 text-sm font-medium text-center">
-                    <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{pedido.status}</span>
+                    <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status)}</span>
                   </td>
                 </tr>
               )

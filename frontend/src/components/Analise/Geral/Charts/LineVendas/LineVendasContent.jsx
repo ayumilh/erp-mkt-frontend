@@ -4,7 +4,7 @@ import { ChartTypeSelector } from '@/components/Geral/Dropdown/ChartTypeSelector
 import ChartFilterLojas from '@/components/Geral/Dropdown/ChartFilterLojas';
 
 const LineVendasChart = dynamic(() => import('./LineVendasChart'), { ssr: false });
-const MultipleYAxis = dynamic(() => import('@/components/Analise/Vendas/Charts/MultipleYAxis'), { ssr: false });
+const MultipleYStep = dynamic(() => import('../LineVendas/MultipleYStep'), { ssr: false });
 
 export const LineVendasContent = () => {
   const [chartTypeSelected, setChartTypeSelected] = useState('bar');
@@ -23,7 +23,7 @@ export const LineVendasContent = () => {
         </div>
       </div>
       {chartTypeSelected === 'candlestick' ? (
-        <MultipleYAxis selectedItem={valoresParaYAxis} />
+        <MultipleYStep />
       ) : (
         <LineVendasChart />
       )}

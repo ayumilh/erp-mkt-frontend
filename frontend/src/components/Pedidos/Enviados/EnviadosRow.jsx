@@ -106,18 +106,19 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'delivered':
-        return 'bg-green-200';
-      case 'ready_to_ship':
-        return 'bg-blue-200';
       case 'shipped':
         return 'bg-yellow-200';
-      case 'cancelled':
-        return 'bg-red-200';
-      case 'pending':
-        return 'bg-orange-200';
       default:
         return '';
+    }
+  }
+
+  function translateStatus(status) {
+    switch (status) {
+      case 'shipped':
+        return 'Enviado';
+      default:
+        return status; 
     }
   }
 
@@ -177,7 +178,7 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
                   <td className="px-4 py-2 md:py-5 text-sm font-medium text-center">{pedido.tracking_method}</td>
                   <td className="px-4 py-2 md:py-5 text-sm font-medium text-center">{pedido.seller_nickname}</td>
                   <td className="pr-6 pl-4 py-2 md:py-5 text-sm font-medium text-center">
-                    <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{pedido.status}</span>
+                    <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status)}</span>
                   </td>
                 </tr>
               );
@@ -199,7 +200,7 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
                   <td className="px-4 py-2 md:py-5 text-sm font-medium text-center">{pedido.tracking_method}</td>
                   <td className="px-4 py-2 md:py-5 text-sm font-medium text-center">{pedido.seller_nickname}</td>
                   <td className="pr-6 pl-4 py-2 md:py-5 text-sm font-medium text-center">
-                    <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{pedido.status}</span>
+                    <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status)}</span>
                   </td>
                 </tr>
               )

@@ -17,7 +17,6 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 
 import SettingsIcon from '@mui/icons-material/Settings';
 import BtnSignOut from "../BtnSignOut";
-import ModalConectarLojas from "@/components/Config/ModalConectarLojas";
 import { Zoom } from "@mui/material";
 
 const iconsNav = [
@@ -30,10 +29,11 @@ const iconsNav = [
   <SacIcon key="sac" sx={{ width: 34 }} />,
 ];
 
-const SidebarList = ({ open }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => setIsModalOpen(!isModalOpen);
-
+const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
+  const toggleModal = () => {
+    onSetIsModalOpen(!onIsModalOpen);
+  }
+  
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
 
@@ -43,6 +43,7 @@ const SidebarList = ({ open }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <>
       <ul className="my-10">
@@ -59,7 +60,7 @@ const SidebarList = ({ open }) => {
                     <span className={`relative flex justify-center text-segundaria-900 ${ open ? "mr-3" : "mr-auto" }`}>
                       {iconsNav[index]}
                     </span>
-                    <span className={`opacity-${open ? "100" : "0"}, font-medium `}>
+                    <span className={`opacity-${open ? "100" : "0"}, text-neutral-800 font-medium `}>
                       {text}
                     </span>
                   </button>
@@ -132,7 +133,6 @@ const SidebarList = ({ open }) => {
           </div>
         </li>
       </ul>
-      {isModalOpen && <ModalConectarLojas onClose={toggleModal} />}
     </>
   );
 };

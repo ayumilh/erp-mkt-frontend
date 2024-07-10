@@ -1,6 +1,6 @@
 'use client'
 import BtnBackPage from '@/components/Geral/Button/BtnBackPage';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, act } from 'react';
 import Image from 'next/image';
 import { SwipeableDrawer } from "@mui/material";
 import Modal from 'react-modal';
@@ -21,7 +21,7 @@ export default function ModalDetailsContent ({ onClose, order }){
         <ModalDetailsResumo order={order} />
       );
     }
-  }, []);
+  }, [activeContent, order]);
 
   const modalClose = () => {
     setIsOpen(false);

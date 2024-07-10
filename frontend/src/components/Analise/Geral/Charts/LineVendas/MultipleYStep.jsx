@@ -1,123 +1,87 @@
 'use client'
 import { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import dayjs from 'dayjs';
 
 const MultipleYStep = () => {
   const [chartData, setChartData] = useState({
-    series: [{
-      name: 'Website Blog',
-      type: 'column',
-      data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
-    }],
+    series: [
+      {
+        name: 'candle',
+        data: [
+          { x: new Date(1538778600000), y: [6629.81, 6650.5, 6623.04, 6633.33] },
+          { x: new Date(1538780400000), y: [6632.01, 6643.59, 6620, 6630.11] },
+          { x: new Date(1538865000000), y: [6630.11, 6648.2, 6620, 6635.98] },
+          { x: new Date(1538951400000), y: [6635.98, 6650, 6625, 6640.25] },
+          { x: new Date(1539037800000), y: [6640.25, 6655, 6630, 6648.93] },
+          { x: new Date(1540945800000), y: [6630.11, 6648.2, 6620, 6635.98] },
+          { x: new Date(1541032200000), y: [6635.98, 6650, 6625, 6640.25] },
+          { x: new Date(1541118600000), y: [6640.25, 6655, 6630, 6648.93] },
+          { x: new Date(1541205000000), y: [6648.93, 6660, 6635, 6650.11] },
+        ]
+      }
+    ],
     options: {
       chart: {
         height: 350,
-        type: 'line',
-        stacked: false,
+        type: 'candlestick',
+        toolbar: {
+          show: false
+        },
       },
-      dataLabels: {
-        enabled: false,
+      plotOptions: {
+        candlestick: {
+          colors: {
+            upward: '#aea2f0',
+            downward: '#4B37B2'
+          }
+        }
       },
-      stroke: {
-        width: [1, 1, 4],
+      annotations: {
+        xaxis: [
+          {
+            x: 'Oct 06 14:00',
+            borderColor: '#00E396',
+            label: {
+              borderColor: '#00E396',
+              style: {
+                fontSize: '12px',
+                color: '#fff',
+                background: '#00E396'
+              },
+              orientation: 'horizontal',
+              offsetY: 7,
+              text: 'Annotation Test'
+            }
+          }
+        ]
+      },
+      tooltip: {
+        enabled: true,
       },
       xaxis: {
-        categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
+        type: 'category',
+        labels: {
+          formatter: function(val) {
+            return dayjs(val).format('MMM DD HH:mm');
+          }
+        }
       },
-      yaxis: [
-        {
-          min: 0,
-          seriesName: 'Income',
-          axisTicks: {
-            show: true,
-          },
-          axisBorder: {
-            show: true,
-            color: '#008FFB',
-          },
-          labels: {
-            style: {
-              colors: '#008FFB',
-            },
-          },
-          title: {
-            text: 'Income (thousand crores)',
-            style: {
-              color: '#008FFB',
-            },
-          },
-          tooltip: {
-            enabled: true,
-          },
-        },
-        {
-          min: 0,
-          seriesName: 'Cashflow',
-          opposite: true,
-          axisTicks: {
-            show: true,
-          },
-          axisBorder: {
-            show: true,
-            color: '#00E396',
-          },
-          labels: {
-            style: {
-              colors: '#00E396',
-            },
-          },
-          title: {
-            text: 'Operating Cashflow (thousand crores)',
-            style: {
-              color: '#00E396',
-            },
-          },
-        },
-        {
-          seriesName: 'Revenue',
-          opposite: true,
-          axisTicks: {
-            show: true,
-          },
-          axisBorder: {
-            show: true,
-            color: '#FEB019',
-          },
-          labels: {
-            style: {
-              colors: '#FEB019',
-            },
-          },
-          title: {
-            text: 'Revenue (thousand crores)',
-            style: {
-              color: '#FEB019',
-            },
-          },
-        },
-      ],
-      tooltip: {
-        fixed: {
-          enabled: true,
-          position: 'topLeft',
-          offsetY: 30,
-          offsetX: 60,
-        },
-      },
-      legend: {
-        horizontalAlign: 'left',
-        offsetX: 40,
+      yaxis: {
+        tooltip: {
+          enabled: true
+        }
       }
-    },
-  }); 
+    }
+  });
 
   return (
     <div>
       <div id="chart">
-        <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={290} />
+        <ReactApexChart options={chartData.options} series={chartData.series} type="candlestick" height={350} />
       </div>
       <div id="html-dist"></div>
-      <div className='flex justify-around items-center'>
+      <div className='flex mt-6 justify-around items-center'>
         <button className='bg-violet-400 hover:bg-gray-200 rounded-lg p-2 font-medium text-neutral-800 transition duration-300 ease-out'>1D</button>
         <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>1M</button>
         <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>3M</button>
@@ -125,7 +89,7 @@ const MultipleYStep = () => {
         <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>12M</button>
       </div>
     </div>
-  ) 
+  );
 };
 
 export default MultipleYStep;

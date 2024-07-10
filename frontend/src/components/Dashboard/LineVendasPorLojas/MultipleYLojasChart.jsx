@@ -11,6 +11,13 @@ const MultipleYLojasChart = () => {
         data: [
           { x: new Date(1538778600000), y: [6629.81, 6650.5, 6623.04, 6633.33] },
           { x: new Date(1538780400000), y: [6632.01, 6643.59, 6620, 6630.11] },
+          { x: new Date(1538865000000), y: [6630.11, 6648.2, 6620, 6635.98] },
+          { x: new Date(1538951400000), y: [6635.98, 6650, 6625, 6640.25] },
+          { x: new Date(1539037800000), y: [6640.25, 6655, 6630, 6648.93] },
+          { x: new Date(1540945800000), y: [6630.11, 6648.2, 6620, 6635.98] },
+          { x: new Date(1541032200000), y: [6635.98, 6650, 6625, 6640.25] },
+          { x: new Date(1541118600000), y: [6640.25, 6655, 6630, 6648.93] },
+          { x: new Date(1541205000000), y: [6648.93, 6660, 6635, 6650.11] },
         ]
       }
     ],
@@ -22,7 +29,14 @@ const MultipleYLojasChart = () => {
           show: false
         },
       },
-      colors: ['#4B37B2', '#ff0000'],
+      plotOptions: {
+        candlestick: {
+          colors: {
+            upward: '#aea2f0',
+            downward: '#4B37B2'
+          }
+        }
+      },
       annotations: {
         xaxis: [
           {
@@ -59,13 +73,12 @@ const MultipleYLojasChart = () => {
         }
       }
     }
-
   });
 
   return (
     <div>
       <div id="chart">
-        <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={350} />
+        <ReactApexChart options={chartData.options} series={chartData.series} type="candlestick" height={350} />
       </div>
       <div id="html-dist"></div>
       <div className='flex mt-6 justify-around items-center'>

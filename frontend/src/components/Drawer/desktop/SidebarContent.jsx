@@ -3,16 +3,27 @@ import * as React from 'react'
 import MuiDrawer from '@mui/material/Drawer'
 import { styled } from '@mui/material/styles'
 import Header from './SidebarHeader'
-import ListDrawer from './SidebarList'
+import SidebarList from './SidebarList'
+import ModalConectarLojas from '@/components/Config/ModalConectarLojas'
 
 const SidebarContent = () => {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  }
+  const handleSetIsModalOpen = (isModalOpen) => {
+    setIsModalOpen(isModalOpen);
+  };
+
   const handleDrawerOpen = () => {
 		setOpen(true);
 	};
 	const handleDrawerClose = () => {
 		setOpen(false);
 	};
+
   const handleDrawerToggle = () => {
 		if (open) {
 			handleDrawerClose()
@@ -95,8 +106,9 @@ const SidebarContent = () => {
       <div className='hidden lg:block'>
         <Drawer variant="permanent" open={open}>
           <Header handleDrawerToggle={handleDrawerToggle} open={open}/>
-          <ListDrawer open={open}/>
+          <SidebarList open={open} onSetIsModalOpen={handleSetIsModalOpen} onIsModalOpen={isModalOpen}/>
         </Drawer>
+        {isModalOpen && <ModalConectarLojas onClose={toggleModal} drawerClose={handleDrawerClose} />}
       </div>
   )
 }

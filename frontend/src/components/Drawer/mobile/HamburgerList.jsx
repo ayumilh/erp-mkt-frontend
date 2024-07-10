@@ -14,7 +14,6 @@ import SacIcon from "@mui/icons-material/Help";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import HelpIcon from '@mui/icons-material/Help';
-import ModalConectarLojas from "@/components/Config/ModalConectarLojas";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LinkIcon from '@mui/icons-material/Link';
 import { EmailAddressUser } from "../EmailAddressUser";
@@ -45,11 +44,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
         (text, index) => (
           <li key={text} className="flex flex-col mb-5">
             <Link href={`/${text.toLowerCase()}`}>
-              <button
-                className={`flex w-[160px] h-12 px-4 ${
-                  open ? "justify-start" : "justify-start"
-                }`}
-              >
+              <button className='flex items-center w-[170px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-100 rounded-full transition duration-500 ease-out'>
                 <span
                   className={`flex justify-center text-segundaria-900 ${
                     open ? "mr-3" : "mr-auto"
@@ -57,7 +52,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
                 >
                   {iconsNav[index]}
                 </span>
-                <span className={`opacity-${open ? "100" : "0"}, font-medium `}>
+                <span className={`opacity-${open ? "100" : "0"}, text-neutral-800 font-medium active:text-black`}>
                   {text}
                 </span>
               </button>
@@ -92,7 +87,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
 
       <li className="flex flex-col mb-1">
         <button onClick={toggleModal} 
-          className="flex w-[160px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-200"
+          className="flex items-center w-[160px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-100 rounded-full transition duration-500 ease-out"
         >
           <span
             className={`flex justify-center text-segundaria-900 ${
@@ -105,7 +100,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
 
       {["Notificação", "Ajuda", "Configuração"].map((text, index) => (
         <li key={text} className="flex flex-col mb-1">
-          <button className='flex w-[160px] h-12 px-4 justify-start'>
+          <button className='flex items-center w-[190px] h-12 px-4 justify-start active:bg-gray-100 rounded-full transition duration-500 ease-out'>
             <span
               className={`flex justify-center text-segundaria-900 ${
                 open ? "mr-3" : "mr-auto"
@@ -113,7 +108,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
             >
               {iconConfig[index]}
             </span>
-            <span className={`opacity-${open ? "100" : "0"}, font-medium `}>{text}</span>
+            <span className={`opacity-${open ? "100" : "0"}, text-neutral-800 font-medium `}>{text}</span>
           </button>
         </li>
       ))}
@@ -129,11 +124,10 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
           >
             <span><LogoutRoundedIcon className="w-8 text-segundaria-900"></LogoutRoundedIcon></span>
           </span>
-          <span className={`opacity-${open ? "100" : "0"}, font-medium `}>Sair</span>
+          <span className={`opacity-${open ? "100" : "0"}, text-neutral-800 font-medium `}>Sair</span>
         </button>
       </li>
     </ul>
-    {/* {isModalOpen && <ModalConectarLojas onClose={toggleModal} />} */}
   </>);
 };
 

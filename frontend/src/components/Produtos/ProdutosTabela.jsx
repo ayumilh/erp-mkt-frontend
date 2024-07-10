@@ -112,6 +112,20 @@ const ProdutosTabela = () => {
     }
   }
 
+  function translateStatus(status) {
+    switch (status) {
+      case 'active':
+        return 'Ativo';
+      case 'under_review':
+        return 'Revisão';
+      case 'paused':
+        return 'Pausado';
+      default:
+        return status;
+    }
+  }
+  
+
   return (
     <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
       <ProdutosMenuMoreResponsive 
@@ -148,7 +162,7 @@ const ProdutosTabela = () => {
                 <td className="px-4 py-4 md:py-5 text-center">{product.price}</td>
                 <td className="px-4 py-4 md:py-5 text-center">{product.pacote}</td>
                 <td className="px-4 py-4 md:py-5 text-center">
-                  <span className={`${getStatusColor(product.status)} rounded-full px-3 py-2`}>{product.status}</span>
+                  <span className={`${getStatusColor(product.status)} rounded-full px-3 py-2`}>{translateStatus(product.status)}</span>
                 </td>
                 <td className="pl-4 pr-6 py-2 md:py-5 text-center">
                   <button
