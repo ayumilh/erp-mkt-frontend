@@ -55,7 +55,17 @@ const AreaSazonaisChart = () => {
           return (val / 1000000).toFixed(0)
         }
       }
-    }
+    },
+    responsive: [
+      {
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 300
+          }
+        }
+      }
+    ]
   });
 
   return (

@@ -12,7 +12,7 @@ import ModalGerarProdutos from "./Actions/ModalGerarProdutos";
 import { ProdutosMenuMoreResponsive } from "./Actions/ProdutosMenuMoreResponsive";
 
 
-const ProdutosTabela = () => {
+const ProdutosTabela = ({onFilterStatus}) => {
   const [products, setProducts] = useState([]);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedSku, setSelectedSku] = useState(null);
@@ -33,14 +33,13 @@ const ProdutosTabela = () => {
               pictureUrls: product.pictureurls,
               sku: product.product_sku,
               title: product.title,
-              price: product.product_sku,
+              price: product.price,
               diameter: product.product_sku,
               status: product.status,
             };
           });
           setProducts(restructuredData);
         } else {
-          console.error('Não foi possível obter os produtos');
           setProducts([]);
         }
       } catch (error) {
@@ -89,7 +88,8 @@ const ProdutosTabela = () => {
     setIsModalTr(false);
   };
 
-  const handleButtonClick = (sku) => {
+  const handleButtonClick = (event, sku) => {
+    event.stopPropagation();
     console.log('sku: ', sku);
     try {
       Cookies.set('selectedSku', sku);
@@ -124,7 +124,10 @@ const ProdutosTabela = () => {
         return status;
     }
   }
-  
+
+  const produtosFiltrados = onFilterStatus === 'all'
+  ? products
+  : products.filter((product) => product.status === onFilterStatus);
 
   return (
     <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
@@ -143,15 +146,15 @@ const ProdutosTabela = () => {
             <th className="pr-4 pl-6 py-2 md:py-5 text-sm font-semibold text-center">SKU</th>
             <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Nome</th>
             <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Preço</th>
-            <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Pacote</th>
+            <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Estoque</th>
             <th className="pr-6 pl-4 py-2 md:py-5 text-sm font-semibold text-center">Status</th>
           </tr>
         </thead>
         <tbody>
           {isLoading ? (
             <SkeletonLoader numColumns={5}/>
-          ) : products.length > 0 ? (
-            products.map((product, index) => (
+          ) : produtosFiltrados.length > 0 ? (
+            produtosFiltrados.map((product, index) => (
               <tr key={product.sku} onClick={() => handleModal(product.sku)} className='border-b border-gray-200 hover:bg-gray-100 cursor-pointer'>
                 {showCheckboxes && <td className="pl-4"><input type="checkbox" onClick={(event) => handleCheckboxChange(event, product.sku)} /></td>}
                 {showCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => {}}/></td>}
@@ -165,10 +168,7 @@ const ProdutosTabela = () => {
                   <span className={`${getStatusColor(product.status)} rounded-full px-3 py-2`}>{translateStatus(product.status)}</span>
                 </td>
                 <td className="pl-4 pr-6 py-2 md:py-5 text-center">
-                  <button
-                    onClick={() => handleButtonClick(product.sku)}
-                    className="flex items-center justify-center"
-                  >
+                  <button onClick={(event) => handleButtonClick(event, product.sku)} className="flex items-center justify-center">
                     <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5"/>
                   </button>     
                 </td>

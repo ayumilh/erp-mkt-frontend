@@ -2,7 +2,7 @@ import BtnActive from '@/components/Geral/Button/BtnActive';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-const ProdutosActionsFilter = () => {
+const ProdutosActionsFilter = ({ onFilterChange }) => {
   return (
     <div className="bg-primaria-900 hover:shadow-input transition-all ease-in duration-500 rounded-2xl xl:flex min-w-[345px] md:min-w-[720px] lg:min-w-[876px] xl:min-w-[1264px] min-h-max px-4 py-5 xl:px-8 xl:items-center">
       <h2 className='text-sm lg:text-base text-colorFont-200 font-semibold'>O que você procura?</h2>
@@ -23,11 +23,11 @@ const ProdutosActionsFilter = () => {
             <option className="text-sm opacity-80 font-normal" value="magalu">Magalu</option>
             <option className="text-sm opacity-80 font-normal" value="mercadoLivre">Mercado Livre</option>
           </select>
-          <select title='Status do produto' className="rounded px-3 py-2 w-1/2 lg:w-[160px] xl:w-[200px] text-xs md:text-sm opacity-80 font-normal" name="status" id="status">
-            <option className="text-sm opacity-80 font-normal" value="status">Status</option>
-            <option className="text-sm opacity-80 font-normal" value="inativo">Inativo</option>
-            <option className="text-sm opacity-80 font-normal" value="quantidade">Quantidade</option>
-            <option className="text-sm opacity-80 font-normal" value="semEstoque">Sem estoque</option>
+          <select onChange={(e) => onFilterChange(e.target.value)} title='Status do produto' className="rounded px-3 py-2 w-1/2 lg:w-[160px] xl:w-[200px] text-xs md:text-sm opacity-80 font-normal" name="status" id="status">
+            <option className="text-sm opacity-80 font-normal" value="all">Status</option>
+            <option className="text-sm opacity-80 font-normal" value="active">Ativo</option>
+            <option className="text-sm opacity-80 font-normal" value="under_review">Revisando</option>
+            <option className="text-sm opacity-80 font-normal" value="paused">Pausado</option>
           </select>
         </div>
 

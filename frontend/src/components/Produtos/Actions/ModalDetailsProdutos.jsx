@@ -12,6 +12,7 @@ Modal.setAppElement('body');
 export default function ModalDetailsProdutos({ onClose, selectedSku}){
    const [isOpen, setIsOpen] = useState(true);
    const [product, setProduct] = useState({});
+   console.log(selectedSku);
    const productSKU = selectedSku;
    
    useEffect(() => {
@@ -20,6 +21,7 @@ export default function ModalDetailsProdutos({ onClose, selectedSku}){
             const response = await axios.get(
                `https://erp-mkt.vercel.app/api/mercadolivre/productid?sku=${productSKU}`
                );
+               console.log(response.data);
             setProduct(response.data);
          }catch(error){
             console.error(`Error: ${error}`);
@@ -42,9 +44,9 @@ export default function ModalDetailsProdutos({ onClose, selectedSku}){
             onClose={modalClose}
             onOpen={() => {}}
             sx={{
-               width: ['100%', '768px', '955px'],
+               width: ['100%', '768px'],
                '& .MuiDrawer-paper': {
-                   width: ['100%', '768px','955px']
+                   width: ['100%', '768px']
                }
             }}
          >

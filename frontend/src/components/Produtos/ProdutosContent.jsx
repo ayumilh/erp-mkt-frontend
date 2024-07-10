@@ -1,3 +1,5 @@
+'use client'
+import { useState } from 'react';
 import HamburgerContent from '../Drawer/mobile/HamburgerContent';
 import ActionsHeader from '../ActionsHeader';
 import ProdutosTabela from './ProdutosTabela';
@@ -6,6 +8,12 @@ import ProdutosHeader from './ProdutosHeader';
 import TitlePage from '../Geral/TitlePage';
 
 const ProdutosContent = () => {
+  const [filterStatus, setFilterStatus] = useState('all');
+
+  const handleFilterChange = (newFilter) => {
+    setFilterStatus(newFilter);
+  };
+
   return (
     <div className='w-full px-4 lg:px-0 lg:mx-5 lg:mt-4 xl:mx-8 xl:flex xl:flex-col xl:items-center'>
       <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between items-center h-12 pt-4 mb-8">
@@ -18,8 +26,8 @@ const ProdutosContent = () => {
 
       <div className='w-full flex flex-col items-center' style={{height: '1000px'}}>
         <ProdutosHeader/>
-        <ProdutosActionsFilter/>
-        <ProdutosTabela/>
+        <ProdutosActionsFilter onFilterChange={handleFilterChange}/>
+        <ProdutosTabela onFilterStatus={filterStatus}/>
       </div>
     </div>
   )

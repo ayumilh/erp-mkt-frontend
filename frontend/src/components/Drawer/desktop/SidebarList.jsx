@@ -114,14 +114,14 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
             >
               <MenuItem onClick={handleClose}>
                 <button onClick={toggleModal} 
-                  className="flex w-full hover:bg-gray-100 active:bg-gray-200"
+                  className="flex items-center w-full hover:bg-gray-100 active:bg-gray-200"
                 >
                   <span> <LinkIcon fontSize="small" className="mr-2"/> </span>
                   <span className="text-sm text-neutral-800 font-medium">Conectar Conta</span>
                 </button>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <button className="flex w-full hover:bg-gray-100 active:bg-gray-200">
+                <button className="flex items-center w-full hover:bg-gray-100 active:bg-gray-200">
                   <span> <SettingsIcon fontSize="small" className="mr-2"></SettingsIcon> </span>
                   <span className="text-sm text-neutral-800 font-medium">Ajuste</span>
                 </button>
