@@ -20,9 +20,9 @@ export const AnaliseHeader = ({ setActiveTable }) => {
             Este mês
           </button>
         </div>
-        <div>
+        {/* <div>
           <FilterPlataformasHeader />
-        </div>
+        </div> */}
       </div>
 
     </div>

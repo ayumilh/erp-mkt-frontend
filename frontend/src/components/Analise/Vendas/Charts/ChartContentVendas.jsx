@@ -1,30 +1,38 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import ChartCardVendas from '../Actions/ChartCardVendas';
-import { ChartTypeSelector } from '../../../Geral/Dropdown/ChartTypeSelector';
+import { ChartTypeSelector } from '@/components/Geral/Dropdown/ChartTypeSelector';
 
 const ChartLineVendas = dynamic(() => import('./ChartLineVendas'), { ssr: false });
 const MultipleYAxis = dynamic(() => import('./MultipleYAxis'), { ssr: false });
 
+
+const tituloParaCampo = {
+  "Total de Pedidos": "TotalDePedidos",
+  "Valor Total de Vendas": "ValorTotalDeVendas",
+  "Pedidos Válidos": "PedidosValidos",
+  "Vendas Válidas": "ValorDeVendasValidas",
+  "Pedidos Cancelados": "PedidosCancelados",
+  "Valor de Vendas Canceladas": "ValorDeVendasCanceladas",
+  "Clientes": "Clientes",
+  "Vendas por Cliente": "VendasPorCliente"
+};
+
 export const ChartContentVendas = () => {
-  const [selectedItem, setSelectedItem] = useState('Vendas Totais');
+  const [selectedItem, setSelectedItem] = useState({ titulo: 'Vendas Totais', valor: '' });
   const [valoresParaYAxis, setValoresParaYAxis] = useState([]);
   const [chartTypeSelected, setChartTypeSelected] = useState('bar');
 
-  const tituloParaCampo = {
-    "Total de Pedidos": "TotalDePedidos",
-    "Valor Total de Vendas": "ValorTotalDeVendas",
-    "Pedidos Válidos": "PedidosValidos",
-    "Vendas Válidas": "ValorDeVendasValidas",
-    "Pedidos Cancelados": "PedidosCancelados",
-    "Valor de Vendas Canceladas": "ValorDeVendasCanceladas",
-    "Clientes": "Clientes",
-    "Vendas por Cliente": "VendasPorCliente"
-  };
+  useEffect(() => {
+    const novoValorParaYAxis = tituloParaCampo[selectedItem.titulo];
+    // Verifica se o valor atual é diferente do novo valor antes de atualizar o estado
+    if (valoresParaYAxis !== novoValorParaYAxis) {
+      setValoresParaYAxis(novoValorParaYAxis);
+    }
+  }, [selectedItem, valoresParaYAxis]);
 
   const handleItemSelected = (item) => {
     setSelectedItem(item);
-    setValoresParaYAxis(tituloParaCampo[item.titulo])
   }; 
 
   return (
