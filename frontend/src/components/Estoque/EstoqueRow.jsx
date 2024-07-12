@@ -30,7 +30,6 @@ export default function EstoqueRow ({ setSku }) {
           });
           setProducts(restructuredData);
         } else {
-          console.error('Não foi possível obter os produtos');
           setProducts([]);
         }
       } catch (error) {
@@ -44,13 +43,13 @@ export default function EstoqueRow ({ setSku }) {
   }, []);
 
 
-  const handleModal = (sku) => {
+  const openEstoqueDetailsModal = (sku) => {
     const selectedOrder = products.find(p => p.sku === sku);
     setSku(selectedOrder);
   };
 
-  const handleButtonClick = (sku) => {
-    console.log('sku: ', sku);
+  const storeSkuAndOpenEditModal = (event, sku) => {
+    event.stopPropagation();
     try {
       Cookies.set('selectedSku', sku);
       router.push('/estoque/editar');
@@ -64,14 +63,14 @@ export default function EstoqueRow ({ setSku }) {
       <SkeletonLoader numColumns={4}/>
     ) : products.length > 0 ? (
       products.map((product, index) => (
-        <tr key={index} onClick={() => handleModal(product.sku)} className='border-b border-gray-200 hover:bg-gray-100 cursor-pointer'>
+        <tr key={index} onClick={() => openEstoqueDetailsModal(product.sku)} className='border-b border-gray-200 hover:bg-gray-100 cursor-pointer'>
           <td className="w-40 md:w-52 lg:w-auto pl-6 pr-4 py-4 md:py-5 text-start"><p className="w-40 md:w-52 lg:w-auto font-medium">{product.nome_do_produto}</p></td>
           <td className="px-4 py-4 md:py-5 text-center">{product.sku}</td>
           <td className="px-4 py-4 md:py-5 text-center">{product.custo_de_compra}</td>
           <td className="px-4 py-2 md:py-5 text-center">{product.data_de_lancamento}</td>
           <td className="pl-4 pr-6 py-2 md:py-5 text-center">
             <button
-              onClick={() => handleButtonClick(product.sku)}
+              onClick={(event) => storeSkuAndOpenEditModal(event, product.sku)}
               className="flex items-center justify-center"
             >
               <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5"/>

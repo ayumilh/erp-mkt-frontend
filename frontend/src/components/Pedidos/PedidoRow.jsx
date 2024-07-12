@@ -4,16 +4,13 @@ import Image from 'next/image';
 import axios from 'axios';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import { FaUser } from 'react-icons/fa';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export default function PedidoRow ({ setOrder }) {
   const [pedido, setPedido] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState(null);
 
   
   useEffect(() => {
@@ -45,13 +42,6 @@ export default function PedidoRow ({ setOrder }) {
   
     fetchOrders();
   }, []);
-
-
-  const handleOpen = (order_id) => setIsOpen(prevState => ({ ...prevState, [order_id]: !prevState[order_id] })) 
-  const handleSelect = (order) => {
-    setSelectedOrder(order);
-    setIsOpen(false);
-  };
   
   const shippingIdCounts = {};
   pedido.forEach(pedido => {
@@ -63,8 +53,7 @@ export default function PedidoRow ({ setOrder }) {
   });
 
 
-  // modal da tr
-  const handleModal = (shipping_id, allOrders = false) => {
+  const openOrderDetailsModal = (shipping_id, allOrders = false) => {
     if (allOrders) {
       const selectedOrders = pedido.filter(p => p.shipping_id === shipping_id);
       setOrder(selectedOrders);
@@ -131,7 +120,6 @@ export default function PedidoRow ({ setOrder }) {
       <SkeletonLoader numColumns={8}/>
     ) : pedido.length > 0 ? (
       Object.entries(groupOrdersProducts).map(([shipping_id, orders], groupIndex) => (
-        console.log(orders),
         <React.Fragment key={shipping_id}>
           <tr className='group-header'>
             <td colSpan={8} className="px-4 py-2 text-center bg-gray-100 border-t border-gray-200">
@@ -146,7 +134,7 @@ export default function PedidoRow ({ setOrder }) {
               if(!firstRender[pedido.shipping_id]){
                 firstRender[pedido.shipping_id] = true;
                 return (
-                  <tr key={index} className='hover:bg-gray-100 cursor-pointer' onClick={() => handleModal(shipping_id, true)}>
+                  <tr key={index} className='border-b border-gray-200 hover:bg-gray-100 cursor-pointer' onClick={() => openOrderDetailsModal(shipping_id, true)}>
                     <td className='pl-4 lg:pl-6 pr-3 py-4 md:py-5 align-top'>
                       {groupOrdersProducts[pedido.shipping_id] && groupOrdersProducts[pedido.shipping_id].map((order, index) => (
                         <div key={index} className="text-left flex items-center justify-center gap-4 mb-4">
@@ -171,7 +159,7 @@ export default function PedidoRow ({ setOrder }) {
                       <span className='text-amber-500 font-medium text-sm'>Saída</span><br/>
                       <span className='whitespace-nowrap font-medium text-neutral-600'>{new Date(pedido.date_created).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</span>
                     </td>
-                    <td className="px-3 py-3 md:py-4 text-sm font-medium text-center whitespace-normal align-top">{pedido.tracking_method}</td>
+                    <td className="px-3 py-3 md:py-4 text-sm font-medium text-start align-top">{pedido.tracking_method}</td>
                     <td className="px-3 py-3 md:py-4 text-center align-top">
                       <span className='text-sm font-medium'>{pedido.seller_nickname}</span>
                     </td>
@@ -183,7 +171,7 @@ export default function PedidoRow ({ setOrder }) {
               }
             }else{
               return (
-                <tr key={index} className='border-b border-gray-200 hover:bg-gray-100 cursor-pointer' onClick={() => handleModal(pedido.shipping_id)}>
+                <tr key={index} className='border-b border-gray-200 hover:bg-gray-100 cursor-pointer' onClick={() => openOrderDetailsModal(pedido.shipping_id)}>
                   <td className='pl-4 lg:pl-6 pr-3 py-4 md:py-5 align-top'>
                     <div className="text-left flex items-center justify-center gap-4 mb-4">
                       <div className='w-10 h-10'>{pedido.pictureurls && <Image src={pedido.pictureurls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10 object-cover" />}</div>
