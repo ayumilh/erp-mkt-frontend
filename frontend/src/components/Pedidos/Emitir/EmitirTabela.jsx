@@ -31,29 +31,31 @@ export default function EmitirTabela() {
         setShowCheckboxesAll={setShowCheckboxesAll} 
         showCheckboxesAll={showCheckboxesAll}
       />
-      <table className="table-auto min-w-full">
-        <thead>
-          <tr>
-            {showCheckboxes ? <td className="pl-3"></td> : showCheckboxesAll ? <td className="pl-3"></td> : null}
-            <th className='pl-4'></th>
-            <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Produtos</th>
-            <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Valor</th>
-            <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Destinatario</th>
-            <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Criação</th>
-            <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Metodos de envio</th>
-            <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Vendedor</th>
-            <th className="pr-6 pl-4 py-2 md:py-5 text-sm font-semibold text-center">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <EmitirRow 
-            toggleShowCheckboxes={showCheckboxes} 
-            toggleShowCheckboxesAll={showCheckboxesAll} 
-            setShippingIdOrder={setShippingIdOrder}
-            setOrder={handleOrderSelect}
-          />
-        </tbody>
-      </table>
+      <div className='overflow-x-auto'>
+        <table className="table-auto min-w-full">
+          <thead className='sticky top-0 z-10 bg-primaria-900'>
+            <tr>
+              {showCheckboxes ? <td className="pl-3"></td> : showCheckboxesAll ? <td className="pl-3"></td> : null}
+              <th className='pl-4'></th>
+              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Produtos</th>
+              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Valor</th>
+              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Destinatario</th>
+              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Criação</th>
+              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Metodos de envio</th>
+              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Vendedor</th>
+              <th className="pr-6 pl-4 py-2 md:py-5 text-sm font-semibold text-center">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <EmitirRow 
+              toggleShowCheckboxes={showCheckboxes} 
+              toggleShowCheckboxesAll={showCheckboxesAll} 
+              setShippingIdOrder={setShippingIdOrder}
+              setOrder={handleOrderSelect}
+            />
+          </tbody>
+        </table>
+      </div>
       {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder}/>}
       {
         statusRequestEmitirPedido === true && <SuccessNotification message='Pedidos emitidos com sucesso!' />

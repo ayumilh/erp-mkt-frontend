@@ -21,6 +21,7 @@ const ChartCardsLucros = ({onItemSelected}) => {
       try {
         const response = await axios.get("https://erp-mkt.vercel.app/api/statistics/real");
         if (response.data && Array.isArray(response.data.orders)) {
+          console.log(response.data.orders);
           const restructuredData = response.data.orders.map((lucro) => {
             return {
               Comissao: lucro["Comissão"] || "0", 

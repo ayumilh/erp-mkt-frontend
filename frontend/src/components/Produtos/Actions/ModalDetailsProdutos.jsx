@@ -20,7 +20,6 @@ export default function ModalDetailsProdutos({ onClose, selectedSku }) {
         const response = await axios.get(
           `https://erp-mkt.vercel.app/api/mercadolivre/productid?sku=${productSKU}`
         );
-        console.log(response.data.products[0]);
         setProduct(response.data.products[0]);
       } catch (error) {
         console.error(`Error: ${error}`);
@@ -158,7 +157,7 @@ export default function ModalDetailsProdutos({ onClose, selectedSku }) {
                           Em estoque:
                         </span>
                         <span className="text-neutral-800 text-sm font-medium">
-                          102
+                          {product.available_quantity}
                         </span>
                       </div>
                     </div>

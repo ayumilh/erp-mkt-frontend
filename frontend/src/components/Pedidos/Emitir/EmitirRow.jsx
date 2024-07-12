@@ -30,9 +30,7 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
           }, {});
           setGroupOrdersProducts(groupedOrderByShippingId)
           setPedido(response.data.orders);
-          console.log(response.data.orders);
         } else {
-          console.error('Não foi possível obter os pedidos');
           setPedido([]);
         }
       } catch (error) {

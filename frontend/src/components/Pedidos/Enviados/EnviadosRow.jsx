@@ -31,7 +31,6 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
           setGroupOrdersProducts(groupedOrderByShippingId)
           setPedido(response.data.orders);
         } else {
-          console.error('Não foi possível obter os pedidos');
           setPedido([]);
         }
       } catch (error) {
@@ -106,6 +105,8 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
 
   const getStatusColor = (status) => {
     switch (status) {
+      case 'ready_to_ship':
+        return 'bg-yellow-200';
       case 'shipped':
         return 'bg-yellow-200';
       default:
@@ -116,6 +117,8 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
   function translateStatus(status) {
     switch (status) {
       case 'shipped':
+        return 'Enviado';
+      case 'ready_to_ship':
         return 'Enviado';
       default:
         return status; 
