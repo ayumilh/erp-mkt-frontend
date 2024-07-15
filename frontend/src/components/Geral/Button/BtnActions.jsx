@@ -39,10 +39,11 @@ const span = tv({
 export default function BtnActions({title, onClick, padding, text, rounded, color}){
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleClick = async () => {
+  const handleClick = async (event) => {
+    event.preventDefault()
     setIsLoading(true);
     if(onClick) {
-      await onClick();
+      await onClick(event);
     }
     setIsLoading(false);
   }
@@ -50,7 +51,7 @@ export default function BtnActions({title, onClick, padding, text, rounded, colo
   return (
     <button
       type="button"
-      onClick={handleClick}
+      onClick={(event) => handleClick(event)}
       className={button({padding: padding, rounded: rounded, bg: color})}
       >
        {isLoading ? (

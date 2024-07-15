@@ -116,6 +116,23 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
     }
   }
 
+  const translateStatus = (status) => {
+    switch (status) {
+      case 'delivered':
+        return 'Entregue';
+      case 'ready_to_ship':
+        return 'Pronto para enviar';
+      case 'shipped':
+        return 'Enviado';
+      case 'pending':
+        return 'Pendente';
+      case 'cancelled':
+        return 'Cancelado';
+      default:
+        return '';
+    }
+  }
+
   
   const firstRender = [];
   return (<>

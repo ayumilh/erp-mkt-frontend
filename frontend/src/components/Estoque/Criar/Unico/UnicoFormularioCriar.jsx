@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 import Stepper from '@mui/material/Stepper';
@@ -15,34 +15,75 @@ const steps = [
 ];
 
 export default function CriarProdutoUnicoForm() {
-  const [input, setInputs] = useState({
-    SKU: "",
-    Nome_do_Produto: "",
-    Apelido_do_Produto: "",
-    Categorias: "",
-    Codigo_de_Barras: "",
-    Data_de_Lancamento: "",
-    Status_da_Venda: "",
-    Vendedor: "",
-    Preco_de_Varejo: "",
-    Custo_de_Compra: "",
-    Descricao: "",
-    Link_do_Fornecedor: "",
-    Marca: "",
-    Peso_do_Pacote: "",
-    Tamanho_de_Embalagem: "",
-    Link_do_Video: "",
-    NCM: "",
-    CEST: "",
-    Unidade: "",
-    Origem: ""
-  })
-  
+  const [SKU, setSKU] = useState(null);
+  const [Nome_do_Produto, setNome_do_Produto] = useState(null)
+  const [Apelido_do_Produto, setApelido_do_Produto] = useState("");
+  const [Categorias, setCategorias] = useState("");
+  const [Codigo_de_Barras, setCodigo_de_Barras] = useState("");
+  const [Data_de_Lancamento, setData_de_Lancamento] = useState(null);
+  const [Status_da_Venda, setStatus_da_Venda] = useState("Ativo");
+  const [Vendedor, setVendedor] = useState("");
+  const [Preco_de_Varejo, setPreco_de_Varejo] = useState("");
+  const [Custo_de_Compra, setCusto_de_Compra] = useState("");
+  const [Descricao, setDescricao] = useState("");
+  const [Link_do_Fornecedor, setLink_do_Fornecedor] = useState("");
+  const [Marca, setMarca] = useState("");
+  const [Tamanho, setTamanho] = useState("");
+  const [Peso_do_Pacote, setPeso_do_Pacote] = useState("");
+  const [Tamanho_de_Embalagem, setTamanho_de_Embalagem] = useState("");
+  const [Link_do_Video, setLink_do_Video] = useState("");
+  const [NCM, setNCM] = useState("");
+  const [CEST, setCEST] = useState("");
+  const [Unidade, setUnidade] = useState("");
+  const [Origem, setOrigem] = useState("");
+
+  const product = {
+    SKU,
+    Nome_do_Produto,
+    Apelido_do_Produto,
+    Categorias,
+    Codigo_de_Barras,
+    Data_de_Lancamento,
+    Status_da_Venda,
+    Vendedor,
+    Preco_de_Varejo,
+    Custo_de_Compra,
+    Descricao,
+    Link_do_Fornecedor,
+    Marca,
+    Tamanho,
+    Peso_do_Pacote,
+    Tamanho_de_Embalagem,
+    Link_do_Video,
+    NCM,
+    CEST,
+    Unidade,
+    Origem,
+  };
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const handleStepClick = (index, e) => {
+    e.preventDefault();
+    setActiveStep(index);
+  };
+
   const inputChange = (event) => {
     setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   }
 
-  // buscar de produtos
+  // useEffect(() => {
+  //   const isAllFieldsFilled = Object.values(product).every(field => field.trim() !== '');
+  //   setIsFormValid(isAllFieldsFilled);
+  // }, [product]);
+
+  function validarInput(event) {
+    const valor = event.target.value;
+    const padrao = /^\d*(\.\d{0,2})?$/;
+    if (!padrao.test(valor)) {
+      event.preventDefault();
+    }
+  }
+
   const [products, setProducts] = useState([]);
   const handleIdProduct = (data) => {
     if (!data) return;
@@ -50,7 +91,7 @@ export default function CriarProdutoUnicoForm() {
     const restructuredData = data.sku.map((item, index) => {
       return {
         sku: data.sku[index][`sku${index + 1}`],
-        availableQuantities: data.availableQuantities[index][`available_quantity${index + 1}`],
+        availableQuantities: data.availableQuantities[index][`availableQuantity${index + 1}`],
         color: data.colorVariables[index][`color${index + 1}`]
       };
     });
@@ -63,12 +104,14 @@ export default function CriarProdutoUnicoForm() {
     try {
       const sku = products.map(product => product.sku);
       const quantities = products.map(product => product.availableQuantities);
+      console.log(sku, quantities, product)
 
-      await axios.post("https://erp-mkt.vercel.app/api/stock/createProduct", {
-        ...input,
+      const response = await axios.post("https://erp-mkt.vercel.app/api/stock/createProduct", {
+        ...product,
         SkuMercado: sku,
         quantidade: quantities
       })
+      console.log(response.data)
       
     } catch (error) {
       console.error(error)
@@ -78,7 +121,11 @@ export default function CriarProdutoUnicoForm() {
 
   const [activeStep, setActiveStep] = useState(0);
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if(isFormValid){
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }else{
+      alert('Preencha todos os campos obrigatórios')
+    }
   };
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -104,55 +151,264 @@ export default function CriarProdutoUnicoForm() {
           {steps.map((step, index) => (
             <Step key={step.titulo}>
               <div>
-                <h2 className="text-lg font-semibold opacity-90">{step.titulo}</h2>
+                <button
+                  className="focus:outline-none cursor-pointer"
+                  onClick={(e) => handleStepClick(index, e)}
+                >
+                  <h2 className="text-lg font-semibold text-neutral-700">{step.titulo}</h2>
+                </button>
                 {activeStep === index && (<>
                   <p className="text-sm md:text-base font-medium opacity-90">{step.subtitulo}</p>
                   {index === 0 && (
                     <div className="flex flex-col gap-6 mt-8 mb-7 ml-4">
-                      <input onChange={inputChange} name='SKU' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="SKU"/>
+                      <div className="mb-4">
+                        <label htmlFor="SKU" className="block mb-1 font-medium text-sm text-neutral-600">Código(SKU) <span className='text-red-600'>*</span></label>
+                        <input
+                          onChange={(e) => setSKU(e.target.value)}
+                          value={SKU || ""}
+                          maxLength={55}
+                          name='SKU' 
+                          required
+                          type="text"
+                          placeholder="Código (SKU) ou referência do produto"
+                          className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+                        />
+                      </div>
 
-                      <input onChange={inputChange} name='Nome_do_Produto' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Nome do Produto"/>
+                      <div className="mb-4">
+                        <label htmlFor="Nome_do_Produto" className="block mb-1 font-medium text-sm text-neutral-600">Nome do Produto <span className='text-red-600'>*</span></label>
+                        <input
+                          onChange={(e) => setNome_do_Produto(e.target.value)}
+                          value={Nome_do_Produto || ""}
+                          maxLength={255}
+                          name='Nome_do_Produto' 
+                          required
+                          type="text"
+                          className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+                        />
+                      </div>
 
-                      <input onChange={inputChange} name='Apelido_do_Produto' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Apelido do Produto"/>
+                      <div className="mb-4">
+                        <label htmlFor="Apelido_do_Produto" className="block mb-1 font-medium text-sm text-neutral-600">Apelido do Produto <span className='text-red-600'>*</span></label>
+                        <input
+                          onChange={(e) => setApelido_do_Produto(e.target.value)}
+                          value={Apelido_do_Produto || ""}
+                          maxLength={255}
+                          name='Apelido_do_Produto' 
+                          required
+                          type="text"
+                          className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+                        />
+                      </div>
 
-                      <input onChange={inputChange} name='Categorias' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Categorias"/>
+                    <div className="mb-4">
+                        <label htmlFor="Categorias" className="block mb-1 font-medium text-sm text-neutral-600">Categorias <span className='text-red-600'>*</span></label>
+                        <input
+                          onChange={(e) => setCategorias(e.target.value)}
+                          value={Categorias || ""}
+                          maxLength={255}
+                          name='Categorias' 
+                          required
+                          type="text"
+                          className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+                        />
+                      </div>
                     </div>
                   )}
                   {index === 1 && (
                     <div className="flex flex-col gap-6 mt-8 mb-7 ml-4">
 
-                      <input onChange={inputChange} name='Codigo_de_Barras' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Codigo de Barras"/>
+                      <input 
+                        onChange={(e) => setCodigo_de_Barras(e.target.value)} 
+                        value={Codigo_de_Barras || ""}
+                        name='Codigo_de_Barras' 
+                        type="text" 
+                        maxLength={50}
+                        placeholder="Codigo de Barras"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
+                      />
+                      <div className='flex flex-col'>
+                        <span className="mb-2 font-medium opacity-90">
+                          Data de Lançamento
+                        </span>
+                        <input 
+                          onChange={(e) => setData_de_Lancamento(e.target.value)}
+                          value={Data_de_Lancamento || ""} 
+                          name='Data_de_Lancamento' 
+                          type="date" 
+                          placeholder="Data de Lancamento"
+                          className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal px-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
+                        />
+                      </div>
 
-                      <input onChange={inputChange} name='Data_de_Lancamento' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Data de Lancamento"/>
+                      <div className="flex flex-col">
+                        <span className="mb-2 font-medium opacity-90">
+                          Status de venda
+                        </span>
+                        <div className="flex flex-col md:flex-row gap-4">
+                          <label>
+                            <input
+                              type="radio"
+                              value="Ativo"
+                              checked={Status_da_Venda === 'Ativo'}
+                              name="Status_da_Venda"
+                              onChange={(e) => setStatus_da_Venda(e.target.value)}
+                            />
+                            <span className="font-normal ml-2">Ativo</span>
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Inativo"
+                              name="Status_da_Venda"
+                              checked={Status_da_Venda === 'Inativo'}
+                              onChange={(e) => setStatus_da_Venda(e.target.value)}
+                            />
+                            <span className="font-normal ml-2">Inativo</span>
+                          </label>
+                        </div>
+                      </div>
 
-                      <input onChange={inputChange} name='Status_da_Venda' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Status da Venda"/>
-                      <input onChange={inputChange} name='Vendedor' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Vendedor"/>
+                      <input 
+                        onChange={(e) => setVendedor(e.target.value)}
+                        value={Vendedor || ""} 
+                        name='Vendedor' 
+                        maxLength={100}
+                        type="text" 
+                        placeholder="Vendedor"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
+                      />
 
-                      <input onChange={inputChange} name='Preco_de_Varejo' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Preco de Varejo"/>
+                      <input 
+                        onChange={(e) => setPreco_de_Varejo(e.target.value)} 
+                        value={Preco_de_Varejo || ""}
+                        onInput={validarInput}
+                        name='Preco_de_Varejo' 
+                        type="text" 
+                        placeholder="0,00"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
+                      />
 
-                      <input onChange={inputChange} name='Custo_de_Compra' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Custo de Compra"/>
+                      <input 
+                        onChange={(e) => setCusto_de_Compra(e.target.value)} 
+                        value={Custo_de_Compra || ""}
+                        onInput={validarInput}
+                        name='Custo_de_Compra' 
+                        type="text" 
+                        placeholder="0,00"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
+                      />
 
-                      <input onChange={inputChange} name='Descricao' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Descricao"/>
+                      <input 
+                        onChange={(e) => setDescricao(e.target.value)} 
+                        value={Descricao || ""}
+                        name='Descricao' 
+                        type="text" 
+                        placeholder="Descricao"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
+                      />
 
-                      <input onChange={inputChange} name='Link_do_Fornecedor' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Link do Fornecedor"/>
+                      <input 
+                        onChange={(e) => setLink_do_Fornecedor(e.target.value)} 
+                        value={Link_do_Fornecedor || ""}
+                        name='Link_do_Fornecedor' 
+                        max={255}
+                        type="text" 
+                        placeholder="Link do Fornecedor"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
+                      />
                     </div>
                   )}
                   {index === 2 && (
                     <div className="flex flex-col gap-6 mt-8 mb-7 ml-4">
-                      <input onChange={inputChange} name='Marca' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Marca"/>
+                      <input 
+                        onChange={(e) => setMarca(e.target.value)} 
+                        value={Marca || ""}
+                        name='Marca' 
+                        type="text" 
+                        maxLength={100}
+                        placeholder="Marca"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
+                      />
 
-                      <input onChange={inputChange} name='Peso_do_Pacote' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Peso do Pacote"/>
-                      <input onChange={inputChange} name='Tamanho_de_Embalagem' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Tamanho_de_Embalagem"/>
+                      <input
+                        onChange={(e) => setTamanho(e.target.value)}
+                        value={Tamanho || ""}
+                        name='Tamanho'
+                        type="text"
+                        maxLength={50}
+                        placeholder="Tamanho"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
+                      />
 
-                      <input onChange={inputChange} name='Link_do_Video' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="url" placeholder="Link do Video"/>
+                      <input 
+                        onChange={(e) => setPeso_do_Pacote(e.target.value)}
+                        value={Peso_do_Pacote || ""} 
+                        onInput={validarInput}
+                        name='Peso_do_Pacote' 
+                        type="text" 
+                        placeholder="em Kg"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
+                      />
+                      <input 
+                        onChange={(e) => setTamanho_de_Embalagem(e.target.value)} 
+                        value={Tamanho_de_Embalagem || ""}
+                        name='Tamanho_de_Embalagem' 
+                        type="text" 
+                        maxLength={50}
+                        placeholder="Tamanho_de_Embalagem"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
+                      />
 
-                      <input onChange={inputChange} name='NCM' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="url" placeholder="NCM"/>
+                      <input 
+                        onChange={(e) => setLink_do_Video(e.target.value)} 
+                        value={Link_do_Video || ""}
+                        name='Link_do_Video' 
+                        type="url" 
+                        maxLength={255}
+                        placeholder="Link do Video"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
+                      />
 
-                      <input onChange={inputChange} name='CEST' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="url" placeholder="CEST"/>
+                      <input 
+                        onChange={(e) => setNCM(e.target.value)}
+                        value={NCM || ""} 
+                        name='NCM' 
+                        type="text" 
+                        maxLength={20}
+                        placeholder="NCM"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
+                      />
 
-                      <input onChange={inputChange} name='Unidade' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="url" placeholder="Unidade"/>
+                      <input 
+                        onChange={(e) => setCEST(e.target.value)} 
+                        value={CEST || ""}
+                        name='CEST' 
+                        type="text" 
+                        maxLength={20}
+                        placeholder="CEST"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
+                      />
 
-                      <input onChange={inputChange} name='Origem' className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="url" placeholder="Origem"/>
+                      <input 
+                        onChange={(e) => setUnidade(e.target.value)}
+                        value={Unidade || ""} 
+                        name='Unidade' 
+                        maxLength={10}
+                        type="text" 
+                        placeholder="Unidade"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
+                      />
+
+                      <input 
+                        onChange={(e) => setOrigem(e.target.value)}
+                        value={Origem || ""} 
+                        name='Origem' 
+                        type="text" 
+                        maxLength={50}
+                        placeholder="Origem"
+                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
+                      />
                     </div>
                   )}
                   {index === 3 && (
