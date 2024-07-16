@@ -24,12 +24,10 @@ export default async function authmercado() {
     }
   }, [router.query]);
 
-  console.log("Rota de autenticação do Mercado Livre");
-  console.log(router.query);
-  console.log("Código armazenado:", codigo);
-
   return (
     <main className="flex min-h-screen flex-row items-center justify-evenly">
+      <h1 className="text-4xl font-bold text-gray-800">Autenticação do Mercado Livre</h1>
+      <p className="text-gray-800">Código: {codigo}</p>
     </main>
   );
 }
