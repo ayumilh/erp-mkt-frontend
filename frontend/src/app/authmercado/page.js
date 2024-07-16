@@ -15,6 +15,7 @@ export default function Authmercado({ searchParams }) {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log('code', code);
       try {
         const res = await axios.post('http://localhost:3001/api/mercadolivre/redirect', { code });
         console.log(res.data);
@@ -26,7 +27,6 @@ export default function Authmercado({ searchParams }) {
           return
         }
       } catch (error) {
-        console.error('Erro ao enviar o código para o servidor', error);
         setStatusRequestCodeMercado(false);
       }
     };
