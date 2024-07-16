@@ -299,53 +299,59 @@ export default function CriarProdutoUnicoForm() {
 
           <div className='flex flex-col mb-4'>
             <label htmlFor="Preco_de_Varejo" className="block mb-1 font-medium text-sm text-neutral-600">Preço de Varejo</label>
-            <input 
-              onChange={(e) => {
-                const value = e.target.value;
-                if (value === "") {
-                  setIsInvalidoPrecoDeVarejo(true);
-                } else {
-                  const regex = /^\d*(\.\d{0,2})?$/;
-                  if (regex.test(value.toString())) {
-                    setPreco_de_Varejo(value);
-                    setIsInvalidoPrecoDeVarejo(false);
-                  } else {
+            <div className="relative flex items-center">
+              <span className="absolute left-0 pl-4 py-2 rounded-l-sm focus:rounded-lg font-medium text-neutral-600">R$</span>
+              <input 
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === "") {
                     setIsInvalidoPrecoDeVarejo(true);
+                  } else {
+                    const regex = /^\d*(\.\d{0,2})?$/;
+                    if (regex.test(value.toString())) {
+                      setPreco_de_Varejo(value);
+                      setIsInvalidoPrecoDeVarejo(false);
+                    } else {
+                      setIsInvalidoPrecoDeVarejo(true);
+                    }
                   }
-                }
-              }}
-              value={Preco_de_Varejo || ""}
-              name='Preco_de_Varejo' 
-              type="text" 
-              placeholder="0,00"
-              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
-            />
+                }}
+                value={Preco_de_Varejo || ""}
+                name='Preco_de_Varejo' 
+                type="text" 
+                placeholder="0,00"
+                className="peer rounded-sm border pl-12 pr-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+              />
+            </div>
             {isInvalidoPrecoDeVarejo && <span className="text-red-500 text-sm ml-2 mt-1">Valor inválido</span>}
           </div>
           
           <div className='flex flex-col mb-4'>
             <label htmlFor="Custo_de_Compra" className="block mb-1 font-medium text-sm text-neutral-600">Custo de Compra</label>
-            <input 
-              onChange={(e) => {
-                const value = e.target.value;
-                if (value === "") {
-                  setIsInvalidoCustoDeCompra(true);
-                } else {
-                  const regex = /^\d*(\.\d{0,2})?$/;
-                  if (regex.test(value.toString())) {
-                    setCusto_de_Compra(value);
-                    setIsInvalidoCustoDeCompra(false);
-                  } else {
+            <div className="relative flex items-center">
+              <span className="absolute left-0 pl-4 py-2 rounded-l-sm focus:rounded-lg font-medium text-neutral-600">R$</span>
+              <input 
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === "") {
                     setIsInvalidoCustoDeCompra(true);
+                  } else {
+                    const regex = /^\d*(\.\d{0,2})?$/;
+                    if (regex.test(value.toString())) {
+                      setCusto_de_Compra(value);
+                      setIsInvalidoCustoDeCompra(false);
+                    } else {
+                      setIsInvalidoCustoDeCompra(true);
+                    }
                   }
-                }
-              }}
-              value={Custo_de_Compra || ""}
-              name='Custo_de_Compra' 
-              type="text" 
-              placeholder="0,00"
-              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
-            />
+                }}
+                value={Custo_de_Compra || ""}
+                name='Custo_de_Compra' 
+                type="text" 
+                placeholder="0,00"
+                className="peer rounded-sm border pl-12 pr-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out w-full"
+              />
+            </div>
             {isInvalidoCustoDeCompra && <span className="text-red-500 text-sm ml-2 mt-1">Valor inválido</span>}
           </div>
 
@@ -398,27 +404,29 @@ export default function CriarProdutoUnicoForm() {
 
           <div className="flex flex-col mb-4">
             <label htmlFor="Peso_do_Pacote" className="block mb-1 font-medium text-sm text-neutral-600">Peso do Pacote</label>
-            <input 
-              onChange={(e) => {
-                const value = e.target.value;
-                if (value === "") {
-                  setIsInvalidoPesoDoPacote(true);
-                } else {
-                  const regex = /^\d*(\.\d{0,2})?$/;
-                  if (regex.test(value.toString())) {
-                    setPeso_do_Pacote(value);
-                    setIsInvalidoPesoDoPacote(false);
-                  } else {
+            <div className="relative flex items-center">
+              <span className="absolute right-0 pr-4 py-2 rounded-l-sm focus:rounded-lg font-medium text-neutral-600">kg</span>
+              <input 
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === "") {
                     setIsInvalidoPesoDoPacote(true);
+                  } else {
+                    const regex = /^\d*(\.\d{0,2})?$/;
+                    if (regex.test(value.toString())) {
+                      setPeso_do_Pacote(value);
+                      setIsInvalidoPesoDoPacote(false);
+                    } else {
+                      setIsInvalidoPesoDoPacote(true);
+                    }
                   }
-                }
-              }}
-              value={Peso_do_Pacote || ""} 
-              name='Peso_do_Pacote' 
-              type="text" 
-              placeholder="em Kg"
-              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
-            />
+                }}
+                value={Peso_do_Pacote || ""} 
+                name='Peso_do_Pacote' 
+                type="text" 
+                className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+              />
+            </div>
             {isInvalidoPesoDoPacote && <span className="text-red-500 text-sm font-medium ml-2 mt-1">Valor inválido</span>}
           </div>
 
@@ -505,15 +513,29 @@ export default function CriarProdutoUnicoForm() {
 
           <div className="mb-4">
             <label htmlFor="Unidade" className="block mb-1 font-medium text-sm text-neutral-600">Unidade</label>
-            <input 
+            <select
               onChange={(e) => setUnidade(e.target.value)}
-              value={Unidade || ""} 
-              name='Unidade' 
-              maxLength={10}
-              type="text" 
-              placeholder="Unidade"
-              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
-            />
+              value={Unidade || ""}
+              name='Unidade'
+              className="peer rounded-sm border px-3 py-2 font-medium text-sm text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            >
+              <option value="">Selecione uma unidade</option>
+              <option value="Un">Unidade (Un)</option>
+              <option value="Kg">Quilograma (Kg)</option>
+              <option value="L">Litro (L)</option>
+              <option value="m">Metro (m)</option>
+              <option value="m²">Metro Quadrado (m²)</option>
+              <option value="m³">Metro Cúbico (m³)</option>
+              <option value="Cx">Caixa (Cx)</option>
+              <option value="Pct">Pacote (Pct)</option>
+              <option value="Par">Par (Par)</option>
+              <option value="Dz">Dúzia (Dz)</option>
+              <option value="cm">Centímetro (cm)</option>
+              <option value="mm">Milímetro (mm)</option>
+              <option value="Ton">Tonelada (Ton)</option>
+              <option value="Pc">Peça (Pc)</option>
+              <option value="Gal">Galão (Gal)</option>
+            </select>
           </div>
         </div>
       )}
