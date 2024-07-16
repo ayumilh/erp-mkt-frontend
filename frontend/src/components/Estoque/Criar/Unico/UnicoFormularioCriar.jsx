@@ -394,6 +394,11 @@ export default function CriarProdutoUnicoForm() {
             />
             {isInvalidoPesoDoPacote && <span className="text-red-500 text-sm font-medium ml-2 mt-1">Valor inválido</span>}
           </div>
+
+
+
+
+          
           {/* Unidade */}
           {/* <div className="mb-4">
             <label htmlFor="Unidade" className="block mb-1 font-medium text-sm text-neutral-600">Unidade</label>
