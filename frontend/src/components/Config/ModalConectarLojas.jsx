@@ -7,9 +7,12 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
   
   const sendDataStore = (e) => {
     e.preventDefault();
-
-    const res = axios.post('https://erp-mkt.vercel.app/api/mercadolivre/auth');
-    console.log(res.data)
+  
+    const clientId = 8470533338689335;
+    const redirectUri = encodeURIComponent('https://erp-mkt-frontend.vercel.app/authmercado');
+    const authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
+  
+    window.location.href = authUrl;
   }
   
   useEffect(() => {

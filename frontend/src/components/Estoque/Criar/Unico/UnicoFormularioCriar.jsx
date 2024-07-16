@@ -166,6 +166,12 @@ export default function CriarProdutoUnicoForm() {
         >
           mapear
         </button>
+        <button
+          onClick={() => setSecaoAtiva('infoTaxa')}
+          className={`text-neutral-700 hover:text-black font-medium transition-colors duration-300 ease-in ${secaoAtiva === 'infoTaxa' ? 'border-b-2 border-segundaria-900' : ''}`}
+        >
+          taxação
+        </button>
       </div>
 
       {secaoAtiva === 'gerais' && (
@@ -415,20 +421,6 @@ export default function CriarProdutoUnicoForm() {
               className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
             />
           </div>
-
-          {/* Unidade */}
-          {/* <div className="mb-4">
-            <label htmlFor="Unidade" className="block mb-1 font-medium text-sm text-neutral-600">Unidade</label>
-            <input 
-              onChange={(e) => setUnidade(e.target.value)}
-              value={Unidade || ""} 
-              name='Unidade' 
-              maxLength={10}
-              type="text" 
-              placeholder="Unidade"
-              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
-            />
-          </div> */}
         </div>
       )}
 
@@ -451,6 +443,65 @@ export default function CriarProdutoUnicoForm() {
       {secaoAtiva === 'infoTaxa' && (
         <div className='flex flex-wrap gap-3 xl:gap-7 my-4 transition-transform duration-500 ease-in'>
           <div className="w-full mb-4">
+            <label htmlFor="NCM" className="block mb-1 font-medium text-sm text-neutral-600">NCM</label>
+            <input 
+              onChange={(e) => setNCM(e.target.value)}
+              value={NCM || ""} 
+              name='NCM' 
+              type="text" 
+              maxLength={20}
+              placeholder="NCM"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+          <div className="w-full mb-4">
+            <label htmlFor="CEST" className="block mb-1 font-medium text-sm text-neutral-600">CEST</label>
+            <input 
+              onChange={(e) => setCEST(e.target.value)} 
+              value={CEST || ""}
+              name='CEST' 
+              type="text" 
+              maxLength={20}
+              placeholder="CEST"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+          <div className="w-full mb-4">
+            <label htmlFor="Origem" className="block mb-1 font-medium text-sm text-neutral-600">Origem</label>
+            <select
+              onMouseOver={(e) => e.currentTarget.classList.add('bg-gray-100')}
+              onMouseOut={(e) => e.currentTarget.classList.remove('bg-gray-200')}
+              onChange={(e) => setOrigem(e.target.value)}
+              value={Origem || ""}
+              name='Origem'
+              className="peer w-full rounded-sm border px-3 py-2 font-medium text-sm text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            >
+              <option value="">Selecione a Origem</option>
+              <option value="0">Nacional, exceto as indicadas nos códigos 3 a 5</option>
+              <option value="1">Estrangeira - Importação direta, exceto a indicada no código 6</option>
+              <option value="2">Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7</option>
+              <option value="3">Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%</option>
+              <option value="4">Nacional, cuja produção tenha sido feita em conformidade com os processos produtivos básicos de que tratam as legislações citadas nos Ajustes</option>
+              <option value="5">Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%</option>
+              <option value="6">Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX</option>
+              <option value="7">Estrangeira - Adquirida no mercado interno, sem similar nacional, constante em lista da CAMEX</option>
+              <option value="8">Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="Unidade" className="block mb-1 font-medium text-sm text-neutral-600">Unidade</label>
+            <input 
+              onChange={(e) => setUnidade(e.target.value)}
+              value={Unidade || ""} 
+              name='Unidade' 
+              maxLength={10}
+              type="text" 
+              placeholder="Unidade"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
           </div>
         </div>
       )}
