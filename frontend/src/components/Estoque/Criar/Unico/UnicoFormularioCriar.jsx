@@ -277,7 +277,7 @@ export default function CriarProdutoUnicoForm() {
       )}
 
       {secaoAtiva === 'infoDeVenda' && (
-        <div className='flex gap-3 xl:gap-7 my-4 transition duration-300 ease-out'>
+        <div className='flex flex-wrap gap-3 xl:gap-7 my-4 transition duration-300 ease-out'>
 
           <div className='flex flex-col mb-4'>
             <label htmlFor="Preco_de_Varejo" className="block mb-1 font-medium text-sm text-neutral-600">Preço de Varejo</label>
@@ -370,7 +370,7 @@ export default function CriarProdutoUnicoForm() {
           </div>
 
           <div className="flex flex-col mb-4">
-            <label htmlFor="Tamanho" className="block mb-1 font-medium text-sm text-neutral-600">Tamanho</label>
+            <label htmlFor="Peso_do_Pacote" className="block mb-1 font-medium text-sm text-neutral-600">Peso do Pacote</label>
             <input 
               onChange={(e) => {
                 const value = e.target.value;
@@ -395,10 +395,19 @@ export default function CriarProdutoUnicoForm() {
             {isInvalidoPesoDoPacote && <span className="text-red-500 text-sm font-medium ml-2 mt-1">Valor inválido</span>}
           </div>
 
+          <div className='mb-4'>
+            <label htmlFor="Tamanho_de_Embalagem" className="block mb-1 font-medium text-sm text-neutral-600">Tamanho de Embalagem</label>
+            <input 
+              onChange={(e) => setTamanho_de_Embalagem(e.target.value)} 
+              value={Tamanho_de_Embalagem || ""}
+              name='Tamanho_de_Embalagem' 
+              type="text" 
+              maxLength={50}
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
 
 
-
-          
           {/* Unidade */}
           {/* <div className="mb-4">
             <label htmlFor="Unidade" className="block mb-1 font-medium text-sm text-neutral-600">Unidade</label>
