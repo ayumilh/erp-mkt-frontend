@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const ModalConectarLojas = ({ onClose, drawerClose }) => {
   const [nomeLoja, setNomeLoja] = useState('');
   const [plataforma, setPlataforma] = useState('');
+  
+  const sendDataStore = (e) => {
+    e.preventDefault();
+
+    const res = axios.post('https://erp-mkt.vercel.app/api/mercadolivre/auth');
+    console.log(res.data)
+  }
   
   useEffect(() => {
     drawerClose();
@@ -54,7 +62,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
           </div>
         </form>
         <div className="flex justify-end">
-          <button className="px-4 py-2 bg-segundaria-900 text-white rounded-md text-sm">Conectar</button>
+          <button onClick={sendDataStore} className="px-4 py-2 bg-segundaria-900 text-white rounded-md text-sm">Conectar</button>
         </div>
       </div>
     </div>

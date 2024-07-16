@@ -149,10 +149,10 @@ export default function CriarProdutoUnicoForm() {
           dados básicos
         </button>
         <button
-          onClick={() => setSecaoAtiva('complementares')}
-          className={`text-neutral-700 hover:text-black font-medium transition duration-300 ease-out ${secaoAtiva === 'complementares' ? 'border-b-2 border-segundaria-900' : ''}`}
+          onClick={() => setSecaoAtiva('infoDeVenda')}
+          className={`text-neutral-700 hover:text-black font-medium transition duration-300 ease-out ${secaoAtiva === 'infoDeVenda' ? 'border-b-2 border-segundaria-900' : ''}`}
         >
-          dados complementares
+          venda e atributo
         </button>
       </div>
 
@@ -276,9 +276,37 @@ export default function CriarProdutoUnicoForm() {
         </div>
       )}
 
-      {secaoAtiva === 'complementares' && (
+      {secaoAtiva === 'infoDeVenda' && (
         <div className='flex gap-3 xl:gap-7 my-4 transition duration-300 ease-out'>
-          <div className="mb-4">
+          <div className='flex flex-col mb-4'>
+            <label htmlFor="Preco_de_Varejo" className="block mb-1 font-medium text-sm text-neutral-600">Preço de Varejo</label>
+            <input 
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === "") {
+                  setIsInvalidoPrecoDeVarejo(true);
+                } else {
+                  const regex = /^\d*(\.\d{0,2})?$/;
+                  if (regex.test(value.toString())) {
+                    setPreco_de_Varejo(value);
+                    setIsInvalidoPrecoDeVarejo(false);
+                  } else {
+                    setIsInvalidoPrecoDeVarejo(true);
+                  }
+                }
+              }}
+              value={Preco_de_Varejo || ""}
+              name='Preco_de_Varejo' 
+              type="text" 
+              placeholder="0,00"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+            {isInvalidoPrecoDeVarejo && <span className="text-red-500 text-sm ml-2 mt-1">Valor inválido</span>}
+
+          </div>
+
+          {/* Unidade */}
+          {/* <div className="mb-4">
             <label htmlFor="Unidade" className="block mb-1 font-medium text-sm text-neutral-600">Unidade</label>
             <input 
               onChange={(e) => setUnidade(e.target.value)}
@@ -289,7 +317,7 @@ export default function CriarProdutoUnicoForm() {
               placeholder="Unidade"
               className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
             />
-          </div>
+          </div> */}
         </div>
       )}
       {/* <form className="rounded-xl w-[373px] md:w-[620px] lg:w-[720px] md:p-6 py-5 px-4">
@@ -376,29 +404,7 @@ export default function CriarProdutoUnicoForm() {
                         placeholder="Vendedor"
                         className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
                       />
-                      
-                      {isInvalidoPrecoDeVarejo && <span className="text-red-500 text-sm font-medium">Valor inválido</span>}
-                      <input 
-                        onChange={(e) => {
-                          const value = e.target.value;
-                          if (value === "") {
-                            setIsInvalidoPrecoDeVarejo(true);
-                          } else {
-                            const regex = /^\d*(\.\d{0,2})?$/;
-                            if (regex.test(value.toString())) {
-                              setPreco_de_Varejo(value);
-                              setIsInvalidoPrecoDeVarejo(false);
-                            } else {
-                              setIsInvalidoPrecoDeVarejo(true);
-                            }
-                          }
-                        }}
-                        value={Preco_de_Varejo || ""}
-                        name='Preco_de_Varejo' 
-                        type="text" 
-                        placeholder="0,00"
-                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
-                      />
+                    
                       
                       {isInvalidoCustoDeCompra && <span className="text-red-500 text-sm font-medium">Valor inválido</span>}
                       <input 
