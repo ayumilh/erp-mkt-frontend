@@ -9,22 +9,17 @@ import { useRouter } from 'next/navigation';
 
 
 export default function Authmercado() {
-  // const session = await getServerSession(nextAuthOptions)
-  // if(!session) {
-  //   redirect('/login')
-  // }
-
   const router = useRouter();
   const [codigo, setCodigo] = useState('');
 
   useEffect(() => {
-    const { code } = router.query;
-
-    if (code) {
-      console.log("Código recebido:", code);
-      setCodigo(code); 
+    if (router.isReady) {
+      const { code } = router.query;
+      if (code) {
+        setCodigo(code);
+      }
     }
-  }, [router.query]);
+  }, [router.isReady, router.query]);
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-evenly">
