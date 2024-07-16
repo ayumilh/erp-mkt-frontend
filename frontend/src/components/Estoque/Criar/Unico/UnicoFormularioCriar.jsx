@@ -141,23 +141,35 @@ export default function CriarProdutoUnicoForm() {
     <div className='w-full xl:max-w-screen-lg flex flex-col mt-10'>
       <h3 className='text-neutral-700 text-xl font-medium '>{Nome_do_Produto || "Novo Produto"}</h3>
 
-      <div className='flex gap-4 mt-7 mb-10 relative'>
+      <div className='flex gap-6 mt-7 mb-10 relative'>
         <button
           onClick={() => setSecaoAtiva('gerais')}
-          className={`text-neutral-700 hover:text-black font-medium transition duration-300 ease-out ${secaoAtiva === 'gerais' ? 'border-b-2 border-segundaria-900' : ''}`}
+          className={`text-neutral-700 hover:text-black font-medium transition-colors duration-300 ease-in ${secaoAtiva === 'gerais' ? 'border-b-2 border-segundaria-900' : ''}`}
         >
           dados básicos
         </button>
         <button
           onClick={() => setSecaoAtiva('infoDeVenda')}
-          className={`text-neutral-700 hover:text-black font-medium transition duration-300 ease-out ${secaoAtiva === 'infoDeVenda' ? 'border-b-2 border-segundaria-900' : ''}`}
+          className={`text-neutral-700 hover:text-black font-medium transition-colors duration-300 ease-in ${secaoAtiva === 'infoDeVenda' ? 'border-b-2 border-segundaria-900' : ''}`}
         >
           venda e atributo
+        </button>
+        <button
+          onClick={() => setSecaoAtiva('midia')}
+          className={`text-neutral-700 hover:text-black font-medium transition-colors duration-300 ease-in ${secaoAtiva === 'midia' ? 'border-b-2 border-segundaria-900' : ''}`}
+        >
+          mídia
+        </button>
+        <button
+          onClick={() => setSecaoAtiva('mapear')}
+          className={`text-neutral-700 hover:text-black font-medium transition-colors duration-300 ease-in ${secaoAtiva === 'mapear' ? 'border-b-2 border-segundaria-900' : ''}`}
+        >
+          mapear
         </button>
       </div>
 
       {secaoAtiva === 'gerais' && (
-        <div className='flex flex-wrap gap-3 lg:gap-5 my-4 transition duration-300 ease-out'>
+        <div className='flex flex-wrap gap-3 lg:gap-5 my-4 transition-transform duration-500 ease-in'>
           <div className="w-4/12 mb-4">
             <label htmlFor="Nome_do_Produto" className="block mb-1 font-medium text-sm text-neutral-600">Nome do Produto <span className='text-red-600'>*</span></label>
             <input
@@ -277,7 +289,7 @@ export default function CriarProdutoUnicoForm() {
       )}
 
       {secaoAtiva === 'infoDeVenda' && (
-        <div className='flex flex-wrap gap-3 xl:gap-7 my-4 transition duration-300 ease-out'>
+        <div className='flex flex-wrap gap-3 xl:gap-7 my-4 transition-transform duration-500 ease-in'>
 
           <div className='flex flex-col mb-4'>
             <label htmlFor="Preco_de_Varejo" className="block mb-1 font-medium text-sm text-neutral-600">Preço de Varejo</label>
@@ -338,7 +350,6 @@ export default function CriarProdutoUnicoForm() {
               value={Descricao || ""}
               name='Descricao' 
               type="text" 
-              placeholder="Descricao"
               className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
             />
           </div>
@@ -351,7 +362,6 @@ export default function CriarProdutoUnicoForm() {
               name='Link_do_Fornecedor' 
               max={255}
               type="text" 
-              placeholder="Link do Fornecedor"
               className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
             />
           </div>
@@ -364,7 +374,6 @@ export default function CriarProdutoUnicoForm() {
               name='Marca' 
               type="text" 
               maxLength={100}
-              placeholder="Marca"
               className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
             />
           </div>
@@ -407,7 +416,6 @@ export default function CriarProdutoUnicoForm() {
             />
           </div>
 
-
           {/* Unidade */}
           {/* <div className="mb-4">
             <label htmlFor="Unidade" className="block mb-1 font-medium text-sm text-neutral-600">Unidade</label>
@@ -421,6 +429,65 @@ export default function CriarProdutoUnicoForm() {
               className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
             />
           </div> */}
+        </div>
+      )}
+
+      {secaoAtiva === 'midia' && (
+        <div className='flex flex-wrap gap-3 xl:gap-7 my-4 transition-transform duration-500 ease-in'>
+          <div className="w-full mb-4">
+            <label htmlFor="Link_do_Video" className="block mb-1 font-medium text-sm text-neutral-600">Link do Video</label>
+            <input 
+              onChange={(e) => setLink_do_Video(e.target.value)} 
+              value={Link_do_Video || ""}
+              name='Link_do_Video' 
+              type="url" 
+              maxLength={255}
+              className="peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+        </div>
+      )}
+
+      {secaoAtiva === 'infoTaxa' && (
+        <div className='flex flex-wrap gap-3 xl:gap-7 my-4 transition-transform duration-500 ease-in'>
+          <div className="w-full mb-4">
+          </div>
+        </div>
+      )}
+
+      {secaoAtiva === 'mapear' && (
+        <div className='flex flex-wrap gap-3 xl:gap-7 my-4 transition-transform duration-500 ease-in'>
+          <div className="w-full flex flex-col overflow-x-auto">
+            <div className='absolute'>
+              <button type='button' onClick={handleButtonClick} className='rounded-lg flex items-center justify-center gap-1 text-base py-2 px-3'>
+                <span><AddIcon className='w-5 h-5'/></span>
+                <span className='text-sm hover:text-black font-medium'>Mapear SKU do anúncio</span>
+              </button>
+            </div>
+            <div className="bg-primaria-900 rounded-2xl flex flex-col h-[400px] mx-auto lg:mx-0 mb-6 mt-14 overflow-x-auto">
+              <table className="table-auto min-w-full">
+                <thead>
+                <tr>
+                  <th className="px-4 py-2 md:py-4 text-sm font-semibold text-center">Valor da variante</th>
+                  <th className="px-4 py-2 md:py-4 text-sm font-semibold text-center">ID dos anúncios</th>
+                  <th className="px-4 py-2 md:py-4 text-sm font-semibold text-center">Nome da loja</th>
+                </tr>
+                </thead>
+                <tbody>
+                  {products.map((product, index) => (
+                    <tr key={index}>
+                      <td className="px-4 py-2 md:py-4 text-center">{product.color}</td>
+                      <td className="px-4 py-2 md:py-4 text-center">{product.sku}</td>
+                      <td className="px-4 py-2 md:py-4 text-center">Lojinha</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {isModalOpen && (
+                <ModalMapearAnuncio onIdProduct={handleIdProduct} onClose={closeModal}/>
+              )}
+            </div>
+          </div>
         </div>
       )}
       {/* <form className="rounded-xl w-[373px] md:w-[620px] lg:w-[720px] md:p-6 py-5 px-4">
