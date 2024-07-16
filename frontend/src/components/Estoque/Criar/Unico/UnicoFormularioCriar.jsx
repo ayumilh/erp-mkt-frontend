@@ -278,6 +278,7 @@ export default function CriarProdutoUnicoForm() {
 
       {secaoAtiva === 'infoDeVenda' && (
         <div className='flex gap-3 xl:gap-7 my-4 transition duration-300 ease-out'>
+
           <div className='flex flex-col mb-4'>
             <label htmlFor="Preco_de_Varejo" className="block mb-1 font-medium text-sm text-neutral-600">Preço de Varejo</label>
             <input 
@@ -302,9 +303,97 @@ export default function CriarProdutoUnicoForm() {
               className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
             />
             {isInvalidoPrecoDeVarejo && <span className="text-red-500 text-sm ml-2 mt-1">Valor inválido</span>}
-
+          </div>
+          
+          <div className='flex flex-col mb-4'>
+            <label htmlFor="Custo_de_Compra" className="block mb-1 font-medium text-sm text-neutral-600">Custo de Compra</label>
+            <input 
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === "") {
+                  setIsInvalidoCustoDeCompra(true);
+                } else {
+                  const regex = /^\d*(\.\d{0,2})?$/;
+                  if (regex.test(value.toString())) {
+                    setCusto_de_Compra(value);
+                    setIsInvalidoCustoDeCompra(false);
+                  } else {
+                    setIsInvalidoCustoDeCompra(true);
+                  }
+                }
+              }}
+              value={Custo_de_Compra || ""}
+              name='Custo_de_Compra' 
+              type="text" 
+              placeholder="0,00"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+            {isInvalidoCustoDeCompra && <span className="text-red-500 text-sm ml-2 mt-1">Valor inválido</span>}
           </div>
 
+          <div className="mb-4">
+            <label htmlFor="Descricao" className="block mb-1 font-medium text-sm text-neutral-600">Descrição</label>
+            <input 
+              onChange={(e) => setDescricao(e.target.value)} 
+              value={Descricao || ""}
+              name='Descricao' 
+              type="text" 
+              placeholder="Descricao"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="Link_do_Fornecedor" className="block mb-1 font-medium text-sm text-neutral-600">Link do Fornecedor</label>
+            <input 
+              onChange={(e) => setLink_do_Fornecedor(e.target.value)} 
+              value={Link_do_Fornecedor || ""}
+              name='Link_do_Fornecedor' 
+              max={255}
+              type="text" 
+              placeholder="Link do Fornecedor"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="Marca" className="block mb-1 font-medium text-sm text-neutral-600">Marca</label>
+            <input 
+              onChange={(e) => setMarca(e.target.value)} 
+              value={Marca || ""}
+              name='Marca' 
+              type="text" 
+              maxLength={100}
+              placeholder="Marca"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+          <div className="flex flex-col mb-4">
+            <label htmlFor="Tamanho" className="block mb-1 font-medium text-sm text-neutral-600">Tamanho</label>
+            <input 
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === "") {
+                  setIsInvalidoPesoDoPacote(true);
+                } else {
+                  const regex = /^\d*(\.\d{0,2})?$/;
+                  if (regex.test(value.toString())) {
+                    setPeso_do_Pacote(value);
+                    setIsInvalidoPesoDoPacote(false);
+                  } else {
+                    setIsInvalidoPesoDoPacote(true);
+                  }
+                }
+              }}
+              value={Peso_do_Pacote || ""} 
+              name='Peso_do_Pacote' 
+              type="text" 
+              placeholder="em Kg"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+            {isInvalidoPesoDoPacote && <span className="text-red-500 text-sm font-medium ml-2 mt-1">Valor inválido</span>}
+          </div>
           {/* Unidade */}
           {/* <div className="mb-4">
             <label htmlFor="Unidade" className="block mb-1 font-medium text-sm text-neutral-600">Unidade</label>

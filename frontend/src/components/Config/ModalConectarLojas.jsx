@@ -8,7 +8,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
   const sendDataStore = (e) => {
     e.preventDefault();
 
-    const res = axios.post('https://erp-mkt.vercel.app/api/mercadolivre/auth');
+    const res = axios.get('https://erp-mkt.vercel.app/api/mercadolivre/auth');
     console.log(res.data)
   }
   
