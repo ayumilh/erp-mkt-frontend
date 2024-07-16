@@ -8,9 +8,9 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct}){
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://erp-mkt.vercel.app/api/mercadolivre/products")
-      .then((response) => {
+    const fetchData = async () => {
+      try{
+        const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products")
         const restructuredData = response.data.products.map((product) => {
           return {
             sku: product.product_sku,
@@ -19,10 +19,11 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct}){
           };
         });
         setProducts(restructuredData);
-      })
-      .catch((error) => {
-        console.error(`Error: ${error}`);
-      });
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+    fetchData();
   }, []);
 
 
@@ -41,7 +42,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct}){
     try {
       const idProduct = selectedItems;
       const response = await axios.get('https://erp-mkt.vercel.app/api/stock/mercadolivre/get', { params: { idProduct } });
-
+      console.log(response.data);
       const transformedData = {
         sku: response.data.sku.map(item => item),
         colorVariables: response.data.colorVariables.map(item => item),

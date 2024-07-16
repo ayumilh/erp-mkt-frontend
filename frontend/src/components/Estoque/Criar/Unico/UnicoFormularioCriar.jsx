@@ -36,6 +36,12 @@ export default function CriarProdutoUnicoForm() {
   const [CEST, setCEST] = useState("");
   const [Unidade, setUnidade] = useState("");
   const [Origem, setOrigem] = useState("");
+  
+  const [isInvalidoPrecoDeVarejo, setIsInvalidoPrecoDeVarejo] = useState(null);
+  const [isInvalidoCustoDeCompra, setIsInvalidoCustoDeCompra] = useState(null);
+  const [isInvalidoPesoDoPacote, setIsInvalidoPesoDoPacote] = useState(null);
+
+  const [secaoAtiva, setSecaoAtiva] = useState('gerais');
 
   const product = {
     SKU,
@@ -67,22 +73,12 @@ export default function CriarProdutoUnicoForm() {
     setActiveStep(index);
   };
 
-  const inputChange = (event) => {
-    setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-  }
 
   // useEffect(() => {
   //   const isAllFieldsFilled = Object.values(product).every(field => field.trim() !== '');
   //   setIsFormValid(isAllFieldsFilled);
   // }, [product]);
 
-  function validarInput(event) {
-    const valor = event.target.value;
-    const padrao = /^\d*(\.\d{0,2})?$/;
-    if (!padrao.test(valor)) {
-      event.preventDefault();
-    }
-  }
 
   const [products, setProducts] = useState([]);
   const handleIdProduct = (data) => {
@@ -104,14 +100,12 @@ export default function CriarProdutoUnicoForm() {
     try {
       const sku = products.map(product => product.sku);
       const quantities = products.map(product => product.availableQuantities);
-      console.log(sku, quantities, product)
 
       const response = await axios.post("https://erp-mkt.vercel.app/api/stock/createProduct", {
         ...product,
         SkuMercado: sku,
         quantidade: quantities
       })
-      console.log(response.data)
       
     } catch (error) {
       console.error(error)
@@ -144,8 +138,161 @@ export default function CriarProdutoUnicoForm() {
   }
 
   return (
-    <div className='lg:flex lg:gap-28'>
-      <form className="rounded-xl w-[373px] md:w-[620px] lg:w-[720px] md:p-6 py-5 px-4">
+    <div className='w-full xl:max-w-screen-lg flex flex-col mt-10'>
+      <h3 className='text-neutral-700 text-xl font-medium '>{Nome_do_Produto || "Novo Produto"}</h3>
+
+      <div className='flex gap-4 mt-7 mb-10 relative'>
+        <button
+          onClick={() => setSecaoAtiva('gerais')}
+          className={`text-neutral-700 hover:text-black font-medium transition duration-300 ease-out ${secaoAtiva === 'gerais' ? 'border-b-2 border-segundaria-900' : ''}`}
+        >
+          dados básicos
+        </button>
+        <button
+          onClick={() => setSecaoAtiva('complementares')}
+          className={`text-neutral-700 hover:text-black font-medium transition duration-300 ease-out ${secaoAtiva === 'complementares' ? 'border-b-2 border-segundaria-900' : ''}`}
+        >
+          dados complementares
+        </button>
+      </div>
+
+      {secaoAtiva === 'gerais' && (
+        <div className='flex flex-wrap gap-3 lg:gap-5 my-4 transition duration-300 ease-out'>
+          <div className="w-4/12 mb-4">
+            <label htmlFor="Nome_do_Produto" className="block mb-1 font-medium text-sm text-neutral-600">Nome do Produto <span className='text-red-600'>*</span></label>
+            <input
+              onChange={(e) => setNome_do_Produto(e.target.value)}
+              value={Nome_do_Produto || ""}
+              maxLength={255}
+              name='Nome_do_Produto' 
+              required
+              type="text"
+              className="peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+          <div className="w-3/5 mb-4">
+            <label htmlFor="SKU" className="block mb-1 font-medium text-sm text-neutral-600">Código(SKU) <span className='text-red-600'>*</span></label>
+            <input
+              onChange={(e) => setSKU(e.target.value)}
+              value={SKU || ""}
+              maxLength={55}
+              name='SKU' 
+              required
+              type="text"
+              placeholder="Código (SKU) ou referência do produto"
+              className="peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="Apelido_do_Produto" className="block mb-1 font-medium text-sm text-neutral-600">Apelido do Produto</label>
+            <input
+              onChange={(e) => setApelido_do_Produto(e.target.value)}
+              value={Apelido_do_Produto || ""}
+              maxLength={255}
+              name='Apelido_do_Produto' 
+              required
+              type="text"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="Categorias" className="block mb-1 font-medium text-sm text-neutral-600">Categorias <span className='text-red-600'>*</span></label>
+            <input
+              onChange={(e) => setCategorias(e.target.value)}
+              value={Categorias || ""}
+              maxLength={255}
+              name='Categorias' 
+              required
+              type="text"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="Codigo_de_Barras" className="block mb-1 font-medium text-sm text-neutral-600">Código de Barras</label>
+            <input 
+              onChange={(e) => setCodigo_de_Barras(e.target.value)} 
+              value={Codigo_de_Barras || ""}
+              name='Codigo_de_Barras' 
+              type="text" 
+              maxLength={50}
+              placeholder="EAN, UPC, GTIN"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="Data_de_Lancamento" className="block mb-1 font-medium text-sm text-neutral-600">Data de Lançamento</label>
+            <input 
+              onChange={(e) => setData_de_Lancamento(e.target.value)}
+              value={Data_de_Lancamento || ""} 
+              name='Data_de_Lancamento' 
+              type="date" 
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="Status_da_Venda" className="block mb-1 font-medium text-sm text-neutral-600">Status de venda</label>
+            <div className="flex flex-col md:flex-row gap-4">
+              <label>
+                <input
+                  type="radio"
+                  value="Ativo"
+                  checked={Status_da_Venda === 'Ativo'}
+                  name="Status_da_Venda"
+                  onChange={(e) => setStatus_da_Venda(e.target.value)}
+                />
+                <span className="font-normal ml-2">Ativo</span>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="Inativo"
+                  name="Status_da_Venda"
+                  checked={Status_da_Venda === 'Inativo'}
+                  onChange={(e) => setStatus_da_Venda(e.target.value)}
+                />
+                <span className="font-normal ml-2">Inativo</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="Vendedor" className="block mb-1 font-medium text-sm text-neutral-600">Vendedor</label>
+            <input 
+              onChange={(e) => setVendedor(e.target.value)}
+              value={Vendedor || ""} 
+              name='Vendedor' 
+              maxLength={100}
+              type="text" 
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
+        </div>
+      )}
+
+      {secaoAtiva === 'complementares' && (
+        <div className='flex gap-3 xl:gap-7 my-4 transition duration-300 ease-out'>
+          <div className="mb-4">
+            <label htmlFor="Unidade" className="block mb-1 font-medium text-sm text-neutral-600">Unidade</label>
+            <input 
+              onChange={(e) => setUnidade(e.target.value)}
+              value={Unidade || ""} 
+              name='Unidade' 
+              maxLength={10}
+              type="text" 
+              placeholder="Unidade"
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+        </div>
+      )}
+      {/* <form className="rounded-xl w-[373px] md:w-[620px] lg:w-[720px] md:p-6 py-5 px-4">
         <div className="flex flex-col gap-4">
           <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((step, index) => (
@@ -161,58 +308,9 @@ export default function CriarProdutoUnicoForm() {
                   <p className="text-sm md:text-base font-medium opacity-90">{step.subtitulo}</p>
                   {index === 0 && (
                     <div className="flex flex-col gap-6 mt-8 mb-7 ml-4">
-                      <div className="mb-4">
-                        <label htmlFor="SKU" className="block mb-1 font-medium text-sm text-neutral-600">Código(SKU) <span className='text-red-600'>*</span></label>
-                        <input
-                          onChange={(e) => setSKU(e.target.value)}
-                          value={SKU || ""}
-                          maxLength={55}
-                          name='SKU' 
-                          required
-                          type="text"
-                          placeholder="Código (SKU) ou referência do produto"
-                          className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
-                        />
-                      </div>
 
-                      <div className="mb-4">
-                        <label htmlFor="Nome_do_Produto" className="block mb-1 font-medium text-sm text-neutral-600">Nome do Produto <span className='text-red-600'>*</span></label>
-                        <input
-                          onChange={(e) => setNome_do_Produto(e.target.value)}
-                          value={Nome_do_Produto || ""}
-                          maxLength={255}
-                          name='Nome_do_Produto' 
-                          required
-                          type="text"
-                          className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
-                        />
-                      </div>
 
-                      <div className="mb-4">
-                        <label htmlFor="Apelido_do_Produto" className="block mb-1 font-medium text-sm text-neutral-600">Apelido do Produto <span className='text-red-600'>*</span></label>
-                        <input
-                          onChange={(e) => setApelido_do_Produto(e.target.value)}
-                          value={Apelido_do_Produto || ""}
-                          maxLength={255}
-                          name='Apelido_do_Produto' 
-                          required
-                          type="text"
-                          className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
-                        />
-                      </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="Categorias" className="block mb-1 font-medium text-sm text-neutral-600">Categorias <span className='text-red-600'>*</span></label>
-                        <input
-                          onChange={(e) => setCategorias(e.target.value)}
-                          value={Categorias || ""}
-                          maxLength={255}
-                          name='Categorias' 
-                          required
-                          type="text"
-                          className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
-                        />
-                      </div>
                     </div>
                   )}
                   {index === 1 && (
@@ -278,21 +376,47 @@ export default function CriarProdutoUnicoForm() {
                         placeholder="Vendedor"
                         className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
                       />
-
+                      
+                      {isInvalidoPrecoDeVarejo && <span className="text-red-500 text-sm font-medium">Valor inválido</span>}
                       <input 
-                        onChange={(e) => setPreco_de_Varejo(e.target.value)} 
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          if (value === "") {
+                            setIsInvalidoPrecoDeVarejo(true);
+                          } else {
+                            const regex = /^\d*(\.\d{0,2})?$/;
+                            if (regex.test(value.toString())) {
+                              setPreco_de_Varejo(value);
+                              setIsInvalidoPrecoDeVarejo(false);
+                            } else {
+                              setIsInvalidoPrecoDeVarejo(true);
+                            }
+                          }
+                        }}
                         value={Preco_de_Varejo || ""}
-                        onInput={validarInput}
                         name='Preco_de_Varejo' 
                         type="text" 
                         placeholder="0,00"
                         className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
                       />
-
+                      
+                      {isInvalidoCustoDeCompra && <span className="text-red-500 text-sm font-medium">Valor inválido</span>}
                       <input 
-                        onChange={(e) => setCusto_de_Compra(e.target.value)} 
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          if (value === "") {
+                            setIsInvalidoCustoDeCompra(true);
+                          } else {
+                            const regex = /^\d*(\.\d{0,2})?$/;
+                            if (regex.test(value.toString())) {
+                              setCusto_de_Compra(value);
+                              setIsInvalidoCustoDeCompra(false);
+                            } else {
+                              setIsInvalidoCustoDeCompra(true);
+                            }
+                          }
+                        }}
                         value={Custo_de_Compra || ""}
-                        onInput={validarInput}
                         name='Custo_de_Compra' 
                         type="text" 
                         placeholder="0,00"
@@ -340,11 +464,24 @@ export default function CriarProdutoUnicoForm() {
                         placeholder="Tamanho"
                         className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
                       />
-
+                      
+                      {isInvalidoPesoDoPacote && <span className="text-red-500 text-sm font-medium">Valor inválido</span>}
                       <input 
-                        onChange={(e) => setPeso_do_Pacote(e.target.value)}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          if (value === "") {
+                            setIsInvalidoPesoDoPacote(true);
+                          } else {
+                            const regex = /^\d*(\.\d{0,2})?$/;
+                            if (regex.test(value.toString())) {
+                              setPeso_do_Pacote(value);
+                              setIsInvalidoPesoDoPacote(false);
+                            } else {
+                              setIsInvalidoPesoDoPacote(true);
+                            }
+                          }
+                        }}
                         value={Peso_do_Pacote || ""} 
-                        onInput={validarInput}
                         name='Peso_do_Pacote' 
                         type="text" 
                         placeholder="em Kg"
@@ -390,25 +527,30 @@ export default function CriarProdutoUnicoForm() {
                         className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
                       />
 
-                      <input 
-                        onChange={(e) => setUnidade(e.target.value)}
-                        value={Unidade || ""} 
-                        name='Unidade' 
-                        maxLength={10}
-                        type="text" 
-                        placeholder="Unidade"
-                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
-                      />
 
-                      <input 
-                        onChange={(e) => setOrigem(e.target.value)}
-                        value={Origem || ""} 
-                        name='Origem' 
-                        type="text" 
-                        maxLength={50}
-                        placeholder="Origem"
-                        className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" 
-                      />
+
+                      <div className="w-full mb-4">
+                        <label htmlFor="Origem" className="block mb-1 font-medium text-sm text-neutral-600">Origem</label>
+                        <select
+                          onMouseOver={(e) => e.currentTarget.classList.add('bg-gray-100')}
+                          onMouseOut={(e) => e.currentTarget.classList.remove('bg-gray-200')}
+                          onChange={(e) => setOrigem(e.target.value)}
+                          value={Origem || ""}
+                          name='Origem'
+                          className="peer w-full rounded-sm border px-3 py-2 font-medium text-sm text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+                        >
+                          <option value="">Selecione a Origem</option>
+                          <option value="0">Nacional, exceto as indicadas nos códigos 3 a 5</option>
+                          <option value="1">Estrangeira - Importação direta, exceto a indicada no código 6</option>
+                          <option value="2">Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7</option>
+                          <option value="3">Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%</option>
+                          <option value="4">Nacional, cuja produção tenha sido feita em conformidade com os processos produtivos básicos de que tratam as legislações citadas nos Ajustes</option>
+                          <option value="5">Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%</option>
+                          <option value="6">Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX</option>
+                          <option value="7">Estrangeira - Adquirida no mercado interno, sem similar nacional, constante em lista da CAMEX</option>
+                          <option value="8">Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%</option>
+                        </select>
+                      </div>
                     </div>
                   )}
                   {index === 3 && (
@@ -460,7 +602,7 @@ export default function CriarProdutoUnicoForm() {
           )}
         </div> 
         </div>
-      </form>
+      </form> */}
     </div>
   );
 }
