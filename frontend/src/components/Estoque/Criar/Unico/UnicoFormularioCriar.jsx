@@ -384,6 +384,18 @@ export default function CriarProdutoUnicoForm() {
             />
           </div>
 
+          <div className="mb-4">
+            <label htmlFor="Tamanho" className="block mb-1 font-medium text-sm text-neutral-600">Tamanho</label>
+            <input
+              onChange={(e) => setTamanho(e.target.value)}
+              value={Tamanho || ""}
+              name='Tamanho'
+              type="text"
+              maxLength={50}
+              className="peer rounded-sm border px-3 py-2 font-medium text-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+            />
+          </div>
+
           <div className="flex flex-col mb-4">
             <label htmlFor="Peso_do_Pacote" className="block mb-1 font-medium text-sm text-neutral-600">Peso do Pacote</label>
             <input 

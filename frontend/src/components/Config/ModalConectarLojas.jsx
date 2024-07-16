@@ -15,6 +15,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
     window.location.href = authUrl;
   }
   
+  
   useEffect(() => {
     drawerClose();
   }, [drawerClose]);
