@@ -101,16 +101,8 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'delivered':
-        return 'bg-green-200';
-      case 'ready_to_ship':
-        return 'bg-blue-200';
-      case 'shipped':
-        return 'bg-yellow-200';
       case 'pending':
-        return 'bg-red-200';
-      case 'cancelled':
-        return 'bg-red-200';
+        return 'bg-orange-200';
       default:
         return '';
     }
@@ -118,16 +110,8 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
 
   const translateStatus = (status) => {
     switch (status) {
-      case 'delivered':
-        return 'Entregue';
-      case 'ready_to_ship':
-        return 'Pronto para enviar';
-      case 'shipped':
-        return 'Enviado';
       case 'pending':
         return 'Pendente';
-      case 'cancelled':
-        return 'Cancelado';
       default:
         return '';
     }

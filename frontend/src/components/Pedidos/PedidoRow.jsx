@@ -29,7 +29,6 @@ export default function PedidoRow ({ setOrder }) {
           }, {});
           setGroupOrdersProducts(groupedOrderByShippingId)
           setPedido(response.data.orders);
-          console.log(response.data.orders)
         } else {
           setPedido([]);
         }
