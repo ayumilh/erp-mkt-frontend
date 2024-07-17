@@ -148,7 +148,7 @@ export default function CriarProdutoUnicoForm() {
       {secaoAtiva === 'gerais' && (
         <div className='flex flex-wrap transition-transform duration-500 ease-in'>
           <div className='w-full flex flex-wrap mt-5 mb-7'>
-            <div className="w-2/5 mt-3 mb-4 px-3">
+            <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
               <label htmlFor="Nome_do_Produto" className="block mb-1 font-medium text-sm text-neutral-700">Nome do Produto <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => setNome_do_Produto(e.target.value)}
@@ -161,7 +161,7 @@ export default function CriarProdutoUnicoForm() {
               />
             </div>
 
-            <div className="w-3/5 mt-3 mb-4 px-3">
+            <div className="w-full md:w-3/5 mt-3 mb-4 px-3">
               <label htmlFor="SKU" className="block mb-1 font-medium text-sm text-neutral-700">Código(SKU) <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => setSKU(e.target.value)}
@@ -175,7 +175,7 @@ export default function CriarProdutoUnicoForm() {
               />
             </div>
 
-            <div className="w-2/5 mt-3 mb-4 px-3">
+            <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
               <label htmlFor="Apelido_do_Produto" className="block mb-1 font-medium text-sm text-neutral-700">Apelido do Produto</label>
               <input
                 onChange={(e) => setApelido_do_Produto(e.target.value)}
@@ -188,7 +188,7 @@ export default function CriarProdutoUnicoForm() {
               />
             </div>
 
-            <div className="w-3/5 mt-3 mb-4 px-3">
+            <div className="w-full md:w-3/5 mt-3 mb-4 px-3">
               <label htmlFor="Codigo_de_Barras" className="block mb-1 font-medium text-sm text-neutral-700">Código de Barras</label>
               <input 
                 onChange={(e) => setCodigo_de_Barras(e.target.value)} 
@@ -201,7 +201,7 @@ export default function CriarProdutoUnicoForm() {
               />
             </div>
 
-            <div className="w-2/5 mt-3 mb-4 px-3">
+            <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
               <label htmlFor="Data_de_Lancamento" className="block mb-1 font-medium text-sm text-neutral-700">Data de Lançamento</label>
               <input 
                 onChange={(e) => setData_de_Lancamento(e.target.value)}
@@ -212,7 +212,7 @@ export default function CriarProdutoUnicoForm() {
               />
             </div>
 
-            <div className="w-3/5 mt-3 mb-4 px-3">
+            <div className="w-full md:w-3/5 mt-3 mb-4 px-3">
               <label htmlFor="Vendedor" className="block mb-1 font-medium text-sm text-neutral-700">Vendedor</label>
               <input 
                 onChange={(e) => setVendedor(e.target.value)}
@@ -224,7 +224,7 @@ export default function CriarProdutoUnicoForm() {
               />
             </div>
 
-            <div className="w-2/5 mt-3 mb-4 px-3">
+            <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
               <label htmlFor="Status_da_Venda" className="block mb-1 font-medium text-sm text-neutral-700">Status de venda</label>
               <div className="flex flex-col md:flex-row gap-7 mt-1">
                 <label>
@@ -250,7 +250,7 @@ export default function CriarProdutoUnicoForm() {
               </div>
             </div>
 
-            <div className="w-3/5 mt-3 mb-4 px-3">
+            <div className="w-full md:w-3/5 mt-3 mb-4 px-3">
               <label htmlFor="Categorias" className="block mb-1 font-medium text-sm text-neutral-700">Categorias <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => setCategorias(e.target.value)}
@@ -272,7 +272,7 @@ export default function CriarProdutoUnicoForm() {
           <div className='w-full flex flex-col mt-5 mb-7'>
             <h3 className='text-neutral-800 text-lg font-semibold'>Informações de venda</h3>
             <div className='w-full flex flex-wrap mt-5'>
-              <div className='w-3/12 flex flex-col mt-3 mb-4 px-3'>
+              <div className='w-full md:w-3/12 flex flex-col mt-3 mb-4 px-3'>
                 <label htmlFor="Preco_de_Varejo" className="block mb-1 font-medium text-sm text-neutral-700">Preço de Varejo</label>
                 <div className="relative flex items-center">
                   <span className="absolute left-0 pl-4 py-2 rounded-l-sm focus:rounded-lg font-medium text-neutral-600">R$</span>
@@ -301,7 +301,7 @@ export default function CriarProdutoUnicoForm() {
                 {isInvalidoPrecoDeVarejo && <span className="text-red-500 text-sm ml-2 mt-1">Valor inválido</span>}
               </div>
               
-              <div className='w-3/12 flex flex-col mt-3 mb-4 px-3'>
+              <div className='w-full md:w-3/12 flex flex-col mt-3 mb-4 px-3'>
                 <label htmlFor="Custo_de_Compra" className="block mb-1 font-medium text-sm text-neutral-700">Custo de Compra</label>
                 <div className="relative flex items-center">
                   <span className="absolute left-0 pl-4 py-2 rounded-l-sm focus:rounded-lg font-medium text-neutral-600">R$</span>
@@ -330,7 +330,7 @@ export default function CriarProdutoUnicoForm() {
                 {isInvalidoCustoDeCompra && <span className="text-red-500 text-sm ml-2 mt-1">Valor inválido</span>}
               </div>
 
-              <div className="w-3/12 flex flex-col mt-3 mb-4 px-3">
+              <div className="w-full md:w-3/12 flex flex-col mt-3 mb-4 px-3">
                 <label htmlFor="Tamanho" className="block mb-1 font-medium text-sm text-neutral-700">Tamanho</label>
                 <input
                   onChange={(e) => setTamanho(e.target.value)}
@@ -342,7 +342,7 @@ export default function CriarProdutoUnicoForm() {
                 />
               </div>
 
-              <div className="w-3/12 flex flex-col mt-3 mb-4 px-3">
+              <div className="w-full md:w-3/12 flex flex-col mt-3 mb-4 px-3">
                 <label htmlFor="Peso_do_Pacote" className="block mb-1 font-medium text-sm text-neutral-700">Peso do Pacote</label>
                 <div className="relative flex items-center">
                   <span className="absolute right-0 pr-4 py-2 rounded-l-sm focus:rounded-lg font-medium text-neutral-600">kg</span>
@@ -382,7 +382,7 @@ export default function CriarProdutoUnicoForm() {
                       type="text" 
                       maxLength={50}
                       placeholder="Comprimento"
-                      className="peer rounded-sm border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+                      className="peer rounded-sm border w-full px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
                     />
                   </div>
                   <div className="relative flex items-center mb-4">
@@ -394,7 +394,7 @@ export default function CriarProdutoUnicoForm() {
                       type="text" 
                       maxLength={50}
                       placeholder="Altura"
-                      className="peer rounded-sm border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+                      className="peer rounded-sm border w-full px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
                     />
                   </div>
                   <div className="relative flex items-center mb-4">
@@ -406,7 +406,7 @@ export default function CriarProdutoUnicoForm() {
                       type="text" 
                       maxLength={50}
                       placeholder="Largura"
-                      className="peer rounded-sm border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
+                      className="peer rounded-sm border w-full px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out"
                     />
                   </div>
 
@@ -427,7 +427,7 @@ export default function CriarProdutoUnicoForm() {
           <div className='w-full flex flex-col mt-5 mb-7'>
             <h3 className='text-neutral-800 text-lg font-semibold'>Atributo</h3>
             <div className='flex flex-wrap mt-5'>
-              <div className="w-3/5 mt-3 mb-4 px-3">
+              <div className="w-full md:w-3/5 mt-3 mb-4 px-3">
                 <label htmlFor="Descricao" className="block mb-1 font-medium text-sm text-neutral-700">Descrição</label>
                 <input 
                   onChange={(e) => setDescricao(e.target.value)} 
@@ -438,7 +438,7 @@ export default function CriarProdutoUnicoForm() {
                 />
               </div>
 
-              <div className="w-2/5 mt-3 mb-4 px-3">
+              <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
                 <label htmlFor="Marca" className="block mb-1 font-medium text-sm text-neutral-700">Marca</label>
                 <input
                   onChange={(e) => setMarca(e.target.value)}
@@ -485,7 +485,7 @@ export default function CriarProdutoUnicoForm() {
 
       {secaoAtiva === 'infoTaxa' && (
         <div className='w-full flex flex-wrap transition-transform duration-500 ease-in'>
-          <div className="w-1/3 mt-3 mb-4 px-3">
+          <div className="w-full md:w-1/3 mt-3 mb-4 px-3">
             <label htmlFor="NCM" className="block mb-1 font-medium text-sm text-neutral-700">NCM</label>
             <input 
               onChange={(e) => setNCM(e.target.value)}
@@ -498,7 +498,7 @@ export default function CriarProdutoUnicoForm() {
             />
           </div>
 
-          <div className="w-1/3 mt-3 mb-4 px-3">
+          <div className="w-full md:w-1/3 mt-3 mb-4 px-3">
             <label htmlFor="CEST" className="block mb-1 font-medium text-sm text-neutral-700">CEST</label>
             <input 
               onChange={(e) => setCEST(e.target.value)} 
@@ -511,7 +511,7 @@ export default function CriarProdutoUnicoForm() {
             />
           </div>
 
-          <div className="w-1/3 mt-3 mb-4 px-3">
+          <div className="w-full md:w-1/3 mt-3 mb-4 px-3">
             <label htmlFor="Unidade" className="block mb-1 font-medium text-sm text-neutral-700">Unidade</label>
             <select
               onChange={(e) => setUnidade(e.target.value)}
@@ -538,7 +538,7 @@ export default function CriarProdutoUnicoForm() {
             </select>
           </div>
 
-          <div className="w-full mt-3 mb-4 px-3">
+          <div className="md:w-full mt-3 mb-4 px-3">
             <label htmlFor="Origem" className="block mb-1 font-medium text-sm text-neutral-700">Origem</label>
             <select
               onMouseOver={(e) => e.currentTarget.classList.add('bg-gray-100')}
@@ -565,7 +565,7 @@ export default function CriarProdutoUnicoForm() {
 
       {secaoAtiva === 'mapear' && (
         <div className='flex flex-wrap gap-3 xl:gap-7 my-4 transition-transform duration-500 ease-in'>
-          <div className="w-full flex flex-col overflow-x-auto">
+          <div className="w-full md:w-full flex flex-col overflow-x-auto">
             <div className='absolute'>
               <button type='button' onClick={handleButtonClick} className='rounded-lg flex items-center justify-center gap-1 text-base py-2 px-3'>
                 <span><AddIcon className='w-5 h-5'/></span>
