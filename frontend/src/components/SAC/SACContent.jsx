@@ -1,7 +1,9 @@
 import HamburgerContent from '../Drawer/mobile/HamburgerContent';
 import ActionsHeader from '../ActionsHeader';
 import TitlePage from '../Geral/TitlePage';
-
+import SACHeader from './SACHeader';
+import SACActionsFilter from './SACActionsFilter';
+import SACTabela from './SACTabela';
 
 const SACContent = () => {
   return (
@@ -15,7 +17,9 @@ const SACContent = () => {
       </div>
 
       <div className='mx-auto flex flex-col justify-center items-center'>
-
+        <SACHeader />
+        <SACActionsFilter />
+        <SACTabela />
       </div>
     </div>
   )
