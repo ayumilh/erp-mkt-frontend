@@ -1,4 +1,4 @@
-export const BtnSincronizarAvalicaoes = () => {
+export const BtnSincronizarPerguntas = () => {
 
   return (
     <div className="relative inline-block text-left">
@@ -9,7 +9,7 @@ export const BtnSincronizarAvalicaoes = () => {
         aria-haspopup="true" 
         aria-expanded="true" 
       >
-        <span className="text-white text-sm">Sincronizar avaliações</span>
+        <span className="text-white text-sm">Sincronizar perguntas</span>
       </button>
   </div>
   )

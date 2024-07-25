@@ -1,5 +1,5 @@
 import {DropdownList} from "./Actions/DropdownList";
-import { BtnSincronizarAvalicaoes } from "./Actions/BtnSincronizarAvalicaoes";
+import { BtnSincronizarPerguntas } from "./Actions/BtnSincronizarPerguntas";
 
 const SACHeader = () => {
   return (
@@ -18,7 +18,7 @@ const SACHeader = () => {
 
       <div className="flex justify-center md:justify-end px-4 md:px-0 md:gap-6">
         <div>
-          <BtnSincronizarAvalicaoes />
+          <BtnSincronizarPerguntas />
         </div>
       </div>
     </div>

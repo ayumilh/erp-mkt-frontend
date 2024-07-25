@@ -15,5 +15,5 @@ span,
 button,
 div,
 input {
-  @apply text-colorFont-100;
+  color: #262626;
 }
