@@ -1,5 +1,6 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import HamburgerContent from '../Drawer/mobile/HamburgerContent';
 import ActionsHeader from '../ActionsHeader';
 import TitlePage from '../Geral/TitlePage';
@@ -13,6 +14,13 @@ import RetiradaTabela from './Retirada/RetiradaTabela';
 
 const PedidosContent = () => {
   const [activeTable, setActiveTable] = useState('Pedidos');
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.isReady && router.query && router.query.activeTable) {
+      setActiveTable(router.query.activeTable);
+    }
+  }, [router.isReady, router.query]);
   
   return (
     <div className='w-full px-4 lg:px-0 lg:mx-5 lg:mt-4 xl:mx-8 xl:flex xl:flex-col xl:items-center'>

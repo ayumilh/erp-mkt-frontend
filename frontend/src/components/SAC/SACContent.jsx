@@ -1,6 +1,7 @@
 import HamburgerContent from '../Drawer/mobile/HamburgerContent';
 import ActionsHeader from '../ActionsHeader';
 import TitlePage from '../Geral/TitlePage';
+import {BtnSyncPerguntas} from './BtnSyncPerguntas';
 
 
 const SACContent = () => {
@@ -15,7 +16,7 @@ const SACContent = () => {
       </div>
 
       <div className='mx-auto flex flex-col justify-center items-center'>
-
+        <BtnSyncPerguntas/>
       </div>
     </div>
   )
