@@ -5,9 +5,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
   const [nomeLoja, setNomeLoja] = useState('');
   const [plataforma, setPlataforma] = useState('');
   
-  const sendDataStore = (e) => {
-    e.preventDefault();
-  
+  const sendDataStore = () => {   
     const clientId = 8470533338689335;
     const redirectUri = encodeURIComponent('https://erp-mkt-frontend.vercel.app/authmercado');
     const authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
@@ -16,6 +14,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
   }
   
   const storeNomeLoja = () => {
+    console.log(nomeLoja)
     localStorage.setItem('nome_mercado', nomeLoja);
   };
   
@@ -23,9 +22,9 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
     drawerClose();
   }, [drawerClose]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     storeNomeLoja()
+    sendDataStore()
     onClose();
   };
 
@@ -68,10 +67,10 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
               </select>
             </div>
           </div>
-        </form>
         <div className="flex justify-end">
-          <button onClick={sendDataStore} className="px-4 py-2 bg-segundaria-900 text-white rounded-md text-sm">Conectar</button>
+          <button type='submit' className="px-4 py-2 bg-segundaria-900 text-white rounded-md text-sm">Conectar</button>
         </div>
+        </form>
       </div>
     </div>
   );
