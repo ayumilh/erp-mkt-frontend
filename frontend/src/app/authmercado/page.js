@@ -12,10 +12,10 @@ export default function Authmercado({ searchParams }) {
   const [statusRequestCodeMercado, setStatusRequestCodeMercado] = useState(null);
   const [resData, setResData] = useState('');
   const code = searchParams.code;
+  const nome_mercado = localStorage.getItem('nome_mercado')
 
   useEffect(() => {
     const fetchData = async () => {
-      const nome_mercado = localStorage.getItem('nome_mercado')
       console.log('code', code);
       console.log(nome_mercado)
       try {
@@ -42,8 +42,12 @@ export default function Authmercado({ searchParams }) {
       <p className="text-gray-800">Código: {code}</p>
       {resData && <p className="text-gray-800">Resposta: {JSON.stringify(resData)}</p>}
 
-      {statusRequestCodeMercado === true && <SuccessNotification message='Código do Mercado Livre enviado com sucesso!' />}
-      {statusRequestCodeMercado === false && <ErrorNotification message='Erro ao enviar o código do Mercado Livre!' />}
+      <div>
+      {/* Renderização condicional baseada no statusRequestCodeMercado */}
+      {statusRequestCodeMercado === null && <p>Carregando...</p>}
+      {statusRequestCodeMercado === true && <p>Sucesso: {resData}</p>}
+      {statusRequestCodeMercado === false && <p>Erro ao conectar</p>}
+    </div>
     </main>
   );
 }

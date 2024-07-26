@@ -22,7 +22,8 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
     drawerClose();
   }, [drawerClose]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     storeNomeLoja()
     sendDataStore()
     onClose();
