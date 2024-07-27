@@ -1,8 +1,4 @@
 'use client'
-import { redirect } from 'next/navigation';
-import { nextAuthOptions } from '../../app/api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
-
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
@@ -11,20 +7,26 @@ import ErrorNotification from '@/components/Geral/Notifications/ErrorNotificatio
 export default function Authmercado({ searchParams }) {
   const [statusRequestCodeMercado, setStatusRequestCodeMercado] = useState(null);
   const [resData, setResData] = useState('');
-  const code = searchParams.code;
+  const code = searchParams?.code;
+  const nome_mercado = typeof window !== 'undefined' ? localStorage.getItem('nome_mercado') : null;
 
   useEffect(() => {
+    if (!code || !nome_mercado) {
+      setStatusRequestCodeMercado(false);
+      return;
+    }
+
     const fetchData = async () => {
       console.log('code', code);
+      console.log(nome_mercado);
       try {
-        const res = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/redirect', {code});
+        const res = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/redirect', { code, nome_mercado });
         console.log(res.data);
         if (res.status === 200) {
           setResData(res.data);
           setStatusRequestCodeMercado(true);
-        } else{
+        } else {
           setStatusRequestCodeMercado(false);
-          return
         }
       } catch (error) {
         setStatusRequestCodeMercado(false);
@@ -32,7 +34,7 @@ export default function Authmercado({ searchParams }) {
     };
 
     fetchData();
-  }, [code]);
+  }, [code, nome_mercado]);
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-evenly">
@@ -40,8 +42,12 @@ export default function Authmercado({ searchParams }) {
       <p className="text-gray-800">Código: {code}</p>
       {resData && <p className="text-gray-800">Resposta: {JSON.stringify(resData)}</p>}
 
-      {statusRequestCodeMercado === true && <SuccessNotification message='Código do Mercado Livre enviado com sucesso!' />}
-      {statusRequestCodeMercado === false && <ErrorNotification message='Erro ao enviar o código do Mercado Livre!' />}
+      <div>
+        {/* Renderização condicional baseada no statusRequestCodeMercado */}
+        {statusRequestCodeMercado === null && <p>Carregando...</p>}
+        {statusRequestCodeMercado === true && <p>Sucesso: {resData}</p>}
+        {statusRequestCodeMercado === false && <p>Erro ao conectar</p>}
+      </div>
     </main>
   );
 }

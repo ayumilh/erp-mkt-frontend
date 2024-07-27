@@ -1,9 +1,14 @@
 import HamburgerContent from '../Drawer/mobile/HamburgerContent';
 import ActionsHeader from '../ActionsHeader';
 import TitlePage from '../Geral/TitlePage';
+<<<<<<< HEAD
 import SACHeader from './SACHeader';
 import SACActionsFilter from './SACActionsFilter';
 import SACTabela from './SACTabela';
+=======
+import {BtnSyncPerguntas} from './BtnSyncPerguntas';
+
+>>>>>>> 3c2ac6af09a99fe668e9af77d154d42a620d2a15
 
 const SACContent = () => {
   return (
@@ -17,9 +22,13 @@ const SACContent = () => {
       </div>
 
       <div className='mx-auto flex flex-col justify-center items-center'>
+<<<<<<< HEAD
         <SACHeader />
         <SACActionsFilter />
         <SACTabela />
+=======
+        <BtnSyncPerguntas/>
+>>>>>>> 3c2ac6af09a99fe668e9af77d154d42a620d2a15
       </div>
     </div>
   )

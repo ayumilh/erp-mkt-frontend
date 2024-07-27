@@ -5,9 +5,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
   const [nomeLoja, setNomeLoja] = useState('');
   const [plataforma, setPlataforma] = useState('');
   
-  const sendDataStore = (e) => {
-    e.preventDefault();
-  
+  const sendDataStore = () => {   
     const clientId = 8470533338689335;
     const redirectUri = encodeURIComponent('https://erp-mkt-frontend.vercel.app/authmercado');
     const authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
@@ -15,6 +13,10 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
     window.location.href = authUrl;
   }
   
+  const storeNomeLoja = () => {
+    console.log(nomeLoja)
+    localStorage.setItem('nome_mercado', nomeLoja);
+  };
   
   useEffect(() => {
     drawerClose();
@@ -22,6 +24,8 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    storeNomeLoja()
+    sendDataStore()
     onClose();
   };
 
@@ -44,7 +48,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
               <input
                 type="text"
                 placeholder="Nome da Loja"
-                value={nomeLoja}
+                value={nomeLoja || ''}
                 onChange={(e) => setNomeLoja(e.target.value)}
                 className="w-60 p-2 border rounded-md mb-4 text-sm"
               />
@@ -52,7 +56,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
             <div className="flex gap-3">
               <label className="w-28 text-sm text-gray-800">Plataforma</label>
               <select
-                value={plataforma}
+                value={plataforma || ''}
                 onChange={(e) => setPlataforma(e.target.value)}
                 className="w-60 p-2 border rounded-md mb-4 text-sm"
               >
@@ -64,10 +68,10 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
               </select>
             </div>
           </div>
-        </form>
         <div className="flex justify-end">
-          <button onClick={sendDataStore} className="px-4 py-2 bg-segundaria-900 text-white rounded-md text-sm">Conectar</button>
+          <button type='submit' className="px-4 py-2 bg-segundaria-900 text-white rounded-md text-sm">Conectar</button>
         </div>
+        </form>
       </div>
     </div>
   );
