@@ -19,7 +19,7 @@ const SACContent = () => {
         <ActionsHeader/>
       </div>
 
-      <div className='mx-auto flex flex-col items-center' style={{height: '1000px'}}>
+      <div className='mx-auto flex flex-col items-center' style={{height: '1500px'}}>
         <SACHeader />
         <div className='w-full lg:w-[876px] xl:w-[1270px] flex gap-20 my-10'>
           <div className='w-1/2 h-full'>
