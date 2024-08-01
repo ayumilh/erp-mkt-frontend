@@ -5,8 +5,6 @@ import AddIcon from '@mui/icons-material/Add';
 import ModalMapearAnuncio from './UnicoModalMapearAnuncio';
 import BtnActions from '@/components/Geral/Button/BtnActions';
 
-
-
 export default function CriarProdutoUnicoForm() {
   const [SKU, setSKU] = useState(null);
   const [Nome_do_Produto, setNome_do_Produto] = useState(null)
@@ -597,7 +595,6 @@ export default function CriarProdutoUnicoForm() {
           </div>
         </div>
       )}
-
 
       {secaoAtiva === 'midia' && (
         <div className='flex flex-wrap gap-3 xl:gap-7 my-4 transition-transform duration-500 ease-in'>
