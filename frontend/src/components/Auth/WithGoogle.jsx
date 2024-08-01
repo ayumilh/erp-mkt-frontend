@@ -1,14 +1,35 @@
 'use client'
-import { useRouter } from "next/navigation"
-import { signIn, useSession } from 'next-auth/react';
-import Image from "next/image"
+import { useContext, useState } from "react";
+import Image from 'next/image';
+import {AuthContext} from '@/contexts/AuthContext' 
+import { useRouter } from "next/navigation";
+import { signIn } from 'next-auth/react';
 
 const WithGoogle = ({ loginType }) => {
-  const router = useRouter()
-  const { data: session } = useSession();
-  const handleSignIn = () => {
-    signIn('google');
+  const { login, loginWithGoogle } = useContext(AuthContext);
+  const router = useRouter();
+  
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [errors, setErrors] = useState({});
+  const [loggingLoading, setLoggingLoading] = useState(false);
+
+  const handleSignIn = async () => {
+    setLoggingLoading(true);
+    try {
+      const credentials = await loginWithGoogle();
+      if (credentials) {
+        console.log(credentials)
+      }
+    } catch (error) {
+      console.error('Erro ao logar com Google:', error);
+    } finally {
+      setLoggingLoading(false);
+    }
   };
+
+  
+
   return (
     <div className="flex flex-col items-center">
       <p className="text-base md:text-lg font-medium">ou continuar com</p>
@@ -30,4 +51,4 @@ const WithGoogle = ({ loginType }) => {
   )
 }
 
-export default WithGoogle
+export default WithGoogle;
