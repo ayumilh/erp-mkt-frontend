@@ -42,14 +42,21 @@ const nextAuthOptions = {
   },
 
   callbacks: {
-    session: async (session, user) => {
-      if(user) {
-        return Promise.resolve(session)
-      } else {
-        return Promise.resolve({
-          redirect: '/login'
-        })
+    async session({ session, token, user }) {
+      if (token) {
+        session.user.id = token.id;
+        session.user.email = token.email;
+        session.user.password = token.password;
       }
+      return session;
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.password = user.password;
+      }
+      return token;
     }
   },
 }

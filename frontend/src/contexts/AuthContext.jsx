@@ -25,22 +25,6 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  // const loginWithGoogle = async () => { 
-  //   const response = await signIn('google', { redirect: false });
-  //   console.log(response)
-
-  //   const email = response.user?.email;
-  //   const senha = 'google-oauth';
-  //   console.log(email, senha);
-  //   try {
-  //     await login({ email, senha });
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   } finally {
-  //     console.log(res.data);
-  //   }
-  // };
-
   const loginWithGoogle = async () => { 
     console.log('loginWithGoogle');
     try {
@@ -50,16 +34,19 @@ export const AuthContextProvider = ({ children }) => {
         console.error('Erro ao logar com Google:', response.error);
         return;
       }
-      const email = response.user?.email;
-      const senha = 'google-oauth';
-      console.log('Email:', email, 'Senha:', senha); 
-      await login({ email, senha });
-      return { email, senha };
+
+      const { email, password } = response;
+
+      const res = await axios.post("https://erp-mkt.vercel.app/api/auth/login", { email, password }, { withCredentials: true });
+      console.log(res.data);
+      Cookies.set('loginResponse', JSON.stringify(res.data));
+      setCurrentUser(res.data);
+      setIsAuthenticated(true);
     } catch (error) {
       console.error('Error:', error);
     }
   };
-  
+
   useEffect(() => {
     const fetchUserId = async () => {
       const loginResponse = Cookies.get('loginResponse') ? JSON.parse(Cookies.get('loginResponse')) : null;

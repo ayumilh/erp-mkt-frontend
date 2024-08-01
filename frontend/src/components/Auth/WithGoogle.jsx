@@ -1,34 +1,30 @@
 'use client'
-import { useContext, useState } from "react";
+import { useState, useEffect } from "react";
 import Image from 'next/image';
-import {AuthContext} from '@/contexts/AuthContext' 
 import { useRouter } from "next/navigation";
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from "next-auth/react";
 
 const WithGoogle = ({ loginType }) => {
-  const { login, loginWithGoogle } = useContext(AuthContext);
   const router = useRouter();
-  
+  const { data: session } = useSession();
+
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [errors, setErrors] = useState({});
-  const [loggingLoading, setLoggingLoading] = useState(false);
+
+  useEffect(() => {
+    if (session) {
+      console.log("Session: ", session);
+      if (session.user) {
+        console.log("User: ", session.user);
+        setEmail(session?.user?.email || '');
+      } else {
+        console.log("No user found in session");
+      }
+    }
+  }, [session]);
 
   const handleSignIn = async () => {
-    setLoggingLoading(true);
-    try {
-      const credentials = await loginWithGoogle();
-      if (credentials) {
-        console.log(credentials)
-      }
-    } catch (error) {
-      console.error('Erro ao logar com Google:', error);
-    } finally {
-      setLoggingLoading(false);
-    }
+    await signIn('google');
   };
-
-  
 
   return (
     <div className="flex flex-col items-center">
@@ -37,6 +33,7 @@ const WithGoogle = ({ loginType }) => {
         <Image src="/img/icon-google.svg" alt="Google Logo" width={42} height={42} />
         <span className="ml-2">Sign in with Google</span>
       </button>
+      {email && <p>Email do usuário: {email}</p>}
       {loginType === 'login' ? (
         <p className="font-medium text-sm md:text-base">
           Não tem uma conta? 
