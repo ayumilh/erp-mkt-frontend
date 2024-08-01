@@ -26,25 +26,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const loginWithGoogle = async () => { 
-    console.log('loginWithGoogle');
-    try {
-      const response = await signIn('google', { redirect: false });
-      console.log('signIn response:', response); 
-      if (response.error) {
-        console.error('Erro ao logar com Google:', response.error);
-        return;
-      }
-
-      const { email, password } = response;
-
-      const res = await axios.post("https://erp-mkt.vercel.app/api/auth/login", { email, password }, { withCredentials: true });
-      console.log(res.data);
-      Cookies.set('loginResponse', JSON.stringify(res.data));
-      setCurrentUser(res.data);
-      setIsAuthenticated(true);
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    await signIn('google');
   };
 
   useEffect(() => {
@@ -64,20 +46,20 @@ export const AuthContextProvider = ({ children }) => {
       }
     };
 
-    const fetchUserInfo = async () => {
-      try {
-        const res = await axios.get("https://erp-mkt.vercel.app/api/users/info", { withCredentials: true });
-        if (res.data.user && res.data.user.length > 0) {
-          setUserInfo(res.data.user); 
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
+    // const fetchUserInfo = async () => {
+    //   try {
+    //     const res = await axios.get("https://erp-mkt.vercel.app/api/users/info", { withCredentials: true });
+    //     if (res.data.user && res.data.user.length > 0) {
+    //       setUserInfo(res.data.user); 
+    //     }
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // };
 
     if (currentUser) {
       fetchUserId();
-      fetchUserInfo();
+      // fetchUserInfo();
     }
   }, [currentUser]);
 
