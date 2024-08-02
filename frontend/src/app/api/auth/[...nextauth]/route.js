@@ -3,6 +3,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import axios from 'axios';
 
+let tempPassword = '';
+
 const nextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
@@ -39,15 +41,32 @@ const nextAuthOptions = {
     signIn: '/login',
   },
   callbacks: {
-    session: async (session, user) => {
-      const password = generateRandomPassword();
-      if (!session.user) {
-        session.user = {};
+    async signIn({ user, account }) {
+      if (account.provider === 'google') {
+        tempPassword = generateRandomPassword();
+        const inputs = {
+          email: user.email,
+          senha: tempPassword
+        };
+        console.log('User:', inputs);
+        try {
+          const response = await axios.post("https://erp-mkt.vercel.app/api/auth/register", inputs);
+          if (response.status === 200) {
+            console.log('User registered:', response.data);
+          }
+        } catch (error) {
+          console.error('Registration error:', error);
+          return false;
+        }
       }
-      session.user.password = password;
+      return true;
+    },
+    async session({ session, token }) {
+      if (token && token.provider === 'google') {
+        session.user.password = tempPassword;
+      }
       return session;
-    }
-    
+    },
   },
 };
 

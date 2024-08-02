@@ -1,46 +1,16 @@
 'use client'
-import { useState, useEffect } from "react";
 import { useContext } from "react";
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import {AuthContext} from '@/contexts/AuthContext' 
-import { signIn, useSession } from "next-auth/react";
-import axios from "axios";
 
 const WithGoogle = ({ loginType }) => {
+  const { loginWithGoogle } = useContext(AuthContext);
   const router = useRouter();
-  const { data: session } = useSession();
-  const [inputs, setInputs] = useState({
-    email: '',
-    senha: '',
-  });
 
-  useEffect(() => {
-    if (session) {
-      const email = session.session.user.email || '';
-      const senha = session.user.password || '';
-      setInputs({ email, senha });
-    }
-  }, [session]);
-
-  useEffect(() => {
-    const handleLogin = async () => {
-      if (session) {
-        if (session.user) {
-          console.log("Inputs: ", inputs);
-          const res = await axios.post("https://erp-mkt.vercel.app/api/auth/register", inputs)
-        } else {
-          console.log("No user found in session");
-        }
-      }
-    };
-  
-    handleLogin();
-  }, [session]);
-
-  const handleSignIn = async () => {
-    await signIn('google');
-  };
+  const handleSignIn = async () => {      
+    await loginWithGoogle();
+  }
 
   return (
     <div className="flex flex-col items-center">

@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
   const [userInfo, setUserInfo] = useState([]);
   const { data: session } = useSession();
-
+  
   const login = async (inputs) => {
     try {
       const res = await axios.post("https://erp-mkt.vercel.app/api/auth/login", inputs, { withCredentials: true });
@@ -24,6 +24,7 @@ export const AuthContextProvider = ({ children }) => {
       console.error('Error:', error);
     }
   };
+
 
   const loginWithGoogle = async () => { 
     await signIn('google');
