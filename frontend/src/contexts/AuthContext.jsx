@@ -37,7 +37,6 @@ export const AuthContextProvider = ({ children }) => {
       if (loginResponse && loginResponse.token) {
         const decodedToken = jwtDecode(loginResponse.token);
         const userid = decodedToken.userid;
-        console.log(userid);
         try {
           const res = await axios.post("https://erp-mkt.vercel.app/api/userId", { userid });
           console.log("POST: ", res.data);

@@ -1,12 +1,15 @@
 'use client'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
 
 export default function Authmercado({ searchParams }) {
   const [statusRequestCodeMercado, setStatusRequestCodeMercado] = useState(null);
   const [resData, setResData] = useState('');
+  const router = useRouter();
+
   const code = searchParams?.code;
   const nome_mercado = typeof window !== 'undefined' ? localStorage.getItem('nome_mercado') : null;
 
@@ -25,6 +28,7 @@ export default function Authmercado({ searchParams }) {
         if (res.status === 200) {
           setResData(res.data);
           setStatusRequestCodeMercado(true);
+          router.push('/dashboard');
         } else {
           setStatusRequestCodeMercado(false);
         }
@@ -34,7 +38,7 @@ export default function Authmercado({ searchParams }) {
     };
 
     fetchData();
-  }, [code, nome_mercado]);
+  }, [code, nome_mercado, router]);
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-evenly">
@@ -42,12 +46,8 @@ export default function Authmercado({ searchParams }) {
       <p className="text-gray-800">Código: {code}</p>
       {resData && <p className="text-gray-800">Resposta: {JSON.stringify(resData)}</p>}
 
-      <div>
-        {/* Renderização condicional baseada no statusRequestCodeMercado */}
-        {statusRequestCodeMercado === null && <p>Carregando...</p>}
-        {statusRequestCodeMercado === true && <p>Sucesso: {resData}</p>}
-        {statusRequestCodeMercado === false && <p>Erro ao conectar</p>}
-      </div>
+      {statusRequestCodeMercado === true && <SuccessNotification message="Conectado com sucesso" />}
+      {statusRequestCodeMercado === false && <ErrorNotification message="Erro ao conectar" />}
     </main>
   );
 }
