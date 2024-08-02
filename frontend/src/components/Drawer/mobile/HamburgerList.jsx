@@ -10,7 +10,6 @@ import OrdersIcon from "@mui/icons-material/ShoppingCart";
 import BuyIcon from "@mui/icons-material/LocalAtm";
 import AnalysisIcon from "@mui/icons-material/BarChart";
 import StockIcon from "@mui/icons-material/Inventory";
-import SacIcon from "@mui/icons-material/Help";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import HelpIcon from '@mui/icons-material/Help';
@@ -26,7 +25,7 @@ const iconsNav = [
   <BuyIcon key="buy" sx={{ width: 34 }} />,
   <AnalysisIcon key="analysis" sx={{ width: 34 }} />,
   <StockIcon key="stock" sx={{ width: 34 }} />,
-  <SupportAgentIcon key="sac" sx={{ width: 34 }} />,
+  <SupportAgentIcon key="feedback" sx={{ width: 34 }} />,
 ];
 
 const iconConfig = [
@@ -41,7 +40,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
   
   return (<>
     <ul className="flex flex-col px-4 my-10">
-      {["Dashboard","Produtos", "Pedidos", "Comprar", "Analise", "Estoque", "SAC"].map(
+      {["Dashboard","Produtos", "Pedidos", "Comprar", "Analise", "Estoque", "Feedback"].map(
         (text, index) => (
           <li key={text} className="flex flex-col mb-5">
             <Link href={`/${text.toLowerCase()}`}>

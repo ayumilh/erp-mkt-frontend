@@ -1,5 +1,5 @@
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import { ChartContent } from '@/components/SAC/Chart/ChartContent';
+import { ChartContent } from '@/components/Feedback/Chart/ChartContent';
 
 export const DashboardResumoVendas = () => {
   return (

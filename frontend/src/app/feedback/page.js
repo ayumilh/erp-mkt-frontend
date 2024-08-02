@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation';
-import { nextAuthOptions } from '../../app/api/auth/[...nextauth]/route';
+import { nextAuthOptions } from '../api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 
 import Content from '@/components/Drawer/desktop/SidebarContent'
-import SACContent from '@/components/SAC/SACContent';
+import FeedbackContent from '@/components/Feedback/FeedbackContent';
 
-const SAC = async () => { 
+const Feedback = async () => { 
   const session = await getServerSession(nextAuthOptions)
   if(!session) {
     redirect('/login')
@@ -14,8 +14,8 @@ const SAC = async () => {
 	return (
     <div className="flex max-w-full h-screen mx-auto">
       <Content/>
-      <SACContent/>
+      <FeedbackContent/>
     </div>
 	);
 }
-export default(SAC);
+export default(Feedback);
