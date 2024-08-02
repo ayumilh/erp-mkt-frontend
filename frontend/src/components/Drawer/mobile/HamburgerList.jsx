@@ -16,6 +16,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import HelpIcon from '@mui/icons-material/Help';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LinkIcon from '@mui/icons-material/Link';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import { EmailAddressUser } from "../EmailAddressUser";
 
 const iconsNav = [
@@ -25,7 +26,7 @@ const iconsNav = [
   <BuyIcon key="buy" sx={{ width: 34 }} />,
   <AnalysisIcon key="analysis" sx={{ width: 34 }} />,
   <StockIcon key="stock" sx={{ width: 34 }} />,
-  <SacIcon key="sac" sx={{ width: 34 }} />,
+  <SupportAgentIcon key="sac" sx={{ width: 34 }} />,
 ];
 
 const iconConfig = [

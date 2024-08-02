@@ -14,6 +14,7 @@ import StockIcon from "@mui/icons-material/Inventory";
 import SacIcon from "@mui/icons-material/Help";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 import SettingsIcon from '@mui/icons-material/Settings';
 import BtnSignOut from "../BtnSignOut";
@@ -26,7 +27,7 @@ const iconsNav = [
   <BuyIcon key="buy" sx={{ width: 34 }} />,
   <AnalysisIcon key="analysis" sx={{ width: 34 }} />,
   <StockIcon key="stock" sx={{ width: 34 }} />,
-  <SacIcon key="sac" sx={{ width: 34 }} />,
+  <SupportAgentIcon key="sac" sx={{ width: 32 }} />,
 ];
 
 const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {

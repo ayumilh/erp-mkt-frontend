@@ -117,6 +117,16 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
     }
   }
 
+  function translateTrackingMethod(method) {
+    switch (method) {
+      case 'MEL Distribution':
+        return 'Agências MEL';
+      case 'VAJU6732707 Super Express':
+        return 'Flex';
+      default:
+        return method;
+    }
+  }
   
   const firstRender = [];
   return (<>
@@ -148,7 +158,7 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
                           <div className='flex flex-col'>
                             <span className="text-blue-600 text-sm hover:underline font-medium transition duration-300 ease-out">{order.product_sku}</span>
                             <span className='text-neutral-700 text-sm font-medium'>R${order.unit_price}</span>
-                            <div className='text-neutral-700 text-xs font-medium'>{order.color_name}</div>
+                            <div className='text-neutral-700 text-xs font-medium'>cor: {order.color_name}</div>
                           </div>
                         </div>
                       ))}
@@ -165,7 +175,7 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
                       <span className='text-amber-500 font-medium text-sm'>Saída</span><br/>
                       <span className='whitespace-nowrap font-medium text-neutral-600'>{new Date(pedido.date_created).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</span>
                     </td>
-                    <td className="px-3 py-3 md:py-4 text-sm font-medium text-start align-top">{pedido.tracking_method}</td>
+                    <td className="px-3 py-3 md:py-4 text-sm font-medium text-start align-top">{translateTrackingMethod(pedido.tracking_method)}</td>
                     <td className="px-3 py-3 md:py-4 text-center align-top">
                       <span className='text-sm font-medium'>{pedido.seller_nickname}</span>
                     </td>
@@ -186,7 +196,7 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
                       <div className='flex flex-col'>
                         <span className="text-blue-600 text-sm hover:underline font-medium transition duration-300 ease-out">{pedido.product_sku}</span>
                         <span className='text-neutral-700 text-sm font-medium'>R${pedido.unit_price}</span>
-                        <div className='text-neutral-700 text-xs font-medium'>{pedido.color_name}</div>
+                        <div className='text-neutral-700 text-xs font-medium'>cor: {pedido.color_name}</div>
                       </div>
                     </div>
                   </td>
@@ -207,7 +217,7 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
                     <span className='text-amber-500 font-medium text-sm'>Saída</span><br/>
                     <span className='whitespace-nowrap font-medium text-neutral-600'>{new Date(pedido.date_created).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</span>
                   </td>
-                  <td className="px-3 py-3 md:py-4 text-sm font-medium text-start align-top">{pedido.tracking_method}</td>
+                  <td className="px-3 py-3 md:py-4 text-sm font-medium text-start align-top">{translateTrackingMethod(pedido.tracking_method)}</td>
                   <td className="px-3 py-3 md:py-4 text-sm font-medium text-center align-top">{pedido.seller_nickname}</td>
                   <td className="pl-3 pr-4 py-3 md:py-4 text-sm font-medium text-center align-top">
                     <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status)}</span>

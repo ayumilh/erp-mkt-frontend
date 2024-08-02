@@ -5,6 +5,7 @@ import ChartLojasContent from './LineVendasPorLojas/ChartLojasContent';
 import PieAnalysisContent from './PieAnalysis/PieAnalysisContent';
 import QuickActions from '../QuickActions';
 import TitlePage from '../Geral/TitlePage';
+import { DashboardResumoVendas } from './DashboardResumoVendas';
 
 
 const DashboardContent = () => {
@@ -18,7 +19,10 @@ const DashboardContent = () => {
         <ActionsHeader/>
       </div>
 
-      <div className='xl:mx-auto'>
+      <div className='xl:mx-auto lg:mb-10'>
+        <div className='lg:flex lg:w-full lg:gap-7'>
+          <DashboardResumoVendas />
+        </div>
         <div className='lg:flex lg:w-full lg:gap-7'>
           <DashboardTarefas />
           <PieAnalysisContent />

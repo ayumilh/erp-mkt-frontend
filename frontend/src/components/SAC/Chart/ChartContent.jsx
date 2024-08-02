@@ -6,7 +6,7 @@ export const ChartContent = () => {
   return (
     <div className='w-full'>
       <div className=''>
-        <h2 className='text-lg font-semibold'>vendas</h2>
+        <h2 className='text-base text-colorFont-200 font-semibold'>Vendas</h2>
         <span className='text-sm text-neutral-600 font-medium'>Uma visão geral dos dados da loja</span>
       </div>
       <ChartLine />
