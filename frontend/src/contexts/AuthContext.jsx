@@ -16,8 +16,7 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (inputs) => {
     try {
       const res = await axios.post("https://erp-mkt.vercel.app/api/auth/login", inputs, { withCredentials: true });
-      console.log(res.data);
-      Cookies.set('loginResponse', JSON.stringify(res.data));
+      Cookies.set('userId', JSON.stringify(res.data));
       setCurrentUser(res.data);
       setIsAuthenticated(true);
     } catch (error) {
@@ -32,14 +31,14 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchUserId = async () => {
-      const loginResponse = Cookies.get('loginResponse') ? JSON.parse(Cookies.get('loginResponse')) : null;
+      const getUserId = Cookies.get('userId') ? JSON.parse(Cookies.get('userId')) : null;
 
-      if (loginResponse && loginResponse.token) {
-        const decodedToken = jwtDecode(loginResponse.token);
+      if (getUserId && getUserId.token) {
+        const decodedToken = jwtDecode(getUserId.token);
         const userid = decodedToken.userid;
         try {
           const res = await axios.post("https://erp-mkt.vercel.app/api/userId", { userid });
-          console.log("POST: ", res.data);
+          console.log("UserId: ", res.data);
         } catch (err) {
           console.error(err);
         }
