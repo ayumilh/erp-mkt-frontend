@@ -31,7 +31,6 @@ export default function EstoqueEditarProduto() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        console.log(productSKU);
         const response = await axios.get(
           `https://erp-mkt.vercel.app/api/stock/products/${productSKU}`
         );
@@ -50,7 +49,6 @@ export default function EstoqueEditarProduto() {
         ...input,
         productSKU,
       });
-      console.log("Produto do estoque atualizado com sucesso");
     } catch (error) {
       console.error(error);
     }

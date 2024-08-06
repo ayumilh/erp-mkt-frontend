@@ -27,7 +27,6 @@ function ModalDetailsEstoque({ onClose, sku }) {
     setIsOpen(open);
   };
 
-  console.log('sku: ', sku);
   return (
     <div>
       <SwipeableDrawer

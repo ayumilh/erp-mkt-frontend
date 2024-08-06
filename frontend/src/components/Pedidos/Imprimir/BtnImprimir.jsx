@@ -18,7 +18,6 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     try {
       const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {shipping_id: shippingIdOrder});
       if (response.status === 200) {
-        console.log(response.data);
         handlePrint();
       } else {
         console.error('Erro ao imprimir pedido');

@@ -20,11 +20,8 @@ export default function Authmercado({ searchParams }) {
     }
 
     const fetchData = async () => {
-      console.log('code', code);
-      console.log(nome_mercado);
       try {
         const res = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/redirect', { code, nome_mercado });
-        console.log(res.data);
         if (res.status === 200) {
           setResData(res.data);
           setStatusRequestCodeMercado(true);

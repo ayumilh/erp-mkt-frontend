@@ -27,11 +27,12 @@ const nextAuthOptions = {
           });
           const user = await response.json();
           if (response.ok && user) {
-            console.log('User:', user);
             return user;
+          } else {
+            return null;
           }
         } catch (error) {
-          console.error('Next-Auth:', error);
+          return null;
         }
         return null;
       },
@@ -48,14 +49,9 @@ const nextAuthOptions = {
           email: user.email,
           senha: tempPassword
         };
-        console.log('User:', inputs);
         try {
           const response = await axios.post("https://erp-mkt.vercel.app/api/auth/register", inputs);
-          if (response.status === 200) {
-            console.log('User registered:', response.data);
-          }
         } catch (error) {
-          console.error('Registration error:', error);
           return false;
         }
       }

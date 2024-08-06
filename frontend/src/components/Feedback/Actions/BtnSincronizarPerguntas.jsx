@@ -5,7 +5,6 @@ export const BtnSincronizarPerguntas = () => {
   const handleSyncOrders = async () => {
     try {
       const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/questions");
-      console.log(response)
     } catch (error) {
       console.error(error);
     }

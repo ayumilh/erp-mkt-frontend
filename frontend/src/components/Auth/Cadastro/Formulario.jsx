@@ -29,7 +29,6 @@ const Formulario = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    console.log(inputs)
     try {
       await axios.post("https://erp-mkt.vercel.app/api/auth/register", inputs)
       router.push('/login')

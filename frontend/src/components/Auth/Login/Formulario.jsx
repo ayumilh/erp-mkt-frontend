@@ -16,6 +16,7 @@ import { IconButton } from "@mui/material"
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { signIn } from 'next-auth/react';
+import Cookies from 'js-cookie';
 
 
 const YupValidation = Yup.object().shape({
@@ -43,7 +44,15 @@ const Formulario = () => {
       await YupValidation.validate({ email, senha }, { abortEarly: false });
       setErrors({})
 
-      await login({ email, senha })
+      await login({ email, senha });
+
+      const getUserId = Cookies.get('userId') ? JSON.parse(Cookies.get('userId')) : null;
+      if (getUserId === null) {
+        setErrors({ login: 'Usuário não encontrado. Por favor, verifique as informações inseridas e tente novamente. Se o problema persistir, entre em contato com nosso suporte.' });
+        return;
+      } 
+
+
       const result = await signIn('credentials', {
         email,
         senha,
@@ -52,7 +61,6 @@ const Formulario = () => {
       
       if (result?.error) {
         setErrors({ login: 'Login inválido. Verifique seu e-mail e senha.' })
-        console.log('Erro ao logar:', result)
         return
       } else {
         router.push('/dashboard')
@@ -71,7 +79,7 @@ const Formulario = () => {
     }
   }
 
-  // mostrar senha
+
   const [showPassword, setShowPassword] = useState(false)
   const handleClickShowPassword = () => (
     setShowPassword(!showPassword)

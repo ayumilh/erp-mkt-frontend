@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }) => {
       setCurrentUser(res.data);
       setIsAuthenticated(true);
     } catch (error) {
-      console.error('Error:', error);
+      return null
     }
   };
 
@@ -36,9 +36,9 @@ export const AuthContextProvider = ({ children }) => {
       if (getUserId && getUserId.token) {
         const decodedToken = jwtDecode(getUserId.token);
         const userid = decodedToken.userid;
+
         try {
           const res = await axios.post("https://erp-mkt.vercel.app/api/userId", { userid });
-          console.log("UserId: ", res.data);
         } catch (err) {
           console.error(err);
         }

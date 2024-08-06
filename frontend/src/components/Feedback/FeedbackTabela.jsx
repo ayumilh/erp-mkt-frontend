@@ -12,7 +12,6 @@ const FeedbackTabela = () => {
     const fetchPerguntas = async () => {
       try {
         const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/get-questions");
-        console.log(response.data.questions)
         const retructuredData = response.data.questions.map((question) => {
           return {
             text: question.text,
@@ -28,10 +27,8 @@ const FeedbackTabela = () => {
             pictureurls: question.pictureurls,
           };
         })
-        setProducts(retructuredData);
-        console.log(retructuredData)
+        setProducts(retructuredData)
       } catch (error) {
-        console.error(error);
         setProducts([]);
       }
     }

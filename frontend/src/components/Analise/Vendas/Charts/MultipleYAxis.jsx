@@ -24,7 +24,6 @@ const MultipleYAxis = ({selectedItem}) => {
               VendasPorCliente: sales["Vendas por Cliente"],       
             };
           });
-          console.log(restructuredData);
           setSales(restructuredData);
         } else {
           setSales([]);

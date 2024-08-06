@@ -81,7 +81,6 @@ export default function CriarVarianteForm() {
   
   const handleCriar = async (e) => {
     e.preventDefault()
-    console.log(products)
     try {
       await axios.post('https://erp-mkt.vercel.app/api/stock/productsVari', {products})
         .then(response => {

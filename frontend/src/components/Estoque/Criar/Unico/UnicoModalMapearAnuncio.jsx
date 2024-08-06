@@ -42,7 +42,6 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct}){
     try {
       const idProduct = selectedItems;
       const response = await axios.get('https://erp-mkt.vercel.app/api/stock/mercadolivre/get', { params: { idProduct } });
-      console.log(response.data);
       const transformedData = {
         sku: response.data.sku.map(item => item),
         colorVariables: response.data.colorVariables.map(item => item),

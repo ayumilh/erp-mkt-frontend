@@ -14,7 +14,6 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
   }
   
   const storeNomeLoja = () => {
-    console.log(nomeLoja)
     localStorage.setItem('nome_mercado', nomeLoja);
   };
   

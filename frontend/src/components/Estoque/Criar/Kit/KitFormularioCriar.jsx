@@ -60,7 +60,6 @@ export default function FormularioCriar() {
 
   const handleCriar = async (e) => {
     e.preventDefault()
-    console.log(input)
     try {
       const sku = products.map(product => product.sku);
       const SkuMercado = productsMapear.map(product => product.sku);

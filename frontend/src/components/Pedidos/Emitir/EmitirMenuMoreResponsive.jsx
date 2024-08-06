@@ -21,7 +21,6 @@ export const EmitirMenuMoreResponsive = ({showCheckboxes, showCheckboxesAll, set
     if (!shippingIdOrder || shippingIdOrder.length === 0) {
       return; 
     }
-    console.log(shippingIdOrder);
     try {
       const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/issueNote', {ordersBatch: shippingIdOrder});
       if (response.status === 200) {

@@ -56,13 +56,11 @@ const EditarAnuncioContent = () => {
   // editar produto
   const handleEditar = async (e) => {
     e.preventDefault();
-    console.log(input);
     try {
       await axios.put(`https://erp-mkt.vercel.app/api/mercadolivre/update-anuncio`, {
         ...input,
         productSKU,
       });
-      console.log("Produto atualizado com sucesso");
     } catch (error) {
       console.error(error);
     }

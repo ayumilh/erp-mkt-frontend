@@ -39,7 +39,6 @@ function CriarAnuncioContent() {
         "https://erp-mkt.vercel.app/api/mercadolivre/criar-anuncio",
         input
       );
-      console.log(input);
     } catch (error) {
       console.error(error);
     }

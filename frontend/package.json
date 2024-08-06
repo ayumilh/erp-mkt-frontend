@@ -41,7 +41,8 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.1.4",
     "postcss": "^8",
-    "tailwindcss": "^3.3.0"
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.5.4"
   },
   "description": "erp-mkt",
   "main": "pages/index.js",
