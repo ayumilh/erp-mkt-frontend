@@ -52,6 +52,12 @@ const Formulario = () => {
         return;
       } 
 
+      // const getToken = Cookies.get('token') ? JSON.parse(Cookies.get('token')) : null;
+      // if (getToken === null) {
+      //   setErrors({ login: 'Token não encontrado. Se o problema persistir, entre em contato com nosso suporte.' });
+      //   return;
+      // } 
+
 
       const result = await signIn('credentials', {
         email,
