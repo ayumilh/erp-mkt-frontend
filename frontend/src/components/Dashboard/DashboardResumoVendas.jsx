@@ -1,7 +1,18 @@
+'use client'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { ChartContent } from '@/components/Feedback/Chart/ChartContent';
+import axios from 'axios';
 
 export const DashboardResumoVendas = () => {
+  const handleButtonClick = async () => {
+    try {
+      const response = await axios.post('https://erp-mkt.vercel.app/api/mercado/item-visits');
+      console.log('Requisição bem-sucedida:', response.data);
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+    }
+  };
+
   return (
     <div className='bg-primaria-900 flex flex-col gap-7 lg:flex-row shadow-lg border border-slate-100 rounded-20 max-w-[373px] md:max-w-[688px] lg:max-w-[876px] xl:min-w-[1270px] lg:mx-0 min-h-max px-4 lg:px-5 xl:pl-8 xl:pr-0 py-5 xl:py-7 mb-7 mx-2 xs:mx-auto'>
       <div className='w-full lg:w-1/2 h-full'>
@@ -46,6 +57,15 @@ export const DashboardResumoVendas = () => {
           </div>
           <span className='text-2xl font-semibold text-neutral-700'>0,00% </span>
           <span className="text-neutral-600 font-medium text-sm">vs ontem 0,00% <span className="text-gray-600 text-sm font-extrabold">-</span></span>
+        </div>
+        
+        <div>
+          <button 
+            onClick={handleButtonClick} 
+            className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
+          >
+            Enviar Visitas
+          </button>
         </div>
       </div>
     </div>
