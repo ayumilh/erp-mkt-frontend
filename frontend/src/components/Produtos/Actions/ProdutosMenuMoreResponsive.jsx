@@ -7,9 +7,22 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { DropdownSelectOrAll } from '@/components/Geral/Button/DropdownSelectOrAll';
 import BtnActions from '@/components/Geral/Button/BtnActions';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
-
-export const ProdutosMenuMoreResponsive = ({showCheckboxes, showCheckboxesAll, setShowCheckboxes, setShowCheckboxesAll, setIsModalGerar, idProduct}) => {
+export const ProdutosMenuMoreResponsive = ({
+  showCheckboxes,
+  showCheckboxesAll,
+  setShowCheckboxes,
+  setShowCheckboxesAll,
+  setIsModalGerar,
+  idProduct,
+  currentPage,
+  totalPages,
+  rowsPerPage,
+  handlePageChange,
+  handleRowsPerPageChange
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -17,7 +30,6 @@ export const ProdutosMenuMoreResponsive = ({showCheckboxes, showCheckboxesAll, s
   const handleOpenMenu = () => {
     setIsOpenMenu(!isOpenMenu);
   }
-
 
   const gerarProdutos = async () => {
     if (idProduct.length === 0) return
@@ -28,7 +40,6 @@ export const ProdutosMenuMoreResponsive = ({showCheckboxes, showCheckboxesAll, s
       console.error('Error fetching data: ', error);
     }
   };
-  
 
   const menuMoreVertRef = useRef(null);
   useEffect(() => {
@@ -43,7 +54,6 @@ export const ProdutosMenuMoreResponsive = ({showCheckboxes, showCheckboxesAll, s
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [menuMoreVertRef]);
-
 
   return (
     <div className="border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 sticky top-0 left-0 z-40 bg-primaria-900" ref={menuMoreVertRef}>
@@ -81,6 +91,28 @@ export const ProdutosMenuMoreResponsive = ({showCheckboxes, showCheckboxesAll, s
           <BtnActions title="Gerar" onClick={gerarProdutos} color="ativado" padding="xs" text="sm" rounded="lg"/>
         </div>
       }
+
+      <div className="flex items-center gap-2 ml-auto">
+        <div>
+          <label htmlFor="rowsPerPage" className="text-sm mr-1">Linhas por página:</label>
+          <select id="rowsPerPage" value={rowsPerPage} onChange={handleRowsPerPageChange} className="py-1 rounded bg-transparent">
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={50}>50</option>
+            <option value={100}>100</option>
+          </select>
+        </div>
+
+        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="px-2 py-1 rounded">
+          <KeyboardArrowLeftIcon className={currentPage === 1 ? "opacity-50" : ""} />
+        </button>
+        <span>{currentPage} de {totalPages}</span>
+        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="px-2 py-1 rounded">
+          <KeyboardArrowRightIcon className={currentPage === totalPages ? "opacity-50" : ""} />
+        </button>
+      </div>
+
     </div>
   )
 }

@@ -128,6 +128,44 @@ const ProdutosTabela = ({onFilterStatus}) => {
   ? products
   : products.filter((product) => product.status === onFilterStatus);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(Math.ceil(produtosFiltrados.length / rowsPerPage));
+
+  useEffect(() => {
+    setTotalPages(Math.ceil(produtosFiltrados.length / rowsPerPage));
+  }, [rowsPerPage, produtosFiltrados]);
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+    if (currentPage < 1) {
+      setCurrentPage(1);
+    }
+  }, [totalPages, currentPage]);
+
+  const handlePageChange = (newPage) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  const paginatedProducts = produtosFiltrados.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handleRowsPerPageChange = (event) => {
+    const newRowsPerPage = Number(event.target.value);
+    setRowsPerPage(newRowsPerPage);
+    setTotalPages(Math.ceil(paginatedProducts.length / newRowsPerPage));
+    handlePageChange(1);
+  };
+
+
   return (
     <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
       <ProdutosMenuMoreResponsive 
@@ -137,6 +175,11 @@ const ProdutosTabela = ({onFilterStatus}) => {
         setShowCheckboxes={setShowCheckboxes}
         setShowCheckboxesAll={setShowCheckboxesAll} 
         showCheckboxesAll={showCheckboxesAll}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        rowsPerPage={rowsPerPage}
+        handlePageChange={handlePageChange}
+        handleRowsPerPageChange={handleRowsPerPageChange} 
       />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
@@ -153,12 +196,12 @@ const ProdutosTabela = ({onFilterStatus}) => {
           </thead>
           <tbody>
             {isLoading ? (
-              <SkeletonLoader numColumns={6}/>
-            ) : produtosFiltrados.length > 0 ? (
-              produtosFiltrados.map((product, index) => (
+              <SkeletonLoader numColumns={6} />
+            ) : paginatedProducts.length > 0 ? (
+              paginatedProducts.slice(0, rowsPerPage).map((product, index) => (
                 <tr key={index} onClick={() => openProductDetailsModal(product.sku)} className='border-b border-gray-200 hover:bg-gray-100 cursor-pointer'>
                   {showCheckboxes && <td className="pl-4"><input type="checkbox" onClick={(event) => handleCheckboxChange(event, product.sku)} /></td>}
-                  {showCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => {}}/></td>}
+                  {showCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => { }} /></td>}
                   <td className="w-[200px] xl:w-auto flex items-center gap-3 pl-6 pr-4 py-4 md:py-5">
                     {product.pictureUrls && <Image src={product.pictureUrls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10" />} {product.sku}
                   </td>
@@ -170,8 +213,8 @@ const ProdutosTabela = ({onFilterStatus}) => {
                   </td>
                   <td className="pl-4 pr-6 py-2 md:py-5 text-center">
                     <button onClick={(event) => storeSkuAndOpenEditModal(event, product.sku)} className="flex items-center justify-center">
-                      <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5"/>
-                    </button>     
+                      <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5" />
+                    </button>
                   </td>
                 </tr>
               ))
@@ -179,7 +222,7 @@ const ProdutosTabela = ({onFilterStatus}) => {
               <tr>
                 <td className="text-center" colSpan="6">
                   <div className="w-52 ml-10 md:ml-0 md:px-10 md:w-full py-12">
-                    <span><ProductionQuantityLimitsIcon style={{ width: 46, height: 46 }}/></span>
+                    <span><ProductionQuantityLimitsIcon style={{ width: 46, height: 46 }} /></span>
                     <p className="mt-8">Ops! Parece que as prateleiras estão vazias. Volte em breve para mais produtos!</p>
                   </div>
                 </td>
@@ -188,9 +231,7 @@ const ProdutosTabela = ({onFilterStatus}) => {
           </tbody>
         </table>
       </div>
-      {isModalGerar && (
-        <ModalGerarProdutos onClose={() => setIsModalGerar(false)} idProduct={idProduct} />
-      )}
+      {isModalGerar && <ModalGerarProdutos onClose={() => setIsModalGerar(false)} idProduct={idProduct} />}
       {isModalTr && <ModalDetailsProdutos onClose={closeModal} selectedSku={selectedSku} />}
     </div>
   );
