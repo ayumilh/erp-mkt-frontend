@@ -57,14 +57,14 @@ const nextAuthOptions = {
           if (registerError.response && registerError.response.status !== 409) {
             console.error('Erro ao registrar o usuário:', registerError);
           }
-        }
-
-        try {
-          const loginResponse = await axios.post("https://erp-mkt.vercel.app/api/auth/login", true, { withCredentials: true });
-          Cookies.set('userId', JSON.stringify(loginResponse.data));
-        } catch (loginError) {
-          console.error('Erro ao fazer login:', loginError);
-          return false;
+        } finally {
+          try {
+            const loginResponse = await axios.post("https://erp-mkt.vercel.app/api/auth/login", true, { withCredentials: true });
+            Cookies.set('userId', JSON.stringify(loginResponse.data));
+          } catch (loginError) {
+            console.error('Erro ao fazer login:', loginError);
+            return false;
+          }
         }
       }
 
