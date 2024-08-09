@@ -7,9 +7,9 @@ import DashboardContent from '@/components/Dashboard/DashboardContent';
 
 const Dashboard = async () => {
 	const session = await getServerSession(nextAuthOptions)
-	// if(!session) {
-	//   redirect('/login')
-	// }
+	if(!session) {
+	  redirect('/login')
+	}
 	
 	return (
 	  <div className="flex max-w-full h-screen mx-auto">
