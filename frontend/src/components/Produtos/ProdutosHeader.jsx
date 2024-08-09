@@ -1,7 +1,13 @@
 import BtnActive from "../Geral/Button/BtnActive";
 import BtnRoute from "../Geral/Button/BtnRoute";
+import { useRouter } from 'next/navigation';  
 
 const ProdutosHeader = () => {
+  const router = useRouter();
+
+  const handleRedirect = () => {
+    router.push('/produtos/nf');
+  };
   return (
     <div className="w-full lg:w-[876px] xl:w-[1270px] flex flex-col mb-6">
       <div className="flex mb-8 gap-6">
@@ -11,6 +17,10 @@ const ProdutosHeader = () => {
         </div>
         <div style={{ display: 'inline-block' }}>
           <p className="hover:text-black font-medium hover:cursor-pointer">Produtos do armazem</p>
+          {/* <hr className="border-segundaria-900 border-[1.5px]" /> */}
+        </div>
+        <div style={{ display: 'inline-block' }}>
+          <p onClick={handleRedirect} className="hover:text-black font-medium hover:cursor-pointer">Notas fiscais</p>
           {/* <hr className="border-segundaria-900 border-[1.5px]" /> */}
         </div>
       </div>
