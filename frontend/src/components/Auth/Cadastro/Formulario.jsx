@@ -52,7 +52,7 @@ const Formulario = () => {
         <div className="flex flex-col space-y-8 items-end">
           <div className="w-full">
             <label className="block text-sm md:base font-medium mb-2" htmlFor="email">
-              E-mail
+              E-mail <span className="text-red-500">*</span>
             </label>
             <div className="mt-1 relative rounded-md">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -70,7 +70,7 @@ const Formulario = () => {
 
           <div className="w-full">
             <label className="block text-sm md:text-base font-medium mb-2" htmlFor="senha">
-              Senha
+              Senha <span className="text-red-500">*</span>
             </label>
             <div className="mt-1 relative rounded-md hover:bg-transparent">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none mb-2">
@@ -108,7 +108,6 @@ const Formulario = () => {
                 type="text"
                 name="telefone"
                 onChange={inputChange}
-                required
               />
             </div>
           </div>
@@ -126,7 +125,6 @@ const Formulario = () => {
                 type="text"
                 name="cnpj"
                 onChange={inputChange}
-                required
               />
             </div>
           </div>

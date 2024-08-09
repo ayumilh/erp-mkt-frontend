@@ -3,12 +3,12 @@ import { ChartContent } from '@/components/Feedback/Chart/ChartContent';
 
 export const DashboardResumoVendas = () => {
   return (
-    <div className='bg-primaria-900 shadow-lg border border-slate-100 rounded-20 w-full lg:w-[876px] xl:w-[1270px] flex gap-20 my-10 lg:mx-0 min-h-max px-4 lg:px-5 xl:pl-8 xl:pr-0 py-5 xl:py-7 mb-7 mx-2 xs:mx-auto'>
-      <div className='w-1/2 h-full'>
+    <div className='bg-primaria-900 flex flex-col gap-7 lg:flex-row shadow-lg border border-slate-100 rounded-20 max-w-[373px] md:max-w-[688px] lg:max-w-[876px] xl:min-w-[1270px] lg:mx-0 min-h-max px-4 lg:px-5 xl:pl-8 xl:pr-0 py-5 xl:py-7 mb-7 mx-2 xs:mx-auto'>
+      <div className='w-full lg:w-1/2 h-full'>
         <ChartContent />
       </div>
 
-      <div className='w-1/2 flex flex-wrap'>
+      <div className='w-full lg:w-1/2 flex flex-wrap'>
         <div className='w-1/2 flex flex-col'>
           <div className='items-center'>
             <span className="text-neutral-600 font-medium">visitantes </span>

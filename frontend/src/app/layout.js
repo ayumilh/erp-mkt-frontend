@@ -9,7 +9,7 @@ const poppins = Poppins({
 });
 
 const metadata = {
-  title: "ERP - MKT",
+  title: "SIMK",
   description: "Sistema de gerenciamento de vendas e estoque",
 };
 
@@ -19,6 +19,7 @@ export default function RootLayout({ children }) {
       <head>
         <title>{metadata.title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
         
       <body className={`${poppins.className} max-w-full h-screen`}>

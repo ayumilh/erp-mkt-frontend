@@ -51,13 +51,13 @@ const nextAuthOptions = {
           senha: tempPassword
         };
 
-        try {
-          await axios.post("https://erp-mkt.vercel.app/api/auth/register", inputs);
-        } catch (registerError) {
-          if (registerError.response && registerError.response.status !== 409) {
-            console.error('Erro ao registrar o usuário:', registerError);
-          }
-        }
+        // try {
+        //   await axios.post("https://erp-mkt.vercel.app/api/auth/register", inputs);
+        // } catch (registerError) {
+        //   if (registerError.response && registerError.response.status !== 409) {
+        //     console.error('Erro ao registrar o usuário:', registerError);
+        //   }
+        // }
 
         try {
           const loginResponse = await axios.post("https://erp-mkt.vercel.app/api/auth/login", inputs, { withCredentials: true });

@@ -6,7 +6,7 @@ const ChartLine = () => {
   const [chartData, setChartData] = useState({
     series: [{
       name: "Desktops",
-      data: [10, 41, 35, 51, 49, 62, 69, 91, 148] // Exemplo de dados iniciais
+      data: [10, 41, 35, 51, 49, 62, 69, 91, 148] 
     }],
     options: {
       chart: {
@@ -27,17 +27,26 @@ const ChartLine = () => {
   });
 
   useEffect(() => {
-    const data = [/* seus dados aqui */]; // Defina seus dados aqui
-    const lastDate = new Date(); // Exemplo de data inicial
+    const data = []; // definir os dados aqui
+    let lastDate = new Date().getTime(); // Exemplo de data inicial
     const XAXISRANGE = 7776000000; // Exemplo de intervalo do eixo X
 
     const getNewSeries = (baseval, yrange) => {
       const newDate = baseval + 86400000;
+      if (isNaN(newDate)) {
+        console.error("newDate is NaN");
+        return;
+      }
       const newData = {
         x: newDate,
         y: Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min
       };
+      if (isNaN(newData.y)) {
+        console.error("newData.y is NaN");
+        return;
+      }
       data.push(newData);
+      lastDate = newDate;
     };
 
     const options = {
