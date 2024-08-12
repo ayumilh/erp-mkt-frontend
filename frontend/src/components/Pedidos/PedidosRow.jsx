@@ -6,13 +6,12 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 
-export default function PedidoRow ({ setOrder }) {
-  const [pedido, setPedido] = useState([]);
+export default function PedidosRow ({ setOrder, pedido, setPedido }) {
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  
+  console.log(pedido)
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -28,6 +27,7 @@ export default function PedidoRow ({ setOrder }) {
             return groupedOrderByShippingId;
           }, {});
           setGroupOrdersProducts(groupedOrderByShippingId)
+          console.log(response.data.orders)
           setPedido(response.data.orders);
         } else {
           setPedido([]);
@@ -40,7 +40,7 @@ export default function PedidoRow ({ setOrder }) {
     };
   
     fetchOrders();
-  }, []);
+  }, [setPedido]);
   
   const shippingIdCounts = {};
   pedido.forEach(pedido => {
@@ -108,7 +108,6 @@ export default function PedidoRow ({ setOrder }) {
   }
   
 
-
   const dropdownGroupOrderRef = useRef(null);
   useEffect(() =>{
     const handleClickOutside = (event) => {
@@ -140,6 +139,7 @@ export default function PedidoRow ({ setOrder }) {
             </td>
           </tr>
           {orders.map((pedido, index) => {
+            console.log(pedido)
             if (shippingIdCounts[pedido.shipping_id] > 1) {
               if(!firstRender[pedido.shipping_id]){
                 firstRender[pedido.shipping_id] = true;

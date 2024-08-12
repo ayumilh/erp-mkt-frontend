@@ -1,13 +1,16 @@
 'use client'
-import { useState } from 'react';
-import PedidoRow from "./PedidoRow";
+import { useState, useEffect } from 'react';
+import PedidosRow from "./PedidosRow";
 import ModalDetailsContent from "./Actions/ModalDetailsPedidos/ModalDetailsContent";
 import { PedidosMenuMoreResponsive } from './Actions/PedidosMenuMoreResponsive';
-
 
 const PedidosTabela = () => {
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [pedido, setPedido] = useState([]);
 
   const closeModal = () => {
     setIsModalTr(false);
@@ -18,9 +21,45 @@ const PedidosTabela = () => {
     setIsModalTr(true);
   }
 
+  useEffect(() => {
+    setTotalPages(Math.ceil(pedido.length / rowsPerPage));
+  }, [rowsPerPage, pedido]);
+
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(totalPages);
+    } else if (currentPage < 1) {
+      setCurrentPage(1);
+    }
+  }, [totalPages, currentPage]);
+
+  const handlePageChange = (newPage) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  const paginatedPedido = pedido.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
+
+  const handleRowsPerPageChange = (event) => {
+    const newRowsPerPage = Number(event.target.value);
+    setRowsPerPage(newRowsPerPage);
+    setTotalPages(Math.ceil(pedido.length / newRowsPerPage));
+    handlePageChange(1);
+  };
+
   return (
     <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
-      <PedidosMenuMoreResponsive />
+      <PedidosMenuMoreResponsive 
+        currentPage={currentPage}
+        totalPages={totalPages}
+        rowsPerPage={rowsPerPage}
+        handlePageChange={handlePageChange}
+        handleRowsPerPageChange={handleRowsPerPageChange}
+      />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
           <thead className='sticky top-0 z-10 bg-primaria-900'>
@@ -36,7 +75,9 @@ const PedidosTabela = () => {
             </tr>
           </thead>
           <tbody>
-          <PedidoRow setOrder={handleOrderSelect} />
+            {paginatedPedido.map((pedido, index) => (
+              <PedidosRow key={index} setOrder={handleOrderSelect} pedido={pedido} setPedido={setPedido}/>
+            ))}
           </tbody>
         </table>
       </div>

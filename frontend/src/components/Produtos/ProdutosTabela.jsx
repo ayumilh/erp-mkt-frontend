@@ -68,7 +68,7 @@ const ProdutosTabela = ({onFilterStatus}) => {
       const allOrderIds = products.map(products => products.sku);
       setIdProduct(allOrderIds);
     }
-  }, [showCheckboxesAll, products]);
+  }, [showCheckboxesAll, products, setIdProduct]);
 
   const handleCheckboxChange = (event, sku) => {
     event.stopPropagation(); 
@@ -128,6 +128,7 @@ const ProdutosTabela = ({onFilterStatus}) => {
   ? products
   : products.filter((product) => product.status === onFilterStatus);
 
+  
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -136,13 +137,12 @@ const ProdutosTabela = ({onFilterStatus}) => {
 
   useEffect(() => {
     setTotalPages(Math.ceil(produtosFiltrados.length / rowsPerPage));
-  }, [rowsPerPage, produtosFiltrados]);
+  }, [rowsPerPage, produtosFiltrados, setTotalPages]);
 
   useEffect(() => {
-    if (currentPage > totalPages) {
+    if (currentPage > totalPages && totalPages > 0) {
       setCurrentPage(totalPages);
-    }
-    if (currentPage < 1) {
+    } else if (currentPage < 1) {
       setCurrentPage(1);
     }
   }, [totalPages, currentPage]);
