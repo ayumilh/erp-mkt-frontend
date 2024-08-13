@@ -26,7 +26,7 @@ export const AuthContextProvider = ({ children }) => {
 
 
   const loginWithGoogle = async () => { 
-    await signIn('google');
+    await signIn('google', { callbackUrl: '/dashboard' });
   };
 
   useEffect(() => {
