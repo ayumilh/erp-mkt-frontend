@@ -9,7 +9,8 @@ export const DashboardResumoVendas = () => {
 
   const handleButtonClick = async () => {
     try {
-      await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/item-visits');
+      const res = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/item-visits');
+      console.log(res.data);
     } catch (error) {
       return
     }
@@ -19,15 +20,24 @@ export const DashboardResumoVendas = () => {
     handleButtonClick();
     const fetchData = async ()=> {
       try {
-        const response = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/itemvisits');
-        console.log(response.data);
-        setData(response.data);
+        const response = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/visits');
+        const restructuredData = response.data.visits.map((data) => {
+          return {
+            conversion_rate: data.conversion_rate,
+            total_visits: data.total_visits,
+          };
+        });
+        console.log(restructuredData);
+        setData(restructuredData);
       } catch (error) {
         return
       }
     };
     fetchData();
   }, []);
+
+  
+  const firstElement = data.length > 0 ? data[0] : { conversion_rate: 0 };
 
   return (
     <div className='bg-primaria-900 flex flex-col gap-7 lg:flex-row shadow-lg border border-slate-100 rounded-20 max-w-[373px] md:max-w-[688px] lg:max-w-[876px] xl:min-w-[1270px] lg:mx-0 min-h-max px-4 lg:px-5 xl:pl-8 xl:pr-0 py-5 xl:py-7 mb-7 mx-2 xs:mx-auto'>
@@ -51,7 +61,7 @@ export const DashboardResumoVendas = () => {
             <span className="text-neutral-600 font-medium">visualição da pagina </span>
             <span> <HelpOutlineIcon fontSize='small' className='text-neutral-600 w-4 h-4'/> </span>
           </div>
-          <span className='text-2xl font-semibold text-neutral-700'>37</span>
+          <span className='text-2xl font-semibold text-neutral-700'>{firstElement.total_visits}</span>
           <span className="text-neutral-600 font-medium text-sm">vs ontem 40,00% <span className="text-green-500 text-sm font-extrabold">↑</span></span>
         </div>
 
@@ -72,7 +82,7 @@ export const DashboardResumoVendas = () => {
             <span> <HelpOutlineIcon fontSize='small' className='text-neutral-600 w-4 h-4'/> </span>
           </div>
           <span className='text-2xl font-semibold text-neutral-700'>
-            {data.conversion_rate ? data.conversion_rate.toFixed(2) : '0.00'}%
+            {firstElement.conversion_rate}%
           </span>
           <span className="text-neutral-600 font-medium text-sm">vs ontem 0,00% <span className="text-gray-600 text-sm font-extrabold">-</span></span>
         </div>
