@@ -1,47 +1,29 @@
 'use client'
 import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
-import axios from 'axios';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 
-const PedidosRow = ({ setOrder, pedido, setPedido }) => {
+const PedidosRow = ({ setOrder, pedido }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(pedido)
-
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/orders`);
-        if (response.data && Array.isArray(response.data.orders)) {
-          const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
-            if (order.shipping_id !== null) {
-              if (!groupedOrderByShippingId[order.shipping_id]) {
-                groupedOrderByShippingId[order.shipping_id] = [];
-              }
-              groupedOrderByShippingId[order.shipping_id].push(order);
-            }
-            return groupedOrderByShippingId;
-          }, {});
-          setGroupOrdersProducts(groupedOrderByShippingId)
-          setPedido(response.data.orders);
-        } else {
-          setPedido([]);
+    const groupedOrderByShippingId = pedido.reduce((groupedOrderByShippingId, order) => {
+      if (order.shipping_id !== null) {
+        if (!groupedOrderByShippingId[order.shipping_id]) {
+          groupedOrderByShippingId[order.shipping_id] = [];
         }
-      } catch (error) {
-        console.error(`Error: ${error}`);
-      } finally {
-        setIsLoading(false);
+        groupedOrderByShippingId[order.shipping_id].push(order);
       }
-    };
-  
-    fetchOrders();
-  }, [setPedido]);
-  
+      return groupedOrderByShippingId;
+    }, {});
+    setGroupOrdersProducts(groupedOrderByShippingId);
+    setIsLoading(false);
+  }, [pedido]);
+
   const shippingIdCounts = {};
   pedido.forEach(pedido => {
     if (shippingIdCounts[pedido.shipping_id]) {
@@ -50,7 +32,6 @@ const PedidosRow = ({ setOrder, pedido, setPedido }) => {
       shippingIdCounts[pedido.shipping_id] = 1;
     }
   });
-
 
   const openOrderDetailsModal = (shipping_id, allOrders = false) => {
     if (allOrders) {
@@ -106,12 +87,11 @@ const PedidosRow = ({ setOrder, pedido, setPedido }) => {
         return method;
     }
   }
-  
 
   const dropdownGroupOrderRef = useRef(null);
-  useEffect(() =>{
+  useEffect(() => {
     const handleClickOutside = (event) => {
-      if(dropdownGroupOrderRef.current && !dropdownGroupOrderRef.current.contains(event.target)){
+      if (dropdownGroupOrderRef.current && !dropdownGroupOrderRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     }
@@ -121,7 +101,6 @@ const PedidosRow = ({ setOrder, pedido, setPedido }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [dropdownGroupOrderRef])
-
 
   const firstRender = [];
   return (
@@ -140,7 +119,6 @@ const PedidosRow = ({ setOrder, pedido, setPedido }) => {
               </td>
             </tr>
             {orders.map((pedido, index) => {
-              console.log(pedido)
               if (shippingIdCounts[pedido.shipping_id] > 1) {
                 if (!firstRender[pedido.shipping_id]) {
                   firstRender[pedido.shipping_id] = true;
@@ -236,4 +214,4 @@ const PedidosRow = ({ setOrder, pedido, setPedido }) => {
   );
 }
 
-export default PedidosRow;  
+export default PedidosRow;
