@@ -43,25 +43,25 @@ const nextAuthOptions = {
     error: '/login',
   },
   callbacks: {
-    async signIn({ user, account }) {
-      if (account.provider === 'google') {
-        tempPassword = generateRandomPassword();
-        const inputs = {
-          email: user.email,
-          senha: tempPassword
-        };
+    // async signIn({ user, account }) {
+    //   if (account.provider === 'google') {
+    //     tempPassword = generateRandomPassword();
+    //     const inputs = {
+    //       email: user.email,
+    //       senha: tempPassword
+    //     };
 
-        try {
-          const loginResponse = await axios.post("https://erp-mkt.vercel.app/api/auth/login", true, { withCredentials: true });
-          console.log(loginResponse.data);
-          Cookies.set('userId', JSON.stringify(loginResponse.data));
-        } catch (registerError) {
-          await axios.post("https://erp-mkt.vercel.app/api/auth/register", inputs);
-        }
-      }
+    //     try {
+    //       const loginResponse = await axios.post("https://erp-mkt.vercel.app/api/auth/login", true, { withCredentials: true });
+    //       console.log(loginResponse.data);
+    //       Cookies.set('userId', JSON.stringify(loginResponse.data));
+    //     } catch (registerError) {
+    //       await axios.post("https://erp-mkt.vercel.app/api/auth/register", inputs);
+    //     }
+    //   }
 
-      return true;
-    },
+    //   return user;
+    // },
 
     async session({ session, token }) {
       if (token && token.provider === 'google') {
