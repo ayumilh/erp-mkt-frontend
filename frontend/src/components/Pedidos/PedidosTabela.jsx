@@ -75,9 +75,7 @@ const PedidosTabela = () => {
             </tr>
           </thead>
           <tbody>
-            {paginatedPedido.map((pedido, index) => (
-              <PedidosRow key={index} setOrder={handleOrderSelect} pedido={pedido} setPedido={setPedido}/>
-            ))}
+            <PedidosRow setOrder={handleOrderSelect} pedido={pedido} setPedido={setPedido}/>
           </tbody>
         </table>
       </div>

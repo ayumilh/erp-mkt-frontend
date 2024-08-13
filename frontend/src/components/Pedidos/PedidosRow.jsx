@@ -6,7 +6,7 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 
-export default function PedidosRow ({ setOrder, pedido, setPedido }) {
+const PedidosRow = ({ setOrder, pedido, setPedido }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -233,3 +233,5 @@ export default function PedidosRow ({ setOrder, pedido, setPedido }) {
     )}
   </>);
 }
+
+export default PedidosRow;  
