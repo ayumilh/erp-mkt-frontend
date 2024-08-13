@@ -45,20 +45,20 @@ export const AuthContextProvider = ({ children }) => {
       }
     };
 
-    // const fetchUserInfo = async () => {
-    //   try {
-    //     const res = await axios.get("https://erp-mkt.vercel.app/api/users/info", { withCredentials: true });
-    //     if (res.data.user && res.data.user.length > 0) {
-    //       setUserInfo(res.data.user); 
-    //     }
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // };
+    const fetchUserInfo = async () => {
+      try {
+        const res = await axios.get("https://erp-mkt.vercel.app/api/users/info", { withCredentials: true });
+        if (res.data.user && res.data.user.length > 0) {
+          setUserInfo(res.data.user); 
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
     if (currentUser) {
       fetchUserId();
-      // fetchUserInfo();
+      fetchUserInfo();
     }
   }, [currentUser]);
 

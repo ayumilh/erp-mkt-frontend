@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import Cookies from "js-cookie";
 import axios from 'axios';
+import { signIn } from "next-auth/react";
 
 let tempPassword = '';
 
@@ -62,11 +63,20 @@ const nextAuthOptions = {
 
     //   return user;
     // },
-
-    async session({ session, token }) {
+    
+    // async session({ session, token }) {
+    //   if (token && token.provider === 'google') {
+    //     session.user.password = tempPassword;
+    //   }
+    //   return session;
+    // },
+    
+    session: async (session, user, token) => {
+      session.user = user;
       if (token && token.provider === 'google') {
         session.user.password = tempPassword;
       }
+
       return session;
     },
   },
