@@ -1,21 +1,21 @@
-import { redirect } from 'next/navigation';
-import { nextAuthOptions } from '../../app/api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
+import { redirect } from "next/navigation";
+import { nextAuthOptions } from "../../app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 
-import Content from '@/components/Drawer/desktop/SidebarContent'
-import ProdutosContent from '@/components/Produtos/ProdutosContent';
+import Content from "@/components/Drawer/desktop/SidebarContent";
+import ProdutosContent from "@/components/Produtos/ProdutosContent";
 
-const Produtos = async () => { 
-  const session = await getServerSession(nextAuthOptions)
-  if(!session) {
-    redirect('/login')
+const Produtos = async () => {
+  const session = await getServerSession(nextAuthOptions);
+  if (!session) {
+    redirect("/login");
   }
 
-	return (
+  return (
     <div className="flex max-w-full h-screen mx-auto">
-      <Content/>
-      <ProdutosContent/>
+      <Content />
+      <ProdutosContent />
     </div>
-	);
-}
-export default Produtos
+  );
+};
+export default Produtos;

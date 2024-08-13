@@ -1,5 +1,5 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { EmailAddressUser } from "./Drawer/EmailAddressUser";
 
 const ActionsHeader = () => {

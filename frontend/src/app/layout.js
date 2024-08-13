@@ -1,11 +1,11 @@
 import "./globals.css";
-import { Poppins } from "next/font/google"
+import { Poppins } from "next/font/google";
 import NextAuthSessionProvider from "@/providers/sessionProvider";
 import { AuthContextProvider } from "@/contexts/AuthContext";
 
-const poppins = Poppins({ 
-  weight: ['400', '500', '600', '700'], 
-  subsets: ['latin'],
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
 });
 
 const metadata = {
@@ -21,12 +21,10 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-        
+
       <body className={`${poppins.className} max-w-full h-screen`}>
         <NextAuthSessionProvider>
-          <AuthContextProvider>
-            {children}
-          </AuthContextProvider>
+          <AuthContextProvider>{children}</AuthContextProvider>
         </NextAuthSessionProvider>
       </body>
     </html>
