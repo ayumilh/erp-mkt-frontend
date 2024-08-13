@@ -93,7 +93,7 @@ const PedidosTabela = () => {
             </tr>
           </thead>
           <tbody>
-            <PedidosRow setOrder={handleOrderSelect} pedido={paginatedPedido} setPedido={setPedido}/>
+            <PedidosRow setOrder={handleOrderSelect} pedido={paginatedPedido}/>
           </tbody>
         </table>
       </div>
