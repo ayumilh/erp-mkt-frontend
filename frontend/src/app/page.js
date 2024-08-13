@@ -32,12 +32,12 @@ export default function Home() {
 
         <div className="flex flex-row items-center gap-4">
           <button className="bg-gray-50 hover:bg-gray-100 shadow-sm rounded-full px-3 py-1 transition duration-300 ease-in-out">
-            <a href="#teste-gratis" className="text-neutral-700 font-medium">
+            <a href="#teste-gratis" className="text-neutral-700 font-medium text-sm">
               Teste Grátis
             </a>
           </button>
           <button className=" bg-segundaria-900 hover:bg-segundaria-800 shadow-md hover:shadow-lg rounded-full px-3 py-1 transition duration-300 ease-in-out">
-            <a href="/login" className="text-white font-medium">
+            <a href="/login" className="text-white font-medium text-sm">
               Entrar
             </a>
           </button>

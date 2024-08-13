@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import PedidosRow from "./PedidosRow";
 import ModalDetailsContent from "./Actions/ModalDetailsPedidos/ModalDetailsContent";
 import { PedidosMenuMoreResponsive } from './Actions/PedidosMenuMoreResponsive';
+import axios from 'axios';
 
 const PedidosTabela = () => {
   const [isModalTr, setIsModalTr] = useState(false);
@@ -22,8 +23,25 @@ const PedidosTabela = () => {
   }
 
   useEffect(() => {
-    setTotalPages(Math.ceil(pedido.length / rowsPerPage));
-  }, [rowsPerPage, pedido]);
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/orders`);
+        if (response.data && Array.isArray(response.data.orders)) {
+          setPedido(response.data.orders);
+          setTotalPages(Math.ceil(response.data.orders.length / rowsPerPage));
+        } else {
+          setPedido([]);
+          setTotalPages(1);
+        }
+      } catch (error) {
+        console.error(`Error: ${error}`);
+        setPedido([]);
+        setTotalPages(1);
+      }
+    };
+
+    fetchOrders();
+  }, [rowsPerPage, currentPage]);
 
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {

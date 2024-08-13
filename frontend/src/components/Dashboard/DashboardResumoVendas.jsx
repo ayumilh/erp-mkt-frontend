@@ -9,10 +9,9 @@ export const DashboardResumoVendas = () => {
 
   const handleButtonClick = async () => {
     try {
-      const res = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/item-visits');
-      console.log(res.data);
+      await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/item-visits');
     } catch (error) {
-      return
+      console.error(`Error: ${error}`);
     }
   };
   
@@ -27,10 +26,9 @@ export const DashboardResumoVendas = () => {
             total_visits: data.total_visits,
           };
         });
-        console.log(restructuredData);
         setData(restructuredData);
       } catch (error) {
-        return
+        console.error(`Error: ${error}`);
       }
     };
     fetchData();
