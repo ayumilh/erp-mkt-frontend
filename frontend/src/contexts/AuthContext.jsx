@@ -13,6 +13,13 @@ export const AuthContextProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState([]);
   const { data: session } = useSession();
 
+  // usado no BtnSignOut
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+
   const login = async (inputs) => {
     try {
       const res = await axios.post(
@@ -90,6 +97,9 @@ export const AuthContextProvider = ({ children }) => {
         userInfo,
         setCurrentUser,
         setIsAuthenticated,
+        isModalOpen, 
+        setIsModalOpen,
+        toggleModal
       }}
     >
       {children}
