@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
-import { nextAuthOptions } from "../../../app/api/auth/[...nextauth]/route";
+import { nextAuthOptions } from "../../api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
 import Content from "@/components/Drawer/desktop/SidebarContent";
-import NfContent from "@/components/Produtos/Nf/NfContent";
+import NfContent from "@/components/Pedidos/Nf/NfContent";
 
 const Nf = async () => {
   const session = await getServerSession(nextAuthOptions);
