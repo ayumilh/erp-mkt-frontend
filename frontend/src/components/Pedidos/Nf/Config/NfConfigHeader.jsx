@@ -1,5 +1,5 @@
-import BtnActive from "../../../Geral/Button/BtnActive";
 import { useRouter } from "next/navigation";
+import { BtnExportarNF } from "../Actions/BtnExportarNF";
 
 const NfConfigHeader = () => {
   const router = useRouter();
@@ -35,7 +35,7 @@ const NfConfigHeader = () => {
 
       <div className="flex gap-3 justify-end">
         <div>
-          <BtnActive title="Adicionar uma conta" page="/pedidos/Nf" size="btnHeader" />
+          <BtnExportarNF />
         </div>
       </div>
     </div>
