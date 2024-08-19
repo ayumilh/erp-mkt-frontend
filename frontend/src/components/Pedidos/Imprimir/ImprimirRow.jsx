@@ -110,6 +110,17 @@ export default function ImprimirRow({ setOrder, toggleShowCheckboxes, toggleShow
         return '';
     }
   }
+
+  function translateStatus(status) {
+    switch (status) {
+      case 'ready_to_ship':
+        return 'Imprimir';
+      case 'ready_to_print':
+        return 'Imprimir';
+      default:
+        return status; 
+    }
+  }
   
   function translateTrackingMethod(method) {
     switch (method) {
