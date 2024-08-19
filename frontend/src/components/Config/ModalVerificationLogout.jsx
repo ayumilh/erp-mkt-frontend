@@ -8,7 +8,6 @@ const ModalVerificationLogout = () => {
   if (!isModalOpen) return null;
 
   const handleSignOut = () => {
-    console.log("Signing out...");
     signOut();
   };
 
