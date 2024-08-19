@@ -12,14 +12,11 @@ const ExportarNFDataModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const start = dataInicial.replace(/-/g, "");
-    const end = dataFinal.replace(/-/g, "");
-    
-    console.log("Exportar por:", start, end);
+    const start = parseInt(dataInicial.replace(/-/g, ""));
+    const end = parseInt(dataFinal.replace(/-/g, ""));
+
     try {
-      const response = await axios.post(
-        `https://erp-mkt.vercel.app/api/mercadolivre/export-note?start=${String(start)}&end=${String(end)}`);
-      console.log("Response:", response.data);
+      await axios.post(`https://erp-mkt.vercel.app/api/mercadolivre/export-note`, {start,end});
     } catch (error) {
       console.error("Error:", error);
     }
