@@ -18,7 +18,7 @@ const ExportarNFDataModal = ({ isOpen, onClose }) => {
     console.log("Exportar por:", start, end);
     try {
       const response = await axios.post(
-        `https://erp-mkt.vercel.app/api/mercadolivre/export-note?start=${start}&end=${end}`);
+        `https://erp-mkt.vercel.app/api/mercadolivre/export-note?start=${String(start)}&end=${String(end)}`);
       console.log("Response:", response.data);
     } catch (error) {
       console.error("Error:", error);
