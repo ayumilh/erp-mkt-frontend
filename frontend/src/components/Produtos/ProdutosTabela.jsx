@@ -167,7 +167,7 @@ const ProdutosTabela = ({onFilterStatus}) => {
 
 
   return (
-    <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
+    <div className="bg-primaria-900 z-0 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
       <ProdutosMenuMoreResponsive 
         idProduct={idProduct}
         setIsModalGerar={setIsModalGerar}
@@ -183,7 +183,7 @@ const ProdutosTabela = ({onFilterStatus}) => {
       />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
-          <thead className='sticky top-0 z-10 bg-primaria-900'>
+          <thead className='sticky top-0 z-5 bg-primaria-900'>
             <tr>
               {(showCheckboxes || showCheckboxesAll) && <td className="pl-4"></td>}
               <th className="pr-4 pl-6 py-2 md:py-5 text-sm font-semibold text-center">SKU</th>

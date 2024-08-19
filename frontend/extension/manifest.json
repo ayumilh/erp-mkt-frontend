@@ -4,9 +4,7 @@
     "version": "1.0",
     "description": "Transforme sua loja online em um verdadeiro sucesso com a SIMK - Importação Inteligente para Lojas Online! Nossa extensão facilita a importação de produtos dos fornecedores mais populares diretamente para sua plataforma de e-commerce. Com apenas alguns cliques, você pode expandir seu catálogo de produtos, economizar tempo e aumentar suas vendas.\n\nPrincipais Benefícios:\n\nImportação Rápida e Fácil: Integração direta com fornecedores líderes do mercado.\nCatálogo Atualizado: Mantenha seu estoque sempre atualizado com os produtos mais recentes.\nAutomatização Inteligente: Reduza o trabalho manual e foque no crescimento do seu negócio.\nSuporte Dedicado: Equipe de suporte pronta para ajudar em qualquer etapa do processo.",
     "permissions": [
-      "activeTab",
-      "tabs",
-      "https://www.mercadolivre.com.br/*"
+      "activeTab"
     ],
     "background": {
       "service_worker": "background.js"

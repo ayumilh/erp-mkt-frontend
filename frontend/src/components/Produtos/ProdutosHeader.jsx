@@ -1,5 +1,6 @@
 import BtnActive from "../Geral/Button/BtnActive";
 import BtnRoute from "../Geral/Button/BtnRoute";
+import ModalCopiarAnuncio from "./Actions/ModalCopiarAnuncio";
 
 const ProdutosHeader = () => {
   return (
@@ -17,6 +18,7 @@ const ProdutosHeader = () => {
 
       <div className="flex gap-3 justify-end">
         <div className="flex flex-row gap-0 md:gap-6">
+          <ModalCopiarAnuncio />
           <BtnRoute route="/produtos" size='full' btn='base' txt='base'>
             Usar imagem de anúncio
           </BtnRoute>
