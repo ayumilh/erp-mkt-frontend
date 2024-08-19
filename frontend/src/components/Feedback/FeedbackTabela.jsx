@@ -1,97 +1,175 @@
 'use client'
-import { useEffect, useState } from 'react';  
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
 import { FeedbackMenuMoreResponsive } from "./Actions/FeedbackMenuMoreResponsive";
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
+import { ModalResponderPerguntas } from './Actions/ModalResponderPerguntas';
+import SendIcon from '@mui/icons-material/Send';
 
 const FeedbackTabela = () => {
-  const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [open, setOpen] = useState([]);
+    const [texts, setTexts] = useState({});
 
-  useEffect(() => {
-    const fetchPerguntas = async () => {
-      try {
-        const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/get-questions");
-        const retructuredData = response.data.questions.map((question) => {
-          return {
-            text: question.text,
-            answer_date_created: question.answer_date_created,
-            answer_text: question.answer_text,
-            question_status: question.question_status,
-            nickname: question.nickname,
-            registration_date: question.registration_date,
-            product_sku: question.product_sku,
-            title: question.title,
-            price: question.price,
-            available_quantity: question.available_quantity,
-            pictureurls: question.pictureurls,
-          };
-        })
-        setProducts(retructuredData)
-      } catch (error) {
-        setProducts([]);
-      }
-    }
-    fetchPerguntas();
-  }, []);
+    const handleOpen = (index) => {
+        setOpen((prevOpen) => {
+            const newOpen = [...prevOpen];
+            newOpen[index] = !newOpen[index];
+            return newOpen;
+        });
+    };
+    const handleClose = () => setOpen(false);
 
-  return (
-    <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
-    {products.map((product, index) => (
-      <div key={index} className='border-b border-gray-200 p-7'>
-        <div className="flex justify-between items-center">
-          <div className='flex items-center gap-2'>
-            {/* <Image src="" alt='Imagem do produto' width='42' height='42' className="bg-gray-200 w-10 h-10" /> */}
-            {product.pictureurls && <Image src={product.pictureurls} alt='Imagem do produto' width={42} height={42} className="w-10 h-10" />}
-            <div className="break-words md:break-normal">
-              <p className="w-80 font-medium text-sm text-neutral-800 overflow-hidden whitespace-nowrap text-ellipsis">{product.product_sku}</p>
-              <span className='text-blue-500 cursor-pointer'>{product.questions_id}</span>
-            </div>
-          </div>
+    useEffect(() => {
+        const fetchPerguntas = async () => {
+            try {
+                const retructuredData = [
+                    {
+                        text: "Qual é o prazo de entrega?",
+                        answer_date_created: "2023-10-01T10:00:00Z",
+                        answer_text: "O prazo de entrega é de 5 a 7 dias úteis.",
+                        question_status: "respondida",
+                        nickname: "comprador123",
+                        registration_date: "2023-09-01T10:00:00Z",
+                        product_sku: "SKU12345",
+                        title: "Produto Exemplo",
+                        price: 99.99,
+                        available_quantity: 10,
+                        pictureurls: "/path/to/image.jpg",
+                    },
+                    {
+                        text: "Este produto tem garantia?",
+                        answer_date_created: "2023-10-02T11:00:00Z",
+                        answer_text: "Sim, o produto tem garantia de 1 ano.",
+                        question_status: "respondida",
+                        nickname: "comprador456",
+                        registration_date: "2023-09-02T11:00:00Z",
+                        product_sku: "SKU67890",
+                        title: "Outro Produto",
+                        price: 199.99,
+                        available_quantity: 5,
+                        pictureurls: "/path/to/another-image.jpg",
+                    }
+                ];
+                setProducts(retructuredData);
+            } catch (error) {
+                setProducts([]);
+            }
+        }
+        fetchPerguntas();
+    }, []);
 
-          <div className='flex items-center gap-1'>
-            <span className="text-center">R$ {product.price}</span>
-            <span>X {product.available_quantity} Un</span>
-            <span><ContentPasteSearchIcon fontSize='small' className='cursor-pointer text-neutral-600'/></span>
-            <span>|</span>
-            <span className='font-medium text-sm text-neutral-800'>Mercado Envios Agências</span>
-          </div>
+    const handleTextChange = (index, event) => {
+        const newText = event.target.value;
+        const wordCount = countWords(newText);
 
-          <div>
-            <span className='font-medium text-sm text-neutral-800'>Lene Modas</span>
-          </div>
+        if (wordCount <= 1000) {
+            const newTexts = { ...texts, [index]: newText };
+            setTexts(newTexts);
+        }
+    };
+
+    const countWords = (text) => {
+        return text ? text.trim().split(/\s+/).length : 0;
+    };
+
+    return (
+        <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
+            {products.map((product, index) => (
+                <div key={index} className='border-b border-gray-200 p-7'>
+                    <div className="flex justify-between items-center">
+                        <div className='flex items-center gap-2'>
+                            {product.pictureurls && <Image src={product.pictureurls} alt='Imagem do produto' width={42} height={42} className="w-10 h-10" />}
+                            <div className="break-words md:break-normal">
+                                <p className="w-80 font-medium text-sm text-neutral-800 overflow-hidden whitespace-nowrap text-ellipsis">{product.product_sku}</p>
+                                <span className='text-blue-500 cursor-pointer'>{product.questions_id}</span>
+                            </div>
+                        </div>
+
+                        <div className='flex items-center gap-1'>
+                            <span className="text-center">R$ {product.price}</span>
+                            <span>X {product.available_quantity} Un</span>
+                            <span><ContentPasteSearchIcon fontSize='small' className='cursor-pointer text-neutral-600' /></span>
+                            <span>|</span>
+                            <span className='font-medium text-sm text-neutral-800'>Mercado Envios Agências</span>
+                        </div>
+
+                        <div>
+                            <span className='font-medium text-sm text-neutral-800'>Lene Modas</span>
+                        </div>
+                    </div>
+
+                    <div className='flex flex-row items-start mx-3 mt-7'>
+                        <div className='w-1/2'>
+                            <div className='flex flex-col items-center gap-1'>
+                                <div className='flex gap-5'>
+                                    <span className='font-semibold'>{product.text}</span>
+                                    <span className='text-neutral-700'>{new Date(product.answer_date_created).toLocaleString()}</span>
+                                </div>
+                                <div className='flex gap-1'>
+                                    <span className='text-neutral-600 font-medium'>Comprador: </span>
+                                    <span className='text-neutral-700 font-medium'>{product.nickname}</span>
+                                    <span>|</span>
+                                    <span className='text-neutral-600 font-medium'>Registração: </span>
+                                    <span className='text-neutral-700 font-medium'>{new Date(product.registration_date).toLocaleString()}</span>
+                                </div>
+                            </div>
+
+                            {product.answer_text && (
+                                <div className='bg-gray-200 rounded-lg px-4 py-2 mt-5 mx-5'>
+                                    <span className='text-neutral-700'>{product.answer_text}</span>
+                                    <div>
+                                        <span className='text-blue-500 cursor-pointer'>{new Date(product.answer_date_created).toLocaleString()}</span>
+                                        <span> | </span>
+                                        <span className='text-blue-500 cursor-pointer'>Tempo de Resposta: <span className='text-red-500'> 1,05h</span></span>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <div className='w-1/2 flex justify-end'>
+                            <QuestionAnswerIcon onClick={() => handleOpen(index)} className='text-neutral-600 hover:text-neutral-900 transition duration-300 ease-out cursor-pointer' />
+                        </div>
+                        {/* <div className='z-10'>
+              {open && <ModalResponderPerguntas onClose={handleClose} />}
+            </div> */}
+                    </div>
+
+                    {open[index] && (
+                        <div>
+                            <div className='relative mt-7'>
+                                <textarea
+                                    className='w-full p-2 font-medium text-neutral-700 ring-2 ring-neutral-300 outline-blue-500 rounded focus:rounded-lg transition-all duration-300 ease-out'
+                                    rows='4'
+                                    placeholder='Digite sua resposta aqui...'
+                                    value={texts[index] || ""}
+                                    onChange={(event) => handleTextChange(index, event)}
+                                ></textarea>
+                                <div className='absolute bottom-2 right-2 text-right mt-2'>
+                                    <span className='text-neutral-500 font-medium'>{countWords(texts[index])} / 1000</span>
+                                </div>
+                            </div>
+                            <div className='flex justify-end gap-3 mt-4'>
+                                <button
+                                    className='bg-gray-200 px-3 py-1 rounded hover:bg-gray-300 transition duration-300 ease-out flex items-center'
+                                    onClick={() => handleCancel(index)}
+                                >
+                                    Cancelar
+                                </button>
+                                <button
+                                    className='bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600 transition duration-300 ease-out flex items-center'
+                                >
+                                    <SendIcon size="14"/> <span className='text-white ml-2 text-sm'>Enviar</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    )}
+                </div>
+            ))}
         </div>
-
-        <div className='flex flex-col items-start mx-3 mt-7'>
-          <div className='flex flex-col items-center gap-1'>
-            <div className='flex gap-5'>
-              <span className='font-semibold'>{product.text}</span>
-              <span className='text-neutral-700'>{new Date(product.answer_date_created).toLocaleString()}</span>
-            </div>
-            <div className='flex gap-1'>
-              <span className='text-neutral-600 font-medium'>Comprador: </span>
-              <span className='text-neutral-700 font-medium'>{product.nickname}</span>
-              <span>|</span>
-              <span className='text-neutral-600 font-medium'>Registração: </span>
-              <span className='text-neutral-700 font-medium'>{new Date(product.registration_date).toLocaleString()}</span>
-            </div>
-          </div>
-
-          {product.answer_text && (
-            <div className='bg-gray-200 rounded-lg px-4 py-2 mt-5 mx-5'>
-              <span className='text-neutral-700'>{product.answer_text}</span>
-              <div>
-                <span className='text-blue-500 cursor-pointer'>{new Date(product.answer_date_created).toLocaleString()}</span>
-                <span> | </span>
-                <span className='text-blue-500 cursor-pointer'>Tempo de Resposta: <span className='text-red-500'> 1,05h</span></span>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    ))}
-  </div>
-  );
+    );
 };
 
 export default FeedbackTabela;

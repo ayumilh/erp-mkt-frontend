@@ -1,12 +1,26 @@
 'use client'
 import axios from "axios";
+import { useState } from "react";
+import CircularProgress from '@mui/material/CircularProgress';
+import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
+import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
 
 export const BtnSincronizarPerguntas = () => {
+  const [loading, setLoading] = useState(false);
+  const [statusRequestSync, setStatusRequestSync] = useState(null);
+
   const handleSyncOrders = async () => {
+    setLoading(true);
     try {
       const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/questions");
+      if (response.status === 200) {
+        setStatusRequestSync(true);
+      }
     } catch (error) {
       console.error(error);
+      setStatusRequestSync(false);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -15,13 +29,15 @@ export const BtnSincronizarPerguntas = () => {
       <button 
         type="button" 
         onClick={handleSyncOrders}
-        className="w-full flex items-center justify-center bg-gradient-to-r from-gradient-start to-gradient-end hover:bg-gradient-to-b hover:from-gradient-start-hover hover:to-gradient-end-hover transition-all duration-700 ease-out rounded-xl text-white hover:text-slate-50 px-3 xl:px-4 py-2" 
+        className="w-[186px] flex items-center justify-center bg-gradient-to-r from-gradient-start to-gradient-end hover:bg-gradient-to-b hover:from-gradient-start-hover hover:to-gradient-end-hover transition-all duration-700 ease-out rounded-xl text-white hover:text-slate-50 px-3 xl:px-4 py-2" 
         id="options-menu" 
         aria-haspopup="true" 
         aria-expanded="true" 
       >
-        <span className="text-white text-sm">Sincronizar perguntas</span>
+        {loading ? <CircularProgress size={18} className="text-white" /> : <span className="text-white text-sm">Sincronizar perguntas</span>}
       </button>
-  </div>
+      {statusRequestSync === true && <SuccessNotification message="Perguntas sincronizadas com sucesso" />}
+      {statusRequestSync === false && <ErrorNotification message="Erro ao sincronizar perguntas" />}
+    </div>
   )
 }

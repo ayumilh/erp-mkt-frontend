@@ -60,7 +60,7 @@ export default function BtnActive({ title, page, size, onClick, padding, margin,
       className={button({size: size, padding: padding, width: width})}
     >
       {isLoading ? (
-        <><CircularProgress color="inherit" className="text-white mr-1" size={12} /> {title}...</>
+        <><CircularProgress color="inherit" className="text-white mr-1" size={12} /> <span className={`${span({width: width, margin: margin})}`} style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}...</span></>
       ) : (
         <span className={`${span({width: width, margin: margin})}`} style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}</span>
       )}
