@@ -44,7 +44,7 @@ const BtnRoute = ({ route, size, btn, txt, children }) => {
   return (
     <button 
       onClick={handleRouting} 
-      className={`${button({button: btn})} no-underline`} 
+      className={`${button({button: btn})} no-underline px-2 py-1`} 
       role="menuitem"
       style={btn === 'base' ? {} : { textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
     >

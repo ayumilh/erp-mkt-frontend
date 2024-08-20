@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import JSZip from 'jszip';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const ExportarNFDataModal = ({ isOpen, onClose }) => {
   const [exportarPor, setExportarPor] = useState("mes");
@@ -8,17 +10,37 @@ const ExportarNFDataModal = ({ isOpen, onClose }) => {
   const [dataInicial, setDataInicial] = useState("");
   const [dataFinal, setDataFinal] = useState("");
   const [tipoData, setTipoData] = useState("");
+  const [loggingLoading, setLoggingLoading] = useState(false);
   if (!isOpen) return null;
 
   const handleSubmit = async (e) => {
+    setLoggingLoading(true);
     e.preventDefault();
     const start = parseInt(dataInicial.replace(/-/g, ""));
     const end = parseInt(dataFinal.replace(/-/g, ""));
 
     try {
-      await axios.post(`https://erp-mkt.vercel.app/api/mercadolivre/export-note`, {start,end});
+      const response = await axios.post(`https://erp-mkt.vercel.app/api/mercadolivre/export-note`, 
+        { start, end }, 
+        { responseType: 'blob' }
+      );
+  
+      const blob = new Blob([response.data], { type: 'application/zip' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'notas_mercadolivre.zip');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (error) {
       console.error("Error:", error.response ? error.response.data : error.message);
+    } finally {
+      setLoggingLoading(false);
+      // time para fechar
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     }
   };
 
@@ -164,7 +186,7 @@ const ExportarNFDataModal = ({ isOpen, onClose }) => {
               type="submit"
               className="px-4 py-2 bg-segundaria-900 text-white rounded-md text-sm"
             >
-              Exportar
+              {loggingLoading ? <><CircularProgress color="inherit" className="text-white mr-1" size={12} /> Exportar...</> : 'Exportar'}
             </button>
           </div>
         </form>

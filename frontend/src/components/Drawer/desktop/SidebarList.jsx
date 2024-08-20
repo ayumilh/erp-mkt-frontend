@@ -55,12 +55,12 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
                   <button
                     className={`flex w-[160px] h-12 px-3 ${
                       open ? "justify-start" : "justify-start"
-                    } relative items-center group hover:bg-gray-200 transition-shadow duration-200 ease-in-out rounded-full`}
+                    } relative items-center group hover:text-segundaria-900 transition-shadow duration-300 ease-in-out rounded-full`}
                   >
-                    <span className={`relative flex justify-center text-segundaria-900 ${ open ? "mr-3" : "mr-auto" }`}>
+                    <span className={`relative flex justify-center text-neutral-700 hover:text-segundaria-900 ${ open ? "mr-3" : "mr-auto" }`}>
                       {iconsNav[index]}
                     </span>
-                    <span className={`opacity-${open ? "100" : "0"}, text-neutral-800 font-medium `}>
+                    <span className={`opacity-${open ? "100" : "0"}, hover:text-segundaria-900 font-medium `}>
                       {text}
                     </span>
                   </button>
@@ -84,7 +84,7 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
               onClick={handleClick}
             >
               <span
-                className={`flex justify-center text-segundaria-900 ${
+                className={`flex justify-center text-neutral-600 hover:text-segundaria-900 ${
                   open ? "mr-3" : "mr-auto"
                 }`}
               >

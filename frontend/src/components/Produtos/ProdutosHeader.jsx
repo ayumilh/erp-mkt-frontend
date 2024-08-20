@@ -16,7 +16,7 @@ const ProdutosHeader = () => {
       </div>
 
       <div className="flex gap-3 justify-end">
-        <div className="flex flex-row gap-0 md:gap-6">
+        <div className="flex flex-row gap-0 md:gap-0">
           <BtnRoute route="/produtos/anuncioCopiado" size='full' btn='base' txt='base'>
             Copiar anúncio
           </BtnRoute>

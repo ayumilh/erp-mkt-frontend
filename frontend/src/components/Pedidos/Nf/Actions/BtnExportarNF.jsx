@@ -77,12 +77,12 @@ export const BtnExportarNF = () => {
           >
             <button
               onClick={handleOpenModal}
-              className="flex px-2 py-1 no-underline"
+              className="flex px-2 py-1"
               role="menuitem"
             >
                 {loadingRouting 
                     ? <CircularProgress color="inherit" className="text-segundaria-900" size={12} /> 
-                    : <a className="w-[110px] md:w-full hover:text-black cursor-pointer font-medium overflow-hidden text-sm opacity-90 text-start">Exportar por Data</a>
+                    : <a className="px-2 py-1 w-[110px] md:w-full hover:text-black cursor-pointer font-medium overflow-hidden text-sm opacity-90 text-start">Exportar por Data</a>
                     }
             </button>
 

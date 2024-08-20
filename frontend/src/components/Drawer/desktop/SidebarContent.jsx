@@ -8,7 +8,7 @@ import ModalConectarLojas from '@/components/Config/ModalConectarLojas'
 
 const SidebarContent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -105,7 +105,7 @@ const SidebarContent = () => {
       // mudar a transição do drawer e do IconButton
       <div className='hidden lg:block'>
         <Drawer variant="permanent" open={open}>
-          <Header handleDrawerToggle={handleDrawerToggle} open={open}/>
+          {/* <Header handleDrawerToggle={handleDrawerToggle} open={open}/> */}
           <SidebarList open={open} onSetIsModalOpen={handleSetIsModalOpen} onIsModalOpen={isModalOpen}/>
         </Drawer>
         {isModalOpen && <ModalConectarLojas onClose={toggleModal} drawerClose={handleDrawerClose} />}
