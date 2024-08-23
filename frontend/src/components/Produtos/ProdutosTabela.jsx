@@ -167,7 +167,7 @@ const ProdutosTabela = ({onFilterStatus}) => {
 
 
   return (
-    <div className="bg-primaria-900 z-0 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
+    <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col mt-4 mb-10 overflow-x-auto">
       <ProdutosMenuMoreResponsive 
         idProduct={idProduct}
         setIsModalGerar={setIsModalGerar}

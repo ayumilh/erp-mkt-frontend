@@ -3,8 +3,8 @@ import BtnRoute from "../Geral/Button/BtnRoute";
 
 const ProdutosHeader = () => {
   return (
-    <div className="w-full lg:w-[876px] xl:w-[1270px] flex flex-col mb-6">
-      <div className="flex mb-8 gap-6">
+    <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between mb-6">
+      <div className="flex gap-6">
         <div style={{ display: 'inline-block' }}>
           <p className="hover:text-black font-medium hover:cursor-pointer">Ativos</p>
           <hr className="border-segundaria-900 border-[1.5px]" />

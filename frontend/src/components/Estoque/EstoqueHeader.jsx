@@ -4,8 +4,8 @@ import { BtnCriarEstoque } from "./Actions/BtnCriarEstoque";
 
 const EstoqueHeader = () => {
   return (
-    <div className="w-full lg:w-[876px] xl:w-[1270px] flex flex-col mb-6">
-      <div className="flex mb-8 gap-6">
+    <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between mb-6">
+      <div className="flex gap-6">
         <DropdownList />
         <div style={{ display: 'inline-block' }}>
           <p className="hover:text-black font-medium hover:cursor-pointer">Meus Armazém</p>

@@ -13,8 +13,8 @@ export const PedidosHeader = ({ setActiveTable }) => {
     router.push('/pedidos/nf');
   };
   return (
-    <div className="w-full lg:w-[876px] xl:w-[1270px] flex flex-col mb-6">
-      <div className="flex mb-8 gap-6">
+    <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between mb-6">
+      <div className="flex gap-6">
         <DropdownHeader setActiveTable={setActiveTable} />
         <div style={{ display: 'inline-block' }}>
           <p onClick={handleRedirect} className="hover:text-black font-medium hover:cursor-pointer">Notas fiscais</p>
