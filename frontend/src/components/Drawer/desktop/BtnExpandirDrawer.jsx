@@ -1,23 +1,30 @@
 import * as React from 'react'
-import Image from 'next/image'
 import { styled } from '@mui/material/styles'
 import IconButton from '@mui/material/IconButton'
+import Checkbox from '@mui/material/Checkbox'
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'end',
+  justifyContent: 'flex-start',
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
 }));
-const SidebarHeader = ({handleDrawerToggle, open}) => {
+const BtnExpandirDrawer = ({handleDrawerToggle, open}) => {
+  if (!open) return null;
+
   return (
     <DrawerHeader>
+      <span className='font-medium'>Expandir menu</span>
       <IconButton onClick={handleDrawerToggle}>
-        {open ? <Image src="../../img/sidebar/expand-right.svg" alt="expand left" width={34} height={34} /> : <Image src="../../img/sidebar/expand-left.svg" alt="expand right" width={34} height={34} className='w-8 h-8'/>}
+        <Checkbox
+          checked={open}
+          onChange={handleDrawerToggle}
+          inputProps={{ 'aria-label': 'controlled' }}
+        />
       </IconButton>
     </DrawerHeader>
   )
 }
 
-export default SidebarHeader
+export default BtnExpandirDrawer

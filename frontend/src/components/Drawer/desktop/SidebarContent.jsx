@@ -18,21 +18,21 @@ const SidebarContent = () => {
   };
 
   const handleDrawerOpen = () => {
-		setOpen(true);
-	};
-	const handleDrawerClose = () => {
-		setOpen(false);
-	};
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   const handleDrawerToggle = () => {
-		if (open) {
-			handleDrawerClose()
-		} else {
-			handleDrawerOpen()
-		}
-	}
+    if (open) {
+      handleDrawerClose()
+    } else {
+      handleDrawerOpen()
+    }
+  }
   
-  const drawerWidth = 240;
+  const drawerWidth = 200;
   const openedMixin = (theme) => ({
     width: drawerWidth,
     transition: theme.transitions.create('width', {
@@ -40,13 +40,13 @@ const SidebarContent = () => {
       duration: theme.transitions.duration.enteringScreen,
     }),
     overflowX: 'hidden',
-    position: 'absolute',
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: '30px',  
     marginLeft: '16px',
-    marginTop: '40px',
-    marginBottom: '40px',
+    margin: 'auto', // Centraliza verticalmente
     zIndex: 2,
   });
   
@@ -62,29 +62,29 @@ const SidebarContent = () => {
     overflowX: 'hidden',
     display: 'flex',
     justifyContent: 'center',
-    borderRadius: '30px',  
-    marginLeft: '16px',
-    marginTop: '40px',
-    marginBottom: '40px',
+    alignItems: 'center',
+    borderRadius: '28px',  
+    margin: 'auto', 
+    zIndex: 2,
   });
     
   const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
       width: drawerWidth,
+      height: '100%',
       flexShrink: 0,
       whiteSpace: 'nowrap',
       boxSizing: 'border-box',
       background: '#F6F6FB',
-      height: 'calc(100vh - 80px)',
+      height: 'auto',
       boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 50px 80px 2px rgb(0 0 0 / 0.1)',
       overflow: 'hidden',
       ...(open && {
         ...openedMixin(theme),
         '& .MuiDrawer-paper': {
           ...openedMixin(theme),
-          position: 'sticky',
           transition: 'all 1s ease-out',
-          background: 'transparent',
+          background: '#F6F6FB',
           border: 'none',
         },
       }),
@@ -92,9 +92,8 @@ const SidebarContent = () => {
         ...closedMixin(theme),
         '& .MuiDrawer-paper': {
           ...closedMixin(theme),
-          position: 'sticky',
           transition: 'all 1s ease-out',
-          background: 'transparent',
+          background: '#F6F6FB',
           border: 'none',
         },
       }),
@@ -102,14 +101,15 @@ const SidebarContent = () => {
   );
 
   return (
-      // mudar a transição do drawer e do IconButton
-      <div className='hidden lg:block'>
-        <Drawer variant="permanent" open={open}>
-          {/* <Header handleDrawerToggle={handleDrawerToggle} open={open}/> */}
-          <SidebarList open={open} onSetIsModalOpen={handleSetIsModalOpen} onIsModalOpen={isModalOpen}/>
-        </Drawer>
-        {isModalOpen && <ModalConectarLojas onClose={toggleModal} drawerClose={handleDrawerClose} />}
-      </div>
+    <div className='hidden lg:block'>
+      <Drawer variant="permanent" open={open}>
+        <div className='relative flex items-end justify-end'>
+          <Header handleDrawerToggle={handleDrawerToggle} open={open}/>
+        </div>
+        <SidebarList open={open} onSetIsModalOpen={handleSetIsModalOpen} onIsModalOpen={isModalOpen}/>
+      </Drawer>
+      {isModalOpen && <ModalConectarLojas onClose={toggleModal} drawerClose={handleDrawerClose} />}
+    </div>
   )
 }
 

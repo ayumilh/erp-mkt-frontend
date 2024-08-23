@@ -4,6 +4,7 @@ import Link from "next/link";
 import Tooltip from "@mui/material/Tooltip";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import BtnExpandirDrawer from "./BtnExpandirDrawer";
 
 import ProductsIcon from "@mui/icons-material/Store";
 import LinkIcon from '@mui/icons-material/Link';
@@ -20,121 +21,94 @@ import BtnSignOut from "../BtnSignOut";
 import { Zoom } from "@mui/material";
 
 const iconsNav = [
-  <DashboardIcon key="dashboard" sx={{ width: 34 }}/>,
-  <ProductsIcon key="products" sx={{ width: 34 }} />,
-  <OrdersIcon key="orders" sx={{ width: 34 }} />,
-  <BuyIcon key="buy" sx={{ width: 34 }} />,
-  <AnalysisIcon key="analysis" sx={{ width: 34 }} />,
-  <StockIcon key="stock" sx={{ width: 34 }} />,
-  <SupportAgentIcon key="feedback" sx={{ width: 32 }} />,
+    <DashboardIcon key="dashboard" fontSize='small' />,
+    <ProductsIcon key="products" fontSize='small' />,
+    <OrdersIcon key="orders" fontSize='small' />,
+    <BuyIcon key="buy" fontSize='small' />,
+    <AnalysisIcon key="analysis" fontSize='small' />,
+    <StockIcon key="stock" fontSize='small' />,
+    <SupportAgentIcon key="feedback" fontSize='small' />,
 ];
 
-const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
-  const toggleModal = () => {
-    onSetIsModalOpen(!onIsModalOpen);
-  }
-  
-  const [anchorEl, setAnchorEl] = useState(null);
-  const isOpen = Boolean(anchorEl);
+const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose, handleDrawerOpen }) => {
+    const toggleModal = () => {
+        onSetIsModalOpen(!onIsModalOpen);
+    }
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+    const [anchorEl, setAnchorEl] = useState(null);
+    const isOpen = Boolean(anchorEl);
 
-  return (
-    <>
-      <ul className="my-10">
-        {["Dashboard", "Produtos", "Pedidos", "Comprar", "Analise", "Estoque", "Feedback"].map(
-          (text, index) => (
-            <li key={text} className="flex flex-col mb-5">
-              <Link href={`/${text.toLowerCase()}`}>
-                <Tooltip title={text} placement="bottom" TransitionComponent={Zoom} followCursor>
-                  <button
-                    className={`flex w-[160px] h-12 px-3 ${
-                      open ? "justify-start" : "justify-start"
-                    } relative items-center group hover:text-segundaria-900 transition-shadow duration-300 ease-in-out rounded-full`}
-                  >
-                    <span className={`relative flex justify-center text-neutral-700 hover:text-segundaria-900 ${ open ? "mr-3" : "mr-auto" }`}>
-                      {iconsNav[index]}
-                    </span>
-                    <span className={`opacity-${open ? "100" : "0"}, hover:text-segundaria-900 font-medium `}>
-                      {text}
-                    </span>
-                  </button>
-                </Tooltip>
-              </Link>
-            </li>
-          )
-        )}
-      </ul>
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
-      <ul className="my-10">
-        <li className="flex flex-col mb-5">
-          <div>
-            <button
-              className={`flex rounded-full items-center focus:bg-gray-200 w-[180px] h-12 px-3 ${
-                open ? "justify-start" : "justify-start"
-              }`}
-              aria-controls={isOpen ? 'basic-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={isOpen ? 'true' : undefined}
-              onClick={handleClick}
-            >
-              <span
-                className={`flex justify-center text-neutral-600 hover:text-segundaria-900 ${
-                  open ? "mr-3" : "mr-auto"
-                }`}
-              >
-                <MoreVertIcon className="w-[34px] h-7 text-segundaria-900" />
-              </span>
-              <span className={`opacity-${open ? "100" : "0"}, font-medium `}>
-                Configuração
-              </span>
-            </button>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={isOpen}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button',
-              }}
-              sx={{ '.MuiPaper-root': { borderRadius: 2 } }}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-            >
-              <MenuItem onClick={handleClose}>
-                <button onClick={toggleModal} 
-                  className="flex items-center w-full hover:bg-gray-100 active:bg-gray-200"
-                >
-                  <span> <LinkIcon fontSize="small" className="mr-2"/> </span>
-                  <span className="text-sm text-neutral-800 font-medium">Conectar Conta</span>
-                </button>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <button className="flex items-center w-full hover:bg-gray-100 active:bg-gray-200">
-                  <span> <SettingsIcon fontSize="small" className="mr-2"></SettingsIcon> </span>
-                  <span className="text-sm text-neutral-800 font-medium">Ajuste</span>
-                </button>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <BtnSignOut/>
-              </MenuItem>
-            </Menu>
-          </div>
-        </li>
-      </ul>
-    </>
-  );
+    const handleDrawerToggle = () => {
+        if (open) {
+            handleDrawerClose()
+        } else {
+            handleDrawerOpen()
+        }
+    }
+
+    return (
+        <>
+            <ul className="w-auto">
+                {["Dashboard", "Produtos", "Pedidos", "Comprar", "Analise", "Estoque", "Feedback"].map(
+                    (text, index) => (
+                        <li key={text} className="flex flex-col">
+                            <Link href={`/${text.toLowerCase()}`}>
+                                <Tooltip title={text} placement="bottom" TransitionComponent={Zoom} followCursor>
+                                    <button
+                                        className={`flex w-[160px] h-12 px-3 ${open ? "justify-start" : "justify-start"
+                                            } relative items-center group hover:text-segundaria-900`}
+                                    >
+                                        <span className={`relative flex justify-center text-neutral-700 group-hover:text-segundaria-900 transition duration-300 ease-out ${open ? "mr-3" : "mr-auto"}`}>
+                                            {iconsNav[index]}
+                                        </span>
+                                        <span className={`opacity-${open ? "100" : "0"} text-neutral-700 group-hover:text-segundaria-900 font-medium transition duration-300 ease-out`}>
+                                            {text}
+                                        </span>
+                                    </button>
+                                </Tooltip>
+                            </Link>
+                        </li>
+                    )
+                )}
+            </ul>
+
+            <ul className="my-10">
+                <li className="flex flex-col mb-5">
+                    <BtnExpandirDrawer handleDrawerToggle={handleDrawerToggle} open={open} />
+                </li>
+                <li className="flex flex-col mb-5">
+                    <div>
+                        <button onClick={toggleModal} className={`flex rounded-full items-center group hover:text-segundaria-900 w-[180px] py-2 px-3 ${open ? "justify-start" : "justify-start"}`}
+                        >
+                            <span> <LinkIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 transition duration-300 ease-out" /> </span>
+                            <span className="text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out">Conectar Conta</span>
+                        </button>
+                        <button
+                            className={`flex rounded-full items-center group hover:bg-segundaria-200 w-[180px] py-2 px-3 ${open ? "justify-start" : "justify-start"
+                                }`}
+                            onClick={handleClick}
+                        >
+                            <span className='flex justify-center'>
+                                <SettingsIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 transition duration-300 ease-out" />
+                            </span>
+                            <span className='text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>Ajuste</span>
+                        </button>
+                        <BtnSignOut />
+                    </div>
+                </li>
+            </ul>
+        </>
+    );
 };
 
 export default SidebarList;
+
+
+

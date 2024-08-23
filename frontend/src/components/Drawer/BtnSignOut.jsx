@@ -10,10 +10,10 @@ const BtnSignOut = () => {
     <>
       <button 
         onClick={toggleModal}
-        className="flex items-center w-full px-0 py-0 hover:bg-gray-100 active:bg-gray-100 rounded-full transition duration-500 ease-out"
+        className="flex items-center w-full px-3 py-2 group hover:text-segundaria-900"
       >
-        <span><LogoutIcon fontSize="small" className="mr-2"></LogoutIcon></span>
-        <span className="text-sm text-neutral-800 font-medium">Sair</span>
+        <span><LogoutIcon fontSize="small" className="mr-2 text-neutral-700 group-hover:text-segundaria-900 transition duration-300 ease-out"></LogoutIcon></span>
+        <span className="text-sm group-hover:text-segundaria-900 font-medium transition duration-300 ease-out">Sair</span>
       </button>
     </>
   );
