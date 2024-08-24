@@ -38,7 +38,7 @@ export const DashboardResumoVendas = () => {
   const firstElement = data.length > 0 ? data[0] : { conversion_rate: 0, total_visits: 0 };
 
   return (
-    <div className='bg-primaria-900 flex flex-col gap-7 lg:flex-row shadow-lg border border-slate-100 rounded-20 max-w-[373px] md:max-w-[688px] lg:max-w-[876px] xl:min-w-[1270px] lg:mx-0 min-h-max px-4 lg:px-5 xl:pl-8 xl:pr-0 py-5 xl:py-7 mb-7 mx-2 xs:mx-auto'>
+    <div className='bg-primaria-900 flex flex-col gap-7 lg:flex-row shadow-lg border border-slate-100 rounded-2xl max-w-[373px] md:max-w-[688px] lg:max-w-[876px] xl:min-w-[1270px] lg:mx-0 min-h-max px-4 lg:px-5 xl:pl-8 xl:pr-0 py-5 xl:py-7 mb-7 mx-2 xs:mx-auto'>
       <div className='w-full lg:w-1/2 h-full'>
         <ChartContent />
       </div>

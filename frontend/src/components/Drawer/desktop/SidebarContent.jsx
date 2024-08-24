@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles'
 import SidebarHeader from './SidebarHeader'
 import SidebarList from './SidebarList'
 import ModalConectarLojas from '@/components/Config/ModalConectarLojas'
+import { Padding } from '@mui/icons-material'
 
 const SidebarContent = () => {
     const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -45,9 +46,9 @@ const SidebarContent = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: '30px',
-        marginLeft: '16px',
-        margin: 'auto',
+        borderRadius: '36px',
+        padding: '12px 0',
+        background: '#F6F6FB',
         zIndex: 2,
     });
 
@@ -65,9 +66,7 @@ const SidebarContent = () => {
         display: 'flex',
         justifyContent: 'center',
         borderRadius: '30px',  
-        marginLeft: '16px',
-        marginTop: '40px',
-        marginBottom: '40px',
+        padding: '12px 0',
     });
 
     const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -78,6 +77,7 @@ const SidebarContent = () => {
             boxSizing: 'border-box',
             background: '#F6F6FB',
             height: 'auto',
+            marginLeft: '16px',
             boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 50px 80px 2px rgb(0 0 0 / 0.1)',
             overflow: 'hidden',
             ...(open && {
@@ -86,7 +86,7 @@ const SidebarContent = () => {
                     ...openedMixin(theme),
                     position: 'sticky',
                     transition: 'all 1s ease-out',
-                    background: '#transparent',
+                    background: '#F6F6FB',
                     border: 'none',
                 },
             }),
@@ -104,10 +104,10 @@ const SidebarContent = () => {
     );
 
     return (
-        <div className='hidden lg:flex justify-center items-center h-full ml-3'>
+        <div className='hidden lg:flex justify-center items-center h-full'>
             <Drawer variant="permanent" open={open}>
-                <div className='w-full flex items-end justify-end mt-2'>
-                    <SidebarHeader handleDrawerToggle={handleDrawerToggle} open={open} />
+                <div className='w-full flex items-end justify-end'>
+                    {/* <SidebarHeader handleDrawerToggle={handleDrawerToggle} open={open} /> */}
                 </div>
                 <SidebarList open={open} onSetIsModalOpen={handleSetIsModalOpen} onIsModalOpen={isModalOpen} handleDrawerClose={handleDrawerClose} handleDrawerOpen={handleDrawerOpen} />
             </Drawer>

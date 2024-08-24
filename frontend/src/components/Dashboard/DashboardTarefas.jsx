@@ -9,7 +9,7 @@ const DashboardTarefas = () => {
   };
 
   return (
-    <div className="bg-primaria-900 shadow-lg border border-slate-100 rounded-20 max-w-[373px] md:max-w-[688px] lg:w-[596px] xl:min-w-[958px] lg:mx-0 min-h-max px-4 lg:px-5 xl:pl-8 xl:pr-0 py-5 xl:py-7 mb-7 mx-2 xs:mx-auto">
+    <div className="bg-primaria-900 shadow-lg border border-slate-100 rounded-2xl max-w-[373px] md:max-w-[688px] lg:w-[596px] xl:min-w-[958px] lg:mx-0 min-h-max px-4 lg:px-5 xl:pl-8 xl:pr-0 py-5 xl:py-7 mb-7 mx-2 xs:mx-auto">
 
       <h2 className='text-base text-colorFont-200 font-semibold'>Lista de tarefas</h2>
 
