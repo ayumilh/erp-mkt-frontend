@@ -59,10 +59,11 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose,
                             <Link href={`/${text.toLowerCase()}`}>
                                 <Tooltip title={text} placement="bottom" TransitionComponent={Zoom} followCursor>
                                     <button
-                                        className={`flex w-[160px] h-12 px-3 ${open ? "justify-start" : "justify-center"
+                                        className={`flex w-[160px] h-12 px-3 ${
+                                            open ? "justify-start" : "justify-center"
                                             } relative items-center group hover:text-segundaria-900`}
                                     >
-                                        <span className={`relative flex justify-center text-neutral-700 group-hover:text-segundaria-900 transition duration-300 ease-out`}>
+                                        <span className={`relative flex justify-center text-neutral-700 group-hover:text-segundaria-900 transition duration-300 ease-out ${ open ? "mr-3" : "mr-auto" }`}>
                                             {iconsNav[index]}
                                         </span>
                                         <span className={`ml-3 ${open ? "opacity-100" : "opacity-0"} text-neutral-700 group-hover:text-segundaria-900 font-medium transition duration-300 ease-out`}>

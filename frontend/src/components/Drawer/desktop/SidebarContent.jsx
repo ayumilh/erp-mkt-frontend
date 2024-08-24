@@ -61,19 +61,18 @@ const SidebarContent = () => {
             width: `calc(${theme.spacing(8)} + 1px)`,
         },
         overflowX: 'hidden',
-        display: 'flex',
         position: 'relative',
+        display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: '28px',
-        margin: 'auto',
-        zIndex: 2,
+        borderRadius: '30px',  
+        marginLeft: '16px',
+        marginTop: '40px',
+        marginBottom: '40px',
     });
 
     const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
         ({ theme, open }) => ({
             width: drawerWidth,
-            height: '100%',
             flexShrink: 0,
             whiteSpace: 'nowrap',
             boxSizing: 'border-box',
@@ -85,8 +84,9 @@ const SidebarContent = () => {
                 ...openedMixin(theme),
                 '& .MuiDrawer-paper': {
                     ...openedMixin(theme),
+                    position: 'sticky',
                     transition: 'all 1s ease-out',
-                    background: '#F6F6FB',
+                    background: '#transparent',
                     border: 'none',
                 },
             }),
@@ -94,8 +94,9 @@ const SidebarContent = () => {
                 ...closedMixin(theme),
                 '& .MuiDrawer-paper': {
                     ...closedMixin(theme),
+                    position: 'sticky',
                     transition: 'all 1s ease-out',
-                    background: '#F6F6FB',
+                    background: 'transparent',
                     border: 'none',
                 },
             }),
