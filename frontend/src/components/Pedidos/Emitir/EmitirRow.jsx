@@ -6,7 +6,7 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
-export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }){
+export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
   const [pedido, setPedido] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
@@ -16,7 +16,7 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/issue`);
-       
+        console.log(response.data.orders)
         if (response.data && Array.isArray(response.data.orders)) {
           const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
             if (order.shipping_id !== null) {
@@ -101,8 +101,8 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending':
-        return 'bg-orange-200';
+      case 'issue':
+        return 'bg-blue-200';
       default:
         return '';
     }
@@ -110,8 +110,10 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
 
   const translateStatus = (status) => {
     switch (status) {
-      case 'pending':
-        return 'Pendente';
+      case 'issue':
+        return 'Emitir';
+      case 'invoice_pending':
+        return 'Aguardando pagamento';
       default:
         return '';
     }
@@ -180,7 +182,7 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
                       <span className='text-sm font-medium'>{pedido.seller_nickname}</span>
                     </td>
                     <td className="pl-3 pr-4 py-3 md:py-4 text-sm font-medium text-center align-top">
-                      <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status)}</span>
+                      <span className={`${getStatusColor(pedido.status_simc)} rounded-full px-3 py-2`}>{translateStatus(pedido.status_simc)}</span>
                     </td>
                 </tr>
               );
@@ -220,7 +222,7 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
                   <td className="px-3 py-3 md:py-4 text-sm font-medium text-start align-top">{translateTrackingMethod(pedido.tracking_method)}</td>
                   <td className="px-3 py-3 md:py-4 text-sm font-medium text-center align-top">{pedido.seller_nickname}</td>
                   <td className="pl-3 pr-4 py-3 md:py-4 text-sm font-medium text-center align-top">
-                    <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status)}</span>
+                    <span className={`${getStatusColor(pedido.status_simc)} rounded-full px-3 py-2`}>{translateStatus(pedido.status_simc)}</span>
                   </td>
                 </tr>
               )

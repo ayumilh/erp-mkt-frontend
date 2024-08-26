@@ -6,7 +6,7 @@ const BtnExpandirDrawer = ({ open, handleDrawerToggle }) => {
             <div className="flex items-center w-full">
                 {open ? (
                     <>
-                        <span className="mr-2 text-gray-700 font-medium text-sm">Contrair menu</span>
+                        <span className="mx-2 text-gray-700 font-medium text-xs">Contrair menu</span>
                         <Switch
                             checked={open}
                             onChange={handleDrawerToggle}

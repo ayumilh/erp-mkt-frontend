@@ -6,53 +6,55 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
-export default function RetiradaRow({ setOrder, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder, pedido }){
+export default function RetiradaRow({ setOrder, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }){
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
+  const [pedido, setPedido] = useState([]); 
   const [isOpen, setIsOpen] = useState({});
 
-  // useEffect(() => {
-  //   const fetchOrders = async () => {
-  //     try {
-  //       const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/printed`);
-  //       if (response.data && Array.isArray(response.data.orders)) {
-  //         const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
-  //           if (order.shipping_id !== null) {
-  //             if (!groupedOrderByShippingId[order.shipping_id]) {
-  //               groupedOrderByShippingId[order.shipping_id] = [];
-  //             }
-  //             groupedOrderByShippingId[order.shipping_id].push(order);
-  //           }
-  //           return groupedOrderByShippingId;
-  //         }, {});
-  //         setGroupOrdersProducts(groupedOrderByShippingId)
-  //         setPedido(response.data.orders);
-  //       } else {
-  //         setPedido([]);
-  //       }
-  //     } catch (error) {
-  //       console.error(`Error: ${error}`);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-  
-  //   fetchOrders();
-  // }, []);
-
   useEffect(() => {
-    const groupedOrderByShippingId = pedido.reduce((groupedOrderByShippingId, order) => {
-      if (order.shipping_id !== null) {
-        if (!groupedOrderByShippingId[order.shipping_id]) {
-          groupedOrderByShippingId[order.shipping_id] = [];
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/printed`);
+        console.log(response.data.orders)
+        if (response.data && Array.isArray(response.data.orders)) {
+          const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
+            if (order.shipping_id !== null) {
+              if (!groupedOrderByShippingId[order.shipping_id]) {
+                groupedOrderByShippingId[order.shipping_id] = [];
+              }
+              groupedOrderByShippingId[order.shipping_id].push(order);
+            }
+            return groupedOrderByShippingId;
+          }, {});
+          setGroupOrdersProducts(groupedOrderByShippingId)
+          setPedido(response.data.orders);
+        } else {
+          setPedido([]);
         }
-        groupedOrderByShippingId[order.shipping_id].push(order);
+      } catch (error) {
+        console.error(`Error: ${error}`);
+      } finally {
+        setIsLoading(false);
       }
-      return groupedOrderByShippingId;
-    }, {});
-    setGroupOrdersProducts(groupedOrderByShippingId);
-    setIsLoading(false);
-  }, [pedido]);
+    };
+  
+    fetchOrders();
+  }, []);
+
+  // useEffect(() => {
+  //   const groupedOrderByShippingId = pedido.reduce((groupedOrderByShippingId, order) => {
+  //     if (order.shipping_id !== null) {
+  //       if (!groupedOrderByShippingId[order.shipping_id]) {
+  //         groupedOrderByShippingId[order.shipping_id] = [];
+  //       }
+  //       groupedOrderByShippingId[order.shipping_id].push(order);
+  //     }
+  //     return groupedOrderByShippingId;
+  //   }, {});
+  //   setGroupOrdersProducts(groupedOrderByShippingId);
+  //   setIsLoading(false);
+  // }, [pedido]);
 
   const shippingIdCounts = {};
   pedido.forEach(pedido => {

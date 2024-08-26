@@ -21,10 +21,10 @@ const PedidosContent = () => {
       setActiveTable(router.query.activeTable);
     }
   }, [router.isReady, router.query]);
-  
+
   return (
     <div className='w-full px-4 lg:px-0 lg:mx-5 lg:mt-4 xl:mx-8 xl:flex xl:flex-col xl:items-center'>
-      <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between items-center h-12 pt-4 mb-8">
+      <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between items-center h-12 pt-4 mb-8 z-10">
         <div className='flex items-center'>
           <HamburgerContent/>
           <TitlePage title='Pedidos'/>

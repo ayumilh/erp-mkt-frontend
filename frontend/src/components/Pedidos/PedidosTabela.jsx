@@ -26,6 +26,7 @@ const PedidosTabela = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/orders`);
+        console.log(response.data);
         if (response.data && Array.isArray(response.data.orders)) {
           setPedido(response.data.orders);
           setTotalPages(Math.ceil(response.data.orders.length / rowsPerPage));
@@ -80,7 +81,7 @@ const PedidosTabela = () => {
       />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
-          <thead className='sticky top-0 z-10 bg-primaria-900'>
+          <thead className='sticky top-0 -z-0 bg-primaria-900'>
             <tr>
               <th className="pl-4 lg:pl-6 pr-3 py-3 md:py-4 text-sm font-semibold text-start">Produtos</th>
               <th className="px-3 py-3 md:py-4"></th>
