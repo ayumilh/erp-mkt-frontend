@@ -51,7 +51,7 @@ export const DropdownHeader = ({ setActiveTable }) => {
 				<div className="origin-top-center absolute mt-2 px-2 rounded-md bg-primaria-900">
 					<div className="w-28 my-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
 						<button
-							className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white hover:bg-opacity-80"
+							className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white ho rounded-smver:bg-opacity-80"
 							role="menuitem"
 							onClick={() => handleClickEmitir('Pedidos')}
 						>
@@ -59,32 +59,32 @@ export const DropdownHeader = ({ setActiveTable }) => {
 							<span className='font-medium text-neutral-600 opacity-90'>0</span>
 						</button>
 						<button
-							className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white hover:bg-opacity-80"
+							className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white ho rounded-smver:bg-opacity-80"
 							role="menuitem"
 							onClick={() => handleClickEmitir('Emitir')}
 						>
 							<span>Emitir</span> 
 							<span className='font-medium text-neutral-600 opacity-90'>0</span>
 						</button>
-						<button className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white hover:bg-opacity-80" role="menuitem">
+						<button className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white hover:bg-opacity-80 rounded-sm" role="menuitem">
 							<span>Enviar</span> 
 							<span className='font-medium text-neutral-600 opacity-90'>0</span>
 						</button>
 						<button
 							onClick={() => handleClickEmitir('Imprimir')}
-							className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white hover:bg-opacity-80" role="menuitem">
+							className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white hover:bg-opacity-80 rounded-sm" role="menuitem">
 							<span>Imprimir</span>
 							<span className='font-medium text-neutral-600 opacity-90'>0</span>
 						</button>
 						<button
 							onClick={() => handleClickEmitir('Retirada')}
-							className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white hover:bg-opacity-80" role="menuitem">
+							className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white hover:bg-opacity-80 rounded-sm" role="menuitem">
 							<span>Retirada</span> 
 							<span className='font-medium text-neutral-600 opacity-90'>0</span>
 						</button>
 						<button
 							onClick={() => handleClickEmitir('Enviados')}
-							className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white hover:bg-opacity-80" role="menuitem">
+							className="flex justify-between w-full text-sm font-medium px-2 py-1 hover:text-black hover:bg-white hover:bg-opacity-80 rounded-sm" role="menuitem">
 							<span>Enviados</span> 
 							<span className='font-medium text-neutral-600 opacity-90'>0</span>
 						</button>
