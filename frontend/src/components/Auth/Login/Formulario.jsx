@@ -1,7 +1,6 @@
 'use client'
-import { useState, useContext } from 'react'
+import { useState, useContext, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
-
 import {AuthContext} from '@/contexts/AuthContext' 
 
 import WithGoogle from "../WithGoogle";
@@ -93,13 +92,19 @@ const Formulario = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault()
   }
+
+  const emailInputRef = useRef(null);
+  useEffect(() => {
+    emailInputRef.current.focus();
+  }, []);
+
   return (
     <div>
-      <form onSubmit={handleSubmit} className="bg-primaria-900 form-login w-[350px] md:w-[500px] lg:w-[450px] xl:w-[540px] h-full py-8 md:py-12 px-6 md:px-11 lg:px-8 xl:px-11 space-y-8 rounded-[32px] my-6">    
+      <form onSubmit={handleSubmit} className="bg-primaria-900 shadow-sm w-[350px] md:w-[500px] lg:w-[450px] xl:w-[540px] h-full py-8 md:py-12 px-6 md:px-11 lg:px-8 xl:px-11 space-y-8 rounded-[32px]">  
         <HeaderForm/>  
         <div className="flex flex-col space-y-8 items-end">
           <div className="w-full">
-            <label className="block text-sm md:base font-medium mb-2" htmlFor="email">
+            <label htmlFor="email" className="block text-sm md:base font-medium mb-2">
               E-mail
             </label>
             <div className="mt-1 relative rounded-md">
@@ -108,9 +113,13 @@ const Formulario = () => {
               </div>
               <input
                 className="self-stretch form-input block w-full pl-10 leading-5 border-b-2 bg-transparent hover:border-segundaria-800 focus:border-segundaria-800 focus:outline-none"
+                ref={emailInputRef}
                 type="email"
+                id="email"
                 name="email"
+                placeholder='mail@example.com'
                 value={email}
+                maxLength={255}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
@@ -119,7 +128,7 @@ const Formulario = () => {
           </div>
 
           <div className="w-full">
-            <label className="block text-sm md:text-base font-medium mb-2" htmlFor="senha">
+            <label htmlFor="senha" className="block text-sm md:text-base font-medium mb-2">
               Senha
             </label>
             <div className="mt-1 relative rounded-md hover:bg-transparent">
@@ -129,8 +138,11 @@ const Formulario = () => {
               <input
                 className="self-stretch form-input block w-full pl-10 leading-5 border-b-2 bg-transparent hover:border-segundaria-800 focus:border-segundaria-800 focus:outline-none"
                 type={showPassword ? "text" : "password"}
+                id="senha"
                 name="senha"
                 value={senha}
+                placeholder='********'
+                minLength={6}
                 onChange={(e) => setSenha(e.target.value)}
                 required
               />

@@ -47,7 +47,7 @@ const Formulario = () => {
 
   return (
     <div>
-      <form className="bg-primaria-900 form-login w-[350px] md:w-[500px] lg:w-[450px] xl:w-[540px] h-full py-8 md:py-12 px-6 md:px-11 lg:px-8 xl:px-11 space-y-8 rounded-[32px] my-6">    
+      <form className="bg-primaria-900 w-[350px] md:w-[500px] lg:w-[450px] xl:w-[540px] h-full py-8 md:py-12 px-6 md:px-11 lg:px-8 xl:px-11 space-y-8 rounded-[32px] my-6">    
         <HeaderForm/>  
         <div className="flex flex-col space-y-8 items-end">
           <div className="w-full">
@@ -129,7 +129,7 @@ const Formulario = () => {
             </div>
           </div>
         </div>
-        <button type='submit' onClick={handleLogin} className="w-full bg-gradient-to-r from-gradient-start to-gradient-end hover:bg-gradient-to-b hover:from-gradient-start-hover hover:to-gradient-end-hover rounded-full hover:shadow-segundaria text-white text-base py-3 md:text-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-60">Cadastrar</button>
+        <button type='submit' onClick={handleLogin} className="w-full bg-gradient-to-r from-gradient-start to-gradient-end hover:bg-gradient-to-b hover:from-gradient-start-hover hover:to-gradient-end-hover rounded-full hover:shadow-segundaria text-white text-base py-3 md:text-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-60">Criar minha conta</button>
         <WithGoogle loginType='cadastro'/>
       </form>
     </div>
