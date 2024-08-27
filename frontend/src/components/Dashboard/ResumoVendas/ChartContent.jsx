@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-const ChartLine = dynamic(() => import('./ChartLine'), { ssr: false });
+const ChartLine = dynamic(() => import('./ChartPie'), { ssr: false });
 
 export const ChartContent = () => {
   return (

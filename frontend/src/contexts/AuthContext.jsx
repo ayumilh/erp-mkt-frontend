@@ -50,7 +50,7 @@ export const AuthContextProvider = ({ children }) => {
         const userid = decodedToken.userid;
 
         try {
-          const res = await axios.post(
+          await axios.post(
             "https://erp-mkt.vercel.app/api/userId",
             { userid }
           );

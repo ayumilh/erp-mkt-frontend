@@ -5,7 +5,7 @@ import ChartLojasContent from './LineVendasPorLojas/ChartLojasContent';
 import PieAnalysisContent from './PieAnalysis/PieAnalysisContent';
 import QuickActions from '../QuickActions';
 import TitlePage from '../Geral/TitlePage';
-import { DashboardResumoVendas } from './DashboardResumoVendas';
+import { DashboardResumoVendas } from './ResumoVendas/DashboardResumoVendas';
 
 
 const DashboardContent = () => {
