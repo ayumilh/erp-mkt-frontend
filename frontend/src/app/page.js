@@ -68,7 +68,7 @@ export default function Home() {
                 </h1>
                 <div className="flex flex-row justify-center">
                     <Image
-                        src="/img/print-dashboard.png"
+                        src="/img/landingPage/print-dashboard.png"
                         alt="print-dashboard"
                         width={900}
                         height={500}
@@ -187,7 +187,7 @@ export default function Home() {
                         <div className="flex gap-5 items-center">
                             <div className="bg-white rounded-xl p-3">
                                 <Image
-                                    src="/img/icon-pricing-iniciando.png"
+                                    src="/img/landingPage/icon-pricing-iniciando.png"
                                     alt="icon-pricing-iniciando"
                                     width={28}
                                     height={28}
@@ -243,7 +243,7 @@ export default function Home() {
                         <div className="flex gap-5 items-center">
                             <div className="bg-white rounded-xl p-3">
                                 <Image
-                                    src="/img/icon-pricing-evoluindo.png"
+                                    src="/img/landingPage/icon-pricing-evoluindo.png"
                                     alt="icon-pricing-evoluindo"
                                     width={28}
                                     height={28}
@@ -293,7 +293,7 @@ export default function Home() {
                         <div className="flex gap-5 items-center">
                             <div className="bg-white rounded-xl p-3">
                                 <Image
-                                    src="/img/icon-pricing-potencializando.png"
+                                    src="/img/landingPage/icon-pricing-potencializando.png"
                                     alt="icon-pricing-potencializando"
                                     width={28}
                                     height={28}
