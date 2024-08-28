@@ -97,7 +97,7 @@ export const DashboardResumoVendas = () => {
                             <span className='w-1/3 text-neutral-500 font-medium text-end text-sm'>0</span>
                         </div>
 
-                        <hr className='w-48 border border-gray-200 my-2' />
+                        <hr className='w-full border border-gray-200 my-2' />
 
                         <div className='w-full flex justify-between'>
                             <span className='w-2/3 text-green-500 text-start text-sm'>Liquido</span>
@@ -110,11 +110,14 @@ export const DashboardResumoVendas = () => {
                                 <span className='text-red-500 font-semibold text-sm'>0</span>
                                 <span className='text-neutral-600 font-semibold text-sm'>Contas a pagar</span>
                             </div>
-                            <div className='w-full flex justify-between py-1'>
+                            <div className='w-full flex justify-between pt-1'>
                                 <span className='w-2/3 text-neutral-500 font-medium text-start text-sm'>Valor Total a pagar</span>
                                 <span className='w-1/3 text-neutral-500 font-medium text-end text-sm'>0</span>
                             </div>
                         </div>
+                        
+                        <hr className='w-full border border-gray-100 mb-4' />
+
                         <div className='w-full h-1/2'>
                             <div className='flex'>
                                 <span className='text-neutral-600 font-semibold text-sm'>Notas fiscais</span>

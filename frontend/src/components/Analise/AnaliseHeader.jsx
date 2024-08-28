@@ -12,27 +12,27 @@ export const AnaliseHeader = ({ setActiveTable }) => {
     return (
         <div className="w-full lg:w-[876px] xl:w-[1270px] flex flex-col mb-6">
             <div className="flex mb-8 gap-4">
-            {/* <DropdownRelatoriosHeader setActiveTable={setActiveTable} /> */}
-            <div onClick={() => handleClick('Geral')} className="inline-block group">
-                <p className="hover:text-black font-medium cursor-pointer">Geral</p>
-                {currentText === 'Geral' && <hr className="border-segundaria-900 border-[1.5px]" />}
-                <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
-            </div>
-            <div onClick={() => handleClick('Vendas')} className="inline-block group">
-                <p className="hover:text-black font-medium cursor-pointer">Vendas</p>
-                {currentText === 'Vendas' && <hr className="border-segundaria-900 border-[1.5px]" />}
-                <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
-            </div>
-            <div onClick={() => handleClick('Lucros')} className="inline-block group">
-                <p className="hover:text-black font-medium cursor-pointer">Lucros</p>
-                {currentText === 'Lucros' && <hr className="border-segundaria-900 border-[1.5px]" />}
-                <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
-            </div>
-            <div onClick={() => handleClick('Estoque')} className="inline-block group">
-                <p className="hover:text-black font-medium cursor-pointer">Estoque</p>
-                {currentText === 'Estoque' && <hr className="border-segundaria-900 border-[1.5px]" />}
-                <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
-            </div>
+                {/* <DropdownRelatoriosHeader setActiveTable={setActiveTable} /> */}
+                <div onClick={() => handleClick('Geral')} className="inline-block group">
+                    <p className="hover:text-black font-medium cursor-pointer">Geral</p>
+                    {currentText === 'Geral' && <hr className="border-segundaria-900 border-[1.5px]" />}
+                    <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
+                </div>
+                <div onClick={() => handleClick('Vendas')} className="inline-block group">
+                    <p className="hover:text-black font-medium cursor-pointer">Vendas</p>
+                    {currentText === 'Vendas' && <hr className="border-segundaria-900 border-[1.5px]" />}
+                    <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
+                </div>
+                <div onClick={() => handleClick('Lucros')} className="inline-block group">
+                    <p className="hover:text-black font-medium cursor-pointer">Lucros</p>
+                    {currentText === 'Lucros' && <hr className="border-segundaria-900 border-[1.5px]" />}
+                    <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
+                </div>
+                <div onClick={() => handleClick('Estoque')} className="inline-block group">
+                    <p className="hover:text-black font-medium cursor-pointer">Estoque</p>
+                    {currentText === 'Estoque' && <hr className="border-segundaria-900 border-[1.5px]" />}
+                    <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
+                </div>
             </div>
 
             <div className="flex flex-wrap gap-3 justify-start md:justify-end px-4 md:px-0 md:gap-6">
