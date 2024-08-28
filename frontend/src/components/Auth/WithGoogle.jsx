@@ -22,10 +22,10 @@ const WithGoogle = ({ loginType }) => {
       {loginType === 'login' ? (
         <p className="font-medium text-sm md:text-base">
           Não tem uma conta? 
-          <span className="text-blue-700 font-semibold cursor-pointer ml-1" onClick={() => router.push('cadastro')}>Criar conta!</span> 
+          <span className="text-blue-700 font-semibold cursor-pointer ml-1 hover:underline" onClick={() => router.push('cadastro')}>Criar conta!</span> 
         </p>
       ) : (
-        <p className="text-blue-700 font-semibold cursor-pointer text-sm md:text-base" onClick={() => router.push('login')}>
+        <p className="text-blue-700 font-semibold cursor-pointer text-sm md:text-base hover:underline" onClick={() => router.push('login')}>
           Já tem uma conta? 
         </p>
       )}

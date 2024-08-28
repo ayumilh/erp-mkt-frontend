@@ -159,7 +159,7 @@ const Formulario = () => {
                         {errors.senha && <span className='text-red-500 text-sm'>{errors.senha}</span>}
                     </div>
                     {errors.login && <span className='text-red-500 text-sm'>{errors.login}</span>}
-                    <p className="text-blue-500 text-sm md:text-base"><a href="#">Esqueceu a senha?</a></p>
+                    <p className="text-blue-500 text-sm md:text-base hover:underline transition duration-300 ease-in-out"><a href="#">Esqueceu a senha?</a></p>
                 </div>
                 <button type='submit' className="w-full bg-gradient-to-r from-gradient-start to-gradient-end hover:bg-gradient-to-b hover:from-gradient-start-hover hover:to-gradient-end-hover focus:bg-gradient-to-r focus:from-gradient-start-focus focus:to-gradient-end-focus rounded-full hover:shadow-lg text-white text-base py-3 md:text-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-60">
                     {loggingLoading ? <><CircularProgress color="inherit" className="text-white" size={12} /> Entrando...</> : 'Entrar'}

@@ -47,7 +47,7 @@ const Formulario = () => {
 
   return (
     <div>
-      <form className="bg-primaria-900 w-[350px] md:w-[500px] lg:w-[450px] xl:w-[540px] h-full py-8 md:py-12 px-6 md:px-11 lg:px-8 xl:px-11 space-y-8 rounded-[32px] my-6">    
+      <form className="bg-primaria-900 w-[350px] md:w-[500px] lg:w-[450px] xl:w-[540px] h-full py-8 md:py-12 px-6 md:px-11 lg:px-8 xl:px-11 space-y-8 rounded-[32px] relative bottom-8">    
         <HeaderForm/>  
         <div className="flex flex-col space-y-8 items-end">
           <div className="w-full">
@@ -62,6 +62,8 @@ const Formulario = () => {
                 className="self-stretch form-input block w-full pl-10 leading-5 border-b-2 bg-transparent hover:border-segundaria-800 focus:border-segundaria-800 focus:outline-none"
                 type="email"
                 name="email"
+                placeholder='mail@example.com'
+                maxLength={255}
                 onChange={inputChange}
                 required
               />
@@ -81,6 +83,8 @@ const Formulario = () => {
                 type={showPassword ? 'text' : 'password'}
                 name="senha"
                 onChange={inputChange}
+                placeholder='********'
+                minLength={6}
                 required
               />
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center mb-1 md:mb-2 cursor-pointer">
@@ -107,6 +111,8 @@ const Formulario = () => {
                 className="self-stretch form-input block w-full pl-10 leading-5 border-b-2 bg-transparent hover:border-segundaria-800 focus:border-segundaria-800 focus:outline-none"
                 type="text"
                 name="telefone"
+                placeholder='(00) 00000-0000'
+                maxLength={15}
                 onChange={inputChange}
               />
             </div>
@@ -124,6 +130,7 @@ const Formulario = () => {
                 className="self-stretch form-input block w-full pl-10 leading-5 border-b-2 bg-transparent hover:border-segundaria-800 focus:border-segundaria-800 focus:outline-none"
                 type="text"
                 name="cnpj"
+                maxLength={14}
                 onChange={inputChange}
               />
             </div>
