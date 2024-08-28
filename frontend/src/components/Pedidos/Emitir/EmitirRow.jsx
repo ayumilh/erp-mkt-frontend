@@ -16,7 +16,6 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/issue`);
-        console.log(response.data.orders)
         if (response.data && Array.isArray(response.data.orders)) {
           const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
             if (order.shipping_id !== null) {

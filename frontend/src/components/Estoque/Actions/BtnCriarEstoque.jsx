@@ -36,12 +36,12 @@ export const BtnCriarEstoque = () => {
           onClick={handleButtonClick}
         >
           <span className="text-white text-sm">Criar</span>
-          <KeyboardArrowDownIcon className="-mr-1 ml-1 h-5 w-5 text-white" aria-hidden="true" />
+          <KeyboardArrowDownIcon className={`-mr-1 ml-1 h-5 w-5 text-white transition-transform duration-500 ${isOpen ? 'rotate-180' : ''} `} aria-hidden="true" />
         </button>
       </div>
 
       {isOpen && (
-        <div className="origin-top-right right-2 absolute z-10 mt-2 px-2 rounded-md bg-white items-start">
+        <div className="origin-top-right right-2 absolute z-10 mt-2 px-2 rounded-md items-start shadow-lg bg-primaria-900 ring-1 ring-black ring-opacity-5">
           <div className="w-28 flex flex-col my-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             <BtnRoute route="/estoque/criarUnico" size='dropdown' btn='dropdown' txt='dropdown'>
               Unico

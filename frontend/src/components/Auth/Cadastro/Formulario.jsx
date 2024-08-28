@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 
@@ -45,6 +45,11 @@ const Formulario = () => {
     event.preventDefault()
   }
 
+  const emailInputRef = useRef(null);
+  useEffect(() => {
+      emailInputRef.current.focus();
+  }, []);
+
   return (
     <div>
       <form className="bg-primaria-900 w-[350px] md:w-[500px] lg:w-[450px] xl:w-[540px] h-full py-8 md:py-12 px-6 md:px-11 lg:px-8 xl:px-11 space-y-8 rounded-[32px] relative bottom-8">    
@@ -60,6 +65,7 @@ const Formulario = () => {
               </div>
               <input
                 className="self-stretch form-input block w-full pl-10 leading-5 border-b-2 bg-transparent hover:border-segundaria-800 focus:border-segundaria-800 focus:outline-none"
+                ref={emailInputRef}
                 type="email"
                 name="email"
                 placeholder='mail@example.com'

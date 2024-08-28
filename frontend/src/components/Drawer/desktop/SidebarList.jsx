@@ -81,7 +81,7 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose,
                     <div>
                         <BtnExpandirDrawer handleDrawerToggle={handleDrawerToggle} open={open} />
                     </div>
-                    {open && (
+                    {/* {open && (
                         <div>
                             <button onClick={toggleModal} className={`flex rounded-full items-center group hover:text-segundaria-900 w-[160px] py-2 px-3 ${open ? "justify-start" : "justify-center"}`}
                             >
@@ -100,7 +100,7 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose,
                             </button>
                             <BtnSignOut />
                         </div>
-                    )}
+                    )} */}
                 </li>
             </ul>
         </>

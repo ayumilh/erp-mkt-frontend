@@ -19,11 +19,11 @@ const a = tv({
 });
 
 const button = tv({
-  base: 'flex items-center justify-center md:justify-end px-2 py-1 no-underline transition duration-200 ease-in-out',
+  base: 'flex items-center justify-center md:justify-end px-2 py-1 no-underline',
   variants: {
     type: {
-      dropdown: 'hover:bg-primaria-900 focus:bg-primaria-900 rounded-sm',
-      base: 'hover:border-b-2 hover:border-segundaria-900',
+      dropdown: 'hover:bg-gray-200 focus:bg-primaria-900 rounded-sm transition duration-300 ease-in-out',
+      base: 'hover:border-b-2 hover:border-segundaria-900 transition duration-300 ease-in-out',
     },
   },
 });

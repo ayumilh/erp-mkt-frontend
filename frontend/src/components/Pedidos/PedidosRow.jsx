@@ -9,6 +9,7 @@ const PedidosRow = ({ setOrder, pedido }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  console.log(pedido);
 
   useEffect(() => {
     const groupedOrderByShippingId = pedido.reduce((groupedOrderByShippingId, order) => {
