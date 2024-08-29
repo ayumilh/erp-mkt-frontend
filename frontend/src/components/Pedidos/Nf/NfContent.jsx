@@ -13,7 +13,7 @@ const NfContent = () => {
       <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between items-center h-12 pt-4 mb-8">
         <div className='flex items-center'>
           <HamburgerContent/>
-          <TitlePage title='Nf'/>
+          <TitlePage title='Notas fiscais'/>
         </div>
         <ActionsHeader/>
       </div>

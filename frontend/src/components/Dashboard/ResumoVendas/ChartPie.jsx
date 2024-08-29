@@ -7,7 +7,7 @@ const ChartPie = () => {
     series: [100, 25, 50, 25],
     options: {
       chart: {
-        height: 160,
+        height: 260,
         type: 'donut',
         zoom: {
           enabled: true
@@ -25,9 +25,9 @@ const ChartPie = () => {
   });
 
   return (
-    <div className="w-full px-3">
+    <div>
       <div id="chart">
-        <ReactApexChart options={chartData.options} series={chartData.series} type="donut" height={160} />
+        <ReactApexChart options={chartData.options} series={chartData.series} type="donut" height={300} />
       </div>
       <div id="html-dist"></div>
     </div>
