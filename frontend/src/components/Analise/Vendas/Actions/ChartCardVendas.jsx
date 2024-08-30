@@ -3,7 +3,17 @@ import axios from "axios";
 
 export default function ChartCardVendas({ onItemSelected }) {
   const [selectedItem, setSelectedItem] = useState('Valor Total de Vendas');
-  const [sales, setSales] = useState([]);
+  const [sales, setSales] = useState({
+    TotalDePedidos: 0,
+    ValorTotalDeVendas: 0,
+    PedidosValidos: 0,
+    ValorDeVendasValidas: 0,
+    PedidosCancelados: 0,
+    ValorDeVendasCanceladas: 0,
+    Clientes: 0,
+    VendasPorCliente: 0
+  });
+
   const info = [
     { titulo: 'Total de Pedidos', valor: sales.TotalDePedidos },
     { titulo: 'Valor Total de Vendas', valor: sales.ValorTotalDeVendas },
@@ -21,35 +31,54 @@ export default function ChartCardVendas({ onItemSelected }) {
     }
   }, [sales, onItemSelected]);
 
-  useEffect(() => {
-    const fetchSales = async () => {
-      try {
-        const response = await axios.get("https://erp-mkt.vercel.app/api/statistics/sales");
-        if (response.data && Array.isArray(response.data.statistics)) {
-          const restructuredData = response.data.statistics.map((sales) => {
-            return {
-              Data: sales.Data,
-              TotalDePedidos: sales["Total de Pedidos"],
-              ValorTotalDeVendas: sales["Valor Total de Vendas"],
-              PedidosValidos: sales["Pedidos Válidos"],
-              ValorDeVendasValidas: sales["Valor de Vendas Válidas"],
-              PedidosCancelados: sales["Pedidos Cancelados"],
-              ValorDeVendasCanceladas: sales["Valor de Vendas Canceladas"],
-              Clientes: sales.Clientes,
-              VendasPorCliente: sales["Vendas por Cliente"],       
-            };
-          })[0];
-          setSales(restructuredData);
-        } else {
-          setSales([]);
-        }
-      } catch (error) {
-        console.error(`Error: ${error}`);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchSales = async () => {
+  //     try {
+  //       const response = await axios.get("https://erp-mkt.vercel.app/api/statistics/sales");
+  //       if (response.data && Array.isArray(response.data.statistics)) {
+  //         const restructuredData = response.data.statistics.map((sales) => {
+  //           return {
+  //             Data: sales.Data,
+  //             TotalDePedidos: sales["Total de Pedidos"] || 0,
+  //             ValorTotalDeVendas: sales["Valor Total de Vendas"] || 0,
+  //             PedidosValidos: sales["Pedidos Válidos"] || 0,
+  //             ValorDeVendasValidas: sales["Valor de Vendas Válidas"] || 0,
+  //             PedidosCancelados: sales["Pedidos Cancelados"] || 0,
+  //             ValorDeVendasCanceladas: sales["Valor de Vendas Canceladas"] || 0,
+  //             Clientes: sales.Clientes || 0,
+  //             VendasPorCliente: sales["Vendas por Cliente"] || 0
+  //           };
+  //         })[0];
+  //         setSales(restructuredData);
+  //       } else {
+  //         setSales({
+  //           TotalDePedidos: 0,
+  //           ValorTotalDeVendas: 0,
+  //           PedidosValidos: 0,
+  //           ValorDeVendasValidas: 0,
+  //           PedidosCancelados: 0,
+  //           ValorDeVendasCanceladas: 0,
+  //           Clientes: 0,
+  //           VendasPorCliente: 0
+  //         });
+  //       }
+  //     } catch (error) {
+  //       console.error(`Error: ${error}`);
+  //       setSales({
+  //         TotalDePedidos: 0,
+  //         ValorTotalDeVendas: 0,
+  //         PedidosValidos: 0,
+  //         ValorDeVendasValidas: 0,
+  //         PedidosCancelados: 0,
+  //         ValorDeVendasCanceladas: 0,
+  //         Clientes: 0,
+  //         VendasPorCliente: 0
+  //       });
+  //     }
+  //   };
   
-    fetchSales();
-  }, []);
+  //   fetchSales();
+  // }, []);
 
   const handleItemClick = (item) => {
     onItemSelected(item);

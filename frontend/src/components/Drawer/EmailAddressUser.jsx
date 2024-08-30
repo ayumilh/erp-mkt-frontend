@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 
 import BtnSignOut from "./BtnSignOut";
 
-export const EmailAddressUser = ({ menuOpen, setMenuOpen }) => {
+export const EmailAddressUser = ({ menuOpen, toggleMenu }) => {
     const { userInfo } = useContext(AuthContext);
     const { data: session } = useSession();
 
@@ -16,7 +16,7 @@ export const EmailAddressUser = ({ menuOpen, setMenuOpen }) => {
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setMenuOpen(false);
+                toggleMenu;
             }
         }
 

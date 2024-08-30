@@ -1,5 +1,5 @@
 import LucrosRow from './LucrosRow';
-import { LucrosMenuMoreResponsive } from '../LucrosMenuMoreResponsive';
+import { LucrosMenuMoreResponsive } from '../Actions/LucrosMenuMoreResponsive';
 
 export default function LucrosTabela() {
   return (

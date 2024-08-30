@@ -16,44 +16,44 @@ const ChartCardsLucros = ({onItemSelected}) => {
     { titulo: 'Desconto Total', valor: lucros.DescontoESubsidio, porcentagem: '-4,2%' },
   ];
 
-  useEffect(() => {
-    const fetchLucros = async () => {
-      try {
-        const response = await axios.get("https://erp-mkt.vercel.app/api/statistics/real");
-        if (response.data && Array.isArray(response.data.orders)) {
-          const restructuredData = response.data.orders.map((lucro) => {
-            return {
-              Comissao: lucro["Comissão"] || "0", 
-              DataPedido: lucro["Data de pedido"],
-              DescontoESubsidio: lucro["Desconto e Subsídio"] || "0",
-              Loja: lucro["Loja"],
-              Lucro: lucro["Lucro"],
-              MargemDeLucro: lucro["Margem de Lucro"],
-              OutraTaxaDaPlataforma: lucro["Outra Taxa da Plataforma"] || "0", 
-              Pedido: lucro["Pedido"],
-              Receita: lucro["Receita"],
-              ReembolsoDoComprador: lucro["Reembolso do Comprador"] || "", 
-              Status: lucro["Status"],
-              TaxaDeADS: lucro["Taxa de ADS"] || "0",
-              TaxaDeFreteComprador: lucro["Taxa de Frete Comprador"] || null,
-              TaxaDeServico: lucro["Taxa de Serviço"] || "",
-              TaxaDeTransacao: lucro["Taxa de Transação"] || "",
-              TaxaDoFrete: lucro["Taxa do Frete"] || "0",
-              ValorDoPedido: lucro["Valor do Pedido"],
-              VendasDeProdutos: lucro["Vendas de Produtos"]          
-            };
-          })[0];
-          setLucros(restructuredData);
-        } else {
-          setLucros([]);
-        }
-      } catch (error) {
-        console.error(`Error: ${error}`);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchLucros = async () => {
+  //     try {
+  //       const response = await axios.get("https://erp-mkt.vercel.app/api/statistics/real");
+  //       if (response.data && Array.isArray(response.data.orders)) {
+  //         const restructuredData = response.data.orders.map((lucro) => {
+  //           return {
+  //             Comissao: lucro["Comissão"] || "0", 
+  //             DataPedido: lucro["Data de pedido"],
+  //             DescontoESubsidio: lucro["Desconto e Subsídio"] || "0",
+  //             Loja: lucro["Loja"],
+  //             Lucro: lucro["Lucro"],
+  //             MargemDeLucro: lucro["Margem de Lucro"],
+  //             OutraTaxaDaPlataforma: lucro["Outra Taxa da Plataforma"] || "0", 
+  //             Pedido: lucro["Pedido"],
+  //             Receita: lucro["Receita"],
+  //             ReembolsoDoComprador: lucro["Reembolso do Comprador"] || "", 
+  //             Status: lucro["Status"],
+  //             TaxaDeADS: lucro["Taxa de ADS"] || "0",
+  //             TaxaDeFreteComprador: lucro["Taxa de Frete Comprador"] || null,
+  //             TaxaDeServico: lucro["Taxa de Serviço"] || "",
+  //             TaxaDeTransacao: lucro["Taxa de Transação"] || "",
+  //             TaxaDoFrete: lucro["Taxa do Frete"] || "0",
+  //             ValorDoPedido: lucro["Valor do Pedido"],
+  //             VendasDeProdutos: lucro["Vendas de Produtos"]          
+  //           };
+  //         })[0];
+  //         setLucros(restructuredData);
+  //       } else {
+  //         setLucros([]);
+  //       }
+  //     } catch (error) {
+  //       console.error(`Error: ${error}`);
+  //     }
+  //   };
   
-    fetchLucros();
-  }, [onItemSelected]);
+  //   fetchLucros();
+  // }, [onItemSelected]);
 
   useEffect(() => {
     if (lucros.TaxaDeADS) {

@@ -10,7 +10,7 @@ const BlockAnaliseGeral = () => {
   ];
 
   return (
-    <div className="blocos-topo flex items-center flex-wrap gap-2 md:gap-4 justify-center md:justify-around mb-10 mt-5">
+    <div className="blocos-topo flex items-center flex-wrap gap-2 md:gap-4 justify-center md:justify-around mb-7">
       {blocosDados.map((bloco) => (
         <div key={bloco.titulo} className="w-40 lg:w-[185px] xl:w-60 flex items-center justify-center gap-3 shadow-lg px-4 py-3 rounded-xl" style={{borderRight: '4px solid', borderColor: bloco.corBorda}}>
           <div className={`w-8 h-8 xl:w-10 xl:h-10 flex items-center justify-center rounded-full ${bloco.cor} shadow-md`}>

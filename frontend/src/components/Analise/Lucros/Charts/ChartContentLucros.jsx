@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
-import ChartCardsLucros from './ChartCardsLucros'
+import ChartCardsLucros from '../Actions/ChartCardsLucros'
 
 const ChartLineLucros = dynamic(() => import('./ChartLineLucros'), { ssr: false });
 
