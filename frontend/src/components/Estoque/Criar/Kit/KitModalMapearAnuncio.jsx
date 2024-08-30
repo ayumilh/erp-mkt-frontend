@@ -66,7 +66,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }){
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             {/* header */}
             <div className="modal-header flex justify-between items-center mb-4">
-              <h1 className='text-base text-colorFont-200 font-semibold'>Mapear SKU do Anúncio</h1>
+              <h1 className='text-base text-neutral-700 font-semibold'>Mapear SKU do Anúncio</h1>
               <button type="button" onClick={onClose} className="bg-transparent border-0">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6 text-gray-600 hover:text-gray-800">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

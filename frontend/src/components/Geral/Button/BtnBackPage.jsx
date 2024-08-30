@@ -9,10 +9,10 @@ const BtnBackPage = ({title, modal, onClose = () => {}}) => {
         <button 
             type="button" 
             onClick={() => { modal ? onClose() : router.back() }}
-            className='flex items-center gap-2 text-neutral-600 font-medium hover:text-black transition duration-300 ease-out'
+            className='flex items-center gap-2'
         >
             <ArrowBackIosRoundedIcon/>
-            <span className={`${modal ? 'text-base ml-3' : 'text-lg '}`}>{title}</span>
+            <span className={`${modal ? 'text-base ml-3' : 'text-lg lg:text-2xl font-semibold text-neutral-700'} transition duration-300 ease-out`}>{title}</span>
         </button>
     </div>
     )

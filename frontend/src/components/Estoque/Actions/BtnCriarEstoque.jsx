@@ -41,16 +41,14 @@ export const BtnCriarEstoque = () => {
       </div>
 
       {isOpen && (
-        <div className="origin-top-right right-2 absolute z-10 mt-2 px-2 rounded-md items-start shadow-lg bg-primaria-900 ring-1 ring-black ring-opacity-5">
-          <div className="w-28 flex flex-col my-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+        <div className="origin-top-right right-0 absolute z-10 mt-2 rounded-md items-start shadow-lg bg-primaria-900 ring-1 ring-black ring-opacity-5">
+          <div className="w-auto flex flex-col my-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             <BtnRoute route="/estoque/criarUnico" size='dropdown' btn='dropdown' txt='dropdown'>
               Unico
             </BtnRoute>
-
             <BtnRoute route="/estoque/criarVariante" size='dropdown' btn='dropdown' txt='dropdown'>
               Variado
             </BtnRoute>
-
             <BtnRoute route="/estoque/criarKit" size='dropdown' btn='dropdown' txt='dropdown'>
               Kit
             </BtnRoute>

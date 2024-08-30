@@ -10,7 +10,7 @@ const QuickActions = () => {
 
   return (
     <div className="hidden lg:flex lg:flex-col lg:w-[254px] xl:w-[282px] bg-primaria-900 shadow-lg border border-slate-100 rounded-2xl px-5 py-5">
-      <h2 className="text-base text-colorFont-200 font-semibold mb-2">
+      <h2 className="text-base text-neutral-700 font-semibold mb-2">
         Ações rapidas
       </h2>
       <ul className="space-y-2">

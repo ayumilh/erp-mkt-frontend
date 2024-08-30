@@ -78,7 +78,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
             marginLeft: "10px",
           }}
         >
-          <AccountCircleIcon className="h-9 w-9 text-colorFont-200" />
+          <AccountCircleIcon className="h-9 w-9 text-neutral-700" />
           <div className="flex">
             <EmailAddressUser />
           </div>

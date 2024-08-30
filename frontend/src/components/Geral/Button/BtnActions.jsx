@@ -31,7 +31,7 @@ const span = tv({
     },
     color: {
       ativado: 'text-white',
-      desativado: 'text-colorFont-100',
+      desativado: 'text-neutral-600',
     },
   }
 })

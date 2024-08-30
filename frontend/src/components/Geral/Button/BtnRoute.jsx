@@ -22,13 +22,13 @@ const button = tv({
   base: 'flex',
   variants: {
     type: {
-      dropdown: 'flex px-4 py-2 text-start text-sm text-neutral-700 font-medium hover:bg-gray-200 active:bg-gray-100 rounded-sm transition duration-300 ease-in-out',
-      base: 'px-2 hover:border-b-2 items-center hover:border-segundaria-900 transform focus:-translate-y-0.5 focus:scale-60 transition duration-300 ease-in-out',
+      dropdown: 'w-full flex px-4 py-2 text-start text-sm text-neutral-700 font-medium hover:bg-gray-200 active:bg-gray-100 rounded-sm transition duration-300 ease-in-out',
+      base: 'px-2 hover:border-b-2 items-center hover:border-gray-300 transform focus:-translate-y-0.5 focus:scale-60 transition duration-300 ease-in-out',
     },
   },
 });
 
-const BtnRoute = ({ route, size, btn, txt, children }) => {
+const BtnRoute = ({ route, size, btn, txt, activePage = false, children }) => {
   const router = useRouter();
   const [loadingRouting, setLoadingRouting] = useState(false);
 
@@ -48,7 +48,7 @@ const BtnRoute = ({ route, size, btn, txt, children }) => {
   return (
     <button 
       onClick={handleRouting} 
-      className={button({ type: btn })} 
+      className={`${button({ type: btn })} ${activePage ? 'border-b-2 border-segundaria-900' : ''}`} 
       role="menuitem"
       style={btn === 'base' ? { textOverflow: 'ellipsis', whiteSpace: 'nowrap' } : {}}
     >

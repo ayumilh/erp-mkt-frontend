@@ -13,26 +13,18 @@ export const AnaliseHeader = ({ setActiveTable }) => {
         <div className="w-full lg:w-[876px] xl:w-[1270px] flex flex-row justify-between mb-6">
             <div className="flex gap-4">
                 {/* <DropdownRelatoriosHeader setActiveTable={setActiveTable} /> */}
-                <div onClick={() => handleClick('Geral')} className="inline-block group">
+                <button onClick={() => handleClick('Geral')} className={`${currentText === 'Geral' ? 'border-b-2 border-segundaria-900' : 'border-transparent'} flex items-center justify-center px-2 md:px-3 py-2 border-b-2 border-segundaria-900 hover:border-b-2 hover:border-gray-300 transform focus:-translate-y-0.5 focus:scale-60 transition duration-300 ease-in-out`}>
                     <p className="hover:text-black font-medium cursor-pointer">Geral</p>
-                    {currentText === 'Geral' && <hr className="border-segundaria-900 border-[1.5px]" />}
-                    <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
-                </div>
-                <div onClick={() => handleClick('Vendas')} className="inline-block group">
+                </button>
+                <button onClick={() => handleClick('Vendas')} className={`${currentText === 'Vendas' ? 'border-b-2 border-segundaria-900' : 'border-transparent'} flex items-center justify-center px-2 md:px-3 py-2 hover:border-gray-300 transform focus:-translate-y-0.5 focus:scale-60 transition duration-300 ease-in-out`}>
                     <p className="hover:text-black font-medium cursor-pointer">Vendas</p>
-                    {currentText === 'Vendas' && <hr className="border-segundaria-900 border-[1.5px]" />}
-                    <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
-                </div>
-                <div onClick={() => handleClick('Lucros')} className="inline-block group">
+                </button>
+                <button onClick={() => handleClick('Lucros')} className={`${currentText === 'Lucros' ? 'border-b-2 border-segundaria-900' : 'border-transparent'} flex items-center justify-center px-2 md:px-3 py-2 border-b-2 border-segundaria-900 hover:border-b-2 hover:border-gray-300 transform focus:-translate-y-0.5 focus:scale-60 transition duration-300 ease-in-out`}>
                     <p className="hover:text-black font-medium cursor-pointer">Lucros</p>
-                    {currentText === 'Lucros' && <hr className="border-segundaria-900 border-[1.5px]" />}
-                    <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
-                </div>
-                <div onClick={() => handleClick('Estoque')} className="inline-block group">
+                </button>
+                <button onClick={() => handleClick('Estoque')} className={`${currentText === 'Estoque' ? 'border-b-2 border-segundaria-900' : 'border-transparent'} flex items-center justify-center px-2 md:px-3 py-2 hover:border-gray-300 transform focus:-translate-y-0.5 focus:scale-60 transition duration-300 ease-in-out `}>
                     <p className="hover:text-black font-medium cursor-pointer">Estoque</p>
-                    {currentText === 'Estoque' && <hr className="border-segundaria-900 border-[1.5px]" />}
-                    <hr className="border-transparent group-hover:border-gray-300 border-[1.5px] transition duration-300 ease-in-out" />
-                </div>
+                </button>
             </div>
 
             <div className="flex flex-wrap gap-3 justify-start md:justify-end px-4 md:px-0 md:gap-6">
