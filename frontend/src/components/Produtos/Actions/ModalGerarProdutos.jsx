@@ -48,7 +48,7 @@ export default function ModalGerarProdutos({ onClose, idProduct }){
          };
       });
       try{
-         const response = await axios.post('https://erp-mkt.vercel.app/api/stock/mercadolivre/sync', { productsData });
+         await axios.post('https://erp-mkt.vercel.app/api/stock/mercadolivre/sync', { productsData });
          setStatusRequestGerarProduto(true);
       }catch(error){
          console.error(`Error: ${error}`);

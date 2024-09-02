@@ -24,7 +24,7 @@ export const EmailAddressUser = ({ menuOpen, toggleMenu }) => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         }
-    }, [dropdownRef]);
+    }, [dropdownRef, toggleMenu]);
 
     return (
         <>

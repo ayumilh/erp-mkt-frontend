@@ -88,12 +88,12 @@ export default function ChartCardVendas({ onItemSelected }) {
   return (
     <div className="min-w-full flex justify-around items-center flex-wrap gap-2 mb-6">
       {info.map((item) => (
-        <div key={item.titulo} onClick={() => handleItemClick(item)} className={`w-[150px] md:w-40 lg:w-44 h-24 flex flex-col justify-center shadow-md rounded-lg p-3 ${selectedItem === item.titulo ? 'bg-gray-200' : ''}`}>
-          <div className="flex gap-1 xl:gap-2 items-center justify-start">
-            <span className="lg:text-lg font-semibold text-left">{item.valor}</span>
+        <div key={item.titulo} onClick={() => handleItemClick(item)} className={`w-[150px] md:w-40 lg:w-44 h-24 flex flex-col justify-cente shadow-md hover:shadow-lg rounded-md hover:rounded-lg p-3 cursor-pointer transition duration-300 ease-in-out ${selectedItem === item.titulo ? 'bg-segundaria-900' : ''}`}>
+          <div className="flex gap-1 xl:gap-2 items-center justify-start ">
+            <span className={`lg:text-lg font-semibold text-left transition duration-300 ease-in-out ${selectedItem === item.titulo ? 'text-gray-200' : ''}`}>{item.valor}</span>
           </div>
           <div className="mt-1">
-            <span className="text-xs text-neutral-700">{item.titulo}</span>
+            <span className={`text-xs text-neutral-700 transition duration-300 ease-in-out ${selectedItem === item.titulo ? 'text-gray-200' : ''}`}>{item.titulo}</span>
           </div>
         </div>
       ))}

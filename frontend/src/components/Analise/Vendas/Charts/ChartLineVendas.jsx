@@ -110,7 +110,7 @@ const ChartLineVendas = ({ selectedItem }) => {
       </div>
       <div id="html-dist"></div>
       <div className='flex justify-around items-center'>
-        <button className='bg-violet-400 hover:bg-gray-200 rounded-lg p-2 font-medium text-neutral-800 transition duration-300 ease-out'>1D</button>
+        <button className='bg-segundaria-900 hover:bg-gray-200 rounded-lg p-2 font-medium text-gray-200 hover:text-neutral-800 transition duration-300 ease-out'>1D</button>
         <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>1M</button>
         <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>3M</button>
         <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>6M</button>
