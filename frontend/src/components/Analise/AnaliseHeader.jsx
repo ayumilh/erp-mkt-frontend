@@ -27,7 +27,7 @@ export const AnaliseHeader = ({ setActiveTable }) => {
                 </button>
             </div>
 
-            <div className="flex flex-wrap gap-3 justify-start md:justify-end px-4 md:px-0 md:gap-6">
+            <div className="hidden lg:flex flex-wrap gap-3 justify-start md:justify-end px-4 md:px-0 md:gap-6">
                 <div className="flex flex-row">
                     <button className="px-4 py-2 text-sm text-neutral-800 hover:text-black font-medium border border-gray-200 hover:bg-gray-200 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-gray-300">
                         Últimos 7 dias

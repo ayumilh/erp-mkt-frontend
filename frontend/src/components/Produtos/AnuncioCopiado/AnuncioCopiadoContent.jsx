@@ -15,7 +15,7 @@ const AnuncioCopiadoContent = () => {
             <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between items-center h-12 pt-4 mb-8">
                 <div className='flex items-center'>
                     <HamburgerContent />
-                    <div className='relative bottom-4'>
+                    <div className='relative lg:bottom-4'>
                         <BtnBackPage modal={false} />
                     </div>
                     <Breadcrumbs paths={breadcrumbPaths} />
