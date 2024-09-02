@@ -13,7 +13,6 @@ const ProdutosContent = () => {
   const handleFilterChange = (newFilter) => {
     setFilterStatus(newFilter);
   };
-
   return (
     <div className='w-full px-4 lg:px-0 lg:mx-5 lg:mt-4 xl:mx-8 xl:flex xl:flex-col xl:items-center'>
       <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between items-center h-12 pt-4 mb-8">

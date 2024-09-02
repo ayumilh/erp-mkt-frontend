@@ -11,7 +11,7 @@ const BtnBackPage = ({title, modal, onClose = () => {}}) => {
             onClick={() => { modal ? onClose() : router.back() }}
             className='flex items-center gap-2'
         >
-            <ArrowBackIosRoundedIcon/>
+            <ArrowBackIosRoundedIcon style={{ fontSize: '26px' }} />
             <span className={`${modal ? 'text-base ml-3' : 'text-lg lg:text-2xl font-semibold text-neutral-700'} transition duration-300 ease-out`}>{title}</span>
         </button>
     </div>
