@@ -13,7 +13,7 @@ const NfHeader = () => {
     const handleSync = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/sync-notes');
+            const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/sync-notes');
             setStatusRequestSync(true);
             console.log('Sincronização bem-sucedida:', response.data);
         } catch (error) {
