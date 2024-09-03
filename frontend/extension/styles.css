@@ -3,10 +3,18 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
+  width: 360px;
+  height: 200px;
   margin: 0;
   font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .logo-container {
@@ -18,7 +26,7 @@ body {
 .divider {
   width: 100%;
   border: 1px solid #ccc;
-  margin-top: 60px; /* Ajuste conforme necessário */
+  margin-top: 60px;
 }
 
 .content {
@@ -40,7 +48,7 @@ body {
 
 #botao {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #624DE3;
   color: white;
   border: none;
   border-radius: 4px;
@@ -49,4 +57,14 @@ body {
 
 #botao:hover {
   background-color: #0056b3;
+}
+
+#btnOpenList {
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #262626;
+  font-weight: 500;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
 }

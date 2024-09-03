@@ -3,17 +3,23 @@
 
 <head>
 	<title>Minha Extensão Chrome</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
-	<div class="logo-container">
-		<img src="icons/icon50.png" alt="Logo da extensão" id="logo">
-	</div>
-	<hr class="divider">
-	<div class="content">
-		<input type="text" id="link" placeholder="Insira o link do anúncio">
-		<button id="botao">Importar Dados</button>
+	<div class="container">
+		<div class="logo-container">
+			<img src="icons/icon50.png" alt="Logo da extensão" id="logo">
+		</div>
+		<hr class="divider">
+		<div class="content">
+			<input type="text" id="link" placeholder="Insira o link do anúncio">
+			<div>
+				<button id="botao">Importar Dados</button>
+				<button id="btnOpenList">Abrir lista de importação</button>
+			</div>
+		</div>
 	</div>
 	<script src="popup.js"></script>
 </body>
