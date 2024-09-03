@@ -1,22 +1,24 @@
-'use client'
+'use client';
 import React, { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
+import axios from "axios";
 
 const ModalCopiarAnuncio = ({ onClose }) => {
     const [link, setLink] = useState("");
     const [productInfo, setProductInfo] = useState({ name: "", price: "" });
 
     const handleCopy = async () => {
+        console.log('Link:', link); 
         try {
-            const response = await fetch(`/api/screenshot`);
-            const data = await response.json();
-            console.log('Data:', data);
-            // if (data.name && data.price) {
-            //     setProductInfo(data);
-            //     alert(`Anúncio copiado: ${data.name} - ${data.price}`);
-            // } else {
-            //     alert('Erro ao copiar anúncio');
-            // }
+            const response = await axios.get('/api/screenshot', { link });
+            console.log('Data:', response.data);
+            const data = response.data;
+            if (data.name && data.price) {
+                setProductInfo(data);
+                alert(`Anúncio copiado: ${data.name} - ${data.price}`);
+            } else {
+                alert('Erro ao copiar anúncio');
+            }
         } catch (error) {
             alert('Erro ao copiar anúncio');
         }

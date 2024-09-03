@@ -18,19 +18,19 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import { EmailAddressUser } from "../EmailAddressUser";
 
 const iconsNav = [
-  <DashboardIcon key="dashboard" sx={{ width: 34 }}/>,
-  <ProductsIcon key="products" sx={{ width: 34 }} />,
-  <OrdersIcon key="orders" sx={{ width: 34 }} />,
-  <BuyIcon key="buy" sx={{ width: 34 }} />,
-  <AnalysisIcon key="analysis" sx={{ width: 34 }} />,
-  <StockIcon key="stock" sx={{ width: 34 }} />,
-  <SupportAgentIcon key="feedback" sx={{ width: 34 }} />,
+  <DashboardIcon key="dashboard" sx={{ fontSize: '26px' }}/>,
+  <ProductsIcon key="products" sx={{ fontSize: '26px' }} />,
+  <OrdersIcon key="orders" sx={{ fontSize: '26px' }} />,
+  <BuyIcon key="buy" sx={{ fontSize: '26px' }} />,
+  <AnalysisIcon key="analysis" sx={{ fontSize: '26px' }} />,
+  <StockIcon key="stock" sx={{ fontSize: '26px' }} />,
+  <SupportAgentIcon key="feedback" sx={{ fontSize: '26px' }} />,
 ];
 
 const iconConfig = [
-  <NotificationsIcon key="bell" className="w-8 text-segundaria-900" />,
-  <HelpIcon key="help" className="w-8 text-segundaria-900" />,
-  <SettingsIcon key="settings" className="w-8 text-segundaria-900" />,
+  <NotificationsIcon key="bell" sx={{fontSize: '26px'}} />,
+  <HelpIcon key="help" sx={{fontSize: '26px'}} />,
+  <SettingsIcon key="settings" sx={{fontSize: '26px'}} />,
 ];
 const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
   const toggleModal = () => {
@@ -43,15 +43,15 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
         (text, index) => (
           <li key={text} className="flex flex-col mb-5">
             <Link href={`/${text.toLowerCase()}`}>
-              <button className='flex items-center w-[170px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-100 rounded-full transition duration-500 ease-out'>
+              <button className='flex items-center w-[170px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-200 rounded-full transition duration-500 ease-out'>
                 <span
-                  className={`flex justify-center text-segundaria-900 ${
+                  className={`flex justify-center text-neutral-700 ${
                     open ? "mr-3" : "mr-auto"
                   }`}
                 >
                   {iconsNav[index]}
                 </span>
-                <span className={`opacity-${open ? "100" : "0"}, text-neutral-800 font-medium active:text-black`}>
+                <span className={`opacity-${open ? "100" : "0"}, text-neutral-700 font-medium active:text-black`}>
                   {text}
                 </span>
               </button>
@@ -64,7 +64,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
     <Divider sx={{ color: "#99999999", width: "80%", marginX: "auto" }} />
 
     <ul className="flex flex-col px-4 mt-10">
-      <li className="flex items-center mb-14">
+      <li className="flex items-center mb-7">
         <button
           style={{
             display: "flex",
@@ -77,7 +77,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
             marginLeft: "10px",
           }}
         >
-          <AccountCircleIcon className="h-9 w-9 text-neutral-700" />
+          <AccountCircleIcon sx={{fontSize: '28px'}} className="ml-2 text-neutral-700" />
           <div className="flex">
             <EmailAddressUser />
           </div>
@@ -89,11 +89,11 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
           className="flex items-center w-[160px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-100 rounded-full transition duration-500 ease-out"
         >
           <span
-            className={`flex justify-center text-segundaria-900 ${
+            className={`flex justify-center text-neutral-700 ${
               open ? "mr-3" : "mr-auto"
             }`}
-          > <LinkIcon fontSize="medium" className="ml-2 text-segundaria-900"/> </span>
-          <span className="text-neutral-800 font-medium whitespace-nowrap">Conectar Conta</span>
+          > <LinkIcon sx={{fontSize: '26px'}} className="text-neutral-700"/> </span>
+          <span className="text-neutral-700 font-medium whitespace-nowrap">Conectar Conta</span>
         </button>
       </li>
 
@@ -101,13 +101,13 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
         <li key={text} className="flex flex-col mb-1">
           <button className='flex items-center w-[190px] h-12 px-4 justify-start active:bg-gray-100 rounded-full transition duration-500 ease-out'>
             <span
-              className={`flex justify-center text-segundaria-900 ${
+              className={`flex justify-center text-neutral-700 ${
                 open ? "mr-3" : "mr-auto"
               }`}
             >
               {iconConfig[index]}
             </span>
-            <span className={`opacity-${open ? "100" : "0"}, text-neutral-800 font-medium `}>{text}</span>
+            <span className={`opacity-${open ? "100" : "0"}, text-neutral-700 font-medium `}>{text}</span>
           </button>
         </li>
       ))}
@@ -117,13 +117,13 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen}) => {
           className='flex w-[160px] h-12 px-4 justify-start'
         >
           <span
-            className={`flex justify-center text-segundaria-900 ${
+            className={`flex justify-center text-neutral-700 ${
               open ? "mr-3" : "mr-auto"
             }`}
           >
-            <span><LogoutRoundedIcon className="w-8 text-segundaria-900"></LogoutRoundedIcon></span>
+            <span><LogoutRoundedIcon className="w-8 text-neutral-700"></LogoutRoundedIcon></span>
           </span>
-          <span className={`opacity-${open ? "100" : "0"}, text-neutral-800 font-medium `}>Sair</span>
+          <span className={`opacity-${open ? "100" : "0"}, text-neutral-700 font-medium `}>Sair</span>
         </button>
       </li>
     </ul>
