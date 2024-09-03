@@ -36,7 +36,11 @@ export const DropdownList = () => {
 					onClick={handleClickLista}
 				>
 					<span className="hover:text-black font-medium text-sm md:text-base">Lista</span>
-					<KeyboardArrowDownIcon className={`-mr-1 ml-2 h-5 w-5 transition-transform duration-500 ${isOpenLista ? 'rotate-180' : ''} `} aria-hidden="true" />
+                    <KeyboardArrowDownIcon sx={{
+                        width: '20px',
+                        transform: isOpenLista ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.4s ease-in-out'
+                    }} className="-mr-1 ml-2 text-segundaria-900" aria-hidden="true" />
 				</button>
 			</div>
 

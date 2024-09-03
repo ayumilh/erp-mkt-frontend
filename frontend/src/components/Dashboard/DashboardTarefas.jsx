@@ -17,7 +17,7 @@ const DashboardTarefas = () => {
                 {/* Pedidos */}
                 <div className="bg-primaria-900 shadow-md hover:shadow-lg border-r-4 border-blue-500 rounded-2xl w-full flex flex-col justify-center lg:mx-0 min-h-max p-4 mx-2 xs:mx-auto transition duration-300 ease-in-out">
                     <div className="flex justify-start items-center gap-1">
-                        <LocalShippingIcon className='w-6 h-6 text-blue-500' />
+                        <LocalShippingIcon sx={{fontSize: '28px'}} className='text-blue-500' />
                         <span className="text-center font-medium text-blue-500">Pedidos</span>
                     </div> 
                     <div className="w-full flex flex-wrap md:flex-nowrap justify-start">

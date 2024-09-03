@@ -56,7 +56,11 @@ export const DropdownHeader = ({ setActiveTable }) => {
                     onClick={handleClickLista}
                 >
                     <span className="hover:text-black font-medium text-sm md:text-base">{currentText}</span>
-                    <KeyboardArrowDownIcon className={`-mr-1 ml-2 h-5 w-5 transition-transform duration-500 ${isOpenLista ? 'rotate-180' : ''}`} aria-hidden="true" />
+                    <KeyboardArrowDownIcon sx={{
+                        width: '20px',
+                        transform: isOpenLista ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.4s ease-in-out'
+                    }} className="-mr-1 ml-2 text-segundaria-900" aria-hidden="true" />
                 </button>
             </div>
 
@@ -76,11 +80,11 @@ export const DropdownHeader = ({ setActiveTable }) => {
                             role="menuitem"
                             onClick={() => handleClickEmitir('Emitir')}
                         >
-                            <span>Emitir</span> 
+                            <span>Emitir</span>
                             <span className='font-medium text-neutral-600 opacity-90'>{orderCounts.Emitir || 0}</span>
                         </button>
                         <button className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm" role="menuitem">
-                            <span>Enviar</span> 
+                            <span>Enviar</span>
                             <span className='font-medium text-neutral-600 opacity-90'>{orderCounts.Enviar || 0}</span>
                         </button>
                         <button
@@ -92,13 +96,13 @@ export const DropdownHeader = ({ setActiveTable }) => {
                         <button
                             onClick={() => handleClickEmitir('Retirada')}
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm" role="menuitem">
-                            <span>Retirada</span> 
+                            <span>Retirada</span>
                             <span className='font-medium text-neutral-600 opacity-90'>{orderCounts.Retirada || 0}</span>
                         </button>
                         <button
                             onClick={() => handleClickEmitir('Enviados')}
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm" role="menuitem">
-                            <span>Enviados</span> 
+                            <span>Enviados</span>
                             <span className='font-medium text-neutral-600 opacity-90'>{orderCounts.Enviados || 0}</span>
                         </button>
                     </div>
