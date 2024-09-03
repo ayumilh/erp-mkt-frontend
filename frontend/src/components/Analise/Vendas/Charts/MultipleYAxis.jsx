@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactApexChart from 'react-apexcharts';
+import BtnGroupChart from '@/components/Geral/Button/BtnGroupChart';
 
 const MultipleYAxis = ({selectedItem}) => {
   const [sales, setSales] = useState([]);
@@ -111,13 +112,7 @@ const MultipleYAxis = ({selectedItem}) => {
         <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={290} />
       </div>
       <div id="html-dist"></div>
-      <div className='flex justify-around items-center'>
-        <button className='bg-violet-400 hover:bg-gray-200 rounded-lg p-2 font-medium text-neutral-800 transition duration-300 ease-out'>1D</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>1M</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>3M</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>6M</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>12M</button>
-      </div>
+      <BtnGroupChart />
     </div>
   );
 };

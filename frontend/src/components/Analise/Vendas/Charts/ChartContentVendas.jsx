@@ -36,7 +36,7 @@ export const ChartContentVendas = () => {
   }; 
 
   return (
-    <div className='bg-primaria-900 shadow-md rounded-3xl w-full xl:max-w-[950px] px-4 lg:px-5 py-5 xl:py-7 xl:pb-0'>
+    <div className='bg-primaria-900 shadow-md rounded-3xl w-full xl:max-w-[950px] px-4 lg:px-5 py-5 xl:py-7'>
       <ChartCardVendas onItemSelected={handleItemSelected}/>
       <div className='mt-10'>
         <div className='flex items-end flex-col'>

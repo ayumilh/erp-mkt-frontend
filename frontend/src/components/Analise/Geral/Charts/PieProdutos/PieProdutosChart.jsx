@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import BtnGroupChart from '@/components/Geral/Button/BtnGroupChart';
 
 const PieProdutosChart = () =>{
   const [series, setSeries] = useState([44, 55, 13]);
@@ -50,13 +51,7 @@ const PieProdutosChart = () =>{
         <ReactApexChart options={options} series={series} type="pie" height={350} />
       </div>
       <div id="html-dist"></div>
-      <div className='flex mt-6 justify-around items-center'>
-        <button className='bg-violet-400 hover:bg-gray-200 rounded-lg p-2 font-medium text-neutral-800 transition duration-300 ease-out'>1D</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>1M</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>3M</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>6M</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>12M</button>
-      </div>
+      <BtnGroupChart />
     </div>
   );
 }
