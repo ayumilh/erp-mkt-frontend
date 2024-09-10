@@ -96,7 +96,6 @@ export default function EnviadosTabela() {
               <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center">Destinatario</th>
               <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center">Criação</th>
               <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center">Metodos de envio</th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center">Vendedor</th>
               <th className="pr-4 pl-3 py-3 md:py-4 text-sm font-semibold text-center">Status</th>
             </tr>
           </thead>

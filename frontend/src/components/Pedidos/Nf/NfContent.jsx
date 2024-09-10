@@ -10,7 +10,7 @@ import BtnBackPage from '../../Geral/Button/BtnBackPage';
 
 const NfContent = () => {
     const breadcrumbPaths = [
-        { label: 'pedidos', href: '/pedidos' },
+        { label: 'Pedidos', href: '/pedidos' },
         { label: 'Notas fiscais', href: '/nf' }
     ];
     return (

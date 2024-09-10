@@ -1,3 +1,7 @@
+'use client';
+import { useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from "next/image";
 import {
     FaShippingFast,
@@ -12,7 +16,69 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CheckIcon from "@mui/icons-material/Check";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Home() {
+    useEffect(() => {
+        // Animação de descida na renderização
+        gsap.from(".animate-image", {
+            scrollTrigger: {
+                trigger: ".animate-image",
+                start: "top 80%",
+                end: "top 30%",
+                scrub: true,
+            },
+            duration: 1,
+            opacity: 1,
+            y: -10,
+        });
+
+        // Animação de subida ao rolar a página
+        gsap.to(".animate-image", {
+            scrollTrigger: {
+                trigger: ".animate-image",
+                start: "top 80%",
+                end: "top 30%",
+                scrub: true,
+            },
+            y: -50,
+            opacity: 0,
+        });
+    }, []);
+
+
+    useEffect(() => {
+        gsap.to(".animate", {
+            opacity: 0,
+            y: (i, target) => {
+                if (i === 1) return 50; 
+                return i === 0 ? -50 : 50; 
+            },
+            stagger: 0.3,
+            scrollTrigger: {
+                trigger: ".animate",
+                markers: true,
+                start: "top 80%",
+                end: "top 30%",
+                scrub: true,
+            },
+        })
+        // gsap.to(".animate", {
+        //     opacity: 0,
+        //     y: (i, target) => {
+        //         if (i === 1) return 50; // Centro sobe
+        //         return i === 0 ? -50 : 50; // Laterais vêm para o centro
+        //     },
+        //     stagger: 0.3,
+        //     scrollTrigger: {
+        //         trigger: ".animate",
+        //         markers: true,
+        //         start: "top 80%",
+        //         end: "top 30%",
+        //         scrub: true,
+        //     },
+        // })
+    }, []);
     return (
         <div className="flex flex-col">
             <header className="w-full h-20 flex flex-row items-center justify-between px-5 xl:px-20 py-5">
@@ -59,26 +125,28 @@ export default function Home() {
                 </div>
             </header>
 
-            <main className="flex flex-col mt-12">
-                <h1 className="text-2xl font-semibold text-center mb-4">
+            <main className="flex flex-col mt-20">
+                <h1 className="text-2xl font-semibold text-center mb-7">
                     ERP: Inovação e Maestria na Gestão que
                     <span className="block text-segundaria-900 font-semibold text-2xl py-1">
                         Simplifica e Acelera o seu Negócio
                     </span>
                 </h1>
                 <div className="flex flex-row justify-center">
-                    <Image
-                        src="/img/landingPage/print-dashboard.png"
-                        alt="print-dashboard"
-                        width={900}
-                        height={500}
-                    />
+                    <div className='animate-image'>
+                        <Image
+                            src="/img/landingPage/print-dashboard.png"
+                            alt="print-dashboard"
+                            width={900}
+                            height={500}
+                        />
+                    </div>
                 </div>
 
                 <section className="flex flex-col items-center mt-14 mb-20">
                     <div className="flex flex-row justify-center gap-20 w-full">
-                        <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm">
-                            <FaShippingFast className="text-4xl text-segundaria-900 mb-2" />
+                        <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
+                            <FaShippingFast style={{ width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">
                                 Eficiência Operacional
                             </h2>
@@ -87,7 +155,7 @@ export default function Home() {
                                 garantindo uma operação eficiente e sem complicações.
                             </p>
                         </div>
-                        <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm">
+                        <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
                             <FaBoxOpen className="text-4xl text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">Redução de Custos</h2>
                             <p className="text-center">
@@ -95,7 +163,7 @@ export default function Home() {
                                 logística, permitindo investir mais em crescimento e inovação.
                             </p>
                         </div>
-                        <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm">
+                        <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
                             <FaChartLine className="text-4xl text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">Escalabilidade</h2>
                             <p className="text-center">

@@ -97,15 +97,15 @@ export default function ImprimirRow({ setOrder, toggleShowCheckboxes, toggleShow
   const getStatusColor = (status) => {
     switch (status) {
       case 'delivered':
-        return 'bg-green-200';
+        return 'bg-green-200 text-green-700';
       case 'ready_to_ship':
-        return 'bg-blue-200';
+        return 'bg-blue-200 text-blue-700';
       case 'shipped':
-        return 'bg-yellow-200';
+        return 'bg-yellow-200 text-yellow-700';
       case 'cancelled':
-        return 'bg-red-200';
+        return 'bg-red-200 text-red-700';
       case 'pending':
-        return 'bg-red-200';
+        return 'bg-red-200 text-red-700';
       default:
         return '';
     }
@@ -180,10 +180,7 @@ export default function ImprimirRow({ setOrder, toggleShowCheckboxes, toggleShow
                     <span className='text-amber-500 font-medium text-sm'>Saída</span><br/>
                     <span className='whitespace-nowrap font-medium text-neutral-600'>{new Date(pedido.date_created).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</span>
                   </td>
-                  <td className="px-3 py-3 md:py-4 text-sm font-medium text-start align-top">{translateTrackingMethod(pedido.tracking_method)}</td>
-                  <td className="px-3 py-3 md:py-4 text-center align-top">
-                    <span className='text-sm font-medium'>{pedido.seller_nickname}</span>
-                  </td>
+                  <td className="px-3 py-3 md:py-4 text-sm font-medium text-center align-top">{translateTrackingMethod(pedido.tracking_method)}</td>
                   <td className="pl-3 pr-4 py-3 md:py-4 text-sm font-medium text-center align-top">
                     <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status)}</span>
                   </td>
@@ -222,8 +219,7 @@ export default function ImprimirRow({ setOrder, toggleShowCheckboxes, toggleShow
                     <span className='text-amber-500 font-medium text-sm'>Saída</span><br/>
                     <span className='whitespace-nowrap font-medium text-neutral-600'>{new Date(pedido.date_created).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</span>
                   </td>
-                  <td className="px-3 py-3 md:py-4 text-sm font-medium text-start align-top">{translateTrackingMethod(pedido.tracking_method)}</td>
-                  <td className="px-3 py-3 md:py-4 text-sm font-medium text-center align-top">{pedido.seller_nickname}</td>
+                  <td className="px-3 py-3 md:py-4 text-sm font-medium text-center align-top">{translateTrackingMethod(pedido.tracking_method)}</td>
                   <td className="pl-3 pr-4 py-3 md:py-4 text-sm font-medium text-center align-top">
                     <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status)}</span>
                   </td>

@@ -3,10 +3,12 @@ import { useState, useRef, useEffect } from 'react';
 import BtnActive from "../Geral/Button/BtnActive";
 import BtnRoute from "../Geral/Button/BtnRoute";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { BtnSincronizarProdutos } from './Actions/BtnSincronizarProdutos';
 
 const ProdutosHeader = () => {
     const [isOpenMore, setIsOpenMore] = useState(false);
     const [isVertical, setIsVertical] = useState(false);
+    const [statusRequestSync, setStatusRequestSync] = useState('');
 
     const toggleDropdown = () => {
         setIsOpenMore(!isOpenMore);
@@ -84,6 +86,9 @@ const ProdutosHeader = () => {
                     <BtnRoute route="/produtos" size='full' btn='base' txt='base'>
                         Importar e Exportar
                     </BtnRoute>
+                </div>
+                <div>
+                    <BtnSincronizarProdutos statusRequestSync={statusRequestSync} setStatusRequestSync={setStatusRequestSync} />
                 </div>
                 <div>
                     <BtnActive title="Criar anúncio" page="/produtos/criarAnuncio" size="btnHeader" />

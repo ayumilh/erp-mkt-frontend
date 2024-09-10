@@ -92,7 +92,6 @@ export default function RetiradaTabela() {
               <th className="px-3 py-3 md:py-4 text-sm font-semibold text-start">Destinatário</th>
               <th className="px-3 py-3 md:py-4 text-sm font-semibold text-start">Tempo</th>
               <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center">Metodos de envio</th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center">Vendedor</th>
               <th className="pl-3 pr-4 py-3 md:py-4 text-sm font-semibold text-center">Status</th>
             </tr>
           </thead>

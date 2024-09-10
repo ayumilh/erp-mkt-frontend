@@ -12,7 +12,7 @@ import ModalGerarProdutos from "./Actions/ModalGerarProdutos";
 import { ProdutosMenuMoreResponsive } from "./Actions/ProdutosMenuMoreResponsive";
 
 
-const ProdutosTabela = ({onFilterStatus}) => {
+const ProdutosTabela = ({ onFilterStatus }) => {
   const [products, setProducts] = useState([]);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedSku, setSelectedSku] = useState(null);
@@ -51,14 +51,6 @@ const ProdutosTabela = ({onFilterStatus}) => {
     };
     fetchProducts();
 
-    const fetchSyncProducts = async () => {
-      try {
-        await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/productsSync");
-      } catch (syncError) {
-        console.error(`Erro de sincronização: ${syncError}`);
-      }
-    };
-    fetchSyncProducts();
   }, []);
 
 
@@ -71,7 +63,7 @@ const ProdutosTabela = ({onFilterStatus}) => {
   }, [showCheckboxesAll, products, setIdProduct]);
 
   const handleCheckboxChange = (event, sku) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
     if (showCheckboxesAll || event.target.checked) {
       setIdProduct(prevItems => [...prevItems, sku]);
     } else {
@@ -101,11 +93,11 @@ const ProdutosTabela = ({onFilterStatus}) => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'active':
-        return 'bg-green-200';
+        return 'bg-green-200 text-green-700';
       case 'under_review':
-        return 'bg-yellow-200';
+        return 'bg-yellow-200 text-yellow-700';
       case 'paused':
-        return 'bg-red-200';
+        return 'bg-red-200 text-red-700';
       default:
         return '';
     }
@@ -125,10 +117,10 @@ const ProdutosTabela = ({onFilterStatus}) => {
   }
 
   const produtosFiltrados = onFilterStatus === 'all'
-  ? products
-  : products.filter((product) => product.status === onFilterStatus);
+    ? products
+    : products.filter((product) => product.status === onFilterStatus);
 
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -168,18 +160,18 @@ const ProdutosTabela = ({onFilterStatus}) => {
 
   return (
     <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col mt-4 mb-10 overflow-x-auto">
-      <ProdutosMenuMoreResponsive 
+      <ProdutosMenuMoreResponsive
         idProduct={idProduct}
         setIsModalGerar={setIsModalGerar}
-        showCheckboxes={showCheckboxes} 
+        showCheckboxes={showCheckboxes}
         setShowCheckboxes={setShowCheckboxes}
-        setShowCheckboxesAll={setShowCheckboxesAll} 
+        setShowCheckboxesAll={setShowCheckboxesAll}
         showCheckboxesAll={showCheckboxesAll}
         currentPage={currentPage}
         totalPages={totalPages}
         rowsPerPage={rowsPerPage}
         handlePageChange={handlePageChange}
-        handleRowsPerPageChange={handleRowsPerPageChange} 
+        handleRowsPerPageChange={handleRowsPerPageChange}
       />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
@@ -209,7 +201,7 @@ const ProdutosTabela = ({onFilterStatus}) => {
                   <td className="px-4 py-4 md:py-5 text-center">{product.price}</td>
                   <td className="px-4 py-4 md:py-5 text-center">{product.estoque}</td>
                   <td className="px-4 py-4 md:py-5 text-center">
-                    <span className={`${getStatusColor(product.status)} rounded-full px-3 py-2`}>{translateStatus(product.status)}</span>
+                    <span className={`${getStatusColor(product.status)} w-24 rounded-full px-3 py-2`}>{translateStatus(product.status)}</span>
                   </td>
                   <td className="pl-4 pr-6 py-2 md:py-5 text-center">
                     <button onClick={(event) => storeSkuAndOpenEditModal(event, product.sku)} className="flex items-center justify-center">

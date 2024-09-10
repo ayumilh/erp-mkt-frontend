@@ -11,7 +11,7 @@ import BtnBackPage from '@/components/Geral/Button/BtnBackPage';
 
 const NfConfigContent = () => {
     const breadcrumbPaths = [
-        { label: 'pedidos', href: '/pedidos' },
+        { label: 'Pedidos', href: '/pedidos' },
         { label: 'Notas fiscais', href: '/pedidos/nf' },
         { label: 'Notas fiscais', href: '/nf' }
     ];

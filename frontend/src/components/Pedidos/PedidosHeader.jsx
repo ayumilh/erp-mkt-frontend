@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { DropdownHeader } from "./Actions/DropdownHeader";
-import { BtnSincronizarHeader } from "./Actions/BtnSincronizarHeader";
+import { BtnSincronizarPedidos } from "./Actions/BtnSincronizarPedidos";
 import SuccessNotification from "../Geral/Notifications/SuccessNotification";
 import ErrorNotification from "../Geral/Notifications/ErrorNotification";
 import BtnRoute from "../Geral/Button/BtnRoute";
 
 export const PedidosHeader = ({ setActiveTable }) => {
     const [statusRequestSync, setStatusRequestSync] = useState('');
+    
     return (
         <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between mb-6">
             <div className="flex gap-4">
@@ -16,7 +17,7 @@ export const PedidosHeader = ({ setActiveTable }) => {
                 </BtnRoute>
             </div>
             <div className="flex pr-3 md:pr-0 justify-end">
-                <BtnSincronizarHeader statusRequestSync={statusRequestSync} setStatusRequestSync={setStatusRequestSync} />
+                <BtnSincronizarPedidos statusRequestSync={statusRequestSync} setStatusRequestSync={setStatusRequestSync} />
             </div>
             {
                 statusRequestSync === true && <SuccessNotification message='Pedidos sincronizados com sucesso!' />
