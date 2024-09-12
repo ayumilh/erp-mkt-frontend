@@ -109,7 +109,7 @@ export default function CriarProdutoUnicoForm() {
       const sku = products.map(product => product.sku);
       const quantities = products.map(product => product.availableQuantities);
 
-      const response = await axios.post("https://erp-mkt.vercel.app/api/stock/createProduct", {
+      await axios.post("https://erp-mkt.vercel.app/api/stock/createProduct", {
         ...product,
         SkuMercado: sku,
         quantidade: quantities

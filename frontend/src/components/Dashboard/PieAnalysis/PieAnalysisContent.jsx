@@ -8,7 +8,7 @@ const PieRankingChart = dynamic(() => import('./PieRankingChart'), { ssr: false 
 
 const PieAnalysisContent = () => {
   return (
-    <div className="bg-primaria-900 shadow-lg border border-slate-100 rounded-2xl max-w-[373px] md:max-w-[688px] lg:max-w-[254px] lg:mx-0 xl:max-w-[282px] min-h-max px-5 py-5 mb-7 mx-2 xs:mx-auto">
+    <div className="bg-primaria-900 shadow-lg border border-slate-100 rounded-2xl w-full min-h-max px-5 py-5 mb-7 mx-2 xs:mx-auto">
       <PieAnalysisHeader />
       <div className="flex flex-col lg:justify-between">
         <ChartFilterWeek />

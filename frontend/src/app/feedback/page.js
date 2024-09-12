@@ -11,11 +11,12 @@ const Feedback = async () => {
     redirect('/login')
   }
   
-	return (
-    <div className="flex max-w-full h-screen mx-auto">
-      <Content/>
+  return (
+    <main className="flex max-w-full h-screen">
+      <Content />
       <FeedbackContent/>
-    </div>
-	);
+    </main>
+  );
 }
-export default(Feedback);
+
+export default Feedback;

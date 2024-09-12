@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 
 import Content from "@/components/Drawer/desktop/SidebarContent";
 import NfContent from "@/components/Pedidos/Nf/NfContent";
+import LogoContent from "@/components/Geral/LogoContent";
 
 const Nf = async () => {
   const session = await getServerSession(nextAuthOptions);
@@ -12,10 +13,13 @@ const Nf = async () => {
   }
 
   return (
-    <div className="flex max-w-full h-screen mx-auto">
-      <Content />
+    <main className="flex max-w-full h-screen">
+			<div className='fixed flex flex-col gap-32'>
+				<LogoContent />
+				<Content />
+			</div>
       <NfContent />
-    </div>
+    </main>
   );
 };
 export default Nf;

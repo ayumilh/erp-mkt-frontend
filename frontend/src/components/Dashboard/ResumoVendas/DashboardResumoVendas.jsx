@@ -38,7 +38,7 @@ export const DashboardResumoVendas = () => {
     const firstElement = data.length > 0 ? data[0] : { conversion_rate: 0, total_visits: 0 };
 
     return (
-        <div className='bg-primaria-900 flex flex-col xl:flex-row gap-7 xl:gap-0 shadow-lg border border-slate-100 rounded-2xl max-w-[373px] md:max-w-[688px] lg:min-w-[876px] xl:min-w-[1270px] lg:mx-0 min-h-max px-4 lg:px-5 xl:px-8 py-5 xl:py-7 mb-7 mx-2 xs:mx-auto'>
+        <div className='w-full bg-primaria-900 flex flex-col xl:flex-row gap-7 xl:gap-0 shadow-lg border border-slate-100 rounded-2xl lg:mx-0 min-h-max px-4 lg:px-5 xl:px-8 py-5 xl:py-7 mb-7 mt-7 mx-2'>
             <div className='w-full xl:w-1/2 h-full flex px-4'>
                 <div className='w-full h-full'>
                     <h3 className='text-sm font-semibold text-neutral-700'>Pedidos de venda</h3>
@@ -50,7 +50,8 @@ export const DashboardResumoVendas = () => {
                                 <span className='w-10 font-medium text-end text-neutral-600'>100</span>
                             </div>
                         </div>
-                        <div className='w-full py-1 flex items-center'>
+
+                        <div className='w-full py-1 flex items-center'>     {/* novos */}
                             <div className='w-3 h-3 bg-green-500 shadow-md rounded-full mr-2'></div>
                             <div className='w-full flex justify-between items-center'>
                                 <span className='w-36 font-medium text-neutral-600'>Novos</span>

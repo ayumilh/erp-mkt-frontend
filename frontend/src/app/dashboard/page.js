@@ -2,20 +2,22 @@ import { redirect } from 'next/navigation';
 import { nextAuthOptions } from '../../app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 
-import Content from '@/components/Drawer/desktop/SidebarContent'
+import SidebarContent from '@/components/Drawer/desktop/SidebarContent';
 import DashboardContent from '@/components/Dashboard/DashboardContent';
 
 const Dashboard = async () => {
-	const session = await getServerSession(nextAuthOptions)
-	if (!session) {
-		redirect('/login')
-	}
+  const session = await getServerSession(nextAuthOptions);
+  if (!session) {
+    redirect('/login');
+    return null;
+  }
 
-	return (
-		<div className="flex max-w-full h-screen mx-auto">
-			<Content />
-			<DashboardContent />
-		</div>
-	);
-}
-export default (Dashboard);
+  return (
+    <main className="flex max-w-full h-screen">
+    	<SidebarContent />
+      <DashboardContent />
+    </main>
+  );
+};
+
+export default Dashboard;

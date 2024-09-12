@@ -7,8 +7,8 @@ import FeedbackTabela from './FeedbackTabela';
 
 const FeedbackContent = () => {
   return (
-    <div className='w-full xl:mx-0 lg:pt-6'>
-      <div className="w-full xl:max-w-[1264px] flex justify-between items-center h-12 pt-4 px-6 xl:px-0 mx-auto mb-8">
+    <div className='max-w-[373px] md:max-w-[740px] lg:max-w-[760px] xl:max-w-screen-xl 2xl:max-w-screen-2xl px-4 lg:px-0 lg:mx-4 lg:mt-4 xl:mx-8 xl:flex xl:flex-col xl:items-center'>
+      <div className="w-full flex justify-between items-center h-12 pt-5">
         <div className='flex items-center'>
           <HamburgerContent/>
           <TitlePage title='Feedback central'/>
@@ -16,9 +16,8 @@ const FeedbackContent = () => {
         <ActionsHeader/>
       </div>
 
-      <div className='mx-auto flex flex-col items-center' style={{height: '1500px'}}>
+      <div className='max-w-[373px] md:max-w-[740px] lg:max-w-[760px] xl:max-w-screen-xl 2xl:max-w-screen-2xl flex flex-col items-center lg:mb-10' style={{height: '1500px'}}>
         <FeedbackHeader />
-
         <FeedbackActionsFilter />
         <FeedbackTabela />
       </div>
@@ -26,4 +25,4 @@ const FeedbackContent = () => {
   )
 }
 
-export default FeedbackContent
+export default FeedbackContent;

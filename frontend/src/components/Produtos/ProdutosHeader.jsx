@@ -32,7 +32,7 @@ const ProdutosHeader = () => {
     }, [dropdownMoreRef]);
 
     return (
-        <div className="w-full lg:w-[876px] xl:w-[1270px] flex flex-col xl:flex-row justify-between mb-6">
+        <div className="w-full flex flex-col xl:flex-row justify-between mb-6">
             <div className="flex gap-3">
                 <BtnRoute route="/produtos" size='full' btn='base' txt='base' activePage={true}>
                     Ativos

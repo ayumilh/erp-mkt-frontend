@@ -41,7 +41,7 @@ const PieRankingChart = () => {
   return (
     <div>
       <div id="chart">
-        <ReactApexChart options={chartData.options} series={chartData.series} type="polarArea" height={350} />
+        <ReactApexChart options={chartData.options} series={chartData.series} type="polarArea" height={320} />
       </div>
       <div id="html-dist"></div>
     </div>

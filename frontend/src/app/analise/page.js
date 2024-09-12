@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth';
 
 import AnaliseContent from '@/components/Analise/AnaliseContent';
 import Content from '@/components/Drawer/desktop/SidebarContent'
+import LogoContent from '@/components/Geral/LogoContent';
 
 const Analise = async () => { 
   const session = await getServerSession(nextAuthOptions)
@@ -12,10 +13,13 @@ const Analise = async () => {
   }
 
   return (
-    <div className="flex max-w-full h-screen mx-auto">
-      <Content/>
+    <main className="flex max-w-full h-screen">
+			<div className='fixed flex flex-col gap-32'>
+				<LogoContent />
+				<Content />
+			</div>
       <AnaliseContent/>
-    </div>
+    </main>
   );
 }
 
