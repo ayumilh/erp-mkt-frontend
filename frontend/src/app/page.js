@@ -11,6 +11,10 @@ import {
     FaUsers,
     FaCogs,
 } from "react-icons/fa";
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import Inventory2Icon from '@mui/icons-material/Inventory2';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
+
 import TelegramIcon from '@mui/icons-material/Telegram';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -20,65 +24,116 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
     useEffect(() => {
-        // Animação de descida na renderização
-        gsap.from(".animate-image", {
-            scrollTrigger: {
-                trigger: ".animate-image",
-                start: "top 80%",
-                end: "top 30%",
-                scrub: true,
-            },
-            duration: 1,
-            opacity: 1,
-            y: -10,
-        });
+        gsap.fromTo(".nav-link", 
+            {
+                opacity: 0,
+                y: -10
+            }, 
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "sine.out",
+                stagger: 0.3
+            }
+        );
 
-        // Animação de subida ao rolar a página
-        gsap.to(".animate-image", {
-            scrollTrigger: {
-                trigger: ".animate-image",
-                start: "top 80%",
-                end: "top 30%",
-                scrub: true,
+        gsap.fromTo(".animate-image",
+            {
+                opacity: 0,
+                y: -50,
             },
-            y: -50,
-            opacity: 0,
-        });
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                stagger: 0.3,
+                scrollTrigger: {
+                    trigger: ".animate-image",
+                    start: "top 250px",
+                    end: "bottom 500px",
+                },
+            }
+        );
+
+        gsap.fromTo(".animate",
+            {
+                opacity: 0,
+                y: -50,
+            }, 
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                stagger: 0.3,
+                scrollTrigger: {
+                    trigger: ".animate",
+                    start: "top 100%",
+                    end: "bottom bottom",
+                },
+            }
+        );
+
+        gsap.fromTo(".animate-title", 
+            {
+                opacity: 0,
+                y: -10
+            }, 
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "sine.out",
+                stagger: 0.3,
+                scrollTrigger: {
+                    trigger: ".animate",
+                    start: "top 350px",
+                    end: "bottom 500px",
+                },
+            }
+        );
+
+        gsap.fromTo(".animate-tool-div", 
+            {
+                opacity: 0,
+                y: -10
+            }, 
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power1.out",
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: ".animate",
+                    start: "top 200px",
+                    end: "bottom 500px",
+                },
+            }
+        );
+
+        gsap.fromTo(".animate-title-plans", 
+            {
+                opacity: 0,
+                y: -10
+            }, 
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "sine.out",
+                stagger: 0.3,
+                scrollTrigger: {
+                    trigger: ".animate-tool-div",
+                    start: "top 350px",
+                    end: "bottom 500px",
+                },
+            }
+        );
     }, []);
 
-
-    useEffect(() => {
-        gsap.to(".animate", {
-            opacity: 0,
-            y: (i, target) => {
-                if (i === 1) return 50; 
-                return i === 0 ? -50 : 50; 
-            },
-            stagger: 0.3,
-            scrollTrigger: {
-                trigger: ".animate",
-                markers: true,
-                start: "top 80%",
-                end: "top 30%",
-                scrub: true,
-            },
-        })
-        // gsap.to(".animate", {
-        //     opacity: 0,
-        //     y: (i, target) => {
-        //         if (i === 1) return 50; // Centro sobe
-        //         return i === 0 ? -50 : 50; // Laterais vêm para o centro
-        //     },
-        //     stagger: 0.3,
-        //     scrollTrigger: {
-        //         trigger: ".animate",
-        //         markers: true,
-        //         start: "top 80%",
-        //         end: "top 30%",
-        //         scrub: true,
-        //     },
-        // })
-    }, []);
     return (
         <div className="flex flex-col">
             <header className="w-full h-20 flex flex-row items-center justify-between px-5 xl:px-20 py-5">
@@ -86,7 +141,7 @@ export default function Home() {
                     <div>
                         <Image src="/img/logo.png" alt="logo" width={120} height={120} />
                     </div>
-                    <nav className="flex space-x-4">
+                    <nav className="nav-link flex space-x-4">
                         <a
                             href="#"
                             className="text-neutral-800 font-medium text-lg transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out"
@@ -146,7 +201,7 @@ export default function Home() {
                 <section className="flex flex-col items-center mt-14 mb-20">
                     <div className="flex flex-row justify-center gap-20 w-full">
                         <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
-                            <FaShippingFast style={{ width: '40px' }} className="text-segundaria-900 mb-2" />
+                            <LocalShippingIcon style={{ width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">
                                 Eficiência Operacional
                             </h2>
@@ -156,7 +211,7 @@ export default function Home() {
                             </p>
                         </div>
                         <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
-                            <FaBoxOpen className="text-4xl text-segundaria-900 mb-2" />
+                            <Inventory2Icon style={{ width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">Redução de Custos</h2>
                             <p className="text-center">
                                 Com a nossa solução, você economiza em armazenamento e
@@ -164,7 +219,7 @@ export default function Home() {
                             </p>
                         </div>
                         <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
-                            <FaChartLine className="text-4xl text-segundaria-900 mb-2" />
+                            <ShowChartIcon style={{width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">Escalabilidade</h2>
                             <p className="text-center">
                                 Nossa plataforma permite que você expanda seu negócio
@@ -180,11 +235,12 @@ export default function Home() {
                 <div className="w-10 mb-3">
                     <hr className="w-full border-segundaria-900 border-[1.5px]" />
                 </div>
-                <h2 className="text-2xl font-semibold mb-8">
+                <h2 className="animate-title text-2xl font-semibold mb-8">
                     Transforme Desafios em Oportunidades com Nosso Sistema de Dropshipping
                 </h2>
+
                 <div className="grid grid-cols-3 gap-4">
-                    <div className="w-64 h-32 flex flex-row items-start p-4">
+                    <div className="animate-tool-div w-64 h-32 flex flex-row items-start p-4">
                         <FaBoxOpen className="text-4xl text-segundaria-900 mr-4" />
                         <div className="flex flex-col">
                             <h3 className="text-lg font-semibold mb-1">Gestão de Estoque</h3>
@@ -193,7 +249,7 @@ export default function Home() {
                             </p>
                         </div>
                     </div>
-                    <div className="w-64 h-32 flex flex-row items-start p-4">
+                    <div className="animate-tool-div w-64 h-32 flex flex-row items-start p-4">
                         <FaChartLine className="text-4xl text-segundaria-900 mr-4" />
                         <div className="flex flex-col">
                             <h3 className="text-lg font-semibold mb-1">Análise de Vendas</h3>
@@ -202,7 +258,7 @@ export default function Home() {
                             </p>
                         </div>
                     </div>
-                    <div className="w-64 h-32 flex flex-row items-start p-4">
+                    <div className="animate-tool-div w-64 h-32 flex flex-row items-start p-4">
                         <FaDollarSign className="text-xl text-segundaria-900 mr-4 mt-3" />
                         <div className="flex flex-col">
                             <h3 className="text-lg font-semibold mb-1">Redução de Custos</h3>
@@ -211,7 +267,7 @@ export default function Home() {
                             </p>
                         </div>
                     </div>
-                    <div className="w-64 h-32 flex flex-row items-start p-4">
+                    <div className="animate-tool-div w-64 h-32 flex flex-row items-start p-4">
                         <FaUsers className="text-5xl text-segundaria-900 mr-4" />
                         <div className="flex flex-col">
                             <h3 className="text-lg font-semibold mb-1">Suporte ao Cliente</h3>
@@ -220,7 +276,7 @@ export default function Home() {
                             </p>
                         </div>
                     </div>
-                    <div className="w-64 h-32 flex flex-row items-start p-4">
+                    <div className="animate-tool-div w-64 h-32 flex flex-row items-start p-4">
                         <FaCogs className="text-4xl text-segundaria-900 mr-4 mt-2" />
                         <div className="flex flex-col">
                             <h3 className="text-lg font-semibold mb-1">
@@ -231,7 +287,7 @@ export default function Home() {
                             </p>
                         </div>
                     </div>
-                    <div className="w-64 h-32 flex flex-row items-start p-4">
+                    <div className="animate-tool-div w-64 h-32 flex flex-row items-start p-4">
                         <FaShippingFast className="text-5xl text-segundaria-900 mr-4" />
                         <div className="flex flex-col">
                             <h3 className="text-lg font-semibold mb-1">Entrega Rápida</h3>
@@ -247,7 +303,7 @@ export default function Home() {
                 <div className="w-10 mb-3">
                     <hr className="w-full border-segundaria-900 border-[1.5px]" />
                 </div>
-                <h2 className="text-2xl font-semibold mb-16">
+                <h2 className="animate-title-plans text-2xl font-semibold mb-16">
                     Desenvolvendo o plano ideal para o estágio atual do seu negócio
                 </h2>
                 <div className="flex gap-4">
@@ -413,14 +469,14 @@ export default function Home() {
                 <div className="w-1/2 flex flex-col items-center">
                     <div className="flex flex-col gap-3">
                         <h4 className="text-white font-medium text-2xl">Ainda ficou com duvida?</h4>
-                        <span className="text-white">Preencha sua dúvida no campo ao lado e nosso consultor entrará em contato.</span> 
+                        <span className="text-white">Preencha sua dúvida no campo ao lado e nosso consultor entrará em contato.</span>
                         <div className="relative w-80">
                             <input type="text" className="w-full h-10 rounded-2xl px-4 py-2 bg-transparent ring-1 ring-gray-100 pr-10" placeholder="" />
                             <ArrowForwardIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white cursor-pointer" />
-                        </div>                        
+                        </div>
                         <div className="flex gap-3">
-                            <TelegramIcon className="text-white cursor-pointer"/>
-                            <InstagramIcon className="text-white cursor-pointer"/>
+                            <TelegramIcon className="text-white cursor-pointer" />
+                            <InstagramIcon className="text-white cursor-pointer" />
                         </div>
                     </div>
                 </div>
@@ -489,7 +545,7 @@ export default function Home() {
                         </nav>
                     </div>
                 </div>
-                
+
             </footer>
         </div>
     );
