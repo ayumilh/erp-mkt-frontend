@@ -16,7 +16,12 @@ const NfConfigHeader = () => {
                 </BtnRoute>
             </div>
 
-            <div className="flex gap-3 justify-end">
+            <div className="flex gap-3 justify-end items-center">
+                <div>
+                    <BtnRoute route="/pedidos/nf/config/criar" size='full' btn='base' txt='base'>
+                        Criar configuração
+                    </BtnRoute>
+                </div>
                 <div>
                     <BtnExportarNF />
                 </div>
