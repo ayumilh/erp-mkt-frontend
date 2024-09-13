@@ -7,55 +7,58 @@ import ErrorNotification from '@/components/Geral/Notifications/ErrorNotificatio
 
 export default function ConfigCriarFormulario() {
   const [cnpj, setCnpj] = useState('');
-  const [nome_da_empresa, setNome_da_empresa] = useState('');
-  const [tipo_de_tributacao, setTipoDeTributacao] = useState('');
-  const [tipo_de_empresa, setTipoDeEmpresa] = useState('');
-  const [ie, setIe] = useState('');
+  const [serial_number, setSerial_number] = useState(1);
+  const [company_name, setCompany_name] = useState('');
+  const [tax_type, setTax_type] = useState('');
+  const [company_type, setCompany_type] = useState('');
+  const [state_registration, setState_registration] = useState('');
   const [email, setEmail] = useState('');
 
-  const [cep, setCep] = useState('');
-  const [endereco, setEndereco] = useState('');
-  const [numero, setNumero] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [cidade, setCidade] = useState('');
-  const [estado, setEstado] = useState('');
+  const [postal_code, setPostal_code] = useState('');
+  const [address, setAddress] = useState('');
+  const [address_number, setAddress_number] = useState('');
+  const [neighborhood, setNeighborhood] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
 
   const [isInvalidoCnpj, setIsInvalidoCnpj] = useState(false);
-  const [isInvalidoNomeDaEmpresa, setIsInvalidoNomeDaEmpresa] = useState(false);
-  const [isInvalidoTipoDeTributacao, setIsInvalidoTipoDeTributacao] = useState(false);
-  const [isInvalidoTipoDeEmpresa, setIsInvalidoTipoDeEmpresa] = useState(false);
-  const [isInvalidoIe, setIsInvalidoIe] = useState(false);
+  const [isInvalidoSerial_number, setIsInvalidoSerial_number] = useState(false);
+  const [isInvalidoCompany_name, setIsInvalidoCompany_name] = useState(false);
+  const [isInvalidoTax_type, setIsInvalidoTax_type] = useState(false);
+  const [isInvalidoCompany_type, setIsInvalidoCompany_type] = useState(false);
+  const [isInvalidoState_registration, setIsInvalidoState_registration] = useState(false);
   const [isInvalidoEmail, setIsInvalidoEmail] = useState(false);
 
-  const [isInvalidoCep, setIsInvalidoCep] = useState(false);
-  const [isInvalidoEndereco, setIsInvalidoEndereco] = useState(false);
-  const [isInvalidoNumero, setIsInvalidoNumero] = useState(false);
-  const [isInvalidoBairro, setIsInvalidoBairro] = useState(false);
-  const [isInvalidoCidade, setIsInvalidoCidade] = useState(false);
-  const [isInvalidoEstado, setIsInvalidoEstado] = useState(false);
+  const [isInvalidoPostal_code, setIsInvalidoPostal_code] = useState(false);
+  const [isInvalidoAddress, setIsInvalidoAddress] = useState(false);
+  const [isInvalidoAddress_number, setIsInvalidoAddress_number] = useState(false);
+  const [isInvalidoNeighborhood, setIsInvalidoNeighborhood] = useState(false);
+  const [isInvalidoCity, setIsInvalidoCity] = useState(false);
+  const [isInvalidoState, setIsInvalidoState] = useState(false);
 
   const [statusRequestSync, setStatusRequestSync] = useState('');
 
   const data = {
     cnpj,
-    nome_da_empresa,
-    tipo_de_tributacao,
-    tipo_de_empresa,
-    ie,
+    serial_number,
+    company_name,
+    tax_type,
+    company_type,
+    state_registration,
     email,
-    cep,
-    endereco,
-    numero,
-    bairro,
-    cidade,
-    estado
+    postal_code,
+    address,
+    address_number,
+    neighborhood,
+    city,
+    state
   };
 
   const handleCriar = async (e) => {
     e.preventDefault()
     console.log(data)
     try {
-      await axios.post("https://erp-mkt.vercel.app/api/config/enterprise", {data})
+      await axios.post("https://erp-mkt.vercel.app/api/config/enterprise", data)
       setStatusRequestSync(true)
     } catch (error) {
       setStatusRequestSync(false)
@@ -93,91 +96,113 @@ export default function ConfigCriarFormulario() {
               />
             </div>
 
+            <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
+              <label htmlFor="serial_number" className="block mb-1 font-medium text-sm text-neutral-700">Número de Série <span className='text-red-600'>*</span></label>
+              <input
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const regex = /^[0-9]*$/;
+                  if (value === '' || regex.test(value)) {
+                    setSerial_number(value);
+                    setIsInvalidoSerial_number(false);
+                  } else {
+                    setIsInvalidoSerial_number(true);
+                  }
+                }}
+                value={serial_number || ""}
+                maxLength={10}
+                name='serial_number'
+                required
+                type="text"
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out`}
+              />
+            </div>
+
             <div className="w-full md:w-3/5 mt-3 mb-4 px-3">
-              <label htmlFor="nome_da_empresa" className="block mb-1 font-medium text-sm text-neutral-700">Nome da Empresa <span className='text-red-600'>*</span></label>
+              <label htmlFor="company_name" className="block mb-1 font-medium text-sm text-neutral-700">Nome da Empresa <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
                   const regex = /^[a-zA-Z0-9À-ÿ\s]*$/;
                   if (value === '' || regex.test(value)) {
-                    setNome_da_empresa(value);
-                    setIsInvalidoNomeDaEmpresa(false);
+                    setCompany_name(value);
+                    setIsInvalidoCompany_name(false);
                   } else {
-                    setIsInvalidoNomeDaEmpresa(true);
+                    setIsInvalidoCompany_name(true);
                   }
                 }}
-                value={nome_da_empresa || ""}
+                value={company_name || ""}
                 maxLength={255}
-                name='nome_da_empresa'
+                name='company_name'
                 required
                 type="text"
-                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoNomeDaEmpresa ? 'outline-red-500 focus:outline-red-500' : ''}`}
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoCompany_name ? 'outline-red-500 focus:outline-red-500' : ''}`}
               />
             </div>
 
             <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
-              <label htmlFor="tipo_de_empresa" className="block mb-1 font-medium text-sm text-neutral-700">Tipo de Empresa <span className='text-red-600'>*</span></label>
+              <label htmlFor="company_type" className="block mb-1 font-medium text-sm text-neutral-700">Tipo de Empresa <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
                   const regex = /^[a-zA-ZÀ-ÿ\s]*$/;
                   if (value === '' || regex.test(value)) {
-                    setTipoDeEmpresa(value);
-                    setIsInvalidoTipoDeEmpresa(false);
+                    setCompany_type(value);
+                    setIsInvalidoCompany_type(false);
                   } else {
-                    setIsInvalidoTipoDeEmpresa(true);
+                    setIsInvalidoCompany_type(true);
                   }
                 }}
-                value={tipo_de_empresa || ""}
+                value={company_type || ""}
                 maxLength={255}
-                name='tipo_de_empresa'
+                name='company_type'
                 required
                 type="text"
-                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoTipoDeEmpresa ? 'outline-red-500 focus:outline-red-500' : ''}`}
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoCompany_type ? 'outline-red-500 focus:outline-red-500' : ''}`}
               />
             </div>
 
             <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
-              <label htmlFor="tipo_de_tributacao" className="block mb-1 font-medium text-sm text-neutral-700">Tipo de Tributação <span className='text-red-600'>*</span></label>
+              <label htmlFor="tax_type" className="block mb-1 font-medium text-sm text-neutral-700">Tipo de Tributação <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
                   const regex = /^[a-zA-ZÀ-ÿ\s]*$/;
                   if (value === '' || regex.test(value)) {
-                    setTipoDeTributacao(value);
-                    setIsInvalidoTipoDeTributacao(false);
+                    setTax_type(value);
+                    setIsInvalidoTax_type(false);
                   } else {
-                    setIsInvalidoTipoDeTributacao(true);
+                    setIsInvalidoTax_type(true);
                   }
                 }}
-                value={tipo_de_tributacao || ""}
+                value={tax_type || ""}
                 maxLength={255}
-                name='tipo_de_tributacao'
+                name='tax_type'
                 required
                 type="text"
-                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoTipoDeTributacao ? 'outline-red-500 focus:outline-red-500' : ''}`}
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoTax_type ? 'outline-red-500 focus:outline-red-500' : ''}`}
               />
             </div>
 
             <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
-              <label htmlFor="ie" className="block mb-1 font-medium text-sm text-neutral-700">IE <span className='text-red-600'>*</span></label>
+              <label htmlFor="state_registration" className="block mb-1 font-medium text-sm text-neutral-700">IE <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
                   const regex = /^[0-9.-]*$/;
                   if (value === '' || regex.test(value)) {
-                    setIe(value);
-                    setIsInvalidoIe(false);
+                    setState_registration(value);
+                    setIsInvalidoState_registration(false);
                   } else {
-                    setIsInvalidoIe(true);
+                    setIsInvalidoState_registration(true);
                   }
                 }}
-                value={ie || ""}
+                value={state_registration || ""}
                 maxLength={18}
-                name='ie'
+                name='state_registration'
                 required
                 type="text"
-                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoIe ? 'outline-red-500 focus:outline-red-500' : ''}`}
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoState_registration ? 'outline-red-500 focus:outline-red-500' : ''}`}
               />
             </div>
 
@@ -214,134 +239,134 @@ export default function ConfigCriarFormulario() {
 
           <div className='w-full flex flex-wrap mt-5'>
             <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
-              <label htmlFor="cep" className="block mb-1 font-medium text-sm text-neutral-700">CEP <span className='text-red-600'>*</span></label>
+              <label htmlFor="postal_code" className="block mb-1 font-medium text-sm text-neutral-700">CEP <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
                   const regex = /^[0-9.-]*$/;
                   if (value === '' || regex.test(value)) {
-                    setCep(value);
-                    setIsInvalidoCep(false);
+                    setPostal_code(value);
+                    setIsInvalidoPostal_code(false);
                   } else {
-                    setIsInvalidoCep(true);
+                    setIsInvalidoPostal_code(true);
                   }
                 }}
-                value={cep || ""}
+                value={postal_code || ""}
                 maxLength={10}
-                name='cep'
+                name='postal_code'
                 required
                 type="text"
-                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoCep ? 'outline-red-500 focus:outline-red-500' : ''}`}
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoPostal_code ? 'outline-red-500 focus:outline-red-500' : ''}`}
               />
             </div>
 
             <div className="w-full md:w-3/5 mt-3 mb-4 px-3">
-              <label htmlFor="endereco" className="block mb-1 font-medium text-sm text-neutral-700">Endereço <span className='text-red-600'>*</span></label>
+              <label htmlFor="address" className="block mb-1 font-medium text-sm text-neutral-700">Endereço <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
                   const regex = /^[a-zA-Z0-9À-ÿ\s]*$/;
                   if (value === '' || regex.test(value)) {
-                    setEndereco(value);
-                    setIsInvalidoEndereco(false);
+                    setAddress(value);
+                    setIsInvalidoAddress(false);
                   } else {
-                    setIsInvalidoEndereco(true);
+                    setIsInvalidoAddress(true);
                   }
                 }}
-                value={endereco || ""}
+                value={address || ""}
                 maxLength={255}
-                name='endereco'
+                name='address'
                 required
                 type="text"
-                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoEndereco ? 'outline-red-500 focus:outline-red-500' : ''}`}
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoAddress ? 'outline-red-500 focus:outline-red-500' : ''}`}
               />
             </div>
 
             <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
-              <label htmlFor="numero" className="block mb-1 font-medium text-sm text-neutral-700">Número <span className='text-red-600'>*</span></label>
+              <label htmlFor="address_number" className="block mb-1 font-medium text-sm text-neutral-700">Número <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
                   const regex = /^[0-9]*$/;
                   if (value === '' || regex.test(value)) {
-                    setNumero(value);
-                    setIsInvalidoNumero(false);
+                    setAddress_number(value);
+                    setIsInvalidoAddress_number(false);
                   } else {
-                    setIsInvalidoNumero(true);
+                    setIsInvalidoAddress_number(true);
                   }
                 }}
-                value={numero || ""}
+                value={address_number || ""}
                 maxLength={10}
-                name='numero'
+                name='address_number'
                 required
                 type="text"
-                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoNumero ? 'outline-red-500 focus:outline-red-500' : ''}`}
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoAddress_number ? 'outline-red-500 focus:outline-red-500' : ''}`}
               />
             </div>
 
             <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
-              <label htmlFor="bairro" className="block mb-1 font-medium text-sm text-neutral-700">Bairro <span className='text-red-600'>*</span></label>
+              <label htmlFor="neighborhood" className="block mb-1 font-medium text-sm text-neutral-700">Bairro <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
                   const regex = /^[a-zA-Z0-9À-ÿ\s]*$/;
                   if (value === '' || regex.test(value)) {
-                    setBairro(value);
-                    setIsInvalidoBairro(false);
+                    setNeighborhood(value);
+                    setIsInvalidoNeighborhood(false);
                   } else {
-                    setIsInvalidoBairro(true);
+                    setIsInvalidoNeighborhood(true);
                   }
                 }}
-                value={bairro || ""}
+                value={neighborhood || ""}
                 maxLength={255}
-                name='bairro'
+                name='neighborhood'
                 required
                 type="text"
-                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoBairro ? 'outline-red-500 focus:outline-red-500' : ''}`}
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoNeighborhood ? 'outline-red-500 focus:outline-red-500' : ''}`}
               />
             </div>
 
             <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
-              <label htmlFor="cidade" className="block mb-1 font-medium text-sm text-neutral-700">Cidade <span className='text-red-600'>*</span></label>
+              <label htmlFor="city" className="block mb-1 font-medium text-sm text-neutral-700">Cidade <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
                   const regex = /^[a-zA-ZÀ-ÿ\s]*$/;
                   if (value === '' || regex.test(value)) {
-                    setCidade(value);
-                    setIsInvalidoCidade(false);
+                    setCity(value);
+                    setIsInvalidoCity(false);
                   } else {
-                    setIsInvalidoCidade(true);
+                    setIsInvalidoCity(true);
                   }
                 }}
-                value={cidade || ""}
+                value={city || ""}
                 maxLength={255}
-                name='cidade'
+                name='city'
                 required
                 type="text"
-                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoCidade ? 'outline-red-500 focus:outline-red-500' : ''}`}
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoCity ? 'outline-red-500 focus:outline-red-500' : ''}`}
               />
             </div>
 
             <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
-              <label htmlFor="estado" className="block mb-1 font-medium text-sm text-neutral-700">Estado <span className='text-red-600'>*</span></label>
+              <label htmlFor="state" className="block mb-1 font-medium text-sm text-neutral-700">Estado <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
                   const regex = /^[a-zA-ZÀ-ÿ\s]*$/;
                   if (value === '' || regex.test(value)) {
-                    setEstado(value);
-                    setIsInvalidoEstado(false);
+                    setState(value);
+                    setIsInvalidoState(false);
                   } else {
-                    setIsInvalidoEstado(true);
+                    setIsInvalidoState(true);
                   }
                 }}
-                value={estado || ""}
+                value={state || ""}
                 maxLength={255}
-                name='estado'
+                name='state'
                 required
                 type="text"
-                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoEstado ? 'outline-red-500 focus:outline-red-500' : ''}`}
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 transition-all duration-500 ease-out ${isInvalidoState ? 'outline-red-500 focus:outline-red-500' : ''}`}
               />
             </div>
           </div>
