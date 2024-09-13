@@ -103,9 +103,9 @@ export default function Home() {
             {
                 opacity: 1,
                 y: 0,
-                duration: 0.8,
+                duration: 0.5,
                 ease: "power1.out",
-                stagger: 0.2,
+                stagger: 0.3,
                 scrollTrigger: {
                     trigger: ".animate",
                     start: "top 200px",
@@ -164,7 +164,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex flex-row items-center gap-4">
-                    <button className="bg-gray-50 hover:bg-gray-100 shadow-sm rounded-full px-3 py-1 transition duration-300 ease-in-out">
+                    <button className="bg-gray-50 hover:bg-gray-100 shadow-sm rounded-full px-3 py-1 transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out">
                         <a
                             href="#teste-gratis"
                             className="text-neutral-700 font-medium text-sm"
@@ -172,7 +172,7 @@ export default function Home() {
                             Teste Grátis
                         </a>
                     </button>
-                    <button className=" bg-segundaria-900 hover:bg-segundaria-800 shadow-md hover:shadow-lg rounded-full px-3 py-1 transition duration-300 ease-in-out">
+                    <button className=" bg-segundaria-900 hover:bg-segundaria-800 shadow-md hover:shadow-lg rounded-full px-3 py-1 transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out">
                         <a href="/login" className="text-white font-medium text-sm">
                             Entrar
                         </a>

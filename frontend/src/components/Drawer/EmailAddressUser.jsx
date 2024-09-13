@@ -1,6 +1,6 @@
 'use client'
-import { AuthContext } from "@/contexts/AuthContext";
 import { useContext, useRef, useEffect } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LinkIcon from '@mui/icons-material/Link';

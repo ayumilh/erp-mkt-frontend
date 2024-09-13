@@ -54,21 +54,20 @@ export const PedidosMenuMoreResponsive = ({ currentPage, totalPages, rowsPerPage
 
             <div className="flex items-center gap-2 ml-auto">
                 <div>
-                    <label htmlFor="rowsPerPage" className="text-sm mr-1">Linhas por página:</label>
                     <select id="rowsPerPage" value={rowsPerPage} onChange={handleRowsPerPageChange} className="py-1 rounded bg-transparent">
-                        <option value={5}>5</option>
-                        <option value={10}>10</option>
-                        <option value={20}>20</option>
-                        <option value={50}>50</option>
-                        <option value={100}>100</option>
+                        <option value={5}>5 páginas</option>
+                        <option value={10}>10 páginas</option>
+                        <option value={20}>20 páginas</option>
+                        <option value={50}>50 páginas</option>
+                        <option value={100}>100 páginas</option>
                     </select>
                 </div>
                 <div>
-                    <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="px-2 py-1 rounded">
+                    <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="px-1 py-1 rounded">
                         <KeyboardArrowLeftIcon className={currentPage === 1 ? "opacity-50" : ""} />
                     </button>
                     <span>{currentPage} de {totalPages}</span>
-                    <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="px-2 py-1 rounded">
+                    <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="px-1 py-1 rounded">
                         <KeyboardArrowRightIcon className={currentPage === totalPages ? "opacity-50" : ""} />
                     </button>
                 </div>
