@@ -65,7 +65,7 @@ export default function HamburgerContent() {
             open={open}
           >
             <HamburgerHeader handleDrawerToggle={handleDrawerToggle} open={open}/>
-            <HamburgerList open={open}  onSetIsModalOpen={handleSetIsModalOpen} onIsModalOpen={isModalOpen}/>
+            <HamburgerList open={open} onSetIsModalOpen={handleSetIsModalOpen} onIsModalOpen={isModalOpen}/>
           </Drawer>
         </ClickAwayListener>
       ) : (

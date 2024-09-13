@@ -13,7 +13,7 @@ const SincronizarAnuncios = async () => {
   
   return (
     <main className="flex max-w-full h-screen">
-			<Content />
+			<SidebarContent />
       <SincronizarContent />
     </main>
   );

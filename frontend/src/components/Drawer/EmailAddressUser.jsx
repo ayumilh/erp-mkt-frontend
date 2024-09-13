@@ -1,22 +1,28 @@
 'use client'
-import { useContext, useRef, useEffect } from "react";
+import { useContext, useRef, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LinkIcon from '@mui/icons-material/Link';
 import { useSession } from "next-auth/react";
+import ModalConectarLojas from "@/components/Config/ModalConectarLojas";
 
 import BtnSignOut from "./BtnSignOut";
 
-export const EmailAddressUser = ({ menuOpen, toggleMenu }) => {
+export const EmailAddressUser = ({ menuOpen, toggleMenuOpen }) => {
     const { userInfo } = useContext(AuthContext);
     const { data: session } = useSession();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    }
 
     const dropdownRef = useRef(null);
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                toggleMenu;
+                toggleMenuOpen;
             }
         }
 
@@ -24,7 +30,7 @@ export const EmailAddressUser = ({ menuOpen, toggleMenu }) => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         }
-    }, [dropdownRef, toggleMenu]);
+    }, [dropdownRef, toggleMenuOpen]);
 
     return (
         <>
@@ -50,7 +56,7 @@ export const EmailAddressUser = ({ menuOpen, toggleMenu }) => {
                                 </span>
                                 <span className='text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>Configuração</span>
                             </button>
-                            <button className='flex items-center group hover:text-segundaria-900 px-2 py-1'>
+                            <button onClick={toggleModal} className='flex items-center group hover:text-segundaria-900 px-2 py-1'>
                                 <span> <LinkIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 transition duration-300 ease-out" /> </span>
                                 <span className='text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>Conectar Conta</span>
                             </button>
@@ -58,6 +64,7 @@ export const EmailAddressUser = ({ menuOpen, toggleMenu }) => {
                         </div>
                     </div>
                 )}
+                {isModalOpen && <ModalConectarLojas onClose={toggleModal} />}
             </div>
         </>
     );

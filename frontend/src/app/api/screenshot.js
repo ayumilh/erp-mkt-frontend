@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 
-export default async (req, res) => {
+const screenshotHandler = async (req, res) => {
     const { url } = req.query;
     console.log('URL:', url);
 
@@ -9,7 +9,7 @@ export default async (req, res) => {
     }
 
     try {
-        const browser = await puppeteer.launch({headless: false});
+        const browser = await puppeteer.launch({ headless: false });
         const page = await browser.newPage();
         await page.goto(url);
 
@@ -19,14 +19,14 @@ export default async (req, res) => {
         //     return { name, price };
         // });
 
+        // Adicione mais lógica aqui, se necessário
+
         await browser.close();
-
-        if (!productInfo.name || !productInfo.price) {
-            return res.status(404).json({ error: 'Product information not found' });
-        }
-
-        res.status(200).json(productInfo);
+        res.status(200).json({ message: 'Screenshot taken successfully' });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error taking screenshot:', error);
+        res.status(500).json({ error: 'Failed to take screenshot' });
     }
 };
+
+export default screenshotHandler;

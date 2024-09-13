@@ -27,7 +27,7 @@ const ActionsHeader = () => {
                         marginLeft: "12px",
                     }}
                 >
-                    <EmailAddressUser menuOpen={menuOpen} toggleMenu={toggleMenu} />
+                    <EmailAddressUser menuOpen={menuOpen} toggleMenuOpen={toggleMenu} />
                 </button>
             </div>
         </div>

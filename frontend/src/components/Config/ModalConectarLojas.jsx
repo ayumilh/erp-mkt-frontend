@@ -21,7 +21,9 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
   };
 
   useEffect(() => {
-    drawerClose();
+    if (drawerClose) {
+      drawerClose();
+    }
   }, [drawerClose]);
 
   const handleSubmit = (e) => {
