@@ -14,7 +14,7 @@ import {
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
-
+import BtnActive from '@/components/Geral/Button/BtnActive';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -24,7 +24,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
     useEffect(() => {
-        gsap.fromTo(".nav-link", 
+        gsap.fromTo(".animate-link", 
             {
                 opacity: 0,
                 y: -10
@@ -33,7 +33,7 @@ export default function Home() {
                 opacity: 1,
                 y: 0,
                 duration: 0.8,
-                ease: "sine.out",
+                ease: "power1",
                 stagger: 0.3
             }
         );
@@ -51,8 +51,8 @@ export default function Home() {
                 stagger: 0.3,
                 scrollTrigger: {
                     trigger: ".animate-image",
-                    start: "top 250px",
-                    end: "bottom 500px",
+                    start: "top 540px",
+                    end: "bottom 800px",
                 },
             }
         );
@@ -141,7 +141,7 @@ export default function Home() {
                     <div>
                         <Image src="/img/logo.png" alt="logo" width={120} height={120} />
                     </div>
-                    <nav className="nav-link flex space-x-4">
+                    <nav className="animate-link flex space-x-4">
                         <a
                             href="#"
                             className="text-neutral-800 font-medium text-lg transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out"
@@ -180,14 +180,23 @@ export default function Home() {
                 </div>
             </header>
 
-            <main className="flex flex-col mt-20">
-                <h1 className="text-2xl font-semibold text-center mb-7">
-                    ERP: Inovação e Maestria na Gestão que
-                    <span className="block text-segundaria-900 font-semibold text-2xl py-1">
-                        Simplifica e Acelera o seu Negócio
-                    </span>
-                </h1>
-                <div className="flex flex-row justify-center">
+            <main className="flex flex-col mt-36">
+                <div className='flex flex-col justify-center items-center'>
+                    <h1 className="animate-link text-4xl font-semibold text-center mb-8">
+                        ERP: Inovação e Maestria na Gestão que
+                        <span className="block text-segundaria-900 font-semibold text-5xl py-2">
+                            Simplifica e Acelera o seu Negócio
+                        </span>
+                    </h1>
+                    <p className='w-2/6 animate-link font-semibold text-lg text-neutral-700 text-center flex justify-center flex-wrap'>
+                        Uma visão holística do seu negócio, facilitando a tomada de decisões estratégicas e aumentando a eficiência operacional.
+                    </p>
+                    <div className='mt-8 animate-link'>
+                        <BtnActive title="Começar teste grátis" page="/login" size="btnHeader" padding="lg" fontSize="lg"/>
+                    </div>
+                </div>
+
+                <div className="flex flex-row justify-center mt-20">
                     <div className='animate-image'>
                         <Image
                             src="/img/landingPage/print-dashboard.png"

@@ -5,7 +5,7 @@ import { tv } from 'tailwind-variants'
 import CircularProgress from '@mui/material/CircularProgress';
 
 const button = tv({
-  base:'w-full bg-gradient-to-r from-gradient-start to-gradient-end hover:bg-gradient-to-b hover:from-gradient-start-hover hover:to-gradient-end-hover transition-all duration-700 ease-out rounded-xl text-white hover:text-slate-50 px-3 py-2',
+  base:'w-full bg-gradient-to-r from-gradient-start to-gradient-end hover:bg-gradient-to-b hover:from-gradient-start-hover hover:to-gradient-end-hover transition-all duration-700 ease-out rounded-xl text-white hover:text-slate-50 px-3 py-2 cursor-pointer',
   variants: {
     padding: {
       xs: 'px-2 py-1',
@@ -35,10 +35,16 @@ const span = tv({
         md: 'm-3',
         lg: 'm-4',
     },
+    fontSize: {
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-md',
+      lg: 'text-lg',
+    },
   }
 })
 
-export default function BtnActive({ title, page, size, onClick, padding, margin, width }){
+export default function BtnActive({ title, page, size, onClick, padding, margin, width, fontSize }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   
@@ -62,7 +68,7 @@ export default function BtnActive({ title, page, size, onClick, padding, margin,
       {isLoading ? (
         <><CircularProgress color="inherit" className="text-white mr-1" size={12} /> <span className={`${span({width: width, margin: margin})}`} style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}...</span></>
       ) : (
-        <span className={`${span({width: width, margin: margin})}`} style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}</span>
+        <span className={`${span({width: width, margin: margin, fontSize: fontSize})}`} style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}</span>
       )}
     </button>
   )
