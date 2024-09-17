@@ -1,6 +1,7 @@
 'use client'
 import  { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import BtnGroupChart from '@/components/Geral/Button/BtnGroupChart';
 
 const ChartLineLucros = () => {
   const [chartData, setChartData] = useState({
@@ -45,13 +46,7 @@ const ChartLineLucros = () => {
         <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={350} />
       </div>
       <div id="html-dist"></div>
-      <div className='flex justify-around items-center'>
-        <button className='bg-segundaria-900 hover:bg-gray-200 rounded-lg p-2 font-medium text-gray-200 hover:text-neutral-800 transition duration-300 ease-out'>1D</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>1M</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>3M</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>6M</button>
-        <button className='hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 transition duration-300 ease-out'>12M</button>
-      </div>
+			<BtnGroupChart />
     </div>
   );
 };

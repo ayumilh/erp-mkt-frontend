@@ -15,6 +15,8 @@ import { ProdutosMenuMoreResponsive } from "./Actions/ProdutosMenuMoreResponsive
 const ProdutosTabela = ({ onFilterStatus }) => {
   const [products, setProducts] = useState([]);
   const [isModalTr, setIsModalTr] = useState(false);
+  const [isModalTrMouseLeave, setIsModalTrMouseLeave] = useState(false);
+  const [selectedSkuMouseLeave, setSelectedSkuMouseLeave] = useState(null);
   const [selectedSku, setSelectedSku] = useState(null);
   const [idProduct, setIdProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -76,9 +78,23 @@ const ProdutosTabela = ({ onFilterStatus }) => {
     setSelectedSku(sku);
     setIsModalTr(true);
   };
+
+  const openProductDetailsModalMouseLeave = (sku) => {
+    setSelectedSkuMouseLeave(sku);
+    setIsModalTrMouseLeave(true);
+  };
+
   const closeModal = () => {
     setIsModalTr(false);
   };
+
+
+  const closeModalMouseLeave = () => {
+    setIsModalTrMouseLeave(false);
+    setSelectedSkuMouseLeave(null);
+  };
+
+
 
   const storeSkuAndOpenEditModal = (event, sku) => {
     event.stopPropagation();
@@ -175,7 +191,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
       />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
-          <thead className='sticky top-0 z-5 bg-primaria-900'>
+          <thead className='sticky top-0 bg-primaria-900'>
             <tr>
               {(showCheckboxes || showCheckboxesAll) && <td className="pl-4"></td>}
               <th className="pr-4 pl-6 py-2 md:py-5 text-sm font-semibold text-center">SKU</th>
@@ -191,24 +207,33 @@ const ProdutosTabela = ({ onFilterStatus }) => {
               <SkeletonLoader numColumns={6} />
             ) : paginatedProducts.length > 0 ? (
               paginatedProducts.slice(0, rowsPerPage).map((product, index) => (
-                <tr key={index} onClick={() => openProductDetailsModal(product.sku)} className='border-b border-gray-200 hover:bg-gray-100 cursor-pointer'>
-                  {showCheckboxes && <td className="pl-4"><input type="checkbox" onClick={(event) => handleCheckboxChange(event, product.sku)} /></td>}
-                  {showCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => { }} /></td>}
-                  <td className="w-[200px] xl:w-auto flex items-center gap-3 pl-6 pr-4 py-4 md:py-5">
-                    {product.pictureUrls && <Image src={product.pictureUrls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10" />} {product.sku}
-                  </td>
-                  <td className="break-words md:break-normal px-4 py-4 md:py-5"><p className="font-medium">{product.title}</p></td>
-                  <td className="px-4 py-4 md:py-5 text-center">{product.price}</td>
-                  <td className="px-4 py-4 md:py-5 text-center">{product.estoque}</td>
-                  <td className="px-4 py-4 md:py-5 text-center">
-                    <span className={`${getStatusColor(product.status)} w-24 rounded-full px-3 py-2`}>{translateStatus(product.status)}</span>
-                  </td>
-                  <td className="pl-4 pr-6 py-2 md:py-5 text-center">
-                    <button onClick={(event) => storeSkuAndOpenEditModal(event, product.sku)} className="flex items-center justify-center">
-                      <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5" />
-                    </button>
-                  </td>
-                </tr>
+                <tr 
+                  key={index} 
+                  onClick={() => openProductDetailsModal(product.sku)} 
+                  className='border-b border-gray-200 hover:bg-gray-100 cursor-pointer'
+                  onMouseEnter={() => openProductDetailsModalMouseLeave(product.sku)}
+                  onMouseLeave={closeModalMouseLeave}
+                  >
+                    {showCheckboxes && <td className="pl-4"><input type="checkbox" onClick={(event) => handleCheckboxChange(event, product.sku)} /></td>}
+                    {showCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => { }} /></td>}
+                    <td className="w-[200px] xl:w-auto flex items-center gap-3 pl-6 pr-4 py-4 md:py-5">
+                      {product.pictureUrls && <Image src={product.pictureUrls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10" />} {product.sku}
+                    </td>
+                    <td className="break-words md:break-normal px-4 py-4 md:py-5"><p className="font-medium">{product.title}</p></td>
+                    <td className="px-4 py-4 md:py-5 text-center">{product.price}</td>
+                    <td className="px-4 py-4 md:py-5 text-center">{product.estoque}</td>
+                    <td className="px-4 py-4 md:py-5 text-center">
+                      <span className={`${getStatusColor(product.status)} w-24 rounded-full px-3 py-2`}>{translateStatus(product.status)}</span>
+                    </td>
+                    <td className="pl-4 pr-6 py-2 md:py-5 text-center">
+                      <button onClick={(event) => storeSkuAndOpenEditModal(event, product.sku)} className="flex items-center justify-center">
+                        <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5" />
+                      </button>
+                    </td>
+                    {isModalTrMouseLeave && selectedSkuMouseLeave === product.sku && (
+                      <ModalDetailsProdutos onClose={closeModalMouseLeave} selectedSku={selectedSkuMouseLeave} />
+                    )}
+                  </tr>
               ))
             ) : (
               <tr>
@@ -224,7 +249,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
         </table>
       </div>
       {isModalGerar && <ModalGerarProdutos onClose={() => setIsModalGerar(false)} idProduct={idProduct} />}
-      {isModalTr && <ModalDetailsProdutos onClose={closeModal} selectedSku={selectedSku} />}
+      {/* {isModalTr && <ModalDetailsProdutos onClose={closeModal} selectedSku={selectedSku} />} */}
     </div>
   );
 };

@@ -32,7 +32,7 @@ export default function Home() {
             {
                 opacity: 1,
                 y: 0,
-                duration: 0.8,
+                duration: 0.6,
                 ease: "power1",
                 stagger: 0.3
             }
@@ -46,7 +46,7 @@ export default function Home() {
             {
                 opacity: 1,
                 y: 0,
-                duration: 1,
+                duration: 0.6,
                 ease: "power2.out",
                 stagger: 0.3,
                 scrollTrigger: {
@@ -192,7 +192,7 @@ export default function Home() {
                         Uma visão holística do seu negócio, facilitando a tomada de decisões estratégicas e aumentando a eficiência operacional.
                     </p>
                     <div className='mt-8 animate-link'>
-                        <BtnActive title="Começar teste grátis" page="/login" size="btnHeader" padding="lg" fontSize="lg"/>
+                        <BtnActive title="Começar teste grátis" page="/cadastro" size="btnHeader" padding="lg" fontSize="lg"/>
                     </div>
                 </div>
 

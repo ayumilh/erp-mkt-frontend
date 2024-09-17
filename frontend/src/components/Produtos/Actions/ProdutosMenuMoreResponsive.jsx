@@ -56,7 +56,7 @@ export const ProdutosMenuMoreResponsive = ({
     }, [menuMoreVertRef]);
 
     return (
-        <div className="border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 sticky top-0 left-0 z-40 bg-primaria-900" ref={menuMoreVertRef}>
+        <div className="border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 sticky top-0 left-0 bg-primaria-900" ref={menuMoreVertRef}>
             {isMobile ? (<>
                 <button onClick={handleOpenMenu}>
                     <MoreVertIcon
