@@ -125,11 +125,10 @@ export default function Home() {
                     <Navbar />
                 </div>
 
-                <div className="hidden md:flex flex-row items-center gap-4">
+                <div className="hidden md:flex w-full flex-row justify-end items-center gap-4">
                     <button className="bg-gray-50 hover:bg-gray-100 shadow-sm rounded-full px-3 py-1 transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out">
                         <a
-                            href="#teste-gratis"
-                            className="text-neutral-700 font-medium text-sm"
+                            className="w-full text-neutral-700 font-medium text-sm"
                         >
                             Teste Grátis
                         </a>
