@@ -18,6 +18,7 @@ import BtnActive from '@/components/Geral/Button/BtnActive';
 
 import PlansAndPrices from '@/components/LandingPage/PlansAndPrices';
 import Footer from '@/components/LandingPage/Footer';
+import Navbar from '@/components/LandingPage/Navbar';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,33 +118,14 @@ export default function Home() {
     return (
         <div className="flex flex-col">
             <header className="w-full h-20 flex flex-row items-center justify-between px-5 xl:px-20 py-5">
-                <div className="flex flex-row items-center">
+                <div className="w-full flex justify-between md:justify-normal flex-row items-center">
                     <div>
                         <Image src="/img/logo.png" alt="logo" width={120} height={120} />
                     </div>
-                    <nav className="animate-link flex space-x-4">
-                        <a
-                            href="#"
-                            className="text-neutral-800 font-medium text-lg transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out"
-                        >
-                            Integrações
-                        </a>
-                        <a
-                            href="#sobre"
-                            className="text-neutral-800 font-medium text-lg transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out"
-                        >
-                            Sobre
-                        </a>
-                        <a
-                            href="#planos"
-                            className="text-neutral-800 font-medium text-lg transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out"
-                        >
-                            Planos
-                        </a>
-                    </nav>
+                    <Navbar />
                 </div>
 
-                <div className="flex flex-row items-center gap-4">
+                <div className="hidden md:flex flex-row items-center gap-4">
                     <button className="bg-gray-50 hover:bg-gray-100 shadow-sm rounded-full px-3 py-1 transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out">
                         <a
                             href="#teste-gratis"
@@ -168,11 +150,11 @@ export default function Home() {
                             Simplifica e Acelera o seu Negócio
                         </span>
                     </h1>
-                    <p className='w-2/6 animate-link font-semibold text-lg text-neutral-700 text-center flex justify-center flex-wrap'>
+                    <p className='w-full md:w-2/6 animate-link font-semibold text-lg text-neutral-700 text-center flex justify-center flex-wrap'>
                         Uma visão holística do seu negócio, facilitando a tomada de decisões estratégicas e aumentando a eficiência operacional.
                     </p>
                     <div className='mt-8 animate-link'>
-                        <BtnActive title="Começar teste grátis" page="/cadastro" size="btnHeader" padding="lg" fontSize="lg"/>
+                        <BtnActive title="Começar teste grátis" page="/cadastro" width="full" size="btnHeader" padding="lg" fontSize="lg"/>
                     </div>
                 </div>
 
@@ -188,8 +170,8 @@ export default function Home() {
                 </div>
 
                 <section className="flex flex-col items-center mt-14 mb-20">
-                    <div className="flex flex-row justify-center gap-20 w-full">
-                        <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
+                    <div className="flex flex-col md:flex-row justify-center gap-7 md:gap-20 w-full">
+                        <div className="w-full md:w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
                             <LocalShippingIcon style={{ width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">
                                 Eficiência Operacional
@@ -199,7 +181,7 @@ export default function Home() {
                                 garantindo uma operação eficiente e sem complicações.
                             </p>
                         </div>
-                        <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
+                        <div className="w-full md:w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
                             <Inventory2Icon style={{ width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">Redução de Custos</h2>
                             <p className="text-center">
@@ -207,7 +189,7 @@ export default function Home() {
                                 logística, permitindo investir mais em crescimento e inovação.
                             </p>
                         </div>
-                        <div className="w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
+                        <div className="w-full md:w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
                             <ShowChartIcon style={{width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">Escalabilidade</h2>
                             <p className="text-center">
@@ -220,15 +202,15 @@ export default function Home() {
                 </section>
             </main>
 
-            <section className="h-[460px] w-full bg-gray-100 flex flex-col justify-center items-center my-20">
+            <section className="h-[460px] w-full bg-gray-100 flex flex-col justify-center items-center mb-80 md:mb-0 my-20">
                 <div className="w-10 mb-3">
                     <hr className="w-full border-segundaria-900 border-[1.5px]" />
                 </div>
-                <h2 className="animate-title text-2xl font-semibold mb-8">
+                <h2 className="animate-title text-center text-xl md:text-2xl font-semibold mb-8">
                     Transforme Desafios em Oportunidades com Nosso Sistema de Dropshipping
                 </h2>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="animate-tool-div w-64 h-32 flex flex-row items-start p-4">
                         <FaBoxOpen className="text-4xl text-segundaria-900 mr-4" />
                         <div className="flex flex-col">

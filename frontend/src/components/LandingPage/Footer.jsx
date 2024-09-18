@@ -4,8 +4,8 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const Footer = () => {
     return (
-        <footer className="w-full h-[440px] bg-segundaria-900 flex justify-between items-center gap-20 px-16 py-20 rounded-t-2xl">
-            <div className="w-1/2 flex flex-col items-center">
+        <footer className="w-full h-auto md:h-[440px] bg-segundaria-900 flex flex-col md:flex-row justify-between items-center gap-20 px-16 py-20 rounded-t-2xl">
+            <div className="w-full md:w-1/2 flex flex-col items-center">
                 <div className="flex flex-col gap-3">
                     <h4 className="text-white font-medium text-2xl">Ainda ficou com duvida?</h4>
                     <span className="text-white">Preencha sua dúvida no campo ao lado e nosso consultor entrará em contato.</span>
@@ -20,7 +20,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="w-1/2 flex flex-wrap items-center">
+            <div className="w-full md:w-1/2 flex flex-wrap items-center">
                 <div className="w-1/2 flex flex-col mt-8">
                     <h2 className="text-white opacity-50 uppercase text-sm">Suporte</h2>
                     <nav className="flex flex-col gap-2 mt-4">
@@ -84,7 +84,6 @@ const Footer = () => {
                     </nav>
                 </div>
             </div>
-
         </footer>
     )
 }
