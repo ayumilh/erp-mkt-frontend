@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import AspectRatioIcon from '@mui/icons-material/AspectRatio';
+import ModalTableExpanded from '@/components/Produtos/Actions/ModalTableExpanded';
 import { DropdownSelectOrAll } from '@/components/Geral/Button/DropdownSelectOrAll';
 import BtnActions from '@/components/Geral/Button/BtnActions';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
@@ -55,6 +57,16 @@ export const ProdutosMenuMoreResponsive = ({
         };
     }, [menuMoreVertRef]);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+      setIsModalOpen(true);
+    };
+  
+    const handleCloseModal = () => {
+      setIsModalOpen(false);
+    };
+
     return (
         <div className="border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 sticky top-0 left-0 bg-primaria-900" ref={menuMoreVertRef}>
             {isMobile ? (<>
@@ -90,6 +102,10 @@ export const ProdutosMenuMoreResponsive = ({
                 />
                 <BtnBorder title="Filtrar" />
                 <BtnBorder title="Editar em massa" />
+                <button onClick={handleOpenModal} className='cursor-pointer transform active:-translate-y-1 active:scale-105 transition duration-700 ease-in-out'>
+                    <AspectRatioIcon className='text-neutral-700 hover:text-black' />
+                </button> 
+                <ModalTableExpanded isOpen={isModalOpen} handleClose={handleCloseModal} />
             </>)}
 
             {(showCheckboxes || showCheckboxesAll) &&
