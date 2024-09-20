@@ -5,6 +5,7 @@ import ChartLojasContent from './LineVendasPorLojas/ChartLojasContent';
 import PieAnalysisContent from './PieAnalysis/PieAnalysisContent';
 import TitlePage from '../Geral/TitlePage';
 import { DashboardResumoVendas } from './ResumoVendas/DashboardResumoVendas';
+import QuickActions from './QuickActions';
 
 
 const DashboardContent = () => {
@@ -19,8 +20,9 @@ const DashboardContent = () => {
       </div>
 
       <div className='max-w-[373px] md:max-w-[740px] lg:max-w-[760px] xl:max-w-screen-xl 2xl:max-w-screen-2xl flex flex-col items-center lg:mb-10'>
-        <div className='lg:flex w-full lg:gap-7'>
+        <div className='lg:flex w-full'>
           <DashboardResumoVendas />
+          <QuickActions />
         </div>
         <div className='lg:flex w-full flex-col xl:flex-row lg:gap-7'>
           <div className='w-full xl:w-2/3'>
