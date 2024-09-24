@@ -141,11 +141,11 @@ export default function Home() {
                 </div>
             </header>
 
-            <main className="flex flex-col mt-36">
+            <main className="flex flex-col mt-28 md:mt-36">
                 <div className='flex flex-col justify-center items-center'>
-                    <h1 className="animate-link text-4xl font-semibold text-center mb-8">
+                    <h1 className="animate-link text-2xl md:text-4xl font-semibold text-center mb-8">
                         ERP: Inovação e Maestria na Gestão que
-                        <span className="block text-segundaria-900 font-semibold text-5xl py-2">
+                        <span className="block text-segundaria-900 font-semibold text-4xl py-2">
                             Simplifica e Acelera o seu Negócio
                         </span>
                     </h1>
@@ -168,9 +168,9 @@ export default function Home() {
                     </div>
                 </div>
 
-                <section className="flex flex-col items-center mt-14 mb-20">
-                    <div className="flex flex-col md:flex-row justify-center gap-7 md:gap-20 w-full">
-                        <div className="w-full md:w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
+                <section className="flex flex-col items-center mt-14 h-[840px] lg:h-auto">
+                    <div className="flex flex-col lg:flex-row justify-center gap-7 lg:gap-20 w-full">
+                        <div className="w-full lg:w-72 h-52 flex flex-col items-center p-4 rounded-lg lg:shadow-sm animate">
                             <LocalShippingIcon style={{ width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">
                                 Eficiência Operacional
@@ -180,7 +180,7 @@ export default function Home() {
                                 garantindo uma operação eficiente e sem complicações.
                             </p>
                         </div>
-                        <div className="w-full md:w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
+                        <div className="w-full lg:w-72 h-52 flex flex-col items-center p-4 rounded-lg lg:shadow-sm animate">
                             <Inventory2Icon style={{ width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">Redução de Custos</h2>
                             <p className="text-center">
@@ -188,7 +188,7 @@ export default function Home() {
                                 logística, permitindo investir mais em crescimento e inovação.
                             </p>
                         </div>
-                        <div className="w-full md:w-72 h-52 flex flex-col items-center p-4 rounded-lg shadow-sm animate">
+                        <div className="w-full lg:w-72 h-52 flex flex-col items-center p-4 rounded-lg lg:shadow-sm animate">
                             <ShowChartIcon style={{width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">Escalabilidade</h2>
                             <p className="text-center">
@@ -201,7 +201,7 @@ export default function Home() {
                 </section>
             </main>
 
-            <section className="h-[460px] w-full bg-gray-100 flex flex-col justify-center items-center mb-80 md:mb-0 my-20">
+            <section className="h-full w-full bg-gray-100 flex flex-col justify-center items-center mb-20 md:mb-0 my-20 py-10">
                 <div className="w-10 mb-3">
                     <hr className="w-full border-segundaria-900 border-[1.5px]" />
                 </div>

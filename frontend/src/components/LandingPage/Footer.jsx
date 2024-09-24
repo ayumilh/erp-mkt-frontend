@@ -21,7 +21,7 @@ const Footer = () => {
             </div>
 
             <div className="w-full md:w-1/2 flex flex-wrap items-center">
-                <div className="w-1/2 flex flex-col mt-8">
+                <div className="w-full md:w-1/2 flex flex-col mt-8">
                     <h2 className="text-white opacity-50 uppercase text-sm">Suporte</h2>
                     <nav className="flex flex-col gap-2 mt-4">
                         <a href="#" className="w-52 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
@@ -35,6 +35,23 @@ const Footer = () => {
                         </a>
                         <a href="#" className="w-52 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
                             Política de privacidade
+                        </a>
+                    </nav>
+                </div>
+                <div className="w-full md:w-1/2 flex flex-col mt-8">
+                    <h2 className="text-white font-light opacity-50 uppercase">Integrações</h2>
+                    <nav className="flex flex-col gap-2 mt-4">
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
+                            Shopee
+                        </a>
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
+                            Mercado Livre
+                        </a>
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
+                            Amazon
+                        </a>
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
+                            Magalu
                         </a>
                     </nav>
                 </div>
@@ -66,23 +83,7 @@ const Footer = () => {
                         </a>
                     </nav>
                 </div>
-                <div className="w-1/2 flex flex-col mt-8">
-                    <h2 className="text-white font-light opacity-50 uppercase">Integrações</h2>
-                    <nav className="flex flex-col gap-2 mt-4">
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
-                            Shopee
-                        </a>
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
-                            Mercado Livre
-                        </a>
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
-                            Amazon
-                        </a>
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
-                            Magalu
-                        </a>
-                    </nav>
-                </div>
+
             </div>
         </footer>
     )

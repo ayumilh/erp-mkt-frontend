@@ -40,7 +40,7 @@ const Navbar = () => {
             <header className="w-full h-20 flex flex-row items-center justify-between px-5 xl:px-20 py-5">
                 <div className="flex flex-row items-center" ref={menuNavbarRef}>
                     {isMobile ? (
-                        <button onClick={toggleMenu} className="text-neutral-800 font-medium text-lg">
+                        <button onClick={toggleMenu} className="text-neutral-800 font-medium text-2xl">
                             ☰
                         </button>
                     ) : (
