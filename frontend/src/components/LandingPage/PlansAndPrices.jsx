@@ -85,7 +85,7 @@ const PlansAndPrices = () => {
             <div className="w-10 mb-3">
                 <hr className="w-full border-segundaria-900 border-[1.5px]" />
             </div>
-            <h2 className="animate-title-plans text-xl text-center md:text-2xl font-semibold mb-16">
+            <h2 className="animate-title-plans text-xl text-center md:text-2xl font-semibold mb-16 px-20">
                 Desenvolvendo o plano ideal para o estágio atual do seu negócio
             </h2>
             <div className="flex flex-col lg:flex-row gap-20 lg:gap-4">

@@ -149,7 +149,7 @@ export default function Home() {
                             Simplifica e Acelera o seu Negócio
                         </span>
                     </h1>
-                    <p className='w-full md:w-2/6 animate-link font-semibold text-lg text-neutral-700 text-center flex justify-center flex-wrap'>
+                    <p className='w-full xl:w-2/6 animate-link font-semibold text-lg text-neutral-700 text-center flex justify-center flex-wrap px-20'>
                         Uma visão holística do seu negócio, facilitando a tomada de decisões estratégicas e aumentando a eficiência operacional.
                     </p>
                     <div className='mt-8 animate-link'>
@@ -169,13 +169,13 @@ export default function Home() {
                 </div>
 
                 <section className="flex flex-col items-center mt-14 h-[840px] lg:h-auto">
-                    <div className="flex flex-col lg:flex-row justify-center gap-7 lg:gap-20 w-full">
+                    <div className="flex flex-col lg:flex-row justify-center gap-7 xl:gap-20 w-full">
                         <div className="w-full lg:w-72 h-52 flex flex-col items-center p-4 rounded-lg lg:shadow-sm animate">
                             <LocalShippingIcon style={{ width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">
                                 Eficiência Operacional
                             </h2>
-                            <p className="text-center">
+                            <p className="text-center text-neutral-700 font-medium px-20 lg:px-0">
                                 Nosso sistema de dropshipping e ERP integra todos os processos,
                                 garantindo uma operação eficiente e sem complicações.
                             </p>
@@ -183,7 +183,7 @@ export default function Home() {
                         <div className="w-full lg:w-72 h-52 flex flex-col items-center p-4 rounded-lg lg:shadow-sm animate">
                             <Inventory2Icon style={{ width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">Redução de Custos</h2>
-                            <p className="text-center">
+                            <p className="text-center text-neutral-700 font-medium px-20 lg:px-0">
                                 Com a nossa solução, você economiza em armazenamento e
                                 logística, permitindo investir mais em crescimento e inovação.
                             </p>
@@ -191,7 +191,7 @@ export default function Home() {
                         <div className="w-full lg:w-72 h-52 flex flex-col items-center p-4 rounded-lg lg:shadow-sm animate">
                             <ShowChartIcon style={{width: '40px' }} className="text-segundaria-900 mb-2" />
                             <h2 className="text-xl font-semibold mb-2">Escalabilidade</h2>
-                            <p className="text-center">
+                            <p className="text-center text-neutral-700 font-medium px-20 lg:px-0">
                                 Nossa plataforma permite que você expanda seu negócio
                                 facilmente, adicionando novos produtos e alcançando mais
                                 clientes sem complicações.
@@ -205,7 +205,7 @@ export default function Home() {
                 <div className="w-10 mb-3">
                     <hr className="w-full border-segundaria-900 border-[1.5px]" />
                 </div>
-                <h2 className="animate-title text-center text-xl md:text-2xl font-semibold mb-8">
+                <h2 className="animate-title text-center text-xl md:text-2xl font-semibold mb-8 px-20">
                     Transforme Desafios em Oportunidades com Nosso Sistema de Dropshipping
                 </h2>
 

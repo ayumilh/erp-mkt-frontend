@@ -4,7 +4,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const Footer = () => {
     return (
-        <footer className="w-full h-auto md:h-[440px] bg-segundaria-900 flex flex-col md:flex-row justify-between items-center gap-20 px-16 py-20 rounded-t-2xl">
+        <footer className="w-full h-auto md:h-[440px] bg-segundaria-900 flex flex-col md:flex-row justify-between items-center gap-20 md:gap-7 px-16 py-20 rounded-t-2xl">
             <div className="w-full md:w-1/2 flex flex-col items-center">
                 <div className="flex flex-col gap-3">
                     <h4 className="text-white font-medium text-2xl">Ainda ficou com duvida?</h4>
@@ -41,16 +41,16 @@ const Footer = () => {
                 <div className="w-full md:w-1/2 flex flex-col mt-8">
                     <h2 className="text-white font-light opacity-50 uppercase">Integrações</h2>
                     <nav className="flex flex-col gap-2 mt-4">
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start">
                             Shopee
                         </a>
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start">
                             Mercado Livre
                         </a>
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start">
                             Amazon
                         </a>
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white">
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start">
                             Magalu
                         </a>
                     </nav>
