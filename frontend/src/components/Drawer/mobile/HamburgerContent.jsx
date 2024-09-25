@@ -46,7 +46,7 @@ export default function HamburgerContent() {
         edge="start"
         sx={{ mr: 2, ...(open && { display: "none" }) }}
       >
-        <MenuRoundedIcon sx={{fontSize: '28px'}}/>
+        <MenuRoundedIcon sx={{fontSize: '28px'}} className="dark:text-gray-200"/>
       </IconButton>
 
       {open ? (

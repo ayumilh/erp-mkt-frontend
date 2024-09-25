@@ -8,11 +8,11 @@ function ToggleTheme() {
 
     return (
         <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className='flex items-center group px-2 py-1'>
-            {theme === 'dark' ?
+            {theme === 'light' ?
                 <LightModeIcon sx={{ width: '16px' }} className='text-neutral-700 group-hover:text-segundaria-900' /> : <DarkModeIcon sx={{ width: '16px' }} className='text-neutral-700 hover:text-black' />
             }
             <span className='text-sm group-hover:text-segundaria-900 font-medium transition duration-300 ease-out ml-2'>
-                {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+                {theme === 'dark' ? 'Modo escuro' : 'Modo claro'}
             </span>
         </button>
     );

@@ -27,11 +27,11 @@ export const ChartTypeSelector = ({ onChartTypeSelected }) => {
     <div className='flex'>
       <div className='w-full relative inline-block text-left'>
         <button onClick={toggleMenuChart}>
-          {onChartTypeSelected === 'bar' ? <BarChartIcon fontSize='medium' className="text-neutral-700 hover:text-neutral-800 active:text-black mr-2 cursor-pointer" /> : <CandlestickChartIcon fontSize='medium' className="text-neutral-700 hover:text-neutral-800 active:text-black mr-2 cursor-pointer" />}
+          {onChartTypeSelected === 'bar' ? <BarChartIcon fontSize='medium' className="text-neutral-700 dark:text-gray-300 hover:text-neutral-800 dark:hover:text-gray-200 active:text-black mr-2 cursor-pointer" /> : <CandlestickChartIcon fontSize='medium' className="text-neutral-700 dark:text-gray-400 hover:text-neutral-800 dark:hover:text-gray-200 active:text-black mr-2 cursor-pointer" />}
         </button>
 
         {isOpen && (
-          <div className="top-10 absolute z-10 rounded-md bg-white" ref={menuChartRef}>
+          <div className="top-10 right-0 absolute z-10 rounded-md bg-white" ref={menuChartRef}>
             <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
               <button onClick={() => handleChartTypeChange('bar')} className="flex items-center w-full px-2 active:bg-gray-200 hover:bg-primaria-900 transition duration-300 ease-in-out" role="menuitem">
                 <span> <BarChartIcon fontSize='small' className="text-neutral-700 hover:text-black cursor-pointer transition duration-300 ease-in-out" /> </span>

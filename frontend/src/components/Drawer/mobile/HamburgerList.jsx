@@ -16,6 +16,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import LinkIcon from '@mui/icons-material/Link';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import { EmailAddressUser } from "../EmailAddressUser";
+import ToggleTheme from "@/components/Geral/Button/ToggleTheme";
 
 const iconsNav = [
     <DashboardIcon key="dashboard" sx={{ fontSize: '26px' }} />,
@@ -108,6 +109,9 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
                     </button>
                 </li>
             ))}
+            <li className="flex flex-col mb-1">
+                <ToggleTheme />
+            </li>
             <li className="flex flex-col mb-1">
                 <button
                     onClick={() => signOut()}

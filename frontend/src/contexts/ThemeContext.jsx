@@ -23,7 +23,7 @@ export const ThemeProvider = ({ initialTheme, children }) => {
         if (typeof window !== 'undefined') {
           return getInitialTheme();
         }
-        return 'light'; // Valor padrão para o lado do servidor
+        return 'light';
       });
 
     const rawSetTheme = (rawTheme) => {
