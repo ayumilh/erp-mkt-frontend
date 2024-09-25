@@ -200,8 +200,8 @@ const PedidosRow = ({ setOrder, pedido }) => {
         <tr>
           <td className="text-center" colSpan="8">
             <div className="w-full py-12">
-              <span><ProductionQuantityLimitsIcon style={{ width: 46, height: 46 }} /></span>
-              <p className="mt-8 mx-10">Uh-oh! Parece que não há pedidos, estamos ansiosos para apoiar suas próximas vendas!</p>
+              <span><ProductionQuantityLimitsIcon className='dark:text-gray-200' style={{ width: 46, height: 46 }} /></span>
+              <p className="mt-8 mx-10 dark:text-gray-200">Uh-oh! Parece que não há pedidos, estamos ansiosos para apoiar suas próximas vendas!</p>
             </div>
           </td>
         </tr>

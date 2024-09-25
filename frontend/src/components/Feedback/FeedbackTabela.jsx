@@ -76,28 +76,28 @@ const FeedbackTabela = () => {
     };
 
     return (
-        <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col mt-4 mb-10 overflow-x-auto">
+        <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col mt-4 mb-10 overflow-x-auto">
             {products.map((product, index) => (
-                <div key={index} className='border-b border-gray-200 p-7'>
+                <div key={index} className='border-b border-gray-200 dark:border-neutral-800 p-7'>
                     <div className="flex justify-between items-center">
                         <div className='flex items-center gap-2'>
                             {product.pictureurls && <Image src={product.pictureurls} alt='Imagem do produto' width={42} height={42} className="w-10 h-10" />}
                             <div className="break-words md:break-normal">
-                                <p className="w-80 font-medium text-sm text-neutral-800 overflow-hidden whitespace-nowrap text-ellipsis">{product.product_sku}</p>
+                                <p className="w-80 font-medium text-sm text-neutral-800 dark:text-gray-300 overflow-hidden whitespace-nowrap text-ellipsis">{product.product_sku}</p>
                                 <span className='text-blue-500 cursor-pointer'>{product.questions_id}</span>
                             </div>
                         </div>
 
                         <div className='flex items-center gap-1'>
-                            <span className="text-center">R$ {product.price}</span>
-                            <span>X {product.available_quantity} Un</span>
-                            <span><ContentPasteSearchIcon fontSize='small' className='cursor-pointer text-neutral-600' /></span>
-                            <span>|</span>
-                            <span className='font-medium text-sm text-neutral-800'>Mercado Envios Agências</span>
+                            <span className="text-center dark:text-gray-200">R$ {product.price}</span>
+                            <span className='dark:text-gray-200'>X {product.available_quantity} Un</span>
+                            <span><ContentPasteSearchIcon fontSize='small' className='cursor-pointer text-neutral-600 dark:text-gray-200' /></span>
+                            <span className='dark:text-gray-200'>|</span>
+                            <span className='font-medium text-sm text-neutral-800 dark:text-gray-200'>Mercado Envios Agências</span>
                         </div>
 
                         <div>
-                            <span className='font-medium text-sm text-neutral-800'>Lene Modas</span>
+                            <span className='font-medium text-sm text-neutral-800 dark:text-gray-200'>Lene Modas</span>
                         </div>
                     </div>
 
@@ -105,21 +105,21 @@ const FeedbackTabela = () => {
                         <div className='w-1/2'>
                             <div className='flex flex-col items-center gap-1'>
                                 <div className='flex gap-5'>
-                                    <span className='font-semibold'>{product.text}</span>
-                                    <span className='text-neutral-700'>{new Date(product.answer_date_created).toLocaleString()}</span>
+                                    <span className='font-semibold dark:text-gray-200'>{product.text}</span>
+                                    <span className='text-neutral-700 dark:text-gray-400'>{new Date(product.answer_date_created).toLocaleString()}</span>
                                 </div>
                                 <div className='flex gap-1'>
-                                    <span className='text-neutral-600 font-medium'>Comprador: </span>
-                                    <span className='text-neutral-700 font-medium'>{product.nickname}</span>
+                                    <span className='text-neutral-600 dark:text-gray-400 font-medium'>Comprador: </span>
+                                    <span className='text-neutral-700 dark:text-gray-200 font-medium'>{product.nickname}</span>
                                     <span>|</span>
-                                    <span className='text-neutral-600 font-medium'>Registração: </span>
-                                    <span className='text-neutral-700 font-medium'>{new Date(product.registration_date).toLocaleString()}</span>
+                                    <span className='text-neutral-600 dark:text-gray-400 font-medium'>Registração: </span>
+                                    <span className='text-neutral-700 dark:text-gray-200 font-medium'>{new Date(product.registration_date).toLocaleString()}</span>
                                 </div>
                             </div>
 
                             {product.answer_text && (
-                                <div className='bg-gray-200 rounded-lg px-4 py-2 mt-5 mx-5'>
-                                    <span className='text-neutral-700'>{product.answer_text}</span>
+                                <div className='bg-gray-200 dark:bg-neutral-800 rounded-lg px-4 py-2 mt-5 mx-5'>
+                                    <span className='text-neutral-700 dark:text-gray-300'>{product.answer_text}</span>
                                     <div>
                                         <span className='text-blue-500 cursor-pointer'>{new Date(product.answer_date_created).toLocaleString()}</span>
                                         <span> | </span>
@@ -129,7 +129,7 @@ const FeedbackTabela = () => {
                             )}
                         </div>
                         <div className='w-1/2 flex justify-end'>
-                            <QuestionAnswerIcon onClick={() => handleOpen(index)} className='text-neutral-600 hover:text-neutral-900 transition duration-300 ease-out cursor-pointer' />
+                            <QuestionAnswerIcon onClick={() => handleOpen(index)} className='text-neutral-600 dark:text-gray-400 hover:text-neutral-900 transition duration-300 ease-out cursor-pointer' />
                         </div>
                         {/* <div className='z-10'>
               {open && <ModalResponderPerguntas onClose={handleClose} />}
@@ -140,7 +140,7 @@ const FeedbackTabela = () => {
                         <div>
                             <div className='relative mt-7'>
                                 <textarea
-                                    className='w-full p-2 font-medium text-neutral-700 ring-2 ring-neutral-300 outline-blue-500 rounded focus:rounded-lg transition-all duration-300 ease-out'
+                                    className='w-full dark:bg-neutral-800 p-2 font-medium text-neutral-700 ring-2 ring-neutral-300 dark:ring-black outline-blue-500 rounded focus:rounded-lg transition-all duration-300 ease-out'
                                     rows='4'
                                     placeholder='Digite sua resposta aqui...'
                                     value={texts[index] || ""}

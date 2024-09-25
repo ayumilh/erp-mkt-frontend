@@ -55,7 +55,7 @@ export const DropdownHeader = ({ setActiveTable }) => {
                     aria-expanded="true"
                     onClick={handleClickLista}
                 >
-                    <span className="hover:text-black font-medium text-sm md:text-base">{currentText}</span>
+                    <span className="hover:text-black dark:text-gray-300 font-medium text-sm md:text-base">{currentText}</span>
                     <KeyboardArrowDownIcon sx={{
                         width: '20px',
                         transform: isOpenLista ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -65,45 +65,45 @@ export const DropdownHeader = ({ setActiveTable }) => {
             </div>
 
             {isOpenLista && (
-                <div className="origin-top-center absolute mt-2 rounded-md shadow-lg bg-primaria-900 ring-1 ring-black ring-opacity-5">
+                <div className="origin-top-center absolute mt-2 rounded-md shadow-lg bg-primaria-900 dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5">
                     <div className="w-28 my-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         <button
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm"
                             role="menuitem"
                             onClick={() => handleClickEmitir('Pedidos')}
                         >
-                            <span>Pedidos</span>
-                            <span className='font-medium text-neutral-600 opacity-90'>{orderCounts.Pedidos || 0}</span>
+                            <span className='dark:text-gray-200'>Pedidos</span>
+                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Pedidos || 0}</span>
                         </button>
                         <button
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm"
                             role="menuitem"
                             onClick={() => handleClickEmitir('Emitir')}
                         >
-                            <span>Emitir</span>
-                            <span className='font-medium text-neutral-600 opacity-90'>{orderCounts.Emitir || 0}</span>
+                            <span className='dark:text-gray-200'>Emitir</span>
+                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Emitir || 0}</span>
                         </button>
                         <button className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm" role="menuitem">
-                            <span>Enviar</span>
-                            <span className='font-medium text-neutral-600 opacity-90'>{orderCounts.Enviar || 0}</span>
+                            <span className='dark:text-gray-200'>Enviar</span>
+                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Enviar || 0}</span>
                         </button>
                         <button
                             onClick={() => handleClickEmitir('Imprimir')}
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm" role="menuitem">
-                            <span>Imprimir</span>
-                            <span className='font-medium text-neutral-600 opacity-90'>{orderCounts.Imprimir || 0}</span>
+                            <span className='dark:text-gray-200'>Imprimir</span>
+                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Imprimir || 0}</span>
                         </button>
                         <button
                             onClick={() => handleClickEmitir('Retirada')}
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm" role="menuitem">
-                            <span>Retirada</span>
-                            <span className='font-medium text-neutral-600 opacity-90'>{orderCounts.Retirada || 0}</span>
+                            <span className='dark:text-gray-200'>Retirada</span>
+                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Retirada || 0}</span>
                         </button>
                         <button
                             onClick={() => handleClickEmitir('Enviados')}
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm" role="menuitem">
-                            <span>Enviados</span>
-                            <span className='font-medium text-neutral-600 opacity-90'>{orderCounts.Enviados || 0}</span>
+                            <span className='dark:text-gray-200'>Enviados</span>
+                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Enviados || 0}</span>
                         </button>
                     </div>
                 </div>

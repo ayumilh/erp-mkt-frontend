@@ -176,7 +176,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
 
 
   return (
-    <div className="bg-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">
+    <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">
       <ProdutosMenuMoreResponsive
         idProduct={idProduct}
         setIsModalGerar={setIsModalGerar}
@@ -192,14 +192,14 @@ const ProdutosTabela = ({ onFilterStatus }) => {
       />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
-          <thead className='sticky top-0 bg-primaria-900'>
+          <thead className='sticky top-0 bg-primaria-900 dark:bg-dark-primaria-900'>
             <tr>
               {(showCheckboxes || showCheckboxesAll) && <td className="pl-4"></td>}
-              <th className="pr-4 pl-6 py-2 md:py-5 text-sm font-semibold text-center">SKU</th>
-              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Nome</th>
-              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Preço</th>
-              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Estoque</th>
-              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center">Status</th>
+              <th className="pr-4 pl-6 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">SKU</th>
+              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Nome</th>
+              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Preço</th>
+              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Estoque</th>
+              <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Status</th>
               <th className="pl-4 pr-6 py-2 md:py-5"></th>
             </tr>
           </thead>
@@ -243,8 +243,8 @@ const ProdutosTabela = ({ onFilterStatus }) => {
               <tr>
                 <td className="text-center" colSpan="6">
                   <div className="w-52 ml-10 md:ml-0 md:px-10 md:w-full py-12">
-                    <span><ProductionQuantityLimitsIcon style={{ width: 46, height: 46 }} /></span>
-                    <p className="mt-8">Ops! Parece que as prateleiras estão vazias. Volte em breve para mais produtos!</p>
+                    <span><ProductionQuantityLimitsIcon className="dark:text-gray-200" style={{ width: 46, height: 46 }} /></span>
+                    <p className="mt-8 dark:text-gray-200">Ops! Parece que as prateleiras estão vazias. Volte em breve para mais produtos!</p>
                   </div>
                 </td>
               </tr>

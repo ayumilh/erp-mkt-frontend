@@ -45,7 +45,7 @@ export const BtnCriarEstoque = () => {
             </div>
 
             {isOpen && (
-                <div className="origin-top-right right-0 absolute z-10 mt-2 rounded-md items-start shadow-lg bg-primaria-900 ring-1 ring-black ring-opacity-5">
+                <div className="origin-top-right right-0 absolute z-10 mt-2 rounded-md items-start shadow-lg bg-primaria-900 dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5">
                     <div className="w-auto flex flex-col my-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         <BtnRoute route="/estoque/criarUnico" size='dropdown' btn='dropdown' txt='dropdown'>
                             Unico

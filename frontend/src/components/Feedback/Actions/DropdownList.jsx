@@ -36,7 +36,7 @@ export const DropdownList = () => {
                     aria-expanded="true"
                     onClick={handleClickLista}
                 >
-                    <span className="hover:text-black font-medium text-sm md:text-base">Avaliações</span>
+                    <span className="hover:text-black dark:text-gray-200 font-medium text-sm md:text-base">Avaliações</span>
                     <KeyboardArrowDownIcon sx={{
                         width: '20px',
                         transform: isOpenLista ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -46,7 +46,7 @@ export const DropdownList = () => {
             </div>
 
             {isOpenLista && (
-                <div className="absolute z-10 top-10 mt-2 rounded-md shadow-lg bg-primaria-900 ring-1 ring-black ring-opacity-5">
+                <div className="absolute z-10 top-10 mt-2 rounded-md shadow-lg bg-primaria-900 dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5">
                     <div className="w-[178px] my-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         <BtnRoute route="/feedback" size='full' btn='dropdown' txt='dropdown'>
                             Lista de Avaliações

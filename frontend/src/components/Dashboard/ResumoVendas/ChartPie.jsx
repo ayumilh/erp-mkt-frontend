@@ -1,8 +1,11 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 
 const ChartPie = () => {
+  const { theme } = useContext(ThemeContext);
+
   const [chartData, setChartData] = useState({
     series: [100, 25, 50, 25],
     options: {
@@ -20,9 +23,28 @@ const ChartPie = () => {
       labels: ['Total de Vendas', 'Novos', 'Em Andamento', 'Cancelados'],
       dataLabels: {
         enabled: false
+      },
+      legend: {
+        labels: {
+          colors: theme === 'dark' ? ['#ffffff'] : ['#000000']
+        }
       }
     }
   });
+
+  useEffect(() => {
+    setChartData((prevData) => ({
+      ...prevData,
+      options: {
+        ...prevData.options,
+        legend: {
+          labels: {
+            colors: theme === 'dark' ? ['#ffffff'] : ['#000000']
+          }
+        }
+      }
+    }));
+  }, [theme]);
 
   return (
     <div>
