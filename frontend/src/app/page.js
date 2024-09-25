@@ -51,7 +51,7 @@ export default function Home() {
                 stagger: 0.3,
                 scrollTrigger: {
                     trigger: ".animate-image",
-                    start: "top 540px",
+                    start: "top 550px",
                     end: "bottom 800px",
                 },
             }
@@ -149,7 +149,7 @@ export default function Home() {
                             Simplifica e Acelera o seu Negócio
                         </span>
                     </h1>
-                    <p className='w-full xl:w-2/6 animate-link font-semibold text-lg text-neutral-700 text-center flex justify-center flex-wrap px-20'>
+                    <p className='w-full xl:w-2/6 animate-link font-semibold text-lg text-neutral-700 text-center flex justify-center flex-wrap md:px-20'>
                         Uma visão holística do seu negócio, facilitando a tomada de decisões estratégicas e aumentando a eficiência operacional.
                     </p>
                     <div className='mt-8 animate-link'>

@@ -41,16 +41,16 @@ const Footer = () => {
                 <div className="w-full md:w-1/2 flex flex-col mt-8">
                     <h2 className="text-white font-light opacity-50 uppercase">Integrações</h2>
                     <nav className="flex flex-col gap-2 mt-4">
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start">
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start    ">
                             Shopee
                         </a>
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start">
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start    ">
                             Mercado Livre
                         </a>
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start">
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start    ">
                             Amazon
                         </a>
-                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start">
+                        <a href="#" className="w-32 text-white opacity-80 hover:opacity-100 transition duration-300 ease-in-out hover:border-b hover:border-white text-end lg:text-start    ">
                             Magalu
                         </a>
                     </nav>

@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import NextAuthSessionProvider from "@/providers/sessionProvider";
 import { AuthContextProvider } from "@/contexts/AuthContext";
 import ModalVerificationLogout from "@/components/Config/ModalVerificationLogout";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const poppins = Poppins({
     weight: ["400", "500", "600", "700"],
@@ -26,8 +27,10 @@ export default function RootLayout({ children }) {
             <body className={`${poppins.className} max-w-full h-screen`}>
                 <NextAuthSessionProvider>
                     <AuthContextProvider>
-                        {children}
-                        <ModalVerificationLogout />
+                        <ThemeProvider>
+                            {children}
+                            <ModalVerificationLogout />
+                        </ThemeProvider>
                     </AuthContextProvider>
                 </NextAuthSessionProvider>
             </body>
