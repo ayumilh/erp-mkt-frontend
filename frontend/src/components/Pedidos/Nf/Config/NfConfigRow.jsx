@@ -57,11 +57,11 @@ export default function NfConfigRow () {
       ) : data.length > 0 ? (<>
             {data.map((item, index) => (
               <tr key={index}>
-                <td className="pl-4 lg:pl-6 pr-3 py-3 md:py-4 text-sm text-start">{item.contaNotaFiscal}</td>
-                <td className="pr-3 py-3 md:py-4 text-sm text-center">{item.cnpj}</td>
-                <td className="pr-3 py-3 md:py-4 text-sm text-center">{item.lojaAssociada}</td>
-                <td className="pr-3 py-3 md:py-4 text-sm text-center">{item.certificadoA1}</td>
-                <td className="pr-3 py-3 md:py-4 text-sm text-center">{item.classeImpostoPadrao}</td>
+                <td className="pl-4 lg:pl-6 pr-3 py-3 md:py-4 text-sm text-start dark:text-gray-200">{item.contaNotaFiscal}</td>
+                <td className="pr-3 py-3 md:py-4 text-sm text-center dark:text-gray-200">{item.cnpj}</td>
+                <td className="pr-3 py-3 md:py-4 text-sm text-center dark:text-gray-200">{item.lojaAssociada}</td>
+                <td className="pr-3 py-3 md:py-4 text-sm text-center dark:text-gray-200">{item.certificadoA1}</td>
+                <td className="pr-3 py-3 md:py-4 text-sm text-center dark:text-gray-200">{item.classeImpostoPadrao}</td>
                 <td className='pr-4 lg:pr-6 pl-3 py-3 md:py-4 text-center'>
                   <span className={`${item.status === 'Ativo' ? 'bg-green-200' : 'bg-red-200'} text-sm px-3 py-2 rounded-full font-medium text-neutral-700`}>{item.status}</span>
                 </td>

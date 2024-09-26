@@ -11,9 +11,9 @@ import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
 
 const Criar = async () => { 
   const session = await getServerSession(nextAuthOptions)
-  if(!session) {
-    redirect('/login')
-  }
+  // if(!session) {
+  //   redirect('/login')
+  // }
 
   return (
     <div className="flex max-w-full h-screen">

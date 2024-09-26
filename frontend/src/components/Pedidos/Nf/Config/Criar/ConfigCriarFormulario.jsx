@@ -67,15 +67,15 @@ export default function ConfigCriarFormulario() {
 
   return (
     <div className='w-full xl:max-w-screen-lg flex flex-col mt-10'>
-      <h3 className='text-neutral-800 text-xl font-medium '>Criar configuração</h3>
+      <h3 className='text-neutral-800 dark:text-gray-200 text-xl font-medium '>Criar configuração</h3>
 
       <div className='flex flex-wrap transition-transform duration-500 ease-in'>
         <div className='w-full flex flex-col mt-5 mb-7'>
-          <h3 className='text-neutral-800 text-lg font-semibold'>Informações gerais</h3>
+          <h3 className='text-neutral-800 dark:text-gray-200 text-lg font-semibold'>Informações gerais</h3>
           <div className='w-full flex flex-wrap mt-5'>
 
             <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
-              <label htmlFor="cnpj" className="block mb-1 font-medium text-sm text-neutral-700">CNPJ <span className='text-red-600'>*</span></label>
+              <label htmlFor="cnpj" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">CNPJ <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -97,7 +97,7 @@ export default function ConfigCriarFormulario() {
             </div>
 
             <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
-              <label htmlFor="serial_number" className="block mb-1 font-medium text-sm text-neutral-700">Número de Série <span className='text-red-600'>*</span></label>
+              <label htmlFor="serial_number" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">Número de Série <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -119,7 +119,7 @@ export default function ConfigCriarFormulario() {
             </div>
 
             <div className="w-full md:w-3/5 mt-3 mb-4 px-3">
-              <label htmlFor="company_name" className="block mb-1 font-medium text-sm text-neutral-700">Nome da Empresa <span className='text-red-600'>*</span></label>
+              <label htmlFor="company_name" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">Nome da Empresa <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -141,7 +141,7 @@ export default function ConfigCriarFormulario() {
             </div>
 
             <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
-              <label htmlFor="company_type" className="block mb-1 font-medium text-sm text-neutral-700">Tipo de Empresa <span className='text-red-600'>*</span></label>
+              <label htmlFor="company_type" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">Tipo de Empresa <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -163,7 +163,7 @@ export default function ConfigCriarFormulario() {
             </div>
 
             <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
-              <label htmlFor="tax_type" className="block mb-1 font-medium text-sm text-neutral-700">Tipo de Tributação <span className='text-red-600'>*</span></label>
+              <label htmlFor="tax_type" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">Tipo de Tributação <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -185,7 +185,7 @@ export default function ConfigCriarFormulario() {
             </div>
 
             <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
-              <label htmlFor="state_registration" className="block mb-1 font-medium text-sm text-neutral-700">IE <span className='text-red-600'>*</span></label>
+              <label htmlFor="state_registration" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">IE <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -207,7 +207,7 @@ export default function ConfigCriarFormulario() {
             </div>
 
             <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
-              <label htmlFor="email" className="block mb-1 font-medium text-sm text-neutral-700">Email <span className='text-red-600'>*</span></label>
+              <label htmlFor="email" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">Email <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -235,11 +235,11 @@ export default function ConfigCriarFormulario() {
         </div>
 
         <div className='w-full flex flex-col mt-5'>
-          <h3 className='text-neutral-800 text-lg font-semibold'>Endereço</h3>
+          <h3 className='text-neutral-800 dark:text-gray-200 text-lg font-semibold'>Endereço</h3>
 
           <div className='w-full flex flex-wrap mt-5'>
             <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
-              <label htmlFor="postal_code" className="block mb-1 font-medium text-sm text-neutral-700">CEP <span className='text-red-600'>*</span></label>
+              <label htmlFor="postal_code" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">CEP <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -261,7 +261,7 @@ export default function ConfigCriarFormulario() {
             </div>
 
             <div className="w-full md:w-3/5 mt-3 mb-4 px-3">
-              <label htmlFor="address" className="block mb-1 font-medium text-sm text-neutral-700">Endereço <span className='text-red-600'>*</span></label>
+              <label htmlFor="address" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">Endereço <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -283,7 +283,7 @@ export default function ConfigCriarFormulario() {
             </div>
 
             <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
-              <label htmlFor="address_number" className="block mb-1 font-medium text-sm text-neutral-700">Número <span className='text-red-600'>*</span></label>
+              <label htmlFor="address_number" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">Número <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -305,7 +305,7 @@ export default function ConfigCriarFormulario() {
             </div>
 
             <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
-              <label htmlFor="neighborhood" className="block mb-1 font-medium text-sm text-neutral-700">Bairro <span className='text-red-600'>*</span></label>
+              <label htmlFor="neighborhood" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">Bairro <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -327,7 +327,7 @@ export default function ConfigCriarFormulario() {
             </div>
 
             <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
-              <label htmlFor="city" className="block mb-1 font-medium text-sm text-neutral-700">Cidade <span className='text-red-600'>*</span></label>
+              <label htmlFor="city" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">Cidade <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;
@@ -349,7 +349,7 @@ export default function ConfigCriarFormulario() {
             </div>
 
             <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
-              <label htmlFor="state" className="block mb-1 font-medium text-sm text-neutral-700">Estado <span className='text-red-600'>*</span></label>
+              <label htmlFor="state" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-300">Estado <span className='text-red-600'>*</span></label>
               <input
                 onChange={(e) => {
                   const value = e.target.value;

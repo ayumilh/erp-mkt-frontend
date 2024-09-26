@@ -7,9 +7,9 @@ import PedidosContent from '@/components/Pedidos/PedidosContent';
 
 const Pedidos = async () => {
   const session = await getServerSession(nextAuthOptions)
-  if(!session) {
-    redirect('/login')
-  }
+  // if(!session) {
+  //   redirect('/login')
+  // }
 
 	return (
     <main className="flex max-w-full h-screen">
