@@ -68,7 +68,7 @@ export const BtnExportarNF = () => {
             </div>
 
             {isOpen && (
-                <div className={`absolute top-11 right-0 z-20 w-auto rounded-md shadow-lg bg-primaria-900 ring-1 ring-black ring-opacity-5 transition-transform duration-300 ease-out transform ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
+                <div className={`absolute top-11 right-0 z-20 w-auto rounded-md shadow-lg bg-primaria-900 dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5 transition-transform duration-300 ease-out transform ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
                     <div
                         className="w-60 flex flex-col my-2"
                         role="menu"
@@ -77,12 +77,12 @@ export const BtnExportarNF = () => {
                     >
                         <button
                             onClick={handleOpenModal}
-                            className="w-full flex px-4 py-2 text-sm text-neutral-700 font-medium hover:bg-gray-200 active:bg-gray-100 rounded-sm transition duration-300 ease-in-out"
+                            className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-gray-300 font-medium hover:bg-gray-200 active:bg-gray-100 dark:active:bg-neutral-800 dark:hover:bg-neutral-800 rounded-sm transition duration-300 ease-in-out"
                             role="menuitem"
                         >
                             {loadingRouting
                                 ? <CircularProgress color="inherit" className="text-segundaria-900" size={12} />
-                                : <a>Exportar por Data</a>
+                                : <a className="dark:text-gray-300 dark:hover:text-white">Exportar por Data</a>
                             }
                         </button>
 

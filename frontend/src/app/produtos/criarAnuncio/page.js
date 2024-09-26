@@ -7,9 +7,9 @@ import CriarAnuncioContent from "@/components/Produtos/Criar/CriarAnuncioContent
 
 const CriarAnuncio = async () => {
   const session = await getServerSession(nextAuthOptions)
-  if(!session) {
-    redirect('/login')
-  }
+  // if(!session) {
+  //   redirect('/login')
+  // }
   
   return (
     <div className="px-4 h-screen flex flex-col items-center">

@@ -30,7 +30,7 @@ const SincronizarActionsFilter = () => {
 
           <div className="flex items-center rounded w-1/2 relative">
             <input title='Pesquise por SKU' style={{borderTopRightRadius: '0.5rem', borderBottomRightRadius: '0.5rem', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}} className="w-full h-[38px] overflow-hidden text-sm font-normal px-2 md:pr-8 py-2" type="text"/>
-            <SearchIcon className='h-5 w-5 absolute right-[6px] top-1/2 transform -translate-y-1/2 opacity-80'/>
+            <SearchIcon className='h-5 w-5 absolute right-[6px] top-1/2 transform -translate-y-1/2 opacity-80 dark:text-gray-300'/>
           </div>
         </div>
 

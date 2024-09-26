@@ -34,7 +34,7 @@ const FilterPlataformasHeader = () => {
             <div>
                 <button
                     type="button"
-                    className="inline-flex justify-center w-40 rounded-md border border-gray-200 hover:border-[#c7c7c7] focus:outline-none focus:ring-1 focus:ring-[#d4d4d4] px-2 py-2"
+                    className="inline-flex justify-center w-40 rounded-md border dark:bg-dark-primaria-900 border-gray-200 hover:border-[#c7c7c7] focus:outline-none focus:ring-1 focus:ring-[#d4d4d4] px-2 py-2"
                     id="options-menu"
                     aria-haspopup="true"
                     aria-expanded="true"
@@ -50,7 +50,7 @@ const FilterPlataformasHeader = () => {
             </div>
 
             {isOpen && (
-                <div className="origin-top-center absolute z-10 mt-2 max-w-max rounded-md bg-white">
+                <div className="origin-top-center absolute z-10 mt-2 max-w-max rounded-md bg-white dark:bg-dark-primaria-900">
                     <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         <button
                             className="flex w-full text-neutral-800 text-sm font-medium px-3 py-2 hover:text-black hover:bg-gray-100"

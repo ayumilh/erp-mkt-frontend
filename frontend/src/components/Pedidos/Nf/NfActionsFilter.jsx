@@ -32,7 +32,7 @@ const NfActionsFilter = () => {
             <SearchIcon className='h-5 w-5 absolute right-10 top-1/2 transform -translate-y-1/2 dark:text-gray-300'/>
             <input title='Pesquise por' className="w-full dark:bg-neutral-800 dark:text-gray-200 rounded overflow-hidden text-xs md:text-sm font-normal pr-8 pl-3 py-2" type="text" placeholder="" style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
             <button className="rounded" type="button">
-              <FilterListIcon className='h-6 w-6 ml-[6px] dark:text-gray-300'/>
+              <FilterListIcon className='h-6 w-6 ml-[6px] dark:text-gray-300 dark:hover:text-white'/>
             </button>
           </div>
         </div>

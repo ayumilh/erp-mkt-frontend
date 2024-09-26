@@ -10,10 +10,10 @@ const ProdutosActionsFilter = ({ onFilterChange }) => {
       <form className="mt-[14px] md:flex md:justify-around xl:ml-5">
 
         <div className="flex items-center rounded w-full md:w-[300px] lg:w-[360px] relative">
-          <SearchIcon className='h-5 w-5 absolute left-[6px] top-1/2 transform -translate-y-1/2'/>
+          <SearchIcon className='h-5 w-5 absolute left-[6px] top-1/2 transform -translate-y-1/2 dark:text-gray-300'/>
           <input title='Pesquise por' className="w-full dark:bg-neutral-800 dark:text-gray-200 rounded overflow-hidden text-xs md:text-sm font-normal pl-8 pr-3 py-2" type="text" placeholder="Pesquise por SKU, Nome, Lojas e etc" style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
           <button className="rounded" type="button">
-            <FilterListIcon className='h-6 w-6 ml-[6px] dark:text-gray-200'/>
+            <FilterListIcon className='h-6 w-6 ml-[6px] dark:text-gray-300 dark:hover:text-white'/>
           </button>
         </div>
 

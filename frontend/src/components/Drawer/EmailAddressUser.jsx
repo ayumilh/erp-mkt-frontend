@@ -49,18 +49,18 @@ export const EmailAddressUser = ({ menuOpen, toggleMenuOpen }) => {
                     transition: 'transform 0.4s ease-in-out'
                 }} className="-mr-1 ml-2 text-segundaria-900" aria-hidden="true" />
                 {menuOpen && (
-                    <div className={`absolute top-8 -right-2 z-20 mt-2 w-44 rounded-md shadow-lg bg-primaria-900 ring-1 ring-black ring-opacity-5 transition-transform duration-300 ease-out transform ${menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
+                    <div className={`absolute top-8 -right-2 z-20 mt-2 w-44 rounded-md shadow-lg bg-primaria-900 dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5 transition-transform duration-300 ease-out transform ${menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
                         <div className="m-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                             <button onClick={toggleModal} className='flex items-center group hover:text-segundaria-900 px-2 py-1'>
-                                <span> <LinkIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 transition duration-300 ease-out" /> </span>
-                                <span className='text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>Conectar Conta</span>
+                                <span> <LinkIcon fontSize="small" className="mr-2 text-neutral-700 dark:text-gray-300 group-hover:text-segundaria-900 transition duration-300 ease-out" /> </span>
+                                <span className='text-sm dark:text-gray-200 font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>Conectar Conta</span>
                             </button>
                             <ToggleTheme />
                             <button className='flex rounded-full items-center group hover:bg-segundaria-200 px-2 py-1'>
                                 <span className='flex justify-center'>
-                                    <SettingsIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 transition duration-300 ease-out" />
+                                    <SettingsIcon fontSize="small" className="mr-2 text-neutral-700 dark:text-gray-300 group-hover:text-segundaria-900 transition duration-300 ease-out" />
                                 </span>
-                                <span className='text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>Configuração</span>
+                                <span className='text-sm dark:text-gray-200 font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>Configuração</span>
                             </button>
                             <BtnSignOut />
                         </div>

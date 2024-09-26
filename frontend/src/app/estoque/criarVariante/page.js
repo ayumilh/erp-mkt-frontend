@@ -7,9 +7,9 @@ import FormularioCriar from '@/components/Estoque/Criar/Variante/VarianteFormula
 
 const CriarVariante = async () => {
   const session = await getServerSession(nextAuthOptions)
-  if(!session) {
-    redirect('/login')
-  }
+  // if(!session) {
+  //   redirect('/login')
+  // }
   return (
     <div className="px-4 h-screen flex flex-col items-center">
       <div className="w-full xl:max-w-[1264px] flex justify-between items-center h-12 pt-4 px-6 xl:px-0 mx-auto mb-8">

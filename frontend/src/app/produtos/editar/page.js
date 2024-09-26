@@ -7,9 +7,9 @@ import EditarAnuncioContent from "@/components/Produtos/Editar/EditarAnuncioCont
 
 const Editar = async () => { 
   const session = await getServerSession(nextAuthOptions)
-  if(!session) {
-    redirect('/login')
-  }
+  // if(!session) {
+  //   redirect('/login')
+  // }
   
   return (
     <div className="p-6 mx-auto flex flex-col items-center space-x-4">

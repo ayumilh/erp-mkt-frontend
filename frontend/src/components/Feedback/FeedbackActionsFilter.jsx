@@ -16,7 +16,7 @@ const FeedbackActionsFilter = () => {
 
           <div className="relative flex w-full">
             <input title='Pesquisar por' className="w-full dark:bg-neutral-800 rounded-tr-md rounded-br-md overflow-hidden text-xs md:text-sm font-normal pr-8 pl-3 py-2" type="text" />
-            <SearchIcon className='h-5 w-5 absolute right-[6px] top-1/2 transform -translate-y-1/2'/>
+            <SearchIcon className='h-5 w-5 absolute right-[6px] top-1/2 transform -translate-y-1/2 dark:text-gray-300'/>
           </div>
         </div>
 

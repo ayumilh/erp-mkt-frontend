@@ -9,9 +9,9 @@ function ToggleTheme() {
     return (
         <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className='flex items-center group px-2 py-1'>
             {theme === 'light' ?
-                <LightModeIcon sx={{ width: '16px' }} className='text-neutral-700 group-hover:text-segundaria-900' /> : <DarkModeIcon sx={{ width: '16px' }} className='text-neutral-700 hover:text-black' />
+                <LightModeIcon sx={{ width: '16px' }} className='text-neutral-700 dark:text-gray-300 group-hover:text-segundaria-900' /> : <DarkModeIcon sx={{ width: '16px' }} className='text-neutral-700 dark:text-gray-300 group-hover:text-segundaria-900' />
             }
-            <span className='text-sm group-hover:text-segundaria-900 font-medium transition duration-300 ease-out ml-2'>
+            <span className='text-sm dark:text-gray-200 group-hover:text-segundaria-900 font-medium transition duration-300 ease-out ml-2'>
                 {theme === 'dark' ? 'Modo escuro' : 'Modo claro'}
             </span>
         </button>

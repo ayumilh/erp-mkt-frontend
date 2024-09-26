@@ -68,7 +68,7 @@ export const DropdownHeader = ({ setActiveTable }) => {
                 <div className="origin-top-center absolute mt-2 rounded-md shadow-lg bg-primaria-900 dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5">
                     <div className="w-28 my-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         <button
-                            className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm"
+                            className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm"
                             role="menuitem"
                             onClick={() => handleClickEmitir('Pedidos')}
                         >
@@ -76,32 +76,32 @@ export const DropdownHeader = ({ setActiveTable }) => {
                             <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Pedidos || 0}</span>
                         </button>
                         <button
-                            className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm"
+                            className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm"
                             role="menuitem"
                             onClick={() => handleClickEmitir('Emitir')}
                         >
                             <span className='dark:text-gray-200'>Emitir</span>
                             <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Emitir || 0}</span>
                         </button>
-                        <button className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm" role="menuitem">
+                        <button className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm" role="menuitem">
                             <span className='dark:text-gray-200'>Enviar</span>
                             <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Enviar || 0}</span>
                         </button>
                         <button
                             onClick={() => handleClickEmitir('Imprimir')}
-                            className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm" role="menuitem">
+                            className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm" role="menuitem">
                             <span className='dark:text-gray-200'>Imprimir</span>
                             <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Imprimir || 0}</span>
                         </button>
                         <button
                             onClick={() => handleClickEmitir('Retirada')}
-                            className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm" role="menuitem">
+                            className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm" role="menuitem">
                             <span className='dark:text-gray-200'>Retirada</span>
                             <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Retirada || 0}</span>
                         </button>
                         <button
                             onClick={() => handleClickEmitir('Enviados')}
-                            className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 rounded-sm" role="menuitem">
+                            className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm" role="menuitem">
                             <span className='dark:text-gray-200'>Enviados</span>
                             <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Enviados || 0}</span>
                         </button>

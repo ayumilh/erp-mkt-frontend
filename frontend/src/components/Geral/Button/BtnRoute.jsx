@@ -22,7 +22,7 @@ const button = tv({
   base: 'flex',
   variants: {
     type: {
-      dropdown: 'w-full flex px-4 py-2 text-start text-sm text-neutral-700 font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 rounded-sm transition duration-300 ease-in-out',
+      dropdown: 'w-full flex px-4 py-2 text-start text-sm text-neutral-700 font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 dark:active:bg-neutral-700 active:bg-gray-100 rounded-sm transition duration-300 ease-in-out',
       base: 'px-2 hover:border-b-2 items-center hover:border-gray-300 transform focus:-translate-y-0.5 focus:scale-60 transition duration-300 ease-in-out',
     },
   },

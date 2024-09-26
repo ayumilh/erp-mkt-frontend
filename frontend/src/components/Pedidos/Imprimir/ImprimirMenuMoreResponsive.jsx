@@ -56,7 +56,7 @@ export const ImprimirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
                                 aria-haspopup="true"
                                 className="w-full md:h-8 px-2 my-1 flex items-center justify-start"
                             >
-                                <FilterListIcon className="mr-1 h-4 md:h-5 w-4 md:w-5" />
+                                <FilterListIcon className="mr-1 h-4 md:h-5 w-4 md:w-5 dark:text-gray-300 dark:hover:text-white" />
                                 <span className="opacity-90 hover:text-black text-sm font-medium">Filtrar</span>
                             </button>
                         </div>
@@ -88,7 +88,7 @@ export const ImprimirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
                         aria-haspopup="true"
                         className="h-8 px-2 my-1 rounded-lg border border-gray-200 hover:border-[#c7c7c7] focus:outline-none focus:ring-1 focus:ring-[#d4d4d4] flex items-center justify-center"
                     >
-                        <FilterListIcon className="mr-1 h-4 md:h-5 w-4 md:w-5" />
+                        <FilterListIcon className="mr-1 h-4 md:h-5 w-4 md:w-5 dark:text-gray-300 dark:hover:text-white" />
                         <span className="opacity-90 hover:opacity-100 text-sm font-medium">Filtro</span>
                     </button>
                 </div>
