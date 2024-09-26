@@ -12,8 +12,8 @@ const a = tv({
       dropdown: 'w-full',
     },
     text: {
-      base: 'text-start text-neutral-700 dark:text-gray-300',
-      dropdown: 'transition duration-300 ease-in-out dark:text-gray-300',
+      base: 'text-start text-neutral-700 dark:text-gray-300 dark:hover:text-white',
+      dropdown: 'transition duration-300 ease-in-out dark:text-gray-300 dark:hover:text-white',
     }
   },
 });

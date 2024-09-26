@@ -26,7 +26,7 @@ const DashboardTarefas = () => {
                             className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center cursor-pointer"
                         >
                             <p className="font-semibold dark:text-gray-300">0</p>
-                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Para Enviar</p>
+                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:hover:text-white dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Para Enviar</p>
                         </div>
 
                         <div className="border-l border-gray-300 h-[60px] hidden md:block"></div>
@@ -36,7 +36,7 @@ const DashboardTarefas = () => {
                             className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center cursor-pointer"
                         >
                             <p className="font-semibold dark:text-gray-300">0</p>
-                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Para Emitir</p>
+                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Para Emitir</p>
                         </div>
 
                         <div className="border-l border-gray-300 h-[60px] hidden md:block"></div>
@@ -45,7 +45,7 @@ const DashboardTarefas = () => {
                             onClick={handleRetiradaClick}
                             className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center">
                             <p className="font-semibold dark:text-gray-300">0</p>
-                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Expirará em Breve</p>
+                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Expirará em Breve</p>
                         </div>
 
                         <div className="border-l border-gray-300 h-[60px] hidden md:block"></div>
@@ -54,7 +54,7 @@ const DashboardTarefas = () => {
                             onClick={handleRetiradaClick}
                             className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center">
                             <p className="font-semibold dark:text-gray-300">0</p>
-                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Retirada</p>
+                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Retirada</p>
                         </div>
                     </div>
                 </div>
@@ -67,29 +67,29 @@ const DashboardTarefas = () => {
                     </div> 
                     <div className="w-full flex flex-wrap md:flex-nowrap justify-start">
                         <div className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center mb-2">
-                            <p className="font-semibold dark:text-gray-200">0</p>
-                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Estoque Baixo</p>
+                            <p className="font-semibold dark:text-gray-200 dark:hover:text-white">0</p>
+                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Estoque Baixo</p>
                         </div>
 
                         <div className="border-l border-gray-300 h-[60px] hidden md:block"></div>
 
                         <div className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center mb-2">
                             <p className="font-semibold dark:text-gray-300">0</p>
-                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Sem Estoque</p>
+                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Sem Estoque</p>
                         </div>
 
                         <div className="border-l border-gray-300 h-[60px] hidden md:block"></div>
 
                         <div className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center mb-2">
                             <p className="font-semibold dark:text-gray-300">0</p>
-                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Estoque Baixo(MELI Full)</p>
+                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Estoque Baixo(MELI Full)</p>
                         </div>
 
                         <div className="border-l border-gray-300 h-[60px] hidden md:block"></div>
 
                         <div className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center mb-2">
                             <p className="font-semibold dark:text-gray-300">0</p>
-                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Sem Estoque(MELI Full)</p>
+                            <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Sem Estoque(MELI Full)</p>
                         </div>
                     </div>
                 </div>
@@ -103,28 +103,28 @@ const DashboardTarefas = () => {
                     <div className="w-full flex flex-wrap md:flex-nowrap justify-start">
                         <div className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center mb-2">
                             <p className="font-semibold dark:text-gray-300">0</p>
-                            <p className="w-32 xl:w-36 px-[6px] text-xs xl:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Perguntas Pendente do MELI</p>
+                            <p className="w-32 xl:w-36 px-[6px] text-xs xl:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Perguntas Pendente do MELI</p>
                         </div>
 
                         <div className="border-l border-gray-300 h-[60px] hidden md:block"></div>
 
                         <div className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center mb-2">
                             <p className="font-semibold dark:text-gray-300">0</p>
-                            <p className="w-32 xl:w-36 px-[6px] text-xs xl:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Mensagens não lidos do MELI</p>
+                            <p className="w-32 xl:w-36 px-[6px] text-xs xl:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Mensagens não lidos do MELI</p>
                         </div>
 
                         <div className="border-l border-gray-300 h-[60px] hidden md:block"></div>
 
                         <div className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center mb-2">
                             <p className="font-semibold dark:text-gray-300">0</p>
-                            <p className="w-32 xl:w-36 px-[6px] text-xs xl:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Reclamação pendente do MELI</p>
+                            <p className="w-32 xl:w-36 px-[6px] text-xs xl:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Reclamação pendente do MELI</p>
                         </div>
 
                         <div className="border-l border-gray-300 h-[60px] hidden md:block"></div>
 
                         <div className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center mb-2">
                             <p className="font-semibold dark:text-gray-300">0</p>
-                            <p className="w-32 xl:w-36 px-[6px] text-xs xl:text-sm text-center text-neutral-600 dark:text-gray-200 hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Devolução pendente/reembolso do Shopee</p>
+                            <p className="w-32 xl:w-36 px-[6px] text-xs xl:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Devolução pendente/reembolso do Shopee</p>
                         </div>
                     </div>
                 </div>

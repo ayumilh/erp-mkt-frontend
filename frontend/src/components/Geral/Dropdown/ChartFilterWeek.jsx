@@ -29,7 +29,7 @@ const ChartFilterWeek = () => {
                 className="flex items-center space-x-2 transition duration-300 ease-in-out rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-gray-300 cursor-pointer"
                 onClick={toggleDropdown}
             >
-                <span className="text-neutral-700 dark:text-gray-200 text-sm font-medium">Hoje</span>
+                <span className="text-neutral-700 dark:text-gray-200 dark:hover:text-white text-sm font-medium">Hoje</span>
                 <KeyboardArrowDownIcon
                     className={`-mr-1 ml-2 md:ml-0 h-5 w-5 text-segundaria-900 cursor-pointer transition-transform duration-500 ${isOpenWeek ? 'rotate-180' : ''}`}
                     sx={{

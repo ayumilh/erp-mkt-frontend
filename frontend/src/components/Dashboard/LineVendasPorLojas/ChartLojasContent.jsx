@@ -23,13 +23,13 @@ const ChartLojasContent = () => {
       <div className="flex flex-row flex-wrap gap-6">
         <div>
           <h2 className="text-lg font-semibold dark:text-gray-300">0</h2>
-          <h2 className="text-base font-normal text-neutral-700 dark:text-gray-200 hover:cursor-pointer flex-wrap text-start">
+          <h2 className="text-base font-normal text-neutral-700 dark:text-gray-200 flex-wrap text-start">
             Quantidade de Vendas (Últimos 30 dias)
           </h2>
         </div>
         <div>
           <h2 className="text-lg font-semibold dark:text-gray-300">R$ 0,00</h2>
-          <h2 className="text-base font-normal text-neutral-700 dark:text-gray-200 hover:cursor-pointer flex-wrap text-center">
+          <h2 className="text-base font-normal text-neutral-700 dark:text-gray-200 flex-wrap text-center">
             Valor de Vendas (Últimos 30 dias)
           </h2>
         </div>

@@ -6,11 +6,11 @@ import SidebarContent from '@/components/Drawer/desktop/SidebarContent';
 import DashboardContent from '@/components/Dashboard/DashboardContent';
 
 const Dashboard = async () => {
-  const session = await getServerSession(nextAuthOptions);
-  if (!session) {
-    redirect('/login');
-    return null;
-  }
+  // const session = await getServerSession(nextAuthOptions);
+  // if (!session) {
+  //   redirect('/login');
+  //   return null;
+  // }
 
   return (
     <main className="flex max-w-full h-screen">

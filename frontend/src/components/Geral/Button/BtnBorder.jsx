@@ -13,7 +13,7 @@ export const BtnBorder = ({title}) => {
         ) : (
             <EditIcon sx={{ fontSize: '18px' }} className="mr-2 dark:text-gray-300" />
         )}
-        <span className="text-neutral-700 dark:text-gray-300 hover:text-black text-sm font-medium">
+        <span className="text-neutral-700 dark:text-gray-300 dark:hover:text-white hover:text-black text-sm font-medium">
           {title}
         </span>
       </button>
