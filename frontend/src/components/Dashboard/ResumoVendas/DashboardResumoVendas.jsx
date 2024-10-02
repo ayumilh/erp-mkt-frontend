@@ -1,8 +1,9 @@
 'use client'
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import dynamic from "next/dynamic";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import ChartPie from './ChartPie';
+
+const ChartPie = dynamic(() => import('./ChartPie'), { ssr: false });
 
 export const DashboardResumoVendas = () => {
     const [data, setData] = useState([]);
