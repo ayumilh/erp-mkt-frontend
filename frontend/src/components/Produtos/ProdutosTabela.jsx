@@ -43,6 +43,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
             };
           });
           setProducts(restructuredData);
+          console.log(restructuredData)
         } else {
           setProducts([]);
         }

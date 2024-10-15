@@ -60,11 +60,11 @@ export const ProdutosMenuMoreResponsive = ({
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleOpenModal = () => {
-      setIsModalOpen(true);
+        setIsModalOpen(true);
     };
-  
+
     const handleCloseModal = () => {
-      setIsModalOpen(false);
+        setIsModalOpen(false);
     };
 
     return (
@@ -102,10 +102,9 @@ export const ProdutosMenuMoreResponsive = ({
                 />
                 <BtnBorder title="Filtrar" />
                 <BtnBorder title="Editar em massa" />
-                <button onClick={handleOpenModal} className='cursor-pointer transform active:-translate-y-1 active:scale-105 transition duration-700 ease-in-out'>
+                <button onClick={handleOpenModal} className='md:hidden cursor-pointer transform active:-translate-y-1 active:scale-105 transition duration-700 ease-in-out'>
                     <AspectRatioIcon className='text-neutral-700 dark:text-gray-300 hover:text-black' />
-                </button> 
-                <ModalTableExpanded isOpen={isModalOpen} handleClose={handleCloseModal} />
+                </button>
             </>)}
 
             {(showCheckboxes || showCheckboxesAll) &&
@@ -115,6 +114,10 @@ export const ProdutosMenuMoreResponsive = ({
             }
 
             <div className="flex items-center gap-2 ml-auto">
+                <button onClick={handleOpenModal} className='md:hidden cursor-pointer transform active:-translate-y-1 active:scale-105 transition duration-700 ease-in-out'>
+                    <AspectRatioIcon className='text-neutral-700 dark:text-gray-300 hover:text-black' />
+                </button>
+                <ModalTableExpanded isOpen={isModalOpen} handleClose={handleCloseModal} />
                 <div>
                     <select id="rowsPerPage" value={rowsPerPage} onChange={handleRowsPerPageChange} className="py-1 rounded bg-transparent dark:text-gray-200 dark:bg-dark-primaria-900">
                         <option value={5}>5 páginas</option>
@@ -133,7 +136,6 @@ export const ProdutosMenuMoreResponsive = ({
                     <KeyboardArrowRightIcon className={currentPage === totalPages ? "opacity-50 dark:text-gray-200" : ""} />
                 </button>
             </div>
-
         </div>
     )
 }
