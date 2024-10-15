@@ -7,9 +7,9 @@ import FormularioCriar from '@/components/Estoque/Criar/Kit/KitFormularioCriar';
 
 const CriarKit = async () => { 
   const session = await getServerSession(nextAuthOptions)
-  // if(!session) {
-  //   redirect('/login')
-  // }
+  if(!session) {
+    redirect('/login')
+  }
 
   return (
     <div className="px-4 h-screen flex flex-col items-center">
