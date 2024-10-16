@@ -18,7 +18,7 @@ const ActionsHeader = () => {
             <ToggleTheme />
             <div onClick={toggleMenu} className="bg-primaria-900 dark:bg-neutral-700 bg-opacity-70 shadow-sm flex px-3 py-2 rounded-full cursor-pointer">
                 <AccountCircleIcon className="h-6 w-6 text-neutral-700 dark:text-gray-400" />
-                <button
+                <div
                     style={{
                         display: "flex",
                         flexDirection: "row",
@@ -30,7 +30,7 @@ const ActionsHeader = () => {
                     }}
                 >
                     <EmailAddressUser menuOpen={menuOpen} toggleMenuOpen={toggleMenu} />
-                </button>
+                </div>
             </div>
         </div>
     );

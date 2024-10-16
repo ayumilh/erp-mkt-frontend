@@ -32,7 +32,7 @@ export const EmailAddressUser = ({ menuOpen, toggleMenuOpen }) => {
     }, [dropdownRef, toggleMenuOpen]);
 
     return (
-        <>
+        <div ref={dropdownRef}>
             <span
                 className="font-medium max-w-28 md:w-full overflow-hidden"
                 style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
@@ -40,7 +40,7 @@ export const EmailAddressUser = ({ menuOpen, toggleMenuOpen }) => {
             >
                 {session?.session?.user?.email || (userInfo.length > 0 ? userInfo[0].email : "")}
             </span>
-            <div className="relative" ref={dropdownRef}>
+            <div className="relative">
                 <KeyboardArrowDownIcon sx={{
                     width: '20px',
                     transform: menuOpen ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -65,6 +65,6 @@ export const EmailAddressUser = ({ menuOpen, toggleMenuOpen }) => {
                 )}
                 {isModalOpen && <ModalConectarLojas onClose={toggleModal} />}
             </div>
-        </>
+        </div>
     );
 };

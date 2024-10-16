@@ -1,7 +1,7 @@
 'use client'
 import * as React from 'react'
 import MuiDrawer from '@mui/material/Drawer'
-import { styled } from '@mui/material/styles'
+import { styled, useTheme } from '@mui/material/styles';
 import SidebarList from './SidebarList'
 import ModalConectarLojas from '@/components/Config/ModalConectarLojas'
 import LogoContent from '@/components/Geral/LogoContent'
@@ -9,6 +9,7 @@ import LogoContent from '@/components/Geral/LogoContent'
 const SidebarContent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [open, setOpen] = React.useState(true);
+  const theme = useTheme();
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -40,7 +41,6 @@ const SidebarContent = () => {
       duration: theme.transitions.duration.enteringScreen,
     }),
     overflowX: 'hidden',
-
     display: 'flex',
     position: 'block',
     flexDirection: 'column',
@@ -48,7 +48,7 @@ const SidebarContent = () => {
     alignItems: 'center',
     borderRadius: '36px',
     padding: '12px 0',
-    background: '#F6F6FB',
+    background: theme.palette.mode === 'dark' ? '#333' : '#F6F6FB',
     zIndex: 2,
   });
 
@@ -75,7 +75,7 @@ const SidebarContent = () => {
       flexShrink: 0,
       whiteSpace: 'nowrap',
       boxSizing: 'border-box',
-      background: '#F6F6FB',
+      background: theme.palette.mode === 'dark' ? '#333' : '#F6F6FB',
       height: 'auto',
       marginLeft: '16px',
       boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 50px 80px 2px rgb(0 0 0 / 0.1)',
@@ -86,7 +86,7 @@ const SidebarContent = () => {
           ...openedMixin(theme),
           position: 'sticky',
           transition: 'all 1s ease-out',
-          background: '#F6F6FB',
+          background: theme.palette.mode === 'dark' ? '#333' : '#F6F6FB',
           border: 'none',
         },
       }),
