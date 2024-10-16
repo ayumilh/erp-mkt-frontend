@@ -40,7 +40,7 @@ export const DashboardResumoVendas = () => {
 
     return (
         <div className='w-full bg-primaria-900 dark:bg-dark-primaria-900 flex flex-col xl:flex-row gap-7 xl:gap-0 shadow-lg border border-slate-100 dark:border-neutral-800 rounded-2xl lg:mx-0 min-h-max px-4 lg:px-5 xl:px-8 py-5 xl:py-7 mb-7 mt-7 mx-2'>
-            <div className='w-full xl:w-1/2 h-full flex px-4'>
+            <div className='w-full xl:w-1/2 h-full lg:h-auto flex px-4'>
                 <div className='w-full h-full'>
                     <h3 className='text-sm font-semibold text-neutral-700 dark:text-gray-300'>Pedidos de venda</h3>
                     <div className='w-full lg:w-96 xl:w-full flex flex-col mt-2'>

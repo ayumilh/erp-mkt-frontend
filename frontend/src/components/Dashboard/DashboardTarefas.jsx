@@ -95,7 +95,7 @@ const DashboardTarefas = () => {
                 </div>
 
                 {/* SAC */}
-                <div className="bg-primaria-900 dark:bg-dark-primaria-900 shadow-md hover:shadow-lg border-r-4 border-green-500 rounded-2xl w-full flex flex-col justify-center lg:mx-0 min-h-max p-4 mx-2 py-5 xs:mx-auto mb-7 transition duration-300 ease-in-out">
+                <div className="bg-primaria-900 dark:bg-dark-primaria-900 shadow-md hover:shadow-lg border-r-4 border-green-500 rounded-2xl w-full flex flex-col justify-center lg:mx-0 min-h-max p-4 mx-2 py-5 xs:mx-auto mb-7 lg:mb-0 transition duration-300 ease-in-out">
                     <div className="flex justify-start items-center gap-1">
                         <SupportAgentIcon className="w-8 h-8 text-green-500" />
                         <span className="text-center font-medium text-green-500">SAC</span>
