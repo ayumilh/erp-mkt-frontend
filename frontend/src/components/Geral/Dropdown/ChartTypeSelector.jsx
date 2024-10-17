@@ -31,15 +31,15 @@ export const ChartTypeSelector = ({ onChartTypeSelected }) => {
         </button>
 
         {isOpen && (
-          <div className="top-10 right-0 absolute z-10 rounded-md bg-white" ref={menuChartRef}>
+          <div className="top-10 right-0 absolute z-10 rounded-md bg-white dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5" ref={menuChartRef}>
             <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-              <button onClick={() => handleChartTypeChange('bar')} className="flex items-center w-full px-2 active:bg-gray-200 hover:bg-primaria-900 transition duration-300 ease-in-out" role="menuitem">
-                <span> <BarChartIcon fontSize='small' className="text-neutral-700 hover:text-black cursor-pointer transition duration-300 ease-in-out" /> </span>
-                <span className='w-full text-neutral-600 py-2 hover:text-black text-sm font-medium whitespace-nowrap transition duration-300 ease-in-out'>Gráfico barra</span>
+              <button onClick={() => handleChartTypeChange('bar')} className="flex items-center w-full px-2 active:bg-gray-200 hover:bg-primaria-900 dark:hover:bg-neutral-800  transition duration-300 ease-in-out" role="menuitem">
+                <span> <BarChartIcon fontSize='small' className="text-neutral-700 dark:text-neutral-300 hover:text-black cursor-pointer transition duration-300 ease-in-out" /> </span>
+                <span className='w-full text-neutral-600 dark:text-neutral-300 py-2 hover:text-black text-sm font-medium whitespace-nowrap transition duration-300 ease-in-out'>Gráfico barra</span>
               </button>
-              <button onClick={() => handleChartTypeChange('candlestick')} className="flex items-center w-full px-2 active:bg-gray-200 hover:bg-primaria-900 transition duration-300 ease-in-out" role="menuitem">
-                <span> <CandlestickChartIcon fontSize='small' className="text-neutral-700 hover:text-black mr-2 cursor-pointer transition duration-300 ease-in-out" /> </span>
-                <span className='w-full text-neutral-600 py-2 hover:text-black text-sm font-medium whitespace-nowrap transition duration-300 ease-in-out'>Gráfico candle</span>
+              <button onClick={() => handleChartTypeChange('candlestick')} className="flex items-center w-full px-2 active:bg-gray-200 hover:bg-primaria-900 dark:hover:bg-neutral-800  transition duration-300 ease-in-out" role="menuitem">
+                <span> <CandlestickChartIcon fontSize='small' className="text-neutral-700 dark:text-neutral-300 hover:text-black mr-2 cursor-pointer transition duration-300 ease-in-out" /> </span>
+                <span className='w-full text-neutral-600 dark:text-neutral-300 py-2 hover:text-black text-sm font-medium whitespace-nowrap transition duration-300 ease-in-out'>Gráfico candle</span>
               </button>
             </div>
           </div>

@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useState, useMemo, Suspense, useEffect } from 'react';
+import { createContext, useState, useMemo, useEffect } from 'react';
 import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useMediaQuery } from '@mui/material';
@@ -32,7 +32,7 @@ const darkTheme = createTheme({
 
 export const ThemeProvider = ({ children }) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [themeMode, setThemeMode] = useState(prefersDarkMode ? 'dark' : 'light');
+  const [themeMode, setThemeMode] = useState('light');
   const theme = useMemo(() => (themeMode === 'light' ? lightTheme : darkTheme), [themeMode]);
 
   const toggleTheme = () => {
@@ -47,9 +47,7 @@ export const ThemeProvider = ({ children }) => {
     <ThemeMuiContext.Provider value={{ themeMode, toggleTheme }}>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <Suspense fallback={<div>Loading...</div>}>
           {children}
-        </Suspense>
       </MuiThemeProvider>
     </ThemeMuiContext.Provider>
   );

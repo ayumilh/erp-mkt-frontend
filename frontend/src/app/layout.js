@@ -5,6 +5,7 @@ import NextAuthSessionProvider from "@/providers/sessionProvider";
 import { AuthContextProvider } from "@/contexts/AuthContext";
 import ModalVerificationLogout from "@/components/Config/ModalVerificationLogout";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ThemeProvider as ThemeMuiProvider } from "@/contexts/ThemeMuiContext";
 import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
 
 const poppins = Poppins({
@@ -36,10 +37,12 @@ export default function RootLayout({ children }) {
                 <NextAuthSessionProvider>
                     <AuthContextProvider>
                         <ThemeProvider>
-                            <MuiThemeProvider theme={theme}>
-                                {children}
-                                <ModalVerificationLogout />
-                            </MuiThemeProvider>
+                            <ThemeMuiProvider>
+                                <MuiThemeProvider theme={theme}>
+                                    {children}
+                                    <ModalVerificationLogout />
+                                </MuiThemeProvider>
+                            </ThemeMuiProvider>
                         </ThemeProvider>
                     </AuthContextProvider>
                 </NextAuthSessionProvider>

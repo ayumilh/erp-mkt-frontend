@@ -1,16 +1,18 @@
 'use client'
-import { useEffect } from 'react';
-import { useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { ThemeContext } from '../../../contexts/ThemeContext';
+import { ThemeMuiContext } from '../../../contexts/ThemeMuiContext';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
 function ToggleTheme() {
     const { theme, setTheme } = useContext(ThemeContext);
+    const { themeMode, toggleTheme } = useContext(ThemeMuiContext);
     
     const handleToggleTheme = () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark';
         setTheme(newTheme);
+        toggleTheme();
         window.localStorage.setItem('color-theme', newTheme);
     };
 
