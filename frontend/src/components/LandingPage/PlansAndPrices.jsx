@@ -108,32 +108,34 @@ const PlansAndPrices = () => {
                         <span className="text-4xl font-semibold">R$120</span>
                         <span className=" text-lg font-light">/mês</span>
                     </div>
-                    <ul className="animate-text-plans text-lg font-light list-none mt-4 h-32">
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-white" />
-                            </div>
-                            Gestão Básica de Pedidos
-                        </li>
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-white" />
-                            </div>
-                            Controle de Estoque
-                        </li>
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-white" />
-                            </div>
-                            Integração com Fornecedores
-                        </li>
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-white" />
-                            </div>
-                            Relatórios de Vendas
-                        </li>
-                    </ul>
+                    <div>
+                        <ul className="animate-text-plans text-lg font-light list-none mt-4 h-32">
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-white" />
+                                </div>
+                                Gestão Básica de Pedidos
+                            </li>
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-white" />
+                                </div>
+                                Controle de Estoque
+                            </li>
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-white" />
+                                </div>
+                                Integração com Fornecedores
+                            </li>
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-white" />
+                                </div>
+                                Relatórios de Vendas
+                            </li>
+                        </ul>
+                    </div>
                     <button className="animate-title-plans w-full mt-7 px-3 py-2 bg-segundaria-900 text-white rounded-full hover:bg-segundaria-800 cursor-pointer transition duration-300 ease-in-out">
                         Saiba Mais
                     </button>
@@ -164,32 +166,34 @@ const PlansAndPrices = () => {
                         <span className="text-white text-4xl font-semibold">R$190</span>
                         <span className="text-white text-lg font-light">/mês</span>
                     </div>
-                    <ul className="animate-text-plans text-white text-lg font-light list-none mt-4">
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-white rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-segundaria-900" />
-                            </div>
-                            Automatização de Pedidos
-                        </li>
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-white rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-segundaria-900" />
-                            </div>
-                            Gestão de Inventário em Tempo Real
-                        </li>
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-white rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-segundaria-900" />
-                            </div>
-                            Integração com Múltiplas Plataformas
-                        </li>
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-white rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-segundaria-900" />
-                            </div>
-                            Análise de Dados Avançada
-                        </li>
-                    </ul>
+                    <div>
+                        <ul className="animate-text-plans text-white text-lg font-light list-none mt-4">
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-white rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-segundaria-900" />
+                                </div>
+                                Automatização de Pedidos
+                            </li>
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-white rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-segundaria-900" />
+                                </div>
+                                Gestão de Inventário em Tempo Real
+                            </li>
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-white rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-segundaria-900" />
+                                </div>
+                                Integração com Múltiplas Plataformas
+                            </li>
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-white rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-segundaria-900" />
+                                </div>
+                                Análise de Dados Avançada
+                            </li>
+                        </ul>
+                    </div>
                     <button className="animate-title-plans w-full mt-7 px-3 py-2 bg-white text-segundaria-900 rounded-full hover:bg-gray-200 cursor-pointer transition duration-300 ease-in-out">
                         Saiba Mais
                     </button>
@@ -214,32 +218,34 @@ const PlansAndPrices = () => {
                         <span className="text-4xl font-semibold">R$240</span>
                         <span className=" text-lg font-light">/mês</span>
                     </div>
-                    <ul className="animate-text-plans text-lg font-light list-none mt-4 h-32">
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-white" />
-                            </div>
-                            Automação Avançada
-                        </li>
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-white" />
-                            </div>
-                            Análise de Dados em Tempo Real
-                        </li>
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-white" />
-                            </div>
-                            Suporte Prioritário
-                        </li>
-                        <li className="flex items-center mb-2 text-sm font-light">
-                            <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
-                                <CheckIcon fontSize="small" className="text-white" />
-                            </div>
-                            Personalização e Escalabilidade
-                        </li>
-                    </ul>
+                    <div>
+                        <ul className="animate-text-plans text-lg font-light list-none mt-4 h-32">
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-white" />
+                                </div>
+                                Automação Avançada
+                            </li>
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-white" />
+                                </div>
+                                Análise de Dados em Tempo Real
+                            </li>
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-white" />
+                                </div>
+                                Suporte Prioritário
+                            </li>
+                            <li className="flex items-center mb-2 text-sm font-light">
+                                <div className="bg-segundaria-900 rounded-full w-6 h-6 flex items-center justify-center p-1 mr-2">
+                                    <CheckIcon fontSize="small" className="text-white" />
+                                </div>
+                                Personalização e Escalabilidade
+                            </li>
+                        </ul>
+                    </div>
                     <button className="animate-title-plans w-full mt-7 px-3 py-2 bg-segundaria-900 text-white rounded-full hover:bg-segundaria-800 cursor-pointer transition duration-300 ease-in-out">
                         Saiba Mais
                     </button>

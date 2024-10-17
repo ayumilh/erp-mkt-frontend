@@ -1,11 +1,10 @@
-'use client'
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import NextAuthSessionProvider from "@/providers/sessionProvider";
 import { AuthContextProvider } from "@/contexts/AuthContext";
 import ModalVerificationLogout from "@/components/Config/ModalVerificationLogout";
-import { ThemeProvider } from "@/contexts/ThemeContext";
-import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from "@/contexts/ThemeContext"; // Seu Theme Context
+import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles'; // Material-UI
 
 const poppins = Poppins({
     weight: ["400", "500", "600", "700"],
@@ -18,9 +17,10 @@ const metadata = {
 };
 
 export default function RootLayout({ children }) {
+    // Defina o tema do Material-UI com base no tema do seu contexto global
     const theme = createTheme({
         palette: {
-            mode: 'light'
+            mode: 'light', // Ajuste isso dinamicamente com base no seu contexto global de tema
         },
     });
 
@@ -35,8 +35,8 @@ export default function RootLayout({ children }) {
             <body className={`${poppins.className} max-w-full h-screen`}>
                 <NextAuthSessionProvider>
                     <AuthContextProvider>
-                        <ThemeProvider>
-                            <MuiThemeProvider theme={theme}>
+                        <ThemeProvider> {/* Seu contexto de tema */}
+                            <MuiThemeProvider theme={theme}> {/* Material-UI usando o mesmo tema */}
                                 {children}
                                 <ModalVerificationLogout />
                             </MuiThemeProvider>

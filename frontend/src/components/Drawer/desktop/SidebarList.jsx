@@ -52,57 +52,60 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose,
 
     return (
         <>
-            <ul className="w-[200px] px-2 ml-1">
-                {["Dashboard", "Produtos", "Pedidos", "Comprar", "Analise", "Estoque", "Feedback"].map(
-                    (text, index) => (
-                        <li key={text} className="flex flex-col items-center">
-                            <Link href={`/${text.toLowerCase()}`}>
-                                <Tooltip title={text} placement="bottom" TransitionComponent={Zoom} followCursor>
-                                    <button
-                                        className={`flex  py-3 ${open ? "justify-start w-[124px]" : "justify-center w-[160px]"
-                                            } relative items-center group hover:text-segundaria-900`}
-                                    >
-                                        <span className={`relative flex justify-center text-neutral-700 group-hover:text-segundaria-900 transition duration-300 ease-out ${open ? "mr-0" : "mr-auto"}`}>
-                                            {iconsNav[index]}
-                                        </span>
-                                        <span className={`ml-3 ${open ? "opacity-100" : "opacity-0"} text-neutral-700 group-hover:text-segundaria-900 font-medium transition duration-300 ease-out`}>
-                                            {text}
-                                        </span>
-                                    </button>
-                                </Tooltip>
-                            </Link>
-                        </li>
-                    )
-                )}
-            </ul>
-
-            <ul className="mt-7 w-[180px] px-2">
-                <li className="flex flex-col">
-                    <div>
-                        <BtnExpandirDrawer handleDrawerToggle={handleDrawerToggle} open={open} />
-                    </div>
-                    {/* {open && (
+            <div>
+                <ul className="w-[200px] px-2 ml-1">
+                    {["Dashboard", "Produtos", "Pedidos", "Comprar", "Analise", "Estoque", "Feedback"].map(
+                        (text, index) => (
+                            <li key={text} className="flex flex-col items-center">
+                                <Link href={`/${text.toLowerCase()}`}>
+                                    <Tooltip title={text} placement="bottom" TransitionComponent={Zoom} followCursor>
+                                        <button
+                                            className={`flex  py-3 ${open ? "justify-start w-[124px]" : "justify-center w-[160px]"
+                                                } relative items-center group hover:text-segundaria-900`}
+                                        >
+                                            <span className={`relative flex justify-center text-neutral-700 group-hover:text-segundaria-900 transition duration-300 ease-out ${open ? "mr-0" : "mr-auto"}`}>
+                                                {iconsNav[index]}
+                                            </span>
+                                            <span className={`ml-3 ${open ? "opacity-100" : "opacity-0"} text-neutral-700 group-hover:text-segundaria-900 font-medium transition duration-300 ease-out`}>
+                                                {text}
+                                            </span>
+                                        </button>
+                                    </Tooltip>
+                                </Link>
+                            </li>
+                        )
+                    )}
+                </ul>
+            </div>
+            <div>
+                <ul className="mt-7 w-[180px] px-2">
+                    <li className="flex flex-col">
                         <div>
-                            <button onClick={toggleModal} className={`flex rounded-full items-center group hover:text-segundaria-900 w-[160px] py-2 px-3 ${open ? "justify-start" : "justify-center"}`}
-                            >
-                                <span> <LinkIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 transition duration-300 ease-out" /> </span>
-                                <span className={`${open ? "opacity-100" : "opacity-0"} text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out`}>Conectar Conta</span>
-                            </button>
-                            <button
-                                className={`flex rounded-full items-center group hover:bg-segundaria-200 w-[160px] py-2 px-3 ${open ? "justify-start" : "justify-center"
-                                    }`}
-                                onClick={handleClick}
-                            >
-                                <span className='flex justify-center'>
-                                    <SettingsIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 transition duration-300 ease-out" />
-                                </span>
-                                <span className={`${open ? "opacity-100" : "opacity-0"} text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out`}>Ajuste</span>
-                            </button>
-                            <BtnSignOut />
+                            <BtnExpandirDrawer handleDrawerToggle={handleDrawerToggle} open={open} />
                         </div>
-                    )} */}
-                </li>
-            </ul>
+                        {/* {open && (
+                            <div>
+                                <button onClick={toggleModal} className={`flex rounded-full items-center group hover:text-segundaria-900 w-[160px] py-2 px-3 ${open ? "justify-start" : "justify-center"}`}
+                                >
+                                    <span> <LinkIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 transition duration-300 ease-out" /> </span>
+                                    <span className={`${open ? "opacity-100" : "opacity-0"} text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out`}>Conectar Conta</span>
+                                </button>
+                                <button
+                                    className={`flex rounded-full items-center group hover:bg-segundaria-200 w-[160px] py-2 px-3 ${open ? "justify-start" : "justify-center"
+                                        }`}
+                                    onClick={handleClick}
+                                >
+                                    <span className='flex justify-center'>
+                                        <SettingsIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 transition duration-300 ease-out" />
+                                    </span>
+                                    <span className={`${open ? "opacity-100" : "opacity-0"} text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out`}>Ajuste</span>
+                                </button>
+                                <BtnSignOut />
+                            </div>
+                        )} */}
+                    </li>
+                </ul>
+            </div>
         </>
     );
 };
