@@ -89,7 +89,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
 
                 <li className="flex flex-col mb-1">
                     <button onClick={toggleModal}
-                        className="flex items-center w-[160px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-100 rounded-full transition duration-500 ease-out"
+                        className="flex items-center w-full h-12 px-4 justify-start hover:bg-gray-100 dark:hover:bg-neutral-800 active:bg-gray-200 dark:active:bg-neutral-800 rounded-full transition duration-500 ease-out"
                     >
                         <span
                             className={`flex justify-center text-neutral-700 dark:text-gray-300 ${open ? "mr-3" : "mr-auto"
@@ -101,7 +101,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
 
                 {["Notificação", "Ajuda", "Configuração"].map((text, index) => (
                     <li key={text} className="flex flex-col mb-1">
-                        <button className='flex items-center w-[190px] h-12 px-4 justify-start active:bg-gray-100 rounded-full transition duration-500 ease-out'>
+                        <button className='flex items-center w-full h-12 px-4 justify-start hover:bg-gray-100 dark:hover:bg-neutral-800 active:bg-gray-200 dark:active:bg-neutral-800 rounded-full transition duration-500 ease-out'>
                             <span
                                 className={`flex justify-center text-neutral-700 dark:text-gray-300 ${open ? "mr-3" : "mr-auto"
                                     }`}

@@ -55,7 +55,7 @@ export const DropdownSelectOrAll = ({ setShowCheckboxes, showCheckboxes, setShow
             </button>
 
             {isOpenEmitir && (
-                <div className={`max-w-max top-12 absolute z-10 rounded-md shadow-lg bg-primaria-900 dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5 transition-transform duration-300 ease-out transform ${isOpenEmitir ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
+                <div className={`max-w-max top-12 absolute z-20 rounded-md shadow-lg bg-primaria-900 dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5 transition-transform duration-300 ease-out transform ${isOpenEmitir ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
                     <div className="my-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         <button onClick={handleEmitirSelecionados} className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-gray-200 font-medium hover:bg-gray-200 active:bg-gray-100 rounded-sm transition duration-300 ease-in-out" role="menuitem">
                             Selecionar

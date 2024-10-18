@@ -26,7 +26,6 @@ export default function SincronizarRow () {
           });
           setProducts(restructuredData);
         } else {
-          console.error('Não foi possível obter os produtos');
           setProducts([]);
         }
       } catch (error) {
@@ -45,13 +44,13 @@ export default function SincronizarRow () {
     ) : products.length > 0 ? (
       products.map((product, index) => (
         <tr key={index} className="cursor-pointer">
-          <td className="pl-6 pr-4 py-4 md:py-5 text-center">{product.sku}</td>
-          <td className="px-4 py-4 md:py-5 text-">{product.categorias}</td>
-          <td className="px-4 py-4 md:py-5 font-medium text-start">{product.nome_do_produto}</td>
-          <td className="px-4 py-4 md:py-5 text-center">{product.custo_de_compra}</td>
-          <td className="px-4 py-4 md:py-5 text-center">{product.peso_do_pacote}</td>
-          <td className="px-4 py-4 md:py-5 text-center">{product.data_de_lancamento}</td>
-          <td className="pl-4 pr-6 px-4 py-4 md:py-5 text-center">
+          <td className="pl-6 pr-4 py-4 md:py-5 text-center dark:text-gray-200">{product.sku}</td>
+          <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{product.categorias}</td>
+          <td className="px-4 py-4 md:py-5 font-medium text-start dark:text-gray-200">{product.nome_do_produto}</td>
+          <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{product.custo_de_compra}</td>
+          <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{product.peso_do_pacote}</td>
+          <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{product.data_de_lancamento}</td>
+          <td className="pl-4 pr-6 px-4 py-4 md:py-5 text-center dark:text-gray-200">
             <button className="px-2 py-1 bg-primaria-200 text-white rounded-md">Editar</button>
           </td>
         </tr>
@@ -60,8 +59,8 @@ export default function SincronizarRow () {
       <tr>
         <td className="text-center" colSpan="7">
           <div className="w-full py-12">
-            <span><ProductionQuantityLimitsIcon style={{ width: 46, height: 46 }}/></span>
-            <p className="mt-8 mx-10">Ei, parece que você ainda não sincronizou nenhum produto. Sincronize seus produtos e comece a gerenciar seu estoque de maneira eficiente!</p>
+            <span><ProductionQuantityLimitsIcon className='dark:text-gray-200' style={{ width: 46, height: 46 }}/></span>
+            <p className="mt-8 mx-10 dark:text-gray-200">Ei, parece que você ainda não sincronizou nenhum produto. Sincronize seus produtos e comece a gerenciar seu estoque de maneira eficiente!</p>
           </div>
         </td>
       </tr>

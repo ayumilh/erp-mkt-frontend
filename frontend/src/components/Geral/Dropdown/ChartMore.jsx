@@ -33,7 +33,7 @@ const ChartMore = () => {
                 onClick={toggleDropdown}
             >
                 <MoreHorizIcon
-                    className='dark:text-gray-300'
+                    className='dark:text-gray-200'
                     sx={{
                         width: '34px',
                         color: '#2D3748',

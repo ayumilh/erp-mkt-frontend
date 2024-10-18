@@ -46,6 +46,7 @@ const ProdutosHeader = () => {
                         onClick={toggleDropdown}
                     >
                         <MoreHorizIcon
+                            className='dark:text-gray-200'
                             sx={{
                                 width: '34px',
                                 color: '#2D3748',

@@ -72,6 +72,7 @@ export const ProdutosMenuMoreResponsive = ({
             {isMobile ? (<>
                 <button onClick={handleOpenMenu}>
                     <MoreVertIcon
+                        className='dark:text-gray-200'
                         sx={{
                             width: '18px',
                             color: '#2D3748',

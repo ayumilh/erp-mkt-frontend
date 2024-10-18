@@ -34,7 +34,9 @@ export const PedidosMenuMoreResponsive = ({ currentPage, totalPages, rowsPerPage
         <div className="border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-6 gap-3 relative top-0 left-0 bg-primaria-900 dark:bg-dark-primaria-900" ref={menuMoreVertRef}>
             {isMobile ? (<>
                 <button onClick={handleOpenMenu}>
-                    <MoreVertIcon sx={{
+                    <MoreVertIcon 
+                    className='dark:text-gray-200'
+                    sx={{
                         width: '18px',
                         color: '#2D3748',
                         transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
