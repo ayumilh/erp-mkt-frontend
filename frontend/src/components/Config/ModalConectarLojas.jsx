@@ -3,15 +3,25 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const ModalConectarLojas = ({ onClose, drawerClose }) => {
+  const [selectedStore, setSelectedStore] = useState('Mercado Livre');
+
+  const handleStoreChange = (event) => {
+    setSelectedStore(event.target.value);
+  };
+
   const [nomeLoja, setNomeLoja] = useState("");
-  const [plataforma, setPlataforma] = useState("");
 
   const sendDataStore = () => {
-    const clientId = 8470533338689335;
-    const redirectUri = encodeURIComponent(
-      "https://erp-mkt-frontend.vercel.app/authmercado"
-    );
-    const authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
+    let authUrl = '';
+    if (selectedStore === 'Mercado Livre') {
+      const clientId = 8470533338689335;
+      const redirectUri = encodeURIComponent(
+        "https://erp-mkt-frontend.vercel.app/authmercado"
+      );
+      authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
+    } else if (selectedStore === 'Shopee') {
+      authUrl = `https://partner.shopeemobile.com/api/v2/shop/auth_partner?partner_id=${process.env.SHOPEE_PARTNER_ID}&redirect=https://open.shopee.com&timestamp=1677188400&sign=656451597757546d506e525959634269464f4a76534a48415765586978536653?`;
+    }
 
     window.location.href = authUrl;
   };
@@ -81,8 +91,8 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
             <div className="flex gap-3">
               <label className="w-28 text-sm text-gray-800">Plataforma</label>
               <select
-                value={plataforma || ""}
-                onChange={(e) => setPlataforma(e.target.value)}
+                value={selectedStore}
+                onChange={handleStoreChange}
                 className="w-60 p-2 border rounded-md mb-4 text-sm"
               >
                 <option value="">Selecione a Plataforma</option>

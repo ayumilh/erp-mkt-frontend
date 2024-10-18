@@ -6,7 +6,7 @@ const BtnExpandirDrawer = ({ open, handleDrawerToggle }) => {
             <div className="flex items-center w-full">
                 {open ? (
                     <>
-                        <span className="mx-2 text-gray-700 font-medium text-xs">Contrair menu</span>
+                        <span className="mx-2 text-gray-700 dark:text-gray-200 font-medium text-xs">Contrair menu</span>
                         <Switch
                             checked={open}
                             onChange={handleDrawerToggle}
@@ -28,7 +28,7 @@ const BtnExpandirDrawer = ({ open, handleDrawerToggle }) => {
                                 className={`${open ? 'translate-x-6' : 'translate-x-1'} inline-block w-3 h-3 transform bg-segundaria-900 rounded-full transition-transform duration-200 ease-in-out`}
                             />
                         </Switch>
-                        <span className="ml-2 text-gray-700 font-medium text-sm">Expandir menu</span>
+                        <span className="ml-2 text-gray-700 dark:text-gray-200 font-medium text-sm">Expandir menu</span>
                     </>
                 )}
             </div>

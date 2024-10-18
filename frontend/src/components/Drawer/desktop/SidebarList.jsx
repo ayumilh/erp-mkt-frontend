@@ -61,12 +61,12 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose,
                                     <Tooltip title={text} placement="bottom" TransitionComponent={Zoom} followCursor>
                                         <button
                                             className={`flex  py-3 ${open ? "justify-start w-[124px]" : "justify-center w-[160px]"
-                                                } relative items-center group hover:text-segundaria-900`}
+                                                } relative items-center group hover:text-indigo-500`}
                                         >
-                                            <span className={`relative flex justify-center text-neutral-700 group-hover:text-segundaria-900 transition duration-300 ease-out ${open ? "mr-0" : "mr-auto"}`}>
+                                            <span className={`relative flex justify-center text-neutral-700 dark:text-gray-300 group-hover:text-indigo-500 transition duration-300 ease-out ${open ? "mr-0" : "mr-auto"}`}>
                                                 {iconsNav[index]}
                                             </span>
-                                            <span className={`ml-3 ${open ? "opacity-100" : "opacity-0"} text-neutral-700 group-hover:text-segundaria-900 font-medium transition duration-300 ease-out`}>
+                                            <span className={`ml-3 ${open ? "opacity-100" : "opacity-0"} text-neutral-700 dark:text-gray-300 group-hover:text-indigo-500 font-medium transition duration-300 ease-out`}>
                                                 {text}
                                             </span>
                                         </button>
@@ -85,10 +85,10 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose,
                         </div>
                         {/* {open && (
                             <div>
-                                <button onClick={toggleModal} className={`flex rounded-full items-center group hover:text-segundaria-900 w-[160px] py-2 px-3 ${open ? "justify-start" : "justify-center"}`}
+                                <button onClick={toggleModal} className={`flex rounded-full items-center group hover:text-segundaria-900 dark:text-indigo-600 w-[160px] py-2 px-3 ${open ? "justify-start" : "justify-center"}`}
                                 >
-                                    <span> <LinkIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 transition duration-300 ease-out" /> </span>
-                                    <span className={`${open ? "opacity-100" : "opacity-0"} text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out`}>Conectar Conta</span>
+                                    <span> <LinkIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 dark:text-indigo-600 transition duration-300 ease-out" /> </span>
+                                    <span className={`${open ? "opacity-100" : "opacity-0"} text-sm font-medium group-hover:text-segundaria-900 dark:text-indigo-600 transition duration-300 ease-out`}>Conectar Conta</span>
                                 </button>
                                 <button
                                     className={`flex rounded-full items-center group hover:bg-segundaria-200 w-[160px] py-2 px-3 ${open ? "justify-start" : "justify-center"
@@ -96,9 +96,9 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose,
                                     onClick={handleClick}
                                 >
                                     <span className='flex justify-center'>
-                                        <SettingsIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 transition duration-300 ease-out" />
+                                        <SettingsIcon fontSize="small" className="mr-2 text-neutral-600 group-hover:text-segundaria-900 dark:text-indigo-600 transition duration-300 ease-out" />
                                     </span>
-                                    <span className={`${open ? "opacity-100" : "opacity-0"} text-sm font-medium group-hover:text-segundaria-900 transition duration-300 ease-out`}>Ajuste</span>
+                                    <span className={`${open ? "opacity-100" : "opacity-0"} text-sm font-medium group-hover:text-segundaria-900 dark:text-indigo-600 transition duration-300 ease-out`}>Ajuste</span>
                                 </button>
                                 <BtnSignOut />
                             </div>

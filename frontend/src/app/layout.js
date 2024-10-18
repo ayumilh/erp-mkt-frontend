@@ -6,7 +6,6 @@ import { AuthContextProvider } from "@/contexts/AuthContext";
 import ModalVerificationLogout from "@/components/Config/ModalVerificationLogout";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { ThemeProvider as ThemeMuiProvider } from "@/contexts/ThemeMuiContext";
-import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
 
 const poppins = Poppins({
     weight: ["400", "500", "600", "700"],
@@ -19,12 +18,6 @@ const metadata = {
 };
 
 export default function RootLayout({ children }) {
-    const theme = createTheme({
-        palette: {
-            mode: 'light'
-        },
-    });
-
     return (
         <html lang="pt-br">
             <head>
@@ -38,10 +31,8 @@ export default function RootLayout({ children }) {
                     <AuthContextProvider>
                         <ThemeProvider>
                             <ThemeMuiProvider>
-                                <MuiThemeProvider theme={theme}>
-                                    {children}
-                                    <ModalVerificationLogout />
-                                </MuiThemeProvider>
+                                {children}
+                                <ModalVerificationLogout />
                             </ThemeMuiProvider>
                         </ThemeProvider>
                     </AuthContextProvider>

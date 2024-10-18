@@ -45,14 +45,14 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
                     (text, index) => (
                         <li key={text} className="flex flex-col mb-5">
                             <Link href={`/${text.toLowerCase()}`}>
-                                <button className='flex items-center w-[170px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-200 active:text-segundaria-900 rounded-full transition duration-500 ease-out'>
+                                <button className='flex items-center w-[170px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-200 dark:active:bg-neutral-800 active:text-indigo-500 rounded-full transition duration-500 ease-out'>
                                     <span
-                                        className={`flex justify-center text-neutral-700 ${open ? "mr-3" : "mr-auto"
+                                        className={`flex justify-center text-neutral-700 dark:text-gray-300 ${open ? "mr-3" : "mr-auto"
                                             }`}
                                     >
                                         {iconsNav[index]}
                                     </span>
-                                    <span className={`opacity-${open ? "100" : "0"}, text-neutral-700 font-medium active:text-segundaria-900`}>
+                                    <span className={`opacity-${open ? "100" : "0"}, text-neutral-700 dark:text-gray-300 font-medium active:text-indigo-500`}>
                                         {text}
                                     </span>
                                 </button>
@@ -80,7 +80,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
                             marginLeft: "10px",
                         }}
                     >
-                        <AccountCircleIcon sx={{ fontSize: '28px' }} className="ml-2 text-neutral-700" />
+                        <AccountCircleIcon sx={{ fontSize: '28px' }} className="ml-2 text-neutral-700 dark:text-gray-300" />
                         <div className="flex">
                             <EmailAddressUser />
                         </div>
@@ -92,10 +92,10 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
                         className="flex items-center w-[160px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-100 rounded-full transition duration-500 ease-out"
                     >
                         <span
-                            className={`flex justify-center text-neutral-700 ${open ? "mr-3" : "mr-auto"
+                            className={`flex justify-center text-neutral-700 dark:text-gray-300 ${open ? "mr-3" : "mr-auto"
                                 }`}
-                        > <LinkIcon sx={{ fontSize: '26px' }} className="text-neutral-700" /> </span>
-                        <span className="text-neutral-700 font-medium whitespace-nowrap">Conectar Conta</span>
+                        > <LinkIcon sx={{ fontSize: '26px' }} className="text-neutral-700 dark:text-gray-300" /> </span>
+                        <span className="text-neutral-700 dark:text-gray-300 font-medium whitespace-nowrap">Conectar Conta</span>
                     </button>
                 </li>
 
@@ -103,12 +103,12 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
                     <li key={text} className="flex flex-col mb-1">
                         <button className='flex items-center w-[190px] h-12 px-4 justify-start active:bg-gray-100 rounded-full transition duration-500 ease-out'>
                             <span
-                                className={`flex justify-center text-neutral-700 ${open ? "mr-3" : "mr-auto"
+                                className={`flex justify-center text-neutral-700 dark:text-gray-300 ${open ? "mr-3" : "mr-auto"
                                     }`}
                             >
                                 {iconConfig[index]}
                             </span>
-                            <span className={`opacity-${open ? "100" : "0"}, text-neutral-700 font-medium `}>{text}</span>
+                            <span className={`opacity-${open ? "100" : "0"}, text-neutral-700 dark:text-gray-300 font-medium `}>{text}</span>
                         </button>
                     </li>
                 ))}
@@ -121,12 +121,12 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
                         className='flex w-[160px] h-12 px-4 justify-start'
                     >
                         <span
-                            className={`flex justify-center text-neutral-700 ${open ? "mr-3" : "mr-auto"
+                            className={`flex justify-center text-neutral-700 dark:text-gray-300 ${open ? "mr-3" : "mr-auto"
                                 }`}
                         >
-                            <span><LogoutRoundedIcon className="w-8 text-neutral-700"></LogoutRoundedIcon></span>
+                            <span><LogoutRoundedIcon className="w-8 text-neutral-700 dark:text-gray-300"></LogoutRoundedIcon></span>
                         </span>
-                        <span className={`opacity-${open ? "100" : "0"}, text-neutral-700 font-medium `}>Sair</span>
+                        <span className={`opacity-${open ? "100" : "0"}, text-neutral-700 dark:text-gray-300 font-medium `}>Sair</span>
                     </button>
                 </li>
             </ul>

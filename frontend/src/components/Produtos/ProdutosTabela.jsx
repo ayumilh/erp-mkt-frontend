@@ -30,6 +30,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products");
+        console.log(response.data)
         if (response.data && Array.isArray(response.data.products)) {
           const restructuredData = response.data.products.map((product) => {
             return {
@@ -43,7 +44,6 @@ const ProdutosTabela = ({ onFilterStatus }) => {
             };
           });
           setProducts(restructuredData);
-          console.log(restructuredData)
         } else {
           setProducts([]);
         }
@@ -212,24 +212,27 @@ const ProdutosTabela = ({ onFilterStatus }) => {
                 <tr
                   key={index}
                   onClick={() => openProductDetailsModal(product.sku)}
-                  className='border-b border-gray-200 hover:bg-gray-100 cursor-pointer'
+                  className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
                   onMouseEnter={() => openProductDetailsModalMouseLeave(product.sku)}
                   onMouseLeave={closeModalMouseLeave}
                 >
                   {showCheckboxes && <td className="pl-4"><input type="checkbox" onClick={(event) => handleCheckboxChange(event, product.sku)} /></td>}
                   {showCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => { }} /></td>}
                   <td className="w-[200px] xl:w-auto flex items-center gap-3 pl-6 pr-4 py-4 md:py-5">
-                    {product.pictureUrls && <Image src={product.pictureUrls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10" />} {product.sku}
+                    {product.pictureUrls &&
+                      <Image src={product.pictureUrls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10" />
+                    }
+                    <p className="dark:text-gray-300">{product.sku}</p>
                   </td>
-                  <td className="break-words md:break-normal px-4 py-4 md:py-5"><p className="font-medium">{product.title}</p></td>
-                  <td className="px-4 py-4 md:py-5 text-center">{product.price}</td>
-                  <td className="px-4 py-4 md:py-5 text-center">{product.estoque}</td>
-                  <td className="px-4 py-4 md:py-5 text-center">
-                    <span className={`${getStatusColor(product.status)} w-24 rounded-full px-3 py-2`}>{translateStatus(product.status)}</span>
+                  <td className="break-words md:break-normal px-4 py-4 md:py-5"><p className="font-medium dark:text-gray-200">{product.title}</p></td>
+                  <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{product.price}</td>
+                  <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{product.estoque}</td>
+                  <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">
+                    <span className={`${getStatusColor(product.status)} w-24 rounded-full px-3 py-2 text-neutral-800`}>{translateStatus(product.status)}</span>
                   </td>
                   <td className="pl-4 pr-6 py-2 md:py-5 text-center">
                     <button onClick={(event) => storeSkuAndOpenEditModal(event, product.sku)} className="flex items-center justify-center">
-                      <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5" />
+                      <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5 dark:text-gray-200" />
                     </button>
                   </td>
                   {isModalTrMouseLeave && selectedSkuMouseLeave === product.sku && (

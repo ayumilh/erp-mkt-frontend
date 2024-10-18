@@ -9,45 +9,46 @@ export const ThemeMuiContext = createContext();
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
-    primary: {
-      main: '#1976d2',
-    },
-    secondary: {
-      main: '#dc004e',
-    },
   },
 });
 
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-    primary: {
-      main: '#90caf9',
-    },
-    secondary: {
-      main: '#f48fb1',
+    text: {
+      primary: '#e5e7eb',
+      secondary: '#e5e7eb',
     },
   },
 });
 
 export const ThemeProvider = ({ children }) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [themeMode, setThemeMode] = useState('light');
+  const [themeMode, setThemeMode] = useState(prefersDarkMode ? 'dark' : 'light');
   const theme = useMemo(() => (themeMode === 'light' ? lightTheme : darkTheme), [themeMode]);
 
   const toggleTheme = () => {
-    setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    setThemeMode((prevMode) => {
+      const newMode = prevMode === 'light' ? 'dark' : 'light';
+      localStorage.setItem('themeMode', newMode);
+      return newMode;
+    });
   };
 
   useEffect(() => {
-    setThemeMode(prefersDarkMode ? 'dark' : 'light');
+    const savedTheme = localStorage.getItem('themeMode');
+    if (savedTheme) {
+      setThemeMode(savedTheme);
+    } else {
+      setThemeMode(prefersDarkMode ? 'dark' : 'light');
+    }
   }, [prefersDarkMode]);
 
   return (
     <ThemeMuiContext.Provider value={{ themeMode, toggleTheme }}>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-          {children}
+        {children}
       </MuiThemeProvider>
     </ThemeMuiContext.Provider>
   );
