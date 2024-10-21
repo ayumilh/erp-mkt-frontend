@@ -179,16 +179,19 @@ const ModalTableExpanded = ({ isOpen, handleClose, onFilterStatus }) => {
       aria-describedby="modal-description"
     >
       <div
+        className='bg-white dark:bg-dark-primaria-900 dark:text-gray-200 rounded-md'
         style={{
           position: 'absolute',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '400px',
-          backgroundColor: 'white',
+          width: '90%',
+          maxWidth: '1000px',
           padding: '20px',
           borderRadius: '8px',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          overflow: 'auto',
+          maxHeight: '90vh',
         }}
       >
         <div className='overflow-x-auto'>

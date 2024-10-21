@@ -26,7 +26,7 @@ export const ProdutosMenuMoreResponsive = ({
     handleRowsPerPageChange
 }) => {
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [isOpenMenu, setIsOpenMenu] = useState(false);
 
     const handleOpenMenu = () => {
@@ -81,7 +81,7 @@ export const ProdutosMenuMoreResponsive = ({
                         }} />
                 </button>
                 {isOpenMenu && (
-                    <div className="top-10 left-14 absolute z-10 mt-2 px-2 rounded-md bg-white dark:bg-dark-primaria-900">
+                    <div className="top-10 left-10 absolute z-10 mt-2 px-2 rounded-md bg-white dark:bg-dark-primaria-900">
                         <DropdownSelectOrAll
                             title={'Gerar produtos do armazém'}
                             setShowCheckboxes={setShowCheckboxes}

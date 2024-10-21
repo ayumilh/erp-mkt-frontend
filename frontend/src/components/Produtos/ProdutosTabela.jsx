@@ -30,7 +30,6 @@ const ProdutosTabela = ({ onFilterStatus }) => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products");
-        console.log(response.data)
         if (response.data && Array.isArray(response.data.products)) {
           const restructuredData = response.data.products.map((product) => {
             return {
@@ -193,8 +192,8 @@ const ProdutosTabela = ({ onFilterStatus }) => {
       />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
-          <thead className='sticky top-0 bg-primaria-900 dark:bg-dark-primaria-900'>
-            <tr>
+          <thead className='sticky top-0 z-0 bg-primaria-900 dark:bg-dark-primaria-900'>
+            <tr className="z-0">
               {(showCheckboxes || showCheckboxesAll) && <td className="pl-4"></td>}
               <th className="pr-4 pl-6 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">SKU</th>
               <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Nome</th>
@@ -246,7 +245,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
             ) : (
               <tr>
                 <td className="text-center" colSpan="6">
-                  <div className="w-52 ml-10 md:ml-0 md:px-10 md:w-full py-12">
+                  <div className="w-full ml-10 md:ml-0 md:px-10 md:w-full py-12">
                     <span><ProductionQuantityLimitsIcon className="dark:text-gray-200" style={{ width: 46, height: 46 }} /></span>
                     <p className="mt-8 dark:text-gray-200">Ops! Parece que as prateleiras estão vazias. Volte em breve para mais produtos!</p>
                   </div>
