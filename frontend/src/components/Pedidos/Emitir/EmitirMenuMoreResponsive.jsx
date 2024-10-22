@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { DropdownSelectOrAll } from '@/components/Geral/Button/DropdownSelectOrAll';
+import { DropdownSelectOrAll } from '@/components/Geral/Dropdown/DropdownSelectOrAll';
 import BtnActions from '@/components/Geral/Button/BtnActions';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
 

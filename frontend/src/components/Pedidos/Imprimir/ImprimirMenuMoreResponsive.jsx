@@ -5,7 +5,7 @@ import { useMediaQuery } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import EditIcon from '@mui/icons-material/Edit';
-import { DropdownSelectOrAll } from '../../Geral/Button/DropdownSelectOrAll';
+import { DropdownSelectOrAll } from '../../Geral/Dropdown/DropdownSelectOrAll';
 import { BtnImprimir } from './BtnImprimir';
 
 export const ImprimirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, setShowCheckboxes, setShowCheckboxesAll, shippingIdOrder }) => {

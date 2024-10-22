@@ -6,7 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
 import EditIcon from '@mui/icons-material/Edit';
-import { DropdownSelectOrAll } from '../../Geral/Button/DropdownSelectOrAll';
+import { DropdownSelectOrAll } from '../../Geral/Dropdown/DropdownSelectOrAll';
 import { BtnImprimir } from '../Imprimir/BtnImprimir';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
