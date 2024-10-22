@@ -46,9 +46,9 @@ const ProdutosHeader = () => {
                         onClick={toggleDropdown}
                     >
                         <MoreHorizIcon
+                            className="text-gray-700 dark:text-white"
                             sx={{
                                 width: '34px',
-                                color: '#2D3748',
                                 transform: isVertical ? 'rotate(90deg)' : 'rotate(0deg)',
                                 transition: 'transform 0.3s ease-in-out'
                             }}
@@ -75,7 +75,7 @@ const ProdutosHeader = () => {
                 </div>
             </div>
 
-            <div className="flex gap-3 justify-end mt-3 xl:mt-0">
+            <div className="flex gap-3 justify-end mt-4 xl:mt-0">
                 <div className="lg:flex hidden flex-row gap-0 md:gap-0">
                     <BtnRoute route="/produtos/anuncioCopiado" size='full' btn='base' txt='base'>
                         Copiar anúncio

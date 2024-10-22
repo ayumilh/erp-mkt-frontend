@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
             <body className={`${poppins.className} max-w-full h-screen`}>
                 <NextAuthSessionProvider>
                     <AuthContextProvider>
-                        <ThemeProvider>
+                        <ThemeProvider initialTheme="light">
                             {children}
                             <ModalVerificationLogout />
                         </ThemeProvider>
