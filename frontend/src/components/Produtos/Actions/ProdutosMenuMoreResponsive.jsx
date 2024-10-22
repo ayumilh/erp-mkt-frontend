@@ -82,7 +82,7 @@ export const ProdutosMenuMoreResponsive = ({
                 </button>
                 {isOpenMenu && (
                     <div className="top-10 left-10 absolute z-10 mt-2 px-2 rounded-md bg-white dark:bg-dark-primaria-900">
-                        <Drop downSelectOrAll
+                        <DropdownSelectOrAll
                             title={'Gerar produtos do armazém'}
                             setShowCheckboxes={setShowCheckboxes}
                             showCheckboxes={showCheckboxes}
