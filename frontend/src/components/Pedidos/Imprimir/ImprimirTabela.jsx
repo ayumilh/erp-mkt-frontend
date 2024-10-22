@@ -22,7 +22,13 @@ export default function ImprimirTabela() {
 
   return (
     <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
-      <ImprimirMenuMoreResponsive />
+      <ImprimirMenuMoreResponsive
+        shippingIdOrder={shippingIdOrder}
+        showCheckboxes={showCheckboxes}
+        setShowCheckboxes={setShowCheckboxes}
+        setShowCheckboxesAll={setShowCheckboxesAll}
+        showCheckboxesAll={showCheckboxesAll}
+      />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
           <thead className='sticky top-0 z-10 bg-primaria-900'>

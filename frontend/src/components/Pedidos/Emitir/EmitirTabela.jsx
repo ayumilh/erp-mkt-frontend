@@ -7,11 +7,11 @@ import ErrorNotification from '../../Geral/Notifications/ErrorNotification';
 
 export default function EmitirTabela() {
   const [shippingIdOrder, setShippingIdOrder] = useState([]);
-  const [statusRequestEmitirPedido, setStatusRequestEmitirPedido] = useState(null);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [statusRequestEmitirPedido, setStatusRequestEmitirPedido] = useState(null);
   
   const closeModal = () => {
     setIsModalTr(false);
