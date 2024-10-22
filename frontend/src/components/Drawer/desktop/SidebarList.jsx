@@ -12,9 +12,6 @@ import AnalysisIcon from "@mui/icons-material/BarChart";
 import StockIcon from "@mui/icons-material/Inventory";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-
-import SettingsIcon from '@mui/icons-material/Settings';
-import BtnSignOut from "../BtnSignOut";
 import { Zoom } from "@mui/material";
 
 const iconsNav = [
@@ -54,7 +51,7 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose,
         <>
             <div>
                 <ul className="w-[200px] px-2 ml-1">
-                    {["Dashboard", "Produtos", "Pedidos", "Comprar", "Analise", "Estoque", "Feedback"].map(
+                    {["Dashboard", "Produtos", "Pedidos", "Analise", "Estoque", "Feedback"].map(
                         (text, index) => (
                             <li key={text} className="flex flex-col items-center">
                                 <Link href={`/${text.toLowerCase()}`}>

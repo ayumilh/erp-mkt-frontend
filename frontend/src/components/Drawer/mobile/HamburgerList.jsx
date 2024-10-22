@@ -41,7 +41,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
     return (<>
         <div>
             <ul className="flex flex-col px-4 my-10">
-                {["Dashboard", "Produtos", "Pedidos", "Comprar", "Analise", "Estoque", "Feedback"].map(
+                {["Dashboard", "Produtos", "Pedidos", "Analise", "Estoque", "Feedback"].map(
                     (text, index) => (
                         <li key={text} className="flex flex-col mb-5">
                             <Link href={`/${text.toLowerCase()}`}>

@@ -1,42 +1,21 @@
 import { useState } from "react";
+import { searchUserId } from '@/utils/searchUserId';
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import BtnActive from "@/components/Geral/Button/BtnActive";
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
-import Cookies from "js-cookie";
 
 export const BtnSincronizarProdutos = ({ statusRequestSync, setStatusRequestSync }) => {
     const [loading, setLoading] = useState(false);
 
-    const searchUserId = () => {
-        const tokenId = Cookies.get("userId") ? JSON.parse(Cookies.get("userId")) : null;
-        if (tokenId && tokenId.token) {
-            try {
-                const decodedToken = jwtDecode(tokenId.token);
-                const userId = decodedToken.userid;
-                return userId;
-            } catch (error) {
-                console.error(error);
-                setStatusRequestSync(false);
-                return;
-            }
-        } else {
-            setStatusRequestSync(false);
-            return;
-        }
-    }
-
-
     const handleSyncOrders = async () => {
+        setLoading(true);
+
         const userId = searchUserId();
         if (!userId) {
             return;
-        } else {
-            console.log(userId);
         }
 
-        setLoading(true);
         const maxRetries = 3;
         const retryDelay = 2000;
 
@@ -61,7 +40,13 @@ export const BtnSincronizarProdutos = ({ statusRequestSync, setStatusRequestSync
 
     return (
         <div>
-            <BtnActive title="Sincronizar" onClick={handleSyncOrders} size='btnHeader' width='full' disabled={loading} />
+            <BtnActive
+                title="Sincronizar"
+                onClick={handleSyncOrders} 
+                size='btnHeader' 
+                width='full' 
+                disabled={loading} 
+            />
             {
                 statusRequestSync === true && <SuccessNotification message='Produtos sincronizados com sucesso!' />
             }
