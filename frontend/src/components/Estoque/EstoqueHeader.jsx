@@ -43,11 +43,7 @@ const EstoqueHeader = () => {
                         onClick={toggleDropdown}
                     >
                         <MoreHorizIcon
-<<<<<<< HEAD
-                            className="text-gray-700 dark:text-white"
-=======
                             className='dark:text-gray-200'
->>>>>>> 446a5041b26b578363be27eb3641d09d8fb62a95
                             sx={{
                                 width: '34px',
                                 transform: isVertical ? 'rotate(90deg)' : 'rotate(0deg)',
