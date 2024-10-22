@@ -5,7 +5,8 @@ import { useMediaQuery } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import EditIcon from '@mui/icons-material/Edit';
-import { DropdownSelectOrAll } from '../../Geral/Button/DropdownSelectOrAll';
+import { DropdownSelectOrAll } from '../../Geral/Dropdown/DropdownSelectOrAll';
+import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
 import { BtnImprimir } from './BtnImprimir';
 
 export const ImprimirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, setShowCheckboxes, setShowCheckboxesAll, shippingIdOrder }) => {
@@ -31,10 +32,12 @@ export const ImprimirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
     }, [menuMoreVertRef])
 
     return (
-        <div className="relative border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 top-0 left-0 z-40 bg-primaria-900" ref={menuMoreVertRef}>
+        <div className="relative border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 top-0 left-0 z-40 bg-primaria-900 dark:bg-dark-primaria-900" ref={menuMoreVertRef}>
             {isMobile ? (<>
                 <button onClick={handleOpenMenu}>
-                    <MoreVertIcon sx={{
+                    <MoreVertIcon 
+                    className='dark:text-gray-200'
+                    sx={{
                         width: '18px',
                         color: '#2D3748',
                         transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
@@ -50,27 +53,8 @@ export const ImprimirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
                             setShowCheckboxesAll={setShowCheckboxesAll}
                             showCheckboxesAll={showCheckboxesAll}
                         />
-                        <div>
-                            <button
-                                aria-controls="btn-pie"
-                                aria-haspopup="true"
-                                className="w-full md:h-8 px-2 my-1 flex items-center justify-start"
-                            >
-                                <FilterListIcon className="mr-1 h-4 md:h-5 w-4 md:w-5 dark:text-gray-300 dark:hover:text-white" />
-                                <span className="opacity-90 hover:text-black text-sm font-medium">Filtrar</span>
-                            </button>
-                        </div>
-
-                        <div>
-                            <button
-                                aria-controls="btn-pie"
-                                aria-haspopup="true"
-                                className="w-full h-8 px-2 my-1 flex items-center justify-start"
-                            >
-                                <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5" />
-                                <span className="opacity-90 hover:text-black text-sm font-medium">Editar em massa</span>
-                            </button>
-                        </div>
+                        <BtnBorder title="Filtrar" />
+                        <BtnBorder title="Editar em massa" />
                     </div>
                 )}
             </>) : (<>
@@ -81,27 +65,8 @@ export const ImprimirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
                     setShowCheckboxesAll={setShowCheckboxesAll}
                     showCheckboxesAll={showCheckboxesAll}
                 />
-
-                <div>
-                    <button
-                        aria-controls="btn-pie"
-                        aria-haspopup="true"
-                        className="h-8 px-2 my-1 rounded-lg border border-gray-200 hover:border-[#c7c7c7] focus:outline-none focus:ring-1 focus:ring-[#d4d4d4] flex items-center justify-center"
-                    >
-                        <FilterListIcon className="mr-1 h-4 md:h-5 w-4 md:w-5 dark:text-gray-300 dark:hover:text-white" />
-                        <span className="opacity-90 hover:opacity-100 text-sm font-medium">Filtro</span>
-                    </button>
-                </div>
-                <div>
-                    <button
-                        aria-controls="btn-pie"
-                        aria-haspopup="true"
-                        className="h-8 px-2 my-1 rounded-lg border border-gray-200 hover:border-[#c7c7c7] focus:outline-none focus:ring-1 focus:ring-[#d4d4d4] flex items-center justify-center"
-                    >
-                        <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5" />
-                        <span className="opacity-90 hover:opacity-100 text-sm font-medium">Editar em massa</span>
-                    </button>
-                </div>
+                    <BtnBorder title="Filtrar" />
+                    <BtnBorder title="Editar em massa" />
             </>)}
 
             {(showCheckboxes || showCheckboxesAll) &&

@@ -1,9 +1,11 @@
+'use client'
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import NextAuthSessionProvider from "@/providers/sessionProvider";
 import { AuthContextProvider } from "@/contexts/AuthContext";
 import ModalVerificationLogout from "@/components/Config/ModalVerificationLogout";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ThemeProvider as ThemeMuiProvider } from "@/contexts/ThemeMuiContext";
 
 const poppins = Poppins({
     weight: ["400", "500", "600", "700"],
@@ -27,9 +29,17 @@ export default function RootLayout({ children }) {
             <body className={`${poppins.className} max-w-full h-screen`}>
                 <NextAuthSessionProvider>
                     <AuthContextProvider>
+<<<<<<< HEAD
                         <ThemeProvider initialTheme="light">
                             {children}
                             <ModalVerificationLogout />
+=======
+                        <ThemeProvider>
+                            <ThemeMuiProvider>
+                                {children}
+                                <ModalVerificationLogout />
+                            </ThemeMuiProvider>
+>>>>>>> 446a5041b26b578363be27eb3641d09d8fb62a95
                         </ThemeProvider>
                     </AuthContextProvider>
                 </NextAuthSessionProvider>

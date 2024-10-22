@@ -7,11 +7,11 @@ import ErrorNotification from '../../Geral/Notifications/ErrorNotification';
 
 export default function EmitirTabela() {
   const [shippingIdOrder, setShippingIdOrder] = useState([]);
-  const [statusRequestEmitirPedido, setStatusRequestEmitirPedido] = useState(null);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [statusRequestEmitirPedido, setStatusRequestEmitirPedido] = useState(null);
   
   const closeModal = () => {
     setIsModalTr(false);
@@ -23,7 +23,7 @@ export default function EmitirTabela() {
   }
 
   return (
-    <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
+    <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
       <EmitirMenuMoreResponsive 
         shippingIdOrder={shippingIdOrder}
         showCheckboxes={showCheckboxes} 
@@ -33,15 +33,15 @@ export default function EmitirTabela() {
       />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
-          <thead className='sticky top-0 z-10 bg-primaria-900'>
+          <thead className='sticky top-0 z-10 bg-primaria-900 dark:bg-dark-primaria-900'>
             <tr>
-              <th className="pl-4 lg:pl-6 pr-3 py-3 md:py-4 text-sm font-semibold text-start">Produtos</th>
+              <th className="pl-4 lg:pl-6 pr-3 py-3 md:py-4 text-sm font-semibold text-start dark:text-gray-200">Produtos</th>
               <th className="px-3 py-3 md:py-4"></th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold">Valor do pedido</th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-start">Destinatário</th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-start">Tempo</th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center">Metodos de envio</th>
-              <th className="pl-3 pr-4 py-3 md:py-4 text-sm font-semibold text-center">Status</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold dark:text-gray-200">Valor do pedido</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-start dark:text-gray-200">Destinatário</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-start dark:text-gray-200">Tempo</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Metodos de envio</th>
+              <th className="pl-3 pr-4 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Status</th>
             </tr>
           </thead>
           <tbody>

@@ -44,18 +44,21 @@ const span = tv({
   }
 })
 
-export default function BtnActive({ title, page, size, onClick, padding, margin, width, fontSize }) {
+export default function BtnActive({ title, page, size, onClick, padding, margin, width, fontSize, disabled }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   
   const handleClick = async () => {
     setIsLoading(true);
-    if(page) {
-      await router.push(page);
-    } else if(onClick) {
-      await onClick();
+    try{
+      if(page) {
+        await router.push(page);
+      } else if(onClick) {
+        await onClick();
+      }
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }
 
   
@@ -63,7 +66,8 @@ export default function BtnActive({ title, page, size, onClick, padding, margin,
     <button
       type="button"
       onClick={handleClick}
-      className={button({size: size, padding: padding, width: width})}
+      className={`${button({size: size, padding: padding, width: width})} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      disabled={isLoading || disabled}
     >
       {isLoading ? (
         <><CircularProgress color="inherit" className="text-white mr-1" size={12} /> <span className={`${span({width: width, margin: margin})}`} style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}...</span></>

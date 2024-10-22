@@ -3,15 +3,25 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const ModalConectarLojas = ({ onClose, drawerClose }) => {
+  const [selectedStore, setSelectedStore] = useState('Mercado Livre');
+
+  const handleStoreChange = (event) => {
+    setSelectedStore(event.target.value);
+  };
+
   const [nomeLoja, setNomeLoja] = useState("");
-  const [plataforma, setPlataforma] = useState("");
 
   const sendDataStore = () => {
-    const clientId = 8470533338689335;
-    const redirectUri = encodeURIComponent(
-      "https://erp-mkt-frontend.vercel.app/authmercado"
-    );
-    const authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
+    let authUrl = '';
+    if (selectedStore === 'Mercado Livre') {
+      const clientId = 8470533338689335;
+      const redirectUri = encodeURIComponent(
+        "https://erp-mkt-frontend.vercel.app/authmercado"
+      );
+      authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
+    } else if (selectedStore === 'Shopee') {
+      authUrl = `https://partner.shopeemobile.com/api/v2/shop/auth_partner?partner_id=${process.env.SHOPEE_PARTNER_ID}&redirect=https://open.shopee.com&timestamp=1677188400&sign=656451597757546d506e525959634269464f4a76534a48415765586978536653?`;
+    }
 
     window.location.href = authUrl;
   };
@@ -35,21 +45,21 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-10 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+      className="fixed inset-0 z-10 bg-neutral-600 bg-opacity-50 overflow-y-auto h-full w-full"
       onClick={onClose}
     >
       <div
-        className="relative flex-col top-60 mx-auto py-5 px-6 border max-w-min rounded-md bg-primaria-900 shadow-lg"
+        className="relative flex-col top-60 mx-auto py-5 px-6 border max-w-min rounded-md bg-primaria-900 dark:bg-dark-primaria-900 shadow-lg dark:border-neutral-800"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
-          <h3 className="text-lg text-gray-800 font-medium">Conectar Conta</h3>
+          <h3 className="text-lg text-neutral-800 dark:text-gray-300 font-medium">Conectar Conta</h3>
           <button
             onClick={onClose}
-            className="text-gray-800 hover:text-gray-600"
+            className="text-neutral-800 hover:text-neutral-600"
           >
             <svg
-              className="h-6 w-6"
+              className="h-6 w-6 dark:text-gray-300 hover:text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -63,13 +73,13 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
             </svg>
           </button>
         </div>
-        <p className="px-2 pt-7 pb-4 w-full whitespace-normal text-neutral-700 text-sm">
+        <p className="px-2 pt-7 pb-4 w-full whitespace-normal text-neutral-700 dark:text-gray-200 text-sm">
           Insira os detalhes da sua loja para conectá-la à nossa plataforma.
         </p>
         <form onSubmit={handleSubmit} className="pt-0 pb-4 px-2">
           <div className="flex flex-col">
             <div className="flex gap-3">
-              <label className="w-28 text-sm text-gray-800">Nome da Loja</label>
+              <label className="w-28 text-sm text-neutral-800 dark:text-gray-200">Nome da Loja</label>
               <input
                 type="text"
                 placeholder="Nome da Loja"
@@ -79,17 +89,17 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
               />
             </div>
             <div className="flex gap-3">
-              <label className="w-28 text-sm text-gray-800">Plataforma</label>
+              <label className="w-28 text-sm text-neutral-800 dark:text-gray-200">Plataforma</label>
               <select
-                value={plataforma || ""}
-                onChange={(e) => setPlataforma(e.target.value)}
+                value={selectedStore}
+                onChange={handleStoreChange}
                 className="w-60 p-2 border rounded-md mb-4 text-sm"
               >
                 <option value="">Selecione a Plataforma</option>
                 <option value="Mercado Livre">Mercado Livre</option>
                 <option value="Amazon">Amazon</option>
                 <option value="Shopee">Shopee</option>
-                <option value="Magalu" className="hover:bg-gray-200">
+                <option value="Magalu" className="hover:bg-neutral-200">
                   Magalu
                 </option>
               </select>

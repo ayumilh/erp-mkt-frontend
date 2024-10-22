@@ -6,7 +6,7 @@ import { useMediaQuery } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import ModalTableExpanded from '@/components/Produtos/Actions/ModalTableExpanded';
-import { DropdownSelectOrAll } from '@/components/Geral/Button/DropdownSelectOrAll';
+import { DropdownSelectOrAll } from '@/components/Geral/Dropdown/DropdownSelectOrAll';
 import BtnActions from '@/components/Geral/Button/BtnActions';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -26,7 +26,7 @@ export const ProdutosMenuMoreResponsive = ({
     handleRowsPerPageChange
 }) => {
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [isOpenMenu, setIsOpenMenu] = useState(false);
 
     const handleOpenMenu = () => {
@@ -60,18 +60,19 @@ export const ProdutosMenuMoreResponsive = ({
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleOpenModal = () => {
-      setIsModalOpen(true);
+        setIsModalOpen(true);
     };
-  
+
     const handleCloseModal = () => {
-      setIsModalOpen(false);
+        setIsModalOpen(false);
     };
 
     return (
-        <div className="border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 sticky top-0 left-0 bg-primaria-900 dark:bg-dark-primaria-900" ref={menuMoreVertRef}>
+        <div className="relative border-l-indigo-200 dark:bg-dark-primaria-900 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 top-0 left-0 z-40" ref={menuMoreVertRef}>
             {isMobile ? (<>
                 <button onClick={handleOpenMenu}>
                     <MoreVertIcon
+                        className='dark:text-gray-200'
                         sx={{
                             width: '18px',
                             color: '#2D3748',
@@ -80,7 +81,7 @@ export const ProdutosMenuMoreResponsive = ({
                         }} />
                 </button>
                 {isOpenMenu && (
-                    <div className="top-10 left-14 absolute z-10 mt-2 px-2 rounded-md bg-white dark:bg-dark-primaria-900">
+                    <div className="top-10 left-10 absolute z-10 mt-2 px-2 rounded-md bg-white dark:bg-dark-primaria-900">
                         <DropdownSelectOrAll
                             title={'Gerar produtos do armazém'}
                             setShowCheckboxes={setShowCheckboxes}
@@ -102,10 +103,9 @@ export const ProdutosMenuMoreResponsive = ({
                 />
                 <BtnBorder title="Filtrar" />
                 <BtnBorder title="Editar em massa" />
-                <button onClick={handleOpenModal} className='cursor-pointer transform active:-translate-y-1 active:scale-105 transition duration-700 ease-in-out'>
+                <button onClick={handleOpenModal} className='md:hidden cursor-pointer transform active:-translate-y-1 active:scale-105 transition duration-700 ease-in-out'>
                     <AspectRatioIcon className='text-neutral-700 dark:text-gray-300 hover:text-black' />
-                </button> 
-                <ModalTableExpanded isOpen={isModalOpen} handleClose={handleCloseModal} />
+                </button>
             </>)}
 
             {(showCheckboxes || showCheckboxesAll) &&
@@ -115,6 +115,10 @@ export const ProdutosMenuMoreResponsive = ({
             }
 
             <div className="flex items-center gap-2 ml-auto">
+                <button onClick={handleOpenModal} className='md:hidden cursor-pointer transform active:-translate-y-1 active:scale-105 transition duration-700 ease-in-out'>
+                    <AspectRatioIcon className='text-neutral-700 dark:text-gray-300 hover:text-black' />
+                </button>
+                <ModalTableExpanded isOpen={isModalOpen} handleClose={handleCloseModal} />
                 <div>
                     <select id="rowsPerPage" value={rowsPerPage} onChange={handleRowsPerPageChange} className="py-1 rounded bg-transparent dark:text-gray-200 dark:bg-dark-primaria-900">
                         <option value={5}>5 páginas</option>
@@ -133,7 +137,6 @@ export const ProdutosMenuMoreResponsive = ({
                     <KeyboardArrowRightIcon className={currentPage === totalPages ? "opacity-50 dark:text-gray-200" : ""} />
                 </button>
             </div>
-
         </div>
     )
 }

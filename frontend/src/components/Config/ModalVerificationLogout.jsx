@@ -20,14 +20,14 @@ const ModalVerificationLogout = () => {
       onClick={handleCloseModal}
     >
       <div
-        className="bg-white py-5 px-6 rounded shadow-lg"
+        className="bg-white dark:bg-dark-primaria-900 py-5 px-6 rounded shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-700">Confirmar Saída</h2>
+          <h2 className="text-lg font-semibold text-neutral-800 dark:text-gray-300">Confirmar Saída</h2>
           <button
             onClick={handleCloseModal}
-            className="text-gray-800 hover:text-gray-600"
+            className="text-neutral-800 dark:text-gray-200 hover:text-gray-600"
           >
             <svg
               className="h-6 w-6"
@@ -45,7 +45,7 @@ const ModalVerificationLogout = () => {
           </button>
 
         </div>
-        <p className="mt-5 ml-2 text-lg text-gray-700">
+        <p className="mt-5 ml-2 text-lg text-neutral-800 dark:text-gray-200">
           Você tem certeza que deseja sair?
         </p>
         <div className="mt-8 flex gap-4 justify-end" onClick={(e) => e.stopPropagation()}>
@@ -57,7 +57,7 @@ const ModalVerificationLogout = () => {
           </button>
           <button
             onClick={handleCloseModal}
-            className="px-3 py-2 font-medium border border-gray-300 hover:bg-gray-100 rounded-md cursor-pointer transition duration-300 ease-in-out"
+            className="px-3 py-2 font-medium border border-gray-300 hover:bg-gray-100 dark:hover:bg-neutral-800 dark:text-gray-200 rounded-md cursor-pointer transition duration-300 ease-in-out"
           >
             Cancelar
           </button>

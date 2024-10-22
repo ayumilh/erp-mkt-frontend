@@ -7,9 +7,9 @@ import SincronizarContent from "@/components/Estoque/SincronizarAnuncios/Sincron
 
 const SincronizarAnuncios = async () => { 
   const session = await getServerSession(nextAuthOptions)
-  // if(!session) {
-  //   redirect('/login')
-  // }
+  if(!session) {
+    redirect('/login')
+  }
   
   return (
     <main className="flex max-w-full h-screen">

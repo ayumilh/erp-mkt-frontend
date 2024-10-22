@@ -32,7 +32,7 @@ export const NfMenuMoreResponsive = () => {
 			{isMobile ? (<>
 				<button onClick={handleOpenMenu}>
 					<MoreVertIcon
-						className='dark:text-gray-300'
+						className='dark:text-gray-200'
 						 sx={{
 						width: '18px',
 						color: '#2D3748',

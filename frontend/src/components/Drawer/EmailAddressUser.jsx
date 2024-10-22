@@ -6,9 +6,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LinkIcon from '@mui/icons-material/Link';
 import { useSession } from "next-auth/react";
 import ModalConectarLojas from "@/components/Config/ModalConectarLojas";
-
 import BtnSignOut from "./BtnSignOut";
-import ToggleTheme from "@/components/Geral/Button/ToggleTheme";
 
 export const EmailAddressUser = ({ menuOpen, toggleMenuOpen }) => {
     const { userInfo } = useContext(AuthContext);
@@ -34,7 +32,7 @@ export const EmailAddressUser = ({ menuOpen, toggleMenuOpen }) => {
     }, [dropdownRef, toggleMenuOpen]);
 
     return (
-        <>
+        <div ref={dropdownRef}>
             <span
                 className="font-medium max-w-28 md:w-full overflow-hidden"
                 style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
@@ -42,7 +40,7 @@ export const EmailAddressUser = ({ menuOpen, toggleMenuOpen }) => {
             >
                 {session?.session?.user?.email || (userInfo.length > 0 ? userInfo[0].email : "")}
             </span>
-            <div className="relative" ref={dropdownRef}>
+            <div className="relative">
                 <KeyboardArrowDownIcon sx={{
                     width: '20px',
                     transform: menuOpen ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -55,7 +53,6 @@ export const EmailAddressUser = ({ menuOpen, toggleMenuOpen }) => {
                                 <span> <LinkIcon fontSize="small" className="mr-2 text-neutral-700 dark:text-gray-300 group-hover:text-segundaria-900 transition duration-300 ease-out" /> </span>
                                 <span className='text-sm dark:text-gray-200 font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>Conectar Conta</span>
                             </button>
-                            <ToggleTheme />
                             <button className='flex rounded-full items-center group hover:bg-segundaria-200 px-2 py-1'>
                                 <span className='flex justify-center'>
                                     <SettingsIcon fontSize="small" className="mr-2 text-neutral-700 dark:text-gray-300 group-hover:text-segundaria-900 transition duration-300 ease-out" />
@@ -68,6 +65,6 @@ export const EmailAddressUser = ({ menuOpen, toggleMenuOpen }) => {
                 )}
                 {isModalOpen && <ModalConectarLojas onClose={toggleModal} />}
             </div>
-        </>
+        </div>
     );
 };

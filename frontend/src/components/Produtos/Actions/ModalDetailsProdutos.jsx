@@ -84,12 +84,12 @@ export default function ModalDetailsProdutos({ onClose, selectedSku }) {
                   </div>
                   <div className="flex flex-col gap-3 px-2">
                     <div className="flex flex-row gap-4">
-                      <span className="w-48 md:w-64 lg:w-[420px] text-neutral-800 text-lg">
+                      <span className="w-48 md:w-64 lg:w-[420px] text-neutral-800 dark:text-gray-200 text-lg">
                         {product.title}
                       </span>
                     </div>
                     <div className="flex flex-row gap-2">
-                      <span className="w-24 lg:w-14 font-semibold">Cores</span>
+                      <span className="w-24 lg:w-14 font-semibold dark:text-gray-300">Cores</span>
                       {product.color === "Azul-marinho" ? (
                         <div
                           style={{
@@ -142,7 +142,7 @@ export default function ModalDetailsProdutos({ onClose, selectedSku }) {
                       )}
                     </div>
                     <div className="flex flex-row gap-4">
-                      <span className="w-48 md:w-64 lg:w-[420px] text-end text-neutral-800 font-medium text-sm">
+                      <span className="w-48 md:w-64 lg:w-[420px] text-end text-neutral-800 dark:text-gray-300 font-medium text-sm">
                         {product.product_sku}
                       </span>
                     </div>
@@ -151,12 +151,12 @@ export default function ModalDetailsProdutos({ onClose, selectedSku }) {
                       <span className="text-cyan-500 opacity-90 text-2xl font-medium">
                         R${product.price}
                       </span>
-                      <div className="bg-gray-50 rounded-xl px-3 py-2 flex items-center gap-2">
-                        <span className="text-neutral-800 text-sm font-medium">
+                      <div className="bg-gray-50 dark:bg-neutral-800 rounded-xl px-3 py-2 flex items-center gap-2">
+                        <span className="text-neutral-800 dark:text-gray-300 text-sm font-medium">
                           <Inventory2OutlinedIcon className="text-cyan-500 w-5 h-5 mr-2" />
                           Em estoque:
                         </span>
-                        <span className="text-neutral-800 text-sm font-medium">
+                        <span className="text-neutral-800 dark:text-gray-200 text-sm font-medium">
                           {product.available_quantity}
                         </span>
                       </div>

@@ -7,9 +7,9 @@ import ComprarContent from '@/components/Comprar/ComprarContent';
 
 const Comprar = async() => {
   const session = await getServerSession(nextAuthOptions)
-  // if(!session) {
-  //   redirect('/login')
-  // }
+  if(!session) {
+    redirect('/login')
+  }
 
 	return (
     <main className="flex max-w-full h-screen">

@@ -1,6 +1,5 @@
 'use client'
 import * as React from "react";
-
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
@@ -10,6 +9,7 @@ import HamburgerList from "./HamburgerList";
 import HamburgerHeader from "./HamburgerHeader";
 
 const drawerWidth = 240;
+
 export default function HamburgerContent() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -58,6 +58,8 @@ export default function HamburgerContent() {
               "& .MuiDrawer-paper": {
                 width: drawerWidth,
                 boxSizing: "border-box",
+                backgroundColor: "#363638", // Define o fundo do Drawer no modo dark
+                color: "#e5e7eb", // Define a cor do texto no modo dark
               },
             }}
             variant="persistent"
@@ -76,6 +78,8 @@ export default function HamburgerContent() {
             "& .MuiDrawer-paper": {
               width: drawerWidth,
               boxSizing: "border-box",
+              backgroundColor: "#363638", // Define o fundo do Drawer no modo dark
+              color: "#e5e7eb", // Define a cor do texto no modo dark
             },
           }}
           variant="persistent"

@@ -30,10 +30,12 @@ export const EnviadosMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
     }, [menuMoreVertRef])
 
     return (
-        <div className="border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 sticky top-0 left-0 z-40 bg-primaria-900 " ref={menuMoreVertRef}>
+        <div className="border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 sticky top-0 left-0 z-40 bg-primaria-900 dark:bg-dark-primaria-900" ref={menuMoreVertRef}>
             {isMobile ? (<>
                 <button onClick={handleOpenMenu}>
-                    <MoreVertIcon sx={{
+                    <MoreVertIcon 
+                    className='dark:text-gray-200'
+                    sx={{
                         width: '18px',
                         color: '#2D3748',
                         transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
@@ -74,7 +76,7 @@ export const EnviadosMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
 
             <div className="flex items-center gap-2 ml-auto">
                 <div>
-                    <select id="rowsPerPage" value={rowsPerPage} onChange={handleRowsPerPageChange} className="py-1 rounded bg-transparent">
+                    <select id="rowsPerPage" value={rowsPerPage} onChange={handleRowsPerPageChange} className="py-1 rounded bg-transparent dark:text-gray-200 dark:bg-dark-primaria-900">
                         <option value={5}>5 páginas</option>
                         <option value={10}>10 páginas</option>
                         <option value={20}>20 páginas</option>
@@ -83,12 +85,12 @@ export const EnviadosMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
                     </select>
                 </div>
                 <div>
-                    <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="px-1 py-1 rounded">
-                        <KeyboardArrowLeftIcon className={currentPage === 1 ? "opacity-50" : ""} />
+                    <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="px-1 py-1 rounded dark:text-gray-200">
+                        <KeyboardArrowLeftIcon className={currentPage === 1 ? "opacity-50 dark:text-gray-200" : ""} />
                     </button>
-                    <span>{currentPage} de {totalPages}</span>
-                    <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="px-1 py-1 rounded">
-                        <KeyboardArrowRightIcon className={currentPage === totalPages ? "opacity-50" : ""} />
+                    <span className='dark:text-gray-200'>{currentPage} de {totalPages}</span>
+                    <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="px-1 py-1 rounded dark:text-gray-200">
+                        <KeyboardArrowRightIcon className={currentPage === totalPages ? "opacity-50 dark:text-gray-200" : ""} />
                     </button>
                 </div>
             </div>
