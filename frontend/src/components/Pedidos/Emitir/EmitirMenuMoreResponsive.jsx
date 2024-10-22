@@ -48,7 +48,7 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
     }, [menuMoreVertRef])
 
     return (
-        <div className="relative border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 top-0 left-0 z-40 bg-primaria-900" ref={menuMoreVertRef}>
+        <div className="relative border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 top-0 left-0 z-40 bg-primaria-900 dark:bg-dark-primaria-900" ref={menuMoreVertRef}>
             {isMobile ? (<>
                 <button onClick={handleOpenMenu}>
                     <MoreVertIcon 

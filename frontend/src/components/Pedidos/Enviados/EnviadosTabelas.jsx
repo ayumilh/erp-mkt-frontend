@@ -72,7 +72,7 @@ export default function EnviadosTabela() {
   };
 
   return (
-    <div className="bg-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
+    <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col my-10 overflow-x-auto">
       <EnviadosMenuMoreResponsive 
         showCheckboxes={showCheckboxes}
         showCheckboxesAll={showCheckboxesAll}
@@ -87,16 +87,16 @@ export default function EnviadosTabela() {
       />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
-          <thead className='sticky top-0 z-10 bg-primaria-900'>
+          <thead className='sticky top-0 z-10 bg-primaria-900 dark:bg-dark-primaria-900'>
             <tr>
               {showCheckboxes ? <td className="pl-3"></td> : showCheckboxesAll ? <td className="pl-3"></td> : null}
-              <th className="pl-4 lg:pl-6 pr-3 py-3 md:py-4 text-sm font-semibold text-center">Produtos</th>
+              <th className="pl-4 lg:pl-6 pr-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Produtos</th>
               <th className="px-3 py-3 md:py-4"></th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center">Valor do pedido</th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center">Destinatario</th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center">Criação</th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center">Metodos de envio</th>
-              <th className="pr-4 pl-3 py-3 md:py-4 text-sm font-semibold text-center">Status</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Valor do pedido</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Destinatario</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Criação</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Metodos de envio</th>
+              <th className="pr-4 pl-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Status</th>
             </tr>
           </thead>
           <tbody>
