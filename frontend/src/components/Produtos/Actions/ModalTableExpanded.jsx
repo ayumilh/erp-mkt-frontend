@@ -25,12 +25,8 @@ const ModalTableExpanded = ({ isOpen, handleClose, onFilterStatus }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-
       const userId = searchUserId();
-      if (!userId) {
-        return;
-      }
-
+      if (!userId) return
 
       try {
         const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products", {

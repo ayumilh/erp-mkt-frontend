@@ -6,11 +6,12 @@ import { searchUserId } from '@/utils/searchUserId';
 export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
   const [selectedItems, setSelectedItems] = useState([]);
   const [products, setProducts] = useState([]);
-  const userId = searchUserId();
-
+  
   useEffect(() => {
     const fetchData = async () => {
+      const userId = searchUserId();
       if (!userId) return;
+
       try {
         const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products", {
           params: { userId }
@@ -28,7 +29,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
       }
     }
     fetchData();
-  }, [userId]);
+  }, []);
 
 
   // selecionar todos os checkboxes

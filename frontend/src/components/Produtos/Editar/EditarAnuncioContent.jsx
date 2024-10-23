@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
+import { searchUserId } from '@/utils/searchUserId';
 import axios from "axios";
 import Cookies from "js-cookie";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import BtnActions from "@/components/Geral/Button/BtnActions";
-import { searchUserId } from '@/utils/searchUserId';
 
 const steps = [
   {
@@ -37,14 +37,13 @@ const EditarAnuncioContent = () => {
 
   const productSKU = Cookies.get("selectedSku");
 
+  const userId = searchUserId();
+  
   // buscando produto pelo sku
   useEffect(() => {
     const fetchProduct = async () => {
-      const userId = searchUserId();
-      if (!userId) {
-        return;
-      }
-
+      if (!userId) return
+      
       try {
         const response = await axios.get(
           `https://erp-mkt.vercel.app/api/mercadolivre/productid?sku=${productSKU}`, {
@@ -56,12 +55,14 @@ const EditarAnuncioContent = () => {
       }
     };
     fetchProduct();
-  }, [productSKU]);
+  }, [productSKU, userId]);
 
 
   // editar produto
   const handleEditar = async (e) => {
     e.preventDefault();
+    if (!userId) return;
+
     try {
       await axios.put(`https://erp-mkt.vercel.app/api/mercadolivre/update-anuncio`, {
         ...input,

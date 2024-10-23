@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
+import { searchUserId } from '@/utils/searchUserId';
 import axios from 'axios';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
@@ -14,8 +15,13 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
 
     useEffect(() => {
         const fetchOrders = async () => {
+            const userId = searchUserId();
+            if (!userId) return;
+
             try {
-                const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/issue`);
+                const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/issue`, {
+                    params: { userId }
+                });
                 if (response.data && Array.isArray(response.data.orders)) {
                     const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
                         if (order.shipping_id !== null) {

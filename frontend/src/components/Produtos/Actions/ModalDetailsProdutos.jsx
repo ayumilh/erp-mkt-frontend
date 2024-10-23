@@ -17,11 +17,8 @@ export default function ModalDetailsProdutos({ onClose, selectedSku }) {
 
   useEffect(() => {
     const fetchProduct = async () => {
-
       const userId = searchUserId();
-      if (!userId) {
-        return;
-      }
+      if (!userId) return
 
       try {
         const response = await axios.get(

@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState, useRef } from 'react';
+import { searchUserId } from '@/utils/searchUserId';
 import Image from 'next/image';
 import axios from 'axios';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
@@ -14,8 +15,13 @@ export default function ImprimirRow({ setOrder, toggleShowCheckboxes, toggleShow
 
   useEffect(() => {
     const fetchOrders = async () => {
+      const userId = searchUserId();
+      if (!userId) return;
+
       try {
-        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/ready`);
+        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/ready`, {
+          params: { userId }
+      });
         if (response.data && Array.isArray(response.data.orders)) {
           const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
             if (order.shipping_id !== null) {

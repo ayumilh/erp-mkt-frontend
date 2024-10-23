@@ -12,9 +12,7 @@ export const BtnSincronizarProdutos = ({ statusRequestSync, setStatusRequestSync
         setLoading(true);
 
         const userId = searchUserId();
-        if (!userId) {
-            return;
-        }
+        if (!userId) return
 
         const maxRetries = 3;
         const retryDelay = 2000;

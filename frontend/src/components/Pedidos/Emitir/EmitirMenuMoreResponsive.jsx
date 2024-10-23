@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { searchUserId } from '@/utils/searchUserId';
 import axios from 'axios';
 import { useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
@@ -21,8 +22,15 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
         if (!shippingIdOrder || shippingIdOrder.length === 0) {
             return;
         }
+
+        const userId = searchUserId();
+        if (!userId) return;
+
         try {
-            const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/issueNote', { ordersBatch: shippingIdOrder });
+            const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/issueNote', {
+                ordersBatch: shippingIdOrder,
+                params: { userId }
+            });
             if (response.status === 200) {
                 setStatusRequestEmitirPedido(true);
             } else {
@@ -51,14 +59,14 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
         <div className="relative border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 top-0 left-0 z-40 bg-primaria-900 dark:bg-dark-primaria-900" ref={menuMoreVertRef}>
             {isMobile ? (<>
                 <button onClick={handleOpenMenu}>
-                    <MoreVertIcon 
-                    className='dark:text-gray-200'
-                    sx={{
-                        width: '18px',
-                        color: '#2D3748',
-                        transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
-                        transition: 'transform 0.3s ease-in-out'
-                    }} />
+                    <MoreVertIcon
+                        className='dark:text-gray-200'
+                        sx={{
+                            width: '18px',
+                            color: '#2D3748',
+                            transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.3s ease-in-out'
+                        }} />
                 </button>
                 {isOpenMenu && (
                     <div className="top-10 left-10 absolute z-10 mt-3 px-2 rounded-md bg-white">
