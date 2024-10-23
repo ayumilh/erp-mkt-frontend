@@ -20,7 +20,10 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     if (!userId) return;
   
     try {
-      const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {shipping_id: shippingIdOrder, userId});
+      const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {
+        shipping_id: shippingIdOrder, 
+        params: { userId }
+      });
       if (response.status === 200) {
         handlePrint();
       } else {
