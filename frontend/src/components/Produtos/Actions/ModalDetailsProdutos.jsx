@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import BtnBackPage from "@/components/Geral/Button/BtnBackPage";
+import { searchUserId } from '@/utils/searchUserId';
 import { SwipeableDrawer } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
@@ -16,10 +17,17 @@ export default function ModalDetailsProdutos({ onClose, selectedSku }) {
 
   useEffect(() => {
     const fetchProduct = async () => {
+
+      const userId = searchUserId();
+      if (!userId) {
+        return;
+      }
+
       try {
         const response = await axios.get(
-          `https://erp-mkt.vercel.app/api/mercadolivre/productid?sku=${productSKU}`
-        );
+          `https://erp-mkt.vercel.app/api/mercadolivre/productid?sku=${productSKU}`, {
+          params: { userId }
+        });
         setProduct(response.data.products[0]);
       } catch (error) {
         console.error(`Error: ${error}`);
@@ -39,7 +47,7 @@ export default function ModalDetailsProdutos({ onClose, selectedSku }) {
         anchor="right"
         open={isOpen}
         onClose={modalClose}
-        onOpen={() => {}}
+        onOpen={() => { }}
         sx={{
           width: ["100%", "560px"],
           "& .MuiDrawer-paper": {

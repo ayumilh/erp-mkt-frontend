@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { searchUserId } from '@/utils/searchUserId';
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
 
@@ -20,8 +21,13 @@ export default function Authmercado({ searchParams }) {
     }
 
     const fetchData = async () => {
+      const userId = searchUserId();
+      if (!userId) {
+        return;
+      }
+
       try {
-        const res = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/redirect', { code, nome_mercado });
+        const res = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/redirect', { code, nome_mercado, userId });
         if (res.status === 200) {
           setResData(res.data);
           setStatusRequestCodeMercado(true);

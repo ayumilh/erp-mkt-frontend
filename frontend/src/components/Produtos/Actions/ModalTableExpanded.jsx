@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
+import { searchUserId } from '@/utils/searchUserId';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
@@ -24,8 +25,17 @@ const ModalTableExpanded = ({ isOpen, handleClose, onFilterStatus }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+
+      const userId = searchUserId();
+      if (!userId) {
+        return;
+      }
+
+
       try {
-        const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products");
+        const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products", {
+          params: { userId }
+        });
         if (response.data && Array.isArray(response.data.products)) {
           const restructuredData = response.data.products.map((product) => {
             return {
@@ -39,7 +49,6 @@ const ModalTableExpanded = ({ isOpen, handleClose, onFilterStatus }) => {
             };
           });
           setProducts(restructuredData);
-          console.log(restructuredData)
         } else {
           setProducts([]);
         }

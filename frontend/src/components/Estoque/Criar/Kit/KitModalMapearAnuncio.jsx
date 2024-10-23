@@ -2,29 +2,36 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function ModalMapearAnuncio({ onClose, onIdProduct }){
+export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [products, setProducts] = useState([]);
 
-    //  buscar produtos
-    useEffect(() => {
-      axios
-        .get("https://erp-mkt.vercel.app/api/mercadolivre/products")
-        .then((response) => {
-          const restructuredData = response.data.products.map((product) => {
-            return {
-              sku: product.product_sku,
-              title: product.title,
-              color: product.color,
-            };
-          });
-          setProducts(restructuredData);
-        })
-        .catch((error) => {
-          console.error(`Error: ${error}`);
+  const userId = searchUserId();
+  if (!userId) {
+    return;
+  }
+
+  //  buscar produtos
+  useEffect(() => {
+    axios
+      .get("https://erp-mkt.vercel.app/api/mercadolivre/products", {
+        params: { userId }
+      })
+      .then((response) => {
+        const restructuredData = response.data.products.map((product) => {
+          return {
+            sku: product.product_sku,
+            title: product.title,
+            color: product.color,
+          };
         });
-    }, []);
+        setProducts(restructuredData);
+      })
+      .catch((error) => {
+        console.error(`Error: ${error}`);
+      });
+  }, []);
 
 
   // selecionar todos os checkboxes
@@ -43,13 +50,13 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }){
 
     try {
       const response = await axios.get('https://erp-mkt.vercel.app/api/stock/mercadolivre/get', { params: { idProduct } });
-      
+
       const transformedData = {
         sku: response.data.sku.map(item => item),
         colorVariables: response.data.colorVariables.map(item => item),
         availableQuantities: response.data.availableQuantityVariables.map(item => item),
       };
-  
+
       onIdProduct(transformedData);
       onClose();
     } catch (error) {
@@ -87,7 +94,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }){
                 </div>
 
                 <div className="bg-primaria-800 flex items-center rounded w-full relative">
-                  <SearchIcon className='h-5 w-5 absolute left-[6px] top-1/2 transform -translate-y-1/2'/>
+                  <SearchIcon className='h-5 w-5 absolute left-[6px] top-1/2 transform -translate-y-1/2' />
                   <input className="bg-primaria-800 w-full rounded-lg overflow-hidden text-sm font-normal pl-8 pr-3 py-2" type="text" placeholder="Pesquise por SKU" style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
                 </div>
               </div>
@@ -106,7 +113,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }){
                     {products.map((product, index) => (
                       <tr key={index}>
                         <td className='pl-4'>
-                          <input type="checkbox" onChange={(e) => handleCheckboxChange(e, product.sku)}/> 
+                          <input type="checkbox" onChange={(e) => handleCheckboxChange(e, product.sku)} />
                         </td>
                         <td className="w-[240px] pl-6 pr-4 py-3 md:py-5 font-medium">{product.title}</td>
                         <td className="px-4 py-3 md:py-5">{product.sku}</td>

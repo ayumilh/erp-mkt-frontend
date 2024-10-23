@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { searchUserId } from '@/utils/searchUserId';
 import BtnBackPage from "@/components/Geral/Button/BtnBackPage";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
@@ -14,10 +15,17 @@ export default function ModalDetailsProdutosMouseLeave({ onClose, selectedSku })
 
   useEffect(() => {
     const fetchProduct = async () => {
+
+      const userId = searchUserId();
+      if (!userId) {
+        return;
+      }
+
       try {
         const response = await axios.get(
-          `https://erp-mkt.vercel.app/api/mercadolivre/productid?sku=${productSKU}`
-        );
+          `https://erp-mkt.vercel.app/api/mercadolivre/productid?sku=${productSKU}`, {
+          params: { userId }
+        });
         setProduct(response.data.products[0]);
       } catch (error) {
         console.error(`Error: ${error}`);

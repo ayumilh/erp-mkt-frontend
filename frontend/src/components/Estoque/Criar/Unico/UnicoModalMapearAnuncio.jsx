@@ -1,16 +1,24 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchIcon from '@mui/icons-material/Search';
+import { searchUserId } from '@/utils/searchUserId';
 
-export default function ModalMapearAnuncio({ onClose, onIdProduct}){
+export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [products, setProducts] = useState([]);
 
+  const userId = searchUserId();
+  if (!userId) {
+    return;
+  }
+
   useEffect(() => {
     const fetchData = async () => {
-      try{
-        const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products")
+      try {
+        const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products", {
+          params: { userId }
+        });
         const restructuredData = response.data.products.map((product) => {
           return {
             sku: product.product_sku,
@@ -47,7 +55,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct}){
         colorVariables: response.data.colorVariables.map(item => item),
         availableQuantities: response.data.availableQuantityVariables.map(item => item),
       };
-  
+
       onIdProduct(transformedData);
       onClose();
     } catch (error) {
@@ -84,7 +92,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct}){
                 </div>
 
                 <div className="flex items-center rounded w-full relative">
-                  <SearchIcon className='h-5 w-5 absolute left-[6px] top-1/2 transform -translate-y-1/2'/>
+                  <SearchIcon className='h-5 w-5 absolute left-[6px] top-1/2 transform -translate-y-1/2' />
                   <input className="w-full rounded overflow-hidden text-sm font-normal pl-8 pr-3 py-2" type="text" placeholder="Pesquise por SKU" style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
                 </div>
               </div>
@@ -103,7 +111,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct}){
                     {products.map((product, index) => (
                       <tr key={index}>
                         <td className='pl-4'>
-                          <input type="checkbox" onChange={(e) => handleCheckboxChange(e, product.sku)}/> 
+                          <input type="checkbox" onChange={(e) => handleCheckboxChange(e, product.sku)} />
                         </td>
                         <td className="w-[240px] pl-6 pr-4 py-2 md:py-4 font-medium">{product.title}</td>
                         <td className="px-4 py-2 md:py-5">{product.sku}</td>

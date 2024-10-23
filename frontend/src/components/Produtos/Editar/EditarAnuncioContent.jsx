@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import BtnActions from "@/components/Geral/Button/BtnActions";
-
+import { searchUserId } from '@/utils/searchUserId';
 
 const steps = [
   {
@@ -35,15 +35,21 @@ const EditarAnuncioContent = () => {
     setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
-  const productSKU = Cookies.get("selectedSku"); // buscar do cookies
+  const productSKU = Cookies.get("selectedSku");
 
   // buscando produto pelo sku
   useEffect(() => {
     const fetchProduct = async () => {
+      const userId = searchUserId();
+      if (!userId) {
+        return;
+      }
+
       try {
         const response = await axios.get(
-          `https://erp-mkt.vercel.app/api/mercadolivre/productid?sku=${productSKU}`
-        );
+          `https://erp-mkt.vercel.app/api/mercadolivre/productid?sku=${productSKU}`, {
+          params: { userId }
+        });
         setInputs(response.data);
       } catch (error) {
         console.error(error);
@@ -101,8 +107,8 @@ const EditarAnuncioContent = () => {
                       </p>
                       {index === 0 && (
                         <div className="flex flex-col gap-6 mt-8 mb-7 ml-4">
-                          <input onChange={inputChange} name='title' value={input.title} className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Nome do Produto"/>
-{/* 
+                          <input onChange={inputChange} name='title' value={input.title} className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Nome do Produto" />
+                          {/* 
                           <input onChange={inputChange} name='description' value={input.description} className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0" type="text" placeholder="Descrição"/> */}
 
                           <input
