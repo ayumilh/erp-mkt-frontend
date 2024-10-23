@@ -66,6 +66,7 @@ const EditarAnuncioContent = () => {
       await axios.put(`https://erp-mkt.vercel.app/api/mercadolivre/update-anuncio`, {
         ...input,
         productSKU,
+        params: { userId }
       });
     } catch (error) {
       console.error(error);

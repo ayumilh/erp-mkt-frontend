@@ -1,10 +1,10 @@
 'use client'
 import { useEffect, useState } from "react";
+import { searchUserId } from '@/utils/searchUserId';
 import axios from "axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { searchUserId } from '@/utils/searchUserId';
 import EditIcon from '@mui/icons-material/Edit';
 import ModalDetailsProdutos from "./Actions/ModalDetailsProdutos";
 import ModalDetailsProdutosMouseLeave from "./Actions/ModalDetailsProdutosMouseLeave";
@@ -29,11 +29,8 @@ const ProdutosTabela = ({ onFilterStatus }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-
       const userId = searchUserId();
-      if (!userId) {
-        return;
-      }
+      if (!userId) return;
 
       try {
         const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products", {

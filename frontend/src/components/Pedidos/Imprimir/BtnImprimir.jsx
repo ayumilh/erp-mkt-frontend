@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { searchUserId } from '@/utils/searchUserId';
 import axios from "axios";
 import { useReactToPrint } from "react-to-print";
 
@@ -14,9 +15,12 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     if (!shippingIdOrder || shippingIdOrder.length === 0) {
       return; 
     }
+
+    const userId = searchUserId();
+    if (!userId) return;
   
     try {
-      const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {shipping_id: shippingIdOrder});
+      const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {shipping_id: shippingIdOrder, userId});
       if (response.status === 200) {
         handlePrint();
       } else {

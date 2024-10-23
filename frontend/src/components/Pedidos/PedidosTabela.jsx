@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react';
+import { searchUserId } from '@/utils/searchUserId';
 import PedidosRow from "./PedidosRow";
 import ModalDetailsContent from "./Actions/ModalDetailsPedidos/ModalDetailsContent";
 import { PedidosMenuMoreResponsive } from './Actions/PedidosMenuMoreResponsive';
@@ -24,8 +25,13 @@ const PedidosTabela = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
+      const userId = searchUserId();
+      if (!userId) return;
+
       try {
-        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/orders`);
+        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/orders`, {
+          params: { userId }
+        });
         if (response.data && Array.isArray(response.data.orders)) {
           setPedido(response.data.orders);
           setTotalPages(Math.ceil(response.data.orders.length / rowsPerPage));

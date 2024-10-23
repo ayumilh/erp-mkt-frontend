@@ -32,9 +32,9 @@ export const EmailAddressUser = ({ menuOpen, toggleMenuOpen }) => {
     }, [dropdownRef, toggleMenuOpen]);
 
     return (
-        <div ref={dropdownRef}>
+        <div className="w-full flex" ref={dropdownRef}>
             <span
-                className="font-medium max-w-28 md:w-full overflow-hidden"
+                className="font-medium max-w-20 md:w-full overflow-hidden text-sm"
                 style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
                 title={session?.session?.user?.email || (userInfo.length > 0 ? userInfo[0].email : "")}
             >

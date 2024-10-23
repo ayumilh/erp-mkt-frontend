@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
-
+import { searchUserId } from '@/utils/searchUserId';
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import BtnActions from "@/components/Geral/Button/BtnActions";
@@ -34,10 +34,15 @@ function CriarAnuncioContent() {
 
   const handleCriar = async (e) => {
     e.preventDefault();
+
+    const userId = searchUserId();
+    if (!userId) return;
+    
     try {
       await axios.post(
         "https://erp-mkt.vercel.app/api/mercadolivre/criar-anuncio",
-        input
+        input,
+        userId
       );
     } catch (error) {
       console.error(error);
