@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { searchUserId } from '@/utils/searchUserId';
 import SearchIcon from '@mui/icons-material/Search';
 
 export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
-
   const [selectedItems, setSelectedItems] = useState([]);
   const [products, setProducts] = useState([]);
-
   const userId = searchUserId();
-  if (!userId) {
-    return;
-  }
+
 
   //  buscar produtos
   useEffect(() => {
+    if (!userId) return;
     axios
       .get("https://erp-mkt.vercel.app/api/mercadolivre/products", {
         params: { userId }
@@ -31,7 +29,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
       .catch((error) => {
         console.error(`Error: ${error}`);
       });
-  }, []);
+  }, [userId]);
 
 
   // selecionar todos os checkboxes
