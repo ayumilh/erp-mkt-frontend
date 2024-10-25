@@ -8,7 +8,7 @@ import ErrorNotification from '@/components/Geral/Notifications/ErrorNotificatio
 export const BtnSincronizarProdutos = ({ statusRequestSync, setStatusRequestSync }) => {
     const [loading, setLoading] = useState(false);
 
-    const handleSyncOrders = async () => {
+    const handleSyncProducts = async () => {
         setLoading(true);
 
         const userId = searchUserId();
@@ -40,7 +40,7 @@ export const BtnSincronizarProdutos = ({ statusRequestSync, setStatusRequestSync
         <div>
             <BtnActive
                 title="Sincronizar"
-                onClick={handleSyncOrders} 
+                onClick={handleSyncProducts} 
                 size='btnHeader' 
                 width='full' 
                 disabled={loading} 

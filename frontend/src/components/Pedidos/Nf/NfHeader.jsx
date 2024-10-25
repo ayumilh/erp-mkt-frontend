@@ -47,7 +47,7 @@ const NfHeader = () => {
     }, [dropdownMoreRef]);
 
     return (
-        <div className="w-full lg:w-[876px] xl:w-[1270px] flex flex-col md:flex-row justify-between mb-6">
+        <div className="w-full flex flex-col xl:flex-row justify-between mb-6">
             <div className="flex gap-6">
                 <BtnRoute route="/pedidos/nf" size='full' btn='base' txt='base' activePage={true}>
                     Todas as NF-e

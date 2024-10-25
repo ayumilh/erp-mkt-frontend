@@ -31,9 +31,10 @@ export default function EnviadosTabela() {
       if (!userId) return;
 
       try {
-        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/orders`, {
+        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/delivered`, {
           params: { userId }
         });
+        console.log(response.data);
         if (response.data && Array.isArray(response.data.orders)) {
           setPedido(response.data.orders);
           setTotalPages(Math.ceil(response.data.orders.length / rowsPerPage));

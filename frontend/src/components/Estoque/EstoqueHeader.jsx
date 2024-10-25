@@ -31,8 +31,8 @@ const EstoqueHeader = () => {
     }, [dropdownMoreRef]);
 
     return (
-        <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between mb-6">
-            <div className="flex gap-4">
+        <div className="w-full flex flex-col xl:flex-row justify-between mb-6">
+            <div className="flex gap-3">
                 <DropdownList />
                 <BtnRoute route="/estoque" size='full' btn='base' txt='base'>
                     Meu Armazém

@@ -18,10 +18,10 @@ const EstoqueTabela = () => {
   }
 
   return (
-    <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col mt-4 mb-10 overflow-x-auto">
+    <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">
       <EstoqueMenuMoreResponsive />
       <table className="table-auto min-w-full">
-        <thead>
+        <thead className="sticky top-0 z-0 bg-primaria-900 dark:bg-dark-primaria-900">
           <tr>
             <th className="pr-4 pl-6 py-2 md:py-5 text-sm font-semibold dark:text-gray-200">Produto</th>
             <th className="px-4 py-2 md:py-5 text-sm font-semibold dark:text-gray-200">SKU</th>

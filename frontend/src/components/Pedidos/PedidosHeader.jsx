@@ -9,7 +9,7 @@ export const PedidosHeader = ({ setActiveTable }) => {
     const [statusRequestSync, setStatusRequestSync] = useState('');
     
     return (
-        <div className="w-full lg:w-[876px] xl:w-[1270px] flex justify-between mb-6">
+        <div className="w-full flex flex-col xl:flex-row justify-between mb-6">
             <div className="flex gap-4">
                 <DropdownHeader setActiveTable={setActiveTable} />
                 <BtnRoute route="/pedidos/nf" size='full' btn='base' txt='base'>

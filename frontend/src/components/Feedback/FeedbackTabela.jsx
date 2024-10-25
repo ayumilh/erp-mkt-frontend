@@ -76,7 +76,7 @@ const FeedbackTabela = () => {
     };
 
     return (
-        <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] flex flex-col mt-4 mb-10 overflow-x-auto">
+        <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">
             {products.map((product, index) => (
                 <div key={index} className='border-b border-gray-200 dark:border-neutral-800 p-7'>
                     <div className="flex justify-between items-center">

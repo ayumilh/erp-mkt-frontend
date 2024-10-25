@@ -3,7 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const FeedbackActionsFilter = () => {
   return (
-    <div className="bg-primaria-900 dark:bg-dark-primaria-900 hover:shadow-input transition-all ease-in duration-500 rounded-2xl xl:flex w-[345px] md:w-[728px] lg:w-[903px] xl:w-[1270px] min-h-max px-4 py-5 xl:px-8 xl:items-center justify-center">
+    <div className="bg-primaria-900 dark:bg-dark-primaria-900 hover:shadow-input transition-all ease-in duration-500 rounded-2xl xl:flex w-full min-h-max px-4 py-5 xl:px-8 xl:items-center">
       <h2 className='text-sm lg:text-base text-neutral-700 dark:text-gray-300 font-semibold'>O que você procura?</h2>
       
       <form className="mt-[14px] md:flex md:justify-around xl:ml-5">

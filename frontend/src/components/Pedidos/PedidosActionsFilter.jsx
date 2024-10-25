@@ -4,7 +4,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 
 const PedidosActionsFilter = () => {
   return (
-    <div className="bg-primaria-900 dark:bg-dark-primaria-900 hover:shadow-input transition-all ease-in duration-500 rounded-2xl xl:flex min-w-[345px] md:min-w-[720px] lg:min-w-[876px] xl:min-w-[1264px] min-h-max px-4 py-5 xl:px-8 xl:items-center">
+    <div className="bg-primaria-900 dark:bg-dark-primaria-900 hover:shadow-input transition-all ease-in duration-500 rounded-2xl xl:flex w-full min-h-max px-4 py-5 xl:px-8 xl:items-center">
       <h2 className='text-sm lg:text-base text-neutral-700 dark:text-gray-200 font-semibold'>O que você procura?</h2>
       
       <form className="mt-[14px] md:flex md:justify-around xl:ml-5">

@@ -7,7 +7,6 @@ import BtnExpandirDrawer from "./BtnExpandirDrawer";
 import ProductsIcon from "@mui/icons-material/Store";
 import LinkIcon from '@mui/icons-material/Link';
 import OrdersIcon from "@mui/icons-material/ShoppingCart";
-import BuyIcon from "@mui/icons-material/LocalAtm";
 import AnalysisIcon from "@mui/icons-material/BarChart";
 import StockIcon from "@mui/icons-material/Inventory";
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -18,9 +17,8 @@ const iconsNav = [
     <DashboardIcon key="dashboard" fontSize='small' />,
     <ProductsIcon key="products" fontSize='small' />,
     <OrdersIcon key="orders" fontSize='small' />,
-    <BuyIcon key="buy" fontSize='small' />,
-    <AnalysisIcon key="analysis" fontSize='small' />,
     <StockIcon key="stock" fontSize='small' />,
+    <AnalysisIcon key="analysis" fontSize='small' />,
     <SupportAgentIcon key="feedback" fontSize='small' />,
 ];
 
@@ -51,7 +49,7 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose,
         <>
             <div>
                 <ul className="w-[200px] px-2 ml-1">
-                    {["Dashboard", "Produtos", "Pedidos", "Analise", "Estoque", "Feedback"].map(
+                    {["Dashboard", "Produtos", "Pedidos", "Estoque", "Analise", "Feedback"].map(
                         (text, index) => (
                             <li key={text} className="flex flex-col items-center">
                                 <Link href={`/${text.toLowerCase()}`}>

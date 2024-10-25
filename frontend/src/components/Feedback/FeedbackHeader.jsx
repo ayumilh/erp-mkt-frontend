@@ -4,7 +4,7 @@ import BtnRoute from "../Geral/Button/BtnRoute";
 
 const FeedbackHeader = () => {
     return (
-        <div className="w-full lg:w-[876px] xl:w-[1270px] flex flex-col lg:flex-row gap-3 lg:gap-0 justify-between mb-6">
+        <div className="w-full flex flex-col xl:flex-row justify-between mb-6">
             <div className="flex gap-4">
                 <DropdownList />
                 <BtnRoute route="/feedback" size='full' btn='base' txt='base'>

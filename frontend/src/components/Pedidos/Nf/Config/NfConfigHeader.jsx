@@ -3,7 +3,7 @@ import BtnRoute from "@/components/Geral/Button/BtnRoute";
 
 const NfConfigHeader = () => {
     return (
-        <div className="w-full lg:w-[876px] xl:w-[1270px] flex flex-row justify-between mb-6">
+        <div className="w-full flex flex-col xl:flex-row justify-between mb-6">
             <div className="flex gap-6">
                 <BtnRoute route="/pedidos/nf" size='full' btn='base' txt='base'>
                     Todas as NF-e
