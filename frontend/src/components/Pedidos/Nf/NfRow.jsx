@@ -1,9 +1,9 @@
 'use client'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { searchUserId } from '@/utils/searchUserId';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-
 
 const NfRow = () => {
     const [nfData, setNfData] = useState([]);
@@ -11,9 +11,13 @@ const NfRow = () => {
 
     useEffect(() => {
         const fetchNf = async () => {
+            const userId = searchUserId();
+            if (!userId) return
+    
             try {
-                const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/get-notes");
-                console.log(response.data.orders);
+                const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/get-notes", {
+                    params: { userId }
+                });
                 if (response.data && Array.isArray(response.data.orders)) {
                     const restructuredData = response.data.orders.map((data) => {
                         return {

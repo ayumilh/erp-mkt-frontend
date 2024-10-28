@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { searchUserId } from '@/utils/searchUserId';
 import axios from "axios";
 import JSZip from 'jszip';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -16,13 +17,20 @@ const ExportarNFDataModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     setLoggingLoading(true);
     e.preventDefault();
+
+    const userId = searchUserId();
+    if (!userId) return
+
     const start = parseInt(dataInicial.replace(/-/g, ""));
     const end = parseInt(dataFinal.replace(/-/g, ""));
 
     try {
       const response = await axios.post(`https://erp-mkt.vercel.app/api/mercadolivre/export-note`, 
-        { start, end }, 
-        { responseType: 'blob' }
+        { start, end },
+        {
+          responseType: 'blob',
+          params: { userId }
+        }
       );
   
       const blob = new Blob([response.data], { type: 'application/zip' });

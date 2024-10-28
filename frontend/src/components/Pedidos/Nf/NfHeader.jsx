@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { BtnExportarNF } from "./Actions/BtnExportarNF";
+import { searchUserId } from '@/utils/searchUserId';
 import axios from "axios";
 import BtnRoute from "@/components/Geral/Button/BtnRoute";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -20,8 +21,14 @@ const NfHeader = () => {
 
     const handleSync = async () => {
         setLoading(true);
+
+        const userId = searchUserId();
+        if (!userId) return
+
         try {
-            await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/sync-notes');
+            await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/sync-notes', {
+                params: { userId }
+            });
             setStatusRequestSync(true);
         } catch (error) {
             setStatusRequestSync(false);

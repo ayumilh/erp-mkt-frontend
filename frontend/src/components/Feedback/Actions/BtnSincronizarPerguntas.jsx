@@ -1,6 +1,7 @@
 'use client'
 import axios from "axios";
 import { useState } from "react";
+import { searchUserId } from '@/utils/searchUserId';
 import BtnActive from "@/components/Geral/Button/BtnActive";
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
@@ -11,8 +12,14 @@ export const BtnSincronizarPerguntas = () => {
 
   const handleSync = async () => {
     setLoading(true);
+    
+    const userId = searchUserId();
+    if (!userId) return
+
     try {
-      const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/questions");
+      const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/questions", {
+        params: { userId }
+    });
       if (response.status === 200) {
         setStatusRequestSync(true);
       }
