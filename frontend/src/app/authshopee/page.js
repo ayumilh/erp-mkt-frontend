@@ -12,6 +12,7 @@ export default function Authshopee({ searchParams }) {
   const router = useRouter();
 
   const code = searchParams?.code;
+  const shop_id = searchParams?.shop_id;
   const nome_loja = typeof window !== 'undefined' ? localStorage.getItem('nome_loja') : null;
 
   useEffect(() => {
