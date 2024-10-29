@@ -21,6 +21,7 @@
     "@mui/x-data-grid": "^7.1.1",
     "apexcharts": "^3.49.1",
     "axios": "^1.6.8",
+    "crypto-js": "^4.2.0",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
     "gsap": "^3.12.5",

@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from "react";
-import axios from "axios";
+import CryptoJS from 'crypto-js';
 
 const ModalConectarLojas = ({ onClose, drawerClose }) => {
   const [selectedStore, setSelectedStore] = useState('Mercado Livre');
@@ -19,15 +19,34 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
         "https://erp-mkt-frontend.vercel.app/authmercado"
       );
       authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
+
     } else if (selectedStore === 'Shopee') {
-      authUrl = `https://partner.shopeemobile.com/api/v2/shop/auth_partner?partner_id=${process.env.SHOPEE_PARTNER_ID}&redirect=https://open.shopee.com&timestamp=1677188400&sign=656451597757546d506e525959634269464f4a76534a48415765586978536653?`;
+      const partnerId = "2009306";
+      const partnerKey = "656451597757546d506e525959634269464f4a76534a48415765586978536653";
+      const redirectUri = "https://erp-mkt-frontend.vercel.app/authshopee";
+
+      const generateSign = (partnerId, path, timestamp) => {
+        const baseString = `${partnerId}${path}${timestamp}`;
+        return CryptoJS.HmacSHA256(baseString, partnerKey).toString(CryptoJS.enc.Hex);
+      };
+
+      try {
+        const timestamp = Math.floor(Date.now() / 1000);
+        const path = '/api/v2/shop/auth_partner';
+        const sign = generateSign(partnerId, path, timestamp);
+    
+        const shopeeAuthUrl = `https://partner.shopeemobile.com${path}?partner_id=${partnerId}&timestamp=${timestamp}&sign=${sign}&redirect=${encodeURIComponent(redirectUri)}`;
+        authUrl = shopeeAuthUrl;
+      } catch (error) {
+        console.error('Erro ao gerar URL de autenticação da Shopee:', error);
+      }
     }
 
     window.location.href = authUrl;
   };
 
   const storeNomeLoja = () => {
-    localStorage.setItem("nome_mercado", nomeLoja);
+    localStorage.setItem("nome_loja", nomeLoja);
   };
 
   useEffect(() => {

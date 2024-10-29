@@ -12,10 +12,10 @@ export default function Authmercado({ searchParams }) {
   const router = useRouter();
 
   const code = searchParams?.code;
-  const nome_mercado = typeof window !== 'undefined' ? localStorage.getItem('nome_mercado') : null;
+  const nome_loja = typeof window !== 'undefined' ? localStorage.getItem('nome_loja') : null;
 
   useEffect(() => {
-    if (!code || !nome_mercado) {
+    if (!code || !nome_loja) {
       setStatusRequestCodeMercado(false);
       return;
     }
@@ -25,7 +25,7 @@ export default function Authmercado({ searchParams }) {
       if (!userId) return
 
       try {
-        const res = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/redirect', { code, nome_mercado, userId });
+        const res = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/redirect', { code, nome_loja, userId });
         if (res.status === 200) {
           setResData(res.data);
           setStatusRequestCodeMercado(true);
@@ -39,13 +39,13 @@ export default function Authmercado({ searchParams }) {
     };
 
     fetchData();
-  }, [code, nome_mercado, router]);
+  }, [code, nome_loja, router]);
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-evenly">
-      <h1 className="text-4xl font-bold text-gray-800">Autenticação do Mercado Livre</h1>
-      <p className="text-gray-800">Código: {code}</p>
-      {resData && <p className="text-gray-800">Resposta: {JSON.stringify(resData)}</p>}
+      <h1 className="text-4xl font-bold text-neutral-800 dark:text-gray-200">Autenticação do Mercado Livre</h1>
+      <p className="text-neutral-800 dark:text-gray-200">Código: {code}</p>
+      {resData && <p className="text-neutral-800 dark:text-gray-200">Resposta: {JSON.stringify(resData)}</p>}
 
       {statusRequestCodeMercado === true && <SuccessNotification message="Conectado com sucesso" />}
       {statusRequestCodeMercado === false && <ErrorNotification message="Erro ao conectar" />}
