@@ -37,6 +37,8 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
     
         const shopeeAuthUrl = `https://partner.shopeemobile.com${path}?partner_id=${partnerId}&timestamp=${timestamp}&sign=${sign}&redirect=${encodeURIComponent(redirectUri)}`;
         authUrl = shopeeAuthUrl;
+
+        res.status(200).json({ url: shopeeAuthUrl });
       } catch (error) {
         console.error('Erro ao gerar URL de autenticação da Shopee:', error);
       }
