@@ -71,9 +71,9 @@ const ChartCardsLucros = ({ onItemSelected }) => {
             {info.map((item) => (
                 <div key={item.titulo} onClick={() => handleItemClick(item)} className={`w-[150px] md:w-40 lg:w-44 h-24 flex flex-col justify-cente shadow-md hover:shadow-lg rounded-md hover:rounded-lg p-3 cursor-pointer transition duration-300 ease-in-out ${selectedItem === item.titulo ? 'bg-segundaria-900 bg-opacity-85' : ''}`}>
                     <div className="flex gap-1 xl:gap-2 items-center justify-start">
-                        <span className={`lg:text-lg font-semibold text-left transition duration-300 ease-in-out ${selectedItem === item.titulo ? 'text-white' : ''}`}>0</span>
+                        <span className={`lg:text-lg font-semibold text-left transition duration-300 dark:text-gray-200 ease-in-out ${selectedItem === item.titulo ? 'text-white' : ''}`}>0</span>
                         <div className="flex justify-start items-center">
-                            <span className={`text-sm font-medium ${selectedItem === item.titulo ? 'text-white' : ''}`}>{item.porcentagem}</span>
+                            <span className={`text-sm  dark:text-gray-300 font-medium ${selectedItem === item.titulo ? 'text-white' : ''}`}>{item.porcentagem}</span>
                             {item.porcentagem && item.porcentagem.includes('-') ? (
                                 <span className="text-red-500 font-bold text-xs ml-2">↓</span>
                             ) : (
@@ -82,7 +82,7 @@ const ChartCardsLucros = ({ onItemSelected }) => {
                         </div>
                     </div>
                     <div className="mt-1">
-                        <span className={` ${selectedItem === item.titulo ? 'text-white' : ''} text-xs transition duration-300 ease-in-out `}>{item.titulo}</span>
+                        <span className={` ${selectedItem === item.titulo ? 'text-white' : ''} text-xs dark:text-gray-300 transition duration-300 ease-in-out `}>{item.titulo}</span>
                     </div>
                 </div>
             ))}

@@ -40,7 +40,7 @@ const ChartFilterLojas = () => {
                     aria-expanded="true"
                     onClick={handleClick}
                 >
-                    <span className='text-neutral-700 dark:text-gray-300 dark:hover:text-white hover:text-neutral-800 text-sm font-medium transition duration-300 ease-in-out'>{buttonValue}</span>
+                    <span className='text-neutral-700 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 text-sm font-medium transition duration-300 ease-in-out'>{buttonValue}</span>
                     <KeyboardArrowDownIcon sx={{
                         width: '20px',
                         transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',

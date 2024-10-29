@@ -8,8 +8,8 @@ const BtnGroupChart = () => {
 
   const getButtonClass = (button) => {
     return button === selectedButton
-      ? 'bg-segundaria-900 hover:bg-gray-200 rounded-lg p-2 font-medium text-gray-200 hover:text-neutral-800 dark:hover:text-gray-800 transition duration-300 ease-out'
-      : 'hover:bg-gray-200 rounded-lg p-2 text-sm font-medium text-neutral-800 dark:text-gray-400 dark:hover:text-gray-800 transition duration-300 ease-out';
+      ? 'bg-segundaria-900 hover:bg-gray-200 rounded-lg p-2 font-medium text-gray-200 dark:text-white hover:text-neutral-800 dark:hover:text-gray-800 transition duration-300 ease-out'
+      : 'hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-lg p-2 text-sm font-medium text-neutral-800 dark:hover:text-gray-300 dark:text-gray-200 transition duration-300 ease-out';
   };
   return (
     <div className='flex mt-6 justify-around items-center' >

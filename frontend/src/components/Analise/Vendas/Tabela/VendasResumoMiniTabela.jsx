@@ -11,19 +11,19 @@ export const VendasResumoMiniTabela = () => {
     { id: 9, nome: "Produto I", margemLucroUnitaria: "50%", lucrosTotais: 5000 },
   ];
   return (
-    <div className="bg-primaria-900 shadow-md rounded-3xl w-full xl:w-[320px] mt-7 xl:mt-0 p-5 md:px-4 md:py-5 lg:pt-7 lg:px-7">
-      <h2 className='text-base text-neutral-800 font-semibold'>Vendas por Produtos</h2>
+    <div className="bg-primaria-900 dark:bg-dark-primaria-900 shadow-md rounded-3xl w-full xl:w-[320px] mt-7 xl:mt-0 p-5 md:px-4 md:py-5 lg:pt-7 lg:px-7">
+      <h2 className='text-base text-neutral-800 dark:text-gray-300 font-semibold'>Vendas por Produtos</h2>
       <div className="overflow-auto h-[380px] xl:h-[670px]">
         <table className="min-w-full leading-normal">
-          <thead className="sticky top-0 bg-primaria-900">
+          <thead className="sticky top-0 bg-primaria-900 dark:bg-dark-primaria-900">
             <tr>
-              <th className="px-3 py-3 border-b-2 border-gray-200 text-center text-xs font-semibold text-neutral-900 uppercase tracking-wider">
+              <th className="px-3 py-3 border-b-2 border-gray-200 text-center text-xs font-semibold text-neutral-900 dark:text-gray-200 uppercase tracking-wider">
                 Produto
               </th>
-              <th className="px-3 py-3 border-b-2 border-gray-200 text-center text-xs font-semibold text-neutral-900 uppercase tracking-wider">
+              <th className="px-3 py-3 border-b-2 border-gray-200 text-center text-xs font-semibold text-neutral-900 dark:text-gray-200 uppercase tracking-wider">
                 Vendidos
               </th>
-              <th className="px-3 py-3 border-b-2 border-gray-200 text-center text-xs font-semibold text-neutral-900 uppercase tracking-wider">
+              <th className="px-3 py-3 border-b-2 border-gray-200 text-center text-xs font-semibold text-neutral-900 dark:text-gray-200 uppercase tracking-wider">
                 Total de vendas
               </th>
             </tr>
@@ -31,13 +31,13 @@ export const VendasResumoMiniTabela = () => {
           <tbody>
             {produtos.map((produto) => (
               <tr key={produto.id}>
-                <td className="px-3 py-5 text-center text-neutral-700 border-b border-gray-200 text-sm">
+                <td className="px-3 py-5 text-center text-neutral-700 dark:text-gray-200 border-b border-gray-200 text-sm">
                   {produto.nome}
                 </td>
-                <td className="px-3 py-5 text-center text-neutral-700 border-b border-gray-200 text-sm">
+                <td className="px-3 py-5 text-center text-neutral-700 dark:text-gray-200 border-b border-gray-200 text-sm">
                   {produto.margemLucroUnitaria}
                 </td>
-                <td className="px-3 py-5 text-center text-neutral-700 border-b border-gray-200 text-sm">
+                <td className="px-3 py-5 text-center text-neutral-700 dark:text-gray-200 border-b border-gray-200 text-sm">
                   {produto.lucrosTotais}
                 </td>
               </tr>

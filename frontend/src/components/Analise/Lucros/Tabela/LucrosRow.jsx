@@ -58,32 +58,32 @@ export default function LucrosRow () {
     ) : lucros.length > 0 ? (
       lucros.map((lucro, index) => (
         <tr key={index} className="border-b border-gray-200 hover:bg-gray-100 cursor-pointer">
-          <td className="pr-4 pl-6 py-4 md:py-5">{new Date(lucro.DataPedido).toLocaleDateString()}</td>
-          <td className="px-4 py-4 md:py-5 lg:sticky" style={{ zIndex: 1, left: 0, backgroundColor: '#F6F6FB' }}>{lucro.Pedido}</td>
-          <td className="px-4 py-4 md:py-5 lg:sticky" style={{ zIndex: 1, left: 'calc(200px)', backgroundColor: '#F6F6FB' }}>{lucro.Loja}</td>
-          <td className="px-4 py-4 md:py-5 lg:sticky" style={{ zIndex: 1, left: 'calc(140px)', backgroundColor: '#F6F6FB' }}>{lucro.ValorDoPedido}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.Receita}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.VendasDeProdutos}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.Comissao}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.TaxaDeTransacao}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.TaxaDeFreteComprador}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.TaxaDeServico}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.TaxaDeADS}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.TaxaDoFrete}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.OutraTaxaDaPlataforma}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.DescontoESubsidio}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.ReembolsoDoComprador}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.MargemDeLucro}</td>
-          <td className="pr-6 pl-4 py-4 md:py-5">{lucro.Status}</td>
-          <td className="px-4 py-4 md:py-5">{lucro.Lucro}</td>
+          <td className="pr-4 pl-6 py-4 md:py-5 dark:text-gray-200">{new Date(lucro.DataPedido).toLocaleDateString()}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200 lg:sticky" style={{ zIndex: 1, left: 0, backgroundColor: '#F6F6FB' }}>{lucro.Pedido}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200 lg:sticky" style={{ zIndex: 1, left: 'calc(200px)', backgroundColor: '#F6F6FB' }}>{lucro.Loja}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200 lg:sticky" style={{ zIndex: 1, left: 'calc(140px)', backgroundColor: '#F6F6FB' }}>{lucro.ValorDoPedido}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.Receita}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.VendasDeProdutos}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.Comissao}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.TaxaDeTransacao}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.TaxaDeFreteComprador}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.TaxaDeServico}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.TaxaDeADS}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.TaxaDoFrete}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.OutraTaxaDaPlataforma}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.DescontoESubsidio}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.ReembolsoDoComprador}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.MargemDeLucro}</td>
+          <td className="pr-6 pl-4 py-4 md:py-5 dark:text-gray-200">{lucro.Status}</td>
+          <td className="px-4 py-4 md:py-5 dark:text-gray-200">{lucro.Lucro}</td>
         </tr>
     ))
       ) : (
       <tr>
         <td className="text-center" colSpan="18">
           <div className="w-full py-12">
-            <span><ProductionQuantityLimitsIcon style={{ width: 46, height: 46 }}/></span>
-            <p className="mt-8 mx-10">Ei, parece que você não tem relatorios no momento. Estamos ansiosos para ver o que você tem para oferecer!</p>
+            <span className='dark:text-gray-200'><ProductionQuantityLimitsIcon style={{ width: 46, height: 46 }}/></span>
+            <p className="mt-8 mx-10 dark:text-gray-200">Ei, parece que você não tem relatorios no momento. Estamos ansiosos para ver o que você tem para oferecer!</p>
           </div>
         </td>
       </tr>

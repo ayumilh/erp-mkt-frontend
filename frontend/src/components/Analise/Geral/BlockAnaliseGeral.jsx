@@ -17,8 +17,8 @@ const BlockAnaliseGeral = () => {
             <bloco.Icon className='text-white' size={18}/>
           </div>
           <div className='flex flex-col'>
-            <h2 className="text-sm text-neutral-900 font-medium">{bloco.titulo}</h2>
-            <p className='text-neutral-700'>{bloco.valor}</p>
+            <h2 className="text-sm text-neutral-900 dark:text-gray-300 font-medium">{bloco.titulo}</h2>
+            <p className='text-neutral-700 dark:text-gray-200'>{bloco.valor}</p>
           </div>
         </div>
       ))}

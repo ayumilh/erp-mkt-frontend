@@ -80,10 +80,8 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'ready_to_ship':
-        return 'bg-yellow-200 text-yellow-700';
-      case 'shipped':
-        return 'bg-yellow-200 text-yellow-700';
+      case 'delivered':
+        return 'bg-green-200 text-green-700';
       default:
         return '';
     }
@@ -91,10 +89,8 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
 
   function translateStatus(status) {
     switch (status) {
-      case 'shipped':
-        return 'Enviado';
-      case 'ready_to_ship':
-        return 'Enviado';
+      case 'delivered':
+        return 'Entregue';
       default:
         return status; 
     }
@@ -131,7 +127,7 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
               if(!firstRender[pedido.shipping_id]){
                 firstRender[pedido.shipping_id] = true;
                 return (
-                <tr key={pedido.order_id} className='border-b border-gray-200 hover:bg-gray-100 cursor-pointer' onClick={() => openOrderDetailsModal(shipping_id, true)}>
+                <tr key={pedido.order_id} className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer' onClick={() => openOrderDetailsModal(shipping_id, true)}>
                   {toggleShowCheckboxes && <td className="pl-4"><input type="checkbox" onChange={(event) => handleCheckboxChange(event, pedido.shipping_id)}/></td>}
                   {toggleShowCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => {}}/></td>}
                   <td className='pl-4 lg:pl-6 pr-3 py-4 md:py-5 align-top'>

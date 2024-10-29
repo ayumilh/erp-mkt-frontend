@@ -49,23 +49,23 @@ export default function VendasRow () {
     ) : sales.length > 0 ? (
       sales.map((sale, index) => (
       <tr key={index} className="border-b border-gray-200 hover:bg-gray-100 cursor-pointer">
-        <td className="pl-6 pr-4 py-4 md:py-5 text-center">{new Date(sale.Data).toLocaleDateString()}</td>
-        <td className="px-4 py-4 md:py-5 text-center">{sale.TotalDePedidos}</td>
-        <td className="px-4 py-4 md:py-5 text-center">{sale.ValorTotalDeVendas}</td>
-        <td className="px-4 py-4 md:py-5 text-center">{sale.PedidosValidos}</td>
-        <td className="px-4 py-4 md:py-5 text-center">{sale.ValorDeVendasValidas}</td>
-        <td className="px-4 py-4 md:py-5 text-center">{sale.PedidosCancelados}</td>
-        <td className="px-4 py-4 md:py-5 text-center">{sale.ValorDeVendasValidas}</td>
-        <td className="px-4 py-4 md:py-5 text-center">{sale.Clientes}</td>
-        <td className="pl-4 pr-6 py-4 md:py-5 text-center">{sale.VendasPorCliente}</td>
+        <td className="pl-6 pr-4 py-4 md:py-5 text-center dark:text-gray-200">{new Date(sale.Data).toLocaleDateString()}</td>
+        <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{sale.TotalDePedidos}</td>
+        <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{sale.ValorTotalDeVendas}</td>
+        <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{sale.PedidosValidos}</td>
+        <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{sale.ValorDeVendasValidas}</td>
+        <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{sale.PedidosCancelados}</td>
+        <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{sale.ValorDeVendasValidas}</td>
+        <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{sale.Clientes}</td>
+        <td className="pl-4 pr-6 py-4 md:py-5 text-center dark:text-gray-200">{sale.VendasPorCliente}</td>
       </tr>
     ))
       ) : (
       <tr>
-        <td className="text-center" colSpan="9">
+        <td className="text-center dark:text-gray-200" colSpan="9">
           <div className="w-full py-12">
-            <span><ProductionQuantityLimitsIcon style={{ width: 46, height: 46 }}/></span>
-            <p className="mt-8 mx-10">Ei, parece que você não tem relatorios no momento. Estamos ansiosos para ver o que você tem para oferecer!</p>
+            <span className='dark:text-gray-200'><ProductionQuantityLimitsIcon style={{ width: 46, height: 46 }}/></span>
+            <p className="mt-8 mx-10 dark:text-gray-200">Ei, parece que você não tem relatorios no momento. Estamos ansiosos para ver o que você tem para oferecer!</p>
           </div>
         </td>
       </tr>
