@@ -1,18 +1,20 @@
 'use client'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { searchUserId } from '@/utils/searchUserId';
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
 
-export default function Authshopee({ searchParams }) {
+export default function Authshopee() {
   const [statusRequestCodeShopee, setStatusRequestCodeShopee] = useState(null);
   const [resData, setResData] = useState('');
   const router = useRouter();
 
-  const code = searchParams?.code;
-  const shop_id = searchParams?.shop_id;
+  const searchParams = useSearchParams();
+
+  const code = searchParams.get('code');
+  const shop_id = searchParams.get('shop_id');
   const nome_loja = typeof window !== 'undefined' ? localStorage.getItem('nome_loja') : null;
 
   useEffect(() => {
