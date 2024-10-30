@@ -31,7 +31,7 @@ export default function EnviarTabela() {
       if (!userId) return;
 
       try {
-        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/delivered`, {
+        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/issue`, {
           params: { userId }
         });
         console.log(response.data);
