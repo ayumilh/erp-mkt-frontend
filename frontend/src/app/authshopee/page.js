@@ -14,7 +14,7 @@ export default function Authshopee() {
   const searchParams = useSearchParams();
 
   const code = searchParams.get('code');
-  const shop_id = searchParams.get('shop_id');
+  const shop_id = parseInt(searchParams.get('shop_id'), 10);
   const nome_loja = typeof window !== 'undefined' ? localStorage.getItem('nome_loja') : null;
 
   useEffect(() => {
