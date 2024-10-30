@@ -107,7 +107,7 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
     const getStatusColor = (status) => {
         switch (status) {
             case 'ready_to_ship':
-                return 'bg-blue-200 text-blue-700';
+                return 'bg-orange-200 text-orange-700';
             default:
                 return '';
         }

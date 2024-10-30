@@ -83,7 +83,7 @@ export const DropdownHeader = ({ setActiveTable }) => {
                             <span className='dark:text-gray-200'>Emitir</span>
                             <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Emitir || 0}</span>
                         </button>
-                        <button className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm" role="menuitem">
+                        <button onClick={() => handleClickEmitir('Enviar')} className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm" role="menuitem">
                             <span className='dark:text-gray-200'>Enviar</span>
                             <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Enviar || 0}</span>
                         </button>
@@ -100,10 +100,10 @@ export const DropdownHeader = ({ setActiveTable }) => {
                             <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Retirada || 0}</span>
                         </button>
                         <button
-                            onClick={() => handleClickEmitir('Enviados')}
+                            onClick={() => handleClickEmitir('Enviado')}
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm" role="menuitem">
-                            <span className='dark:text-gray-200'>Enviados</span>
-                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Enviados || 0}</span>
+                            <span className='dark:text-gray-200'>Enviado</span>
+                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Enviado || 0}</span>
                         </button>
                     </div>
                 </div>

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { searchUserId } from '@/utils/searchUserId';
-import EnviadosRow from './EnviadosRow';
-import axios from 'axios';
 import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsContent';
-import {EnviadosMenuMoreResponsive} from './EnviadosMenuMoreResponsive';
+import EnviadosRow from './EnviadosRow';
+import { EnviadosMenuMoreResponsive } from './EnviadosMenuMoreResponsive';
+import axios from 'axios';
 
 export default function EnviadosTabela() {
   const [shippingIdOrder, setShippingIdOrder] = useState([]);
@@ -11,11 +11,13 @@ export default function EnviadosTabela() {
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [pedido, setPedido] = useState([]);
-  
+
+
   const closeModal = () => {
     setIsModalTr(false);
   }
@@ -31,10 +33,9 @@ export default function EnviadosTabela() {
       if (!userId) return;
 
       try {
-        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/delivered`, {
+        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/orders`, {
           params: { userId }
         });
-        console.log(response.data);
         if (response.data && Array.isArray(response.data.orders)) {
           setPedido(response.data.orders);
           setTotalPages(Math.ceil(response.data.orders.length / rowsPerPage));
@@ -81,11 +82,6 @@ export default function EnviadosTabela() {
   return (
     <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">
       <EnviadosMenuMoreResponsive 
-        showCheckboxes={showCheckboxes}
-        showCheckboxesAll={showCheckboxesAll}
-        setShowCheckboxes={setShowCheckboxes}
-        setShowCheckboxesAll={setShowCheckboxesAll}
-        shippingIdOrder={shippingIdOrder}
         currentPage={currentPage}
         totalPages={totalPages}
         rowsPerPage={rowsPerPage}
@@ -94,16 +90,15 @@ export default function EnviadosTabela() {
       />
       <div className='overflow-x-auto'>
         <table className="table-auto min-w-full">
-          <thead className='sticky top-0 z-10 bg-primaria-900 dark:bg-dark-primaria-900'>
+          <thead className="sticky top-0 z-10 bg-primaria-900 dark:bg-dark-primaria-900">
             <tr>
-              {showCheckboxes ? <td className="pl-3"></td> : showCheckboxesAll ? <td className="pl-3"></td> : null}
-              <th className="pl-4 lg:pl-6 pr-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Produtos</th>
+              <th className="pl-4 lg:pl-6 pr-3 py-3 md:py-4 text-sm font-semibold text-start dark:text-gray-200">Produtos</th>
               <th className="px-3 py-3 md:py-4"></th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Valor do pedido</th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Destinatario</th>
-              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Criação</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold dark:text-gray-200">Valor do pedido</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-start dark:text-gray-200">Destinatário</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-start dark:text-gray-200">Tempo</th>
               <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Metodos de envio</th>
-              <th className="pr-4 pl-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Status</th>
+              <th className="pl-3 pr-4 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Status</th>
             </tr>
           </thead>
           <tbody>

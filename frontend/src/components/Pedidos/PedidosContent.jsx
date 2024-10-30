@@ -9,8 +9,9 @@ import PedidosTabela from './PedidosTabela';
 import EmitirTabela from './Emitir/EmitirTabela';
 import ImprimirTabela from './Imprimir/ImprimirTabela';
 import { PedidosHeader } from './PedidosHeader';
-import EnviadosTabela from './Enviados/EnviadosTabelas';
+import EnviarTabela from './Enviar/EnviarTabelas';
 import RetiradaTabela from './Retirada/RetiradaTabela';
+import EnviadosTabela from './Enviados/EnviadosTabela';
 
 const PedidosContent = () => {
   const [activeTable, setActiveTable] = useState('Pedidos');
@@ -38,8 +39,9 @@ const PedidosContent = () => {
         {activeTable === 'Pedidos' && <PedidosTabela />}
         {activeTable === 'Emitir' && <EmitirTabela />}
         {activeTable === 'Imprimir' && <ImprimirTabela />}
-        {activeTable === 'Enviados' && <EnviadosTabela />}
+        {activeTable === 'Enviar' && <EnviarTabela />}
         {activeTable === 'Retirada' && <RetiradaTabela />}
+        {activeTable === 'Enviado' && <EnviadosTabela />}
       </div>
     </div>
   )

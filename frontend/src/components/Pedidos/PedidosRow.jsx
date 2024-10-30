@@ -68,12 +68,14 @@ const PedidosRow = ({ setOrder, pedido }) => {
         return 'Enviar';
       case 'shipped':
         return 'Enviado';
+      case 'picked_up':
+        return 'Enviados';
+      case 'in_hub':
+        return 'Enviados';
       case 'pending':
         return 'Pendente';
       case 'cancelled':
         return 'Cancelado';
-      default:
-        return status; 
     }
   }
 
@@ -141,7 +143,7 @@ const PedidosRow = ({ setOrder, pedido }) => {
                       <td className="px-3 py-3 md:py-4 flex flex-col gap-1 align-top">
                         <span className='text-neutral-700 dark:text-gray-200 font-medium text-sm'>{pedido.buyer_nickname}</span>
                         <span className='text-neutral-600 dark:text-gray-300 font-medium text-xs items-center flex gap-1'>
-                          <FaMapMarkerAlt style={{ fontSize: '12px' }} className='text-blue-500' /> 
+                          <FaMapMarkerAlt style={{ fontSize: '12px' }} className='text-blue-500' />
                           {`${pedido.city}, ${pedido.state}`}
                         </span>
                       </td>
