@@ -7,12 +7,15 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { DropdownSelectOrAll } from '@/components/Geral/Dropdown/DropdownSelectOrAll';
 import BtnActions from '@/components/Geral/Button/BtnActions';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
+import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
+import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
 
 
 export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, setShowCheckboxes, setShowCheckboxesAll, shippingIdOrder }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const [isOpenMenu, setIsOpenMenu] = useState(false);
+    const [statusRequestSync, setStatusRequestSync] = useState(null);
 
     const handleOpenMenu = () => {
         setIsOpenMenu(!isOpenMenu);
@@ -29,16 +32,16 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
         try {
             const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/issueNote', {
                 ordersBatch: shippingIdOrder,
-                params: { userId }
+                userId: userId
             });
             if (response.status === 200) {
-                setStatusRequestEmitirPedido(true);
+                setStatusRequestSync(true);
             } else {
-                setStatusRequestEmitirPedido(false);
+                setStatusRequestSync(false);
             }
         } catch (error) {
             console.error(`Error: ${error}`);
-            setStatusRequestEmitirPedido(false);
+            setStatusRequestSync(false);
         }
     }
 
@@ -98,6 +101,8 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
                     <BtnActions title="Emitir" onClick={emitirPedidos} color="ativado" padding="xs" rounded="lg" />
                 </div>
             }
+            {statusRequestSync === true && <SuccessNotification message="Pedidos emitidos com sucesso" />}
+            {statusRequestSync === false && <ErrorNotification message="Erro ao emitir produtos" />}
         </div>
     )
 }

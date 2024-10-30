@@ -42,17 +42,23 @@ export default function BtnActions({title, onClick, padding, text, rounded, colo
   const handleClick = async (event) => {
     event.preventDefault()
     setIsLoading(true);
-    if(onClick) {
-      await onClick(event);
+    try{
+      if(onClick) {
+        await onClick(event);
+      }
+    } catch (error) {
+      console.error(`Error: ${error}`);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }
 
   return (
     <button
       type="button"
       onClick={(event) => handleClick(event)}
-      className={button({padding: padding, rounded: rounded, bg: color})}
+      disabled={isLoading}
+      className={`${button({padding: padding, rounded: rounded, bg: color})} ${isLoading ? 'cursor-not-allowed' : ''}`}
       >
        {isLoading ? (
           <span 

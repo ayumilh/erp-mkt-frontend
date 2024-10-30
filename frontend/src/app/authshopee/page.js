@@ -43,7 +43,7 @@ export default function Authshopee() {
     };
 
     fetchData();
-  }, [code, nome_loja, router]);
+  }, [code, nome_loja, router, shop_id]);
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-evenly">
