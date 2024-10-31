@@ -6,6 +6,8 @@ import axios from 'axios';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import EditIcon from '@mui/icons-material/Edit';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,10 +25,10 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
           params: { userId }
         });
         if (response.data && Array.isArray(response.data.orders)) {
-          const filteredOrders = response.data.orders.filter(order => 
+          const filteredOrders = response.data.orders.filter(order =>
             order.status === 'ready_to_ship' && (order.substatus === 'picked_up' || order.substatus === 'in_hub')
           );
-  
+
           const ordersWithTranslatedStatus = filteredOrders.map(order => ({
             ...order,
             translatedStatus: translateStatus(order.status, order.substatus)
@@ -56,20 +58,6 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
 
     fetchOrders();
   }, []);
-
-  // useEffect(() => {
-  //   const groupedOrderByShippingId = pedido.reduce((groupedOrderByShippingId, order) => {
-  //     if (order.shipping_id !== null) {
-  //       if (!groupedOrderByShippingId[order.shipping_id]) {
-  //         groupedOrderByShippingId[order.shipping_id] = [];
-  //       }
-  //       groupedOrderByShippingId[order.shipping_id].push(order);
-  //     }
-  //     return groupedOrderByShippingId;
-  //   }, {});
-  //   setGroupOrdersProducts(groupedOrderByShippingId);
-  //   setIsLoading(false);
-  // }, [pedido]);
 
   const shippingIdCounts = {};
   pedido.forEach(pedido => {
@@ -122,6 +110,22 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
     }
 
   }, [dropdownGroupOrderRef]);
+
+
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const menuMoreVertRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuMoreVertRef.current && !menuMoreVertRef.current.contains(event.target)) {
+        setIsOpenMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [menuMoreVertRef])
+
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -185,7 +189,10 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
               if (!firstRender[pedido.shipping_id]) {
                 firstRender[pedido.shipping_id] = true;
                 return (
-                  <tr key={pedido.order_id} className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer' onClick={() => openOrderDetailsModal(shipping_id, true)}>
+                  <tr
+                    key={pedido.order_id}
+                    className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
+                  >
                     {toggleShowCheckboxes && <td className="pl-4"><input type="checkbox" onChange={(event) => handleCheckboxChange(event, pedido.shipping_id)} /></td>}
                     {toggleShowCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => { }} /></td>}
                     <td className='pl-4 lg:pl-6 pr-3 py-4 md:py-5 align-top'>
@@ -216,12 +223,29 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
                     <td className="pl-3 pr-4 py-3 md:py-4 text-sm font-medium text-center align-top">
                       <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status, pedido.substatus)}</span>
                     </td>
+                    <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
+                      <button
+                        onClick={() => openOrderDetailsModal(pedido.shipping_id, true)}
+                        className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2"
+                      >
+                        <MoreVertIcon
+                          className='text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out'
+                          fontSize="small"
+                          sx={{
+                            transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.3s ease-in-out'
+                          }} />
+                      </button>
+                    </td>
                   </tr>
                 );
               }
             } else {
               return (
-                <tr key={pedido.order_id} className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer' onClick={() => openOrderDetailsModal(pedido.shipping_id)}>
+                <tr
+                  key={pedido.order_id}
+                  className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
+                > 
                   {toggleShowCheckboxes && <td className="pl-4"><input type="checkbox" onChange={(event) => handleCheckboxChange(event, pedido.shipping_id)} /></td>}
                   {toggleShowCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => { }} /></td>}
                   <td className='pl-4 lg:pl-6 pr-3 py-4 md:py-5 align-top'>
@@ -255,6 +279,20 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
                   <td className="pl-3 pr-4 py-3 md:py-4 text-sm font-medium text-center align-top">
                     <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status, pedido.substatus)}</span>
                   </td>
+                  <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
+                      <button
+                        onClick={() => openOrderDetailsModal(pedido.shipping_id, true)}
+                        className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2"
+                      >
+                        <MoreVertIcon
+                          className='text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out'
+                          fontSize="small"
+                          sx={{
+                            transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.3s ease-in-out'
+                          }} />
+                      </button>
+                    </td>
                 </tr>
               )
             }

@@ -6,6 +6,8 @@ import axios from 'axios';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import EditIcon from '@mui/icons-material/Edit';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
     const [pedido, setPedido] = useState([]);
@@ -126,6 +128,21 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
     }, [dropdownGroupOrderRef]);
 
 
+    const [isOpenMenu, setIsOpenMenu] = useState(false);
+    const menuMoreVertRef = useRef(null);
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuMoreVertRef.current && !menuMoreVertRef.current.contains(event.target)) {
+                setIsOpenMenu(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+    }, [menuMoreVertRef])
+
+
     const getStatusColor = (status) => {
         switch (status) {
             case 'ready_to_ship':
@@ -178,7 +195,7 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
                                     <tr
                                         key={pedido.order_id}
                                         className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
-                                        // onClick={() => openOrderDetailsModal(shipping_id, true)}
+                                    // onClick={() => openOrderDetailsModal(shipping_id, true)}
                                     >
                                         <td className="pl-4">
                                             {!toggleShowCheckboxesAll && (
@@ -222,6 +239,20 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
                                                 {translateStatus(pedido.status)}
                                             </span>
                                         </td>
+                                        <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
+                                            <button
+                                                onClick={() => openOrderDetailsModal(pedido.shipping_id, true)}
+                                                className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2"
+                                            >
+                                                <MoreVertIcon
+                                                    className='text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out'
+                                                    fontSize="small"
+                                                    sx={{
+                                                        transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
+                                                        transition: 'transform 0.3s ease-in-out'
+                                                    }} />
+                                            </button>
+                                        </td>
                                     </tr>
                                 );
                             }
@@ -230,7 +261,6 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
                                 <tr
                                     key={pedido.order_id}
                                     className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
-                                // onClick={() => openOrderDetailsModal(pedido.shipping_id)}
                                 >
                                     <td className="pl-4">
                                         {!toggleShowCheckboxesAll && (
@@ -273,6 +303,20 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
                                     <td className="px-3 py-3 md:py-4 dark:text-gray-200 text-sm font-medium text-center align-top">{translateTrackingMethod(pedido.tracking_method)}</td>
                                     <td className="pl-3 pr-4 py-3 md:py-4  text-sm font-medium text-center align-top">
                                         <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status)}</span>
+                                    </td>
+                                    <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
+                                        <button
+                                            onClick={() => openOrderDetailsModal(pedido.shipping_id, true)}
+                                            className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2"
+                                        >
+                                            <MoreVertIcon
+                                                className='text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out'
+                                                fontSize="small"
+                                                sx={{
+                                                    transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
+                                                    transition: 'transform 0.3s ease-in-out'
+                                                }} />
+                                        </button>
                                     </td>
                                 </tr>
                             )

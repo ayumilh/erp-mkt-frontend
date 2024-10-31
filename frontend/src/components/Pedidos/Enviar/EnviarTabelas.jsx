@@ -103,7 +103,8 @@ export default function EnviarTabela() {
               <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Destinatario</th>
               <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Criação</th>
               <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Metodos de envio</th>
-              <th className="pr-4 pl-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Status</th>
+              <th className="px-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Status</th>
+              <th className="pr-4 pl-3 py-3 md:py-4 text-sm font-semibold text-center dark:text-gray-200">Ações</th>
             </tr>
           </thead>
           <tbody>

@@ -1,11 +1,12 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { searchUserId } from '@/utils/searchUserId';
 import axios from "axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import EditIcon from '@mui/icons-material/Edit';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ModalDetailsProdutos from "./Actions/ModalDetailsProdutos";
 import ModalDetailsProdutosMouseLeave from "./Actions/ModalDetailsProdutosMouseLeave";
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
@@ -211,6 +212,21 @@ const ProdutosTabela = ({ onFilterStatus }) => {
     handlePageChange(1);
   };
 
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+
+  const menuMoreVertRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuMoreVertRef.current && !menuMoreVertRef.current.contains(event.target)) {
+        setIsOpenMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [menuMoreVertRef])
+
 
   return (
     <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">
@@ -232,8 +248,8 @@ const ProdutosTabela = ({ onFilterStatus }) => {
           <thead className='sticky top-0 z-0 bg-primaria-900 dark:bg-dark-primaria-900'>
             <tr className="z-0">
               <td className="pl-4">
-                <input 
-                  type="checkbox" 
+                <input
+                  type="checkbox"
                   checked={showCheckboxesAll}
                   onChange={handleSelectAllChange}
                 />
@@ -243,7 +259,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
               <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Preço</th>
               <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Estoque</th>
               <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Status</th>
-              <th className="pl-4 pr-6 py-2 md:py-5"></th>
+              <th className="pl-4 pr-6 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -253,7 +269,6 @@ const ProdutosTabela = ({ onFilterStatus }) => {
               paginatedProducts.slice(0, rowsPerPage).map((product, index) => (
                 <tr
                   key={index}
-                  // onClick={() => openProductDetailsModal(product.sku)}
                   className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
                   onMouseEnter={() => openProductDetailsModalMouseLeave(product.sku)}
                   onMouseLeave={closeModalMouseLeave}
@@ -281,9 +296,21 @@ const ProdutosTabela = ({ onFilterStatus }) => {
                   <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">
                     <span className={`${getStatusColor(product.status)} w-24 rounded-full px-3 py-2 text-neutral-800`}>{translateStatus(product.status)}</span>
                   </td>
-                  <td className="pl-4 pr-6 py-2 md:py-5 text-center">
-                    <button onClick={(event) => storeSkuAndOpenEditModal(event, product.sku)} className="flex items-center justify-center">
-                      <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5 dark:text-gray-200" />
+                  <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
+                    <button onClick={(event) => storeSkuAndOpenEditModal(event, product.sku)} className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2">
+                      <EditIcon
+                        className="text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out"
+                        fontSize="small"
+                      />
+                    </button>
+                    <button onClick={() => openProductDetailsModal(product.sku)} className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2">
+                      <MoreVertIcon
+                        className='text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out'
+                        fontSize="small"
+                        sx={{
+                          transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.3s ease-in-out'
+                        }} />
                     </button>
                   </td>
                   {isModalTrMouseLeave && selectedSkuMouseLeave === product.sku && (
