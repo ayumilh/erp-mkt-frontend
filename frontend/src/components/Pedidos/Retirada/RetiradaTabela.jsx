@@ -85,6 +85,10 @@ export default function RetiradaTabela() {
         currentPage={currentPage}
         totalPages={totalPages}
         rowsPerPage={rowsPerPage}
+        showCheckboxes={showCheckboxes}
+        setShowCheckboxes={setShowCheckboxes}
+        setShowCheckboxesAll={setShowCheckboxesAll}
+        showCheckboxesAll={showCheckboxesAll}
         handlePageChange={handlePageChange}
         handleRowsPerPageChange={handleRowsPerPageChange}
       />

@@ -7,11 +7,12 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
-export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
+export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
     const [pedido, setPedido] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
     const [isOpen, setIsOpen] = useState({});
+    const [selectedOrders, setSelectedOrders] = useState([]);
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -65,15 +66,36 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
         }
     }, [toggleShowCheckboxesAll, pedido, setShippingIdOrder]);
 
-    const handleCheckboxChange = (event, orders) => {
-        event.stopPropagation();
+    const updateSelectedOrders = (isChecked, orders) => {
+        let updatedSelectedOrders;
+
+        if (isChecked) {
+            updatedSelectedOrders = [...selectedOrders, orders];
+        } else {
+            updatedSelectedOrders = selectedOrders.filter(o => o !== orders);
+        }
+
+        setSelectedOrders(updatedSelectedOrders);
+        setToggleShowCheckboxes(updatedSelectedOrders.length > 0);
+    };
+
+    const updateShippingIdOrder = (isChecked, orders) => {
         let orderArray = Array.isArray(orders) ? orders : [orders];
         const orderIds = orderArray.map(order => order.order_id);
-        if (toggleShowCheckboxesAll || event.target.checked) {
+
+        if (toggleShowCheckboxesAll || isChecked) {
             setShippingIdOrder(prevItems => [...prevItems, orderIds]);
         } else {
             setShippingIdOrder(prevItems => prevItems.filter(i => !i.includes(orderIds[0])));
         }
+    };
+
+    const handleCheckboxChange = (event, orders) => {
+        event.stopPropagation();
+        const isChecked = event.target.checked;
+
+        updateSelectedOrders(isChecked, orders);
+        updateShippingIdOrder(isChecked, orders);
     };
 
 
@@ -109,7 +131,7 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
             case 'ready_to_ship':
                 return 'bg-orange-200 text-orange-700';
             default:
-                return '';
+                return 'bg-orange-200 text-orange-700';
         }
     }
 
@@ -118,7 +140,7 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
             case 'ready_to_ship':
                 return 'Emitir';
             default:
-                return 'Emitir';
+                return status;
         }
     }
 
@@ -153,9 +175,23 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
                             if (!firstRender[pedido.shipping_id]) {
                                 firstRender[pedido.shipping_id] = true;
                                 return (
-                                    <tr key={pedido.order_id} className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer' onClick={() => openOrderDetailsModal(shipping_id, true)}>
-                                        {toggleShowCheckboxes && <td className="pl-4"><input type="checkbox" onChange={(event) => { handleCheckboxChange(event, orders) }} /></td>}
-                                        {toggleShowCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => { }} /></td>}
+                                    <tr
+                                        key={pedido.order_id}
+                                        className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
+                                        // onClick={() => openOrderDetailsModal(shipping_id, true)}
+                                    >
+                                        <td className="pl-4">
+                                            {!toggleShowCheckboxesAll && (
+                                                <input
+                                                    type="checkbox"
+                                                    onClick={() => setToggleShowCheckboxes(true)}
+                                                    onChange={(event) => { handleCheckboxChange(event, orders) }}
+                                                />
+                                            )}
+                                            {toggleShowCheckboxesAll && (
+                                                <input type="checkbox" checked={true} onChange={() => { }} />
+                                            )}
+                                        </td>
                                         <td className='pl-4 lg:pl-6 pr-3 py-4 md:py-5 align-top'>
                                             {groupOrdersProducts[pedido.shipping_id] && groupOrdersProducts[pedido.shipping_id].map((order, index) => (
                                                 <div key={index} className="text-left flex items-center justify-center gap-4 mb-4">
@@ -191,10 +227,23 @@ export default function EmitirRow({ setOrder, toggleShowCheckboxes, toggleShowCh
                             }
                         } else {
                             return (
-                                <tr key={pedido.order_id} className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer' onClick={() => openOrderDetailsModal(pedido.shipping_id)}>
-                                    {toggleShowCheckboxes && <td className="pl-4"><input type="checkbox" onChange={(event) => handleCheckboxChange(event, pedido)} /></td>}
-                                    {toggleShowCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => { }} /></td>}
-                                    <td className='pl-4 lg:pl-6 pr-3 py-4 md:py-5 align-top'>
+                                <tr
+                                    key={pedido.order_id}
+                                    className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
+                                // onClick={() => openOrderDetailsModal(pedido.shipping_id)}
+                                >
+                                    <td className="pl-4">
+                                        {!toggleShowCheckboxesAll && (
+                                            <input
+                                                type="checkbox"
+                                                onClick={() => setToggleShowCheckboxes(true)}
+                                                onChange={(event) => { handleCheckboxChange(event, pedido) }} />
+                                        )}
+                                        {toggleShowCheckboxesAll && (
+                                            <input type="checkbox" checked={true} onChange={() => { }} />
+                                        )}
+                                    </td>
+                                    <td className='pl-4 pr-3 py-4 md:py-5 align-top'>
                                         <div className="text-left flex items-center justify-center gap-4 mb-4">
                                             <div className='w-10 h-10'>{pedido.pictureurls && <Image src={pedido.pictureurls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10 object-cover" />}</div>
                                             <div className='flex flex-col'>

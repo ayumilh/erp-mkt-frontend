@@ -20,6 +20,10 @@ export default function ImprimirTabela() {
     setIsModalTr(true);
   }
 
+  const handleSelectAllChange = () => {
+    setShowCheckboxesAll(!showCheckboxesAll);
+  };
+
   return (
     <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">
       <ImprimirMenuMoreResponsive
@@ -33,6 +37,13 @@ export default function ImprimirTabela() {
         <table className="table-auto min-w-full">
           <thead className='sticky top-0 z-10 bg-primaria-900 dark:bg-dark-primaria-900'>
             <tr>
+              <th className="px-3 py-3 md:py-4">
+                <input
+                  type="checkbox"
+                  checked={showCheckboxesAll}
+                  onChange={handleSelectAllChange}
+                />
+              </th>
               <th className="pl-4 lg:pl-6 pr-3 py-3 md:py-4 text-sm font-semibold text-start dark:text-gray-200">Produtos</th>
               <th className="px-3 py-3 md:py-4"></th>
               <th className="px-3 py-3 md:py-4 text-sm font-semibold dark:text-gray-200">Valor do pedido</th>
@@ -43,16 +54,17 @@ export default function ImprimirTabela() {
             </tr>
           </thead>
           <tbody>
-            <ImprimirRow 
-              toggleShowCheckboxes={showCheckboxes} 
-              toggleShowCheckboxesAll={showCheckboxesAll} 
+            <ImprimirRow
+              toggleShowCheckboxes={showCheckboxes}
+              setToggleShowCheckboxes={setShowCheckboxes}
+              toggleShowCheckboxesAll={showCheckboxesAll}
               setShippingIdOrder={setShippingIdOrder}
               setOrder={handleOrderSelect}
             />
           </tbody>
         </table>
       </div>
-      {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder}/>}
+      {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder} />}
     </div>
   );
 };

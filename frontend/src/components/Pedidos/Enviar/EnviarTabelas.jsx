@@ -34,7 +34,7 @@ export default function EnviarTabela() {
         const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/issue`, {
           params: { userId }
         });
-        console.log(response.data);
+
         if (response.data && Array.isArray(response.data.orders)) {
           setPedido(response.data.orders);
           setTotalPages(Math.ceil(response.data.orders.length / rowsPerPage));

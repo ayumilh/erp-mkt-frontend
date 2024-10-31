@@ -6,7 +6,6 @@ import { useReactToPrint } from "react-to-print";
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
 
-
 export const BtnImprimir = ({ shippingIdOrder }) => {
   const contentPrint = useRef();
   const [statusRequestSync, setStatusRequestSync] = useState(null);
@@ -22,6 +21,8 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
 
     const userId = searchUserId();
     if (!userId) return;
+
+    console.log(shippingIdOrder);
 
     try {
       const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {

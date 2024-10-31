@@ -26,6 +26,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
   const router = useRouter();
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -68,16 +69,47 @@ const ProdutosTabela = ({ onFilterStatus }) => {
     if (showCheckboxesAll) {
       const allOrderIds = products.map(products => products.sku);
       setIdProduct(allOrderIds);
+      setSelectedProducts(allOrderIds);
+    } else {
+      setIdProduct([]);
+      setSelectedProducts([]);
     }
   }, [showCheckboxesAll, products, setIdProduct]);
 
+  const updateSelectedProducts = (isChecked, sku) => {
+    let updatedSelectedProducts;
+
+    if (isChecked) {
+      updatedSelectedProducts = [...selectedProducts, sku];
+    } else {
+      updatedSelectedProducts = selectedProducts.filter(o => o !== sku);
+    }
+
+    setSelectedProducts(updatedSelectedProducts);
+    setShowCheckboxes(updatedSelectedProducts.length > 0);
+  };
+
+  const updateShippingIdProducts = (isChecked, sku) => {
+    let productArray = Array.isArray(sku) ? sku : [sku];
+    const productIds = productArray.map(sku => sku.sku);
+
+    if (showCheckboxesAll || isChecked) {
+      setIdProduct(prevItems => [...prevItems, productIds]);
+    } else {
+      setIdProduct(prevItems => prevItems.filter(i => !productIds.includes(i)));
+    }
+  };
+
   const handleCheckboxChange = (event, sku) => {
     event.stopPropagation();
-    if (showCheckboxesAll || event.target.checked) {
-      setIdProduct(prevItems => [...prevItems, sku]);
-    } else {
-      setIdProduct(prevItems => prevItems.filter(i => i !== sku));
-    }
+    const isChecked = event.target.checked;
+
+    updateSelectedProducts(isChecked, sku);
+    updateShippingIdProducts(isChecked, sku);
+  };
+
+  const handleSelectAllChange = () => {
+    setShowCheckboxesAll(!showCheckboxesAll);
   };
 
 
@@ -100,7 +132,6 @@ const ProdutosTabela = ({ onFilterStatus }) => {
     setIsModalTrMouseLeave(false);
     setSelectedSkuMouseLeave(null);
   };
-
 
 
   const storeSkuAndOpenEditModal = (event, sku) => {
@@ -200,7 +231,13 @@ const ProdutosTabela = ({ onFilterStatus }) => {
         <table className="table-auto min-w-full">
           <thead className='sticky top-0 z-0 bg-primaria-900 dark:bg-dark-primaria-900'>
             <tr className="z-0">
-              {(showCheckboxes || showCheckboxesAll) && <td className="pl-4"></td>}
+              <td className="pl-4">
+                <input 
+                  type="checkbox" 
+                  checked={showCheckboxesAll}
+                  onChange={handleSelectAllChange}
+                />
+              </td>
               <th className="pr-4 pl-6 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">SKU</th>
               <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Nome</th>
               <th className="px-4 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Preço</th>
@@ -211,18 +248,27 @@ const ProdutosTabela = ({ onFilterStatus }) => {
           </thead>
           <tbody>
             {isLoading ? (
-              <SkeletonLoader numColumns={6} />
+              <SkeletonLoader numColumns={7} />
             ) : paginatedProducts.length > 0 ? (
               paginatedProducts.slice(0, rowsPerPage).map((product, index) => (
                 <tr
                   key={index}
-                  onClick={() => openProductDetailsModal(product.sku)}
+                  // onClick={() => openProductDetailsModal(product.sku)}
                   className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
                   onMouseEnter={() => openProductDetailsModalMouseLeave(product.sku)}
                   onMouseLeave={closeModalMouseLeave}
                 >
-                  {showCheckboxes && <td className="pl-4"><input type="checkbox" onClick={(event) => handleCheckboxChange(event, product.sku)} /></td>}
-                  {showCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => { }} /></td>}
+                  <td className="pl-4">
+                    {!showCheckboxesAll && (
+                      <input
+                        type="checkbox"
+                        onClick={() => setShowCheckboxes(true)}
+                        onChange={(event) => { handleCheckboxChange(event, product.sku) }} />
+                    )}
+                    {showCheckboxesAll && (
+                      <input type="checkbox" checked={true} onChange={() => { }} />
+                    )}
+                  </td>
                   <td className="w-[200px] xl:w-auto flex items-center gap-3 pl-6 pr-4 py-4 md:py-5">
                     {product.pictureUrls &&
                       <Image src={product.pictureUrls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10" />
@@ -250,7 +296,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
               ))
             ) : (
               <tr>
-                <td className="text-center" colSpan="6">
+                <td className="text-center" colSpan="7">
                   <div className="w-full ml-10 md:ml-0 md:px-10 md:w-full py-12">
                     <span><ProductionQuantityLimitsIcon className="dark:text-gray-200" style={{ width: 46, height: 46 }} /></span>
                     <p className="mt-8 dark:text-gray-200">Ops! Parece que as prateleiras estão vazias. Volte em breve para mais produtos!</p>
