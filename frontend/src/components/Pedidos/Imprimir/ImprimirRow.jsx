@@ -184,12 +184,12 @@ export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleS
   const firstRender = [];
   return (<>
     {isLoading ? (
-      <SkeletonLoader numColumns={8} />
+      <SkeletonLoader numColumns={9} />
     ) : pedido.length > 0 ? (
       Object.entries(groupOrdersProducts).map(([shipping_id, orders], groupIndex) => (
         <React.Fragment key={shipping_id}>
           <tr className='group-header'>
-            <td colSpan={8} className="px-4 py-2 text-center bg-gray-100 dark:bg-neutral-800 dark:text-neutral-800 border-t border-gray-200 dark:border-neutral-800">
+            <td colSpan={9} className="px-4 py-2 text-center bg-gray-100 dark:bg-neutral-800 dark:text-neutral-800 border-t border-gray-200 dark:border-neutral-800">
               <div className='text-sm font-medium'>
                 <span className='text-zinc-600 dark:text-gray-200 text-xs font-semibold'>ID da compra: {shipping_id}</span>
                 <span className='text-zinc-600 dark:text-gray-200 text-xs font-semibold'> - {orders[0].seller_nickname}</span>
@@ -331,7 +331,7 @@ export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleS
       ))
     ) : (
       <tr>
-        <td className="text-center" colSpan="7">
+        <td className="text-center" colSpan="9">
           <div className="w-full py-12">
             <span><ProductionQuantityLimitsIcon className='dark:text-gray-200' style={{ width: 46, height: 46 }} /></span>
             <p className="mt-8 mx-10 dark:text-gray-200">Uh-oh! Parece que há pedidos, estamos ansiosos para apoiar suas próximas vendas!</p>
