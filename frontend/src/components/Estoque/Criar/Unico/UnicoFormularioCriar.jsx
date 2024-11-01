@@ -135,7 +135,9 @@ export default function CriarProdutoUnicoForm() {
 
   return (
     <div className='w-full xl:max-w-screen-lg flex flex-col mt-10'>
-      <h3 className='text-neutral-800 dark:text-gray-200 dark:text-gray-200 text-xl font-medium '>{Nome_do_Produto || "Novo Produto"}</h3>
+      <h3 className='text-neutral-800 dark:text-gray-200 text-xl font-medium'>                 
+        {Nome_do_Produto || "Novo Produto"}
+      </h3>
 
       <div className='flex gap-6 mt-5 mb-2 relative'>
         <button
@@ -163,6 +165,7 @@ export default function CriarProdutoUnicoForm() {
           taxação
         </button>
       </div>
+
       {secaoAtiva === 'gerais' && (
         <div className='flex flex-wrap transition-transform duration-500 ease-in'>
           <div className='w-full flex flex-wrap mt-5 mb-7'>
