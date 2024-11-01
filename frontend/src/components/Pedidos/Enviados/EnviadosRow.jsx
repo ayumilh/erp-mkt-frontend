@@ -6,14 +6,14 @@ import axios from 'axios';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
+export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
   const [pedido, setPedido] = useState([]);
   const [isOpen, setIsOpen] = useState({});
+  const [selectedOrders, setSelectedOrders] = useState([]);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -76,15 +76,38 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
     }
   }, [toggleShowCheckboxesAll, pedido, setShippingIdOrder]);
 
-  const handleCheckboxChange = (event, shipping_id) => {
-    event.stopPropagation();
-    if (toggleShowCheckboxesAll || event.target.checked) {
-      setShippingIdOrder(prevItems => [...prevItems, shipping_id]);
+  const updateSelectedOrders = (isChecked, shipping_id) => {
+    let updatedSelectedOrders;
+
+    if (isChecked) {
+      updatedSelectedOrders = [...selectedOrders, shipping_id];
+    } else {
+      updatedSelectedOrders = selectedOrders.filter(o => o !== shipping_id);
+    }
+
+    setSelectedOrders(updatedSelectedOrders);
+    setToggleShowCheckboxes(updatedSelectedOrders.length > 0);
+  };
+
+  const updateShippingIdOrder = (isChecked, shipping_id) => {
+    let orderArray = Array.isArray(shipping_id) ? shipping_id : [shipping_id];
+    const orderIds = orderArray.map(order => order);
+
+    if (toggleShowCheckboxesAll || isChecked) {
+      setShippingIdOrder(prevItems => [...prevItems, ...orderIds]);
     } else {
       setShippingIdOrder(prevItems => prevItems.filter(i => i !== shipping_id));
     }
   };
 
+
+  const handleCheckboxChange = (event, shipping_id) => {
+    event.stopPropagation();
+    const isChecked = event.target.checked;
+
+    updateSelectedOrders(isChecked, shipping_id);
+    updateShippingIdOrder(isChecked, shipping_id);
+  };
 
   const openOrderDetailsModal = (shipping_id, allOrders = false) => {
     if (allOrders) {
@@ -172,12 +195,12 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
   const firstRender = [];
   return (<>
     {isLoading ? (
-      <SkeletonLoader numColumns={8} />
+      <SkeletonLoader numColumns={9} />
     ) : pedido.length > 0 ? (
       Object.entries(groupOrdersProducts).map(([shipping_id, orders], groupIndex) => (
         <React.Fragment key={shipping_id}>
           <tr className='group-header'>
-            <td colSpan={8} className="px-4 py-2 text-center bg-gray-100 dark:bg-neutral-800 dark:text-neutral-800 border-t border-gray-200 dark:border-neutral-800">
+            <td colSpan={9} className="px-4 py-2 text-center bg-gray-100 dark:bg-neutral-800 dark:text-neutral-800 border-t border-gray-200 dark:border-neutral-800">
               <div className='text-sm font-medium'>
                 <span className='text-zinc-600 dark:text-gray-200 text-xs font-semibold'>ID da compra: {shipping_id}</span>
                 <span className='text-zinc-600 dark:text-gray-200 text-xs font-semibold'> - {orders[0].seller_nickname}</span>
@@ -193,8 +216,17 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
                     key={pedido.order_id}
                     className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
                   >
-                    {toggleShowCheckboxes && <td className="pl-4"><input type="checkbox" onChange={(event) => handleCheckboxChange(event, pedido.shipping_id)} /></td>}
-                    {toggleShowCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => { }} /></td>}
+                    <td className="pl-4">
+                      {!toggleShowCheckboxesAll && (
+                        <input
+                          type="checkbox"
+                          onClick={() => setToggleShowCheckboxes(true)}
+                          onChange={(event) => { handleCheckboxChange(event, pedido.shipping_id) }} />
+                      )}
+                      {toggleShowCheckboxesAll && (
+                        <input type="checkbox" checked={true} onChange={() => { }} />
+                      )}
+                    </td>
                     <td className='pl-4 lg:pl-6 pr-3 py-4 md:py-5 align-top'>
                       {groupOrdersProducts[pedido.shipping_id] && groupOrdersProducts[pedido.shipping_id].map((order, index) => (
                         <div key={index} className="text-left flex items-center justify-center gap-4 mb-4">
@@ -245,9 +277,18 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
                 <tr
                   key={pedido.order_id}
                   className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
-                > 
-                  {toggleShowCheckboxes && <td className="pl-4"><input type="checkbox" onChange={(event) => handleCheckboxChange(event, pedido.shipping_id)} /></td>}
-                  {toggleShowCheckboxesAll && <td className="pl-4"><input type="checkbox" checked={true} onChange={() => { }} /></td>}
+                >
+                  <td className="pl-4">
+                    {!toggleShowCheckboxesAll && (
+                      <input
+                        type="checkbox"
+                        onClick={() => setToggleShowCheckboxes(true)}
+                        onChange={(event) => { handleCheckboxChange(event, pedido.shipping_id) }} />
+                    )}
+                    {toggleShowCheckboxesAll && (
+                      <input type="checkbox" checked={true} onChange={() => { }} />
+                    )}
+                  </td>
                   <td className='pl-4 lg:pl-6 pr-3 py-4 md:py-5 align-top'>
                     <div className="text-left flex items-center justify-center gap-4 mb-4">
                       <div className='w-10 h-10'>{pedido.pictureurls && <Image src={pedido.pictureurls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10 object-cover" />}</div>
@@ -280,19 +321,19 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
                     <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status, pedido.substatus)}</span>
                   </td>
                   <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
-                      <button
-                        onClick={() => openOrderDetailsModal(pedido.shipping_id, true)}
-                        className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2"
-                      >
-                        <MoreVertIcon
-                          className='text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out'
-                          fontSize="small"
-                          sx={{
-                            transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
-                            transition: 'transform 0.3s ease-in-out'
-                          }} />
-                      </button>
-                    </td>
+                    <button
+                      onClick={() => openOrderDetailsModal(pedido.shipping_id, true)}
+                      className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2"
+                    >
+                      <MoreVertIcon
+                        className='text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out'
+                        fontSize="small"
+                        sx={{
+                          transform: isOpenMenu ? 'rotate(90deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.3s ease-in-out'
+                        }} />
+                    </button>
+                  </td>
                 </tr>
               )
             }
@@ -301,7 +342,7 @@ export default function EnviadosRow({ setOrder, toggleShowCheckboxes, toggleShow
       ))
     ) : (
       <tr>
-        <td className="text-center" colSpan="7">
+        <td className="text-center" colSpan="9">
           <div className="w-full py-12">
             <span><ProductionQuantityLimitsIcon className='dark:text-gray-200' style={{ width: 46, height: 46 }} /></span>
             <p className="mt-8 mx-10 dark:text-gray-200">Uh-oh! Parece que há pedidos, estamos ansiosos para apoiar suas próximas vendas!</p>

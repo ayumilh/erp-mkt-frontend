@@ -79,12 +79,21 @@ export default function EnviadosTabela() {
     handlePageChange(1);
   };
 
+  const handleSelectAllChange = () => {
+    setShowCheckboxesAll(!showCheckboxesAll);
+  };
+
   return (
     <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">
-      <EnviadosMenuMoreResponsive 
+      <EnviadosMenuMoreResponsive
         currentPage={currentPage}
         totalPages={totalPages}
         rowsPerPage={rowsPerPage}
+        showCheckboxes={showCheckboxes}
+        setShowCheckboxes={setShowCheckboxes}
+        showCheckboxesAll={showCheckboxesAll}
+        setShowCheckboxesAll={setShowCheckboxesAll}
+        shippingIdOrder={shippingIdOrder}
         handlePageChange={handlePageChange}
         handleRowsPerPageChange={handleRowsPerPageChange}
       />
@@ -92,6 +101,13 @@ export default function EnviadosTabela() {
         <table className="table-auto min-w-full">
           <thead className="sticky top-0 z-10 bg-primaria-900 dark:bg-dark-primaria-900">
             <tr>
+              <td className="pl-4">
+                <input
+                  type="checkbox"
+                  checked={showCheckboxesAll}
+                  onChange={handleSelectAllChange}
+                />
+              </td>
               <th className="pl-4 lg:pl-6 pr-3 py-3 md:py-4 text-sm font-semibold text-start dark:text-gray-200">Produtos</th>
               <th className="px-3 py-3 md:py-4"></th>
               <th className="px-3 py-3 md:py-4 text-sm font-semibold dark:text-gray-200">Valor do pedido</th>
@@ -103,9 +119,10 @@ export default function EnviadosTabela() {
             </tr>
           </thead>
           <tbody>
-            <EnviadosRow 
-              toggleShowCheckboxes={showCheckboxes} 
-              toggleShowCheckboxesAll={showCheckboxesAll} 
+            <EnviadosRow
+              toggleShowCheckboxes={showCheckboxes}
+              setToggleShowCheckboxes={setShowCheckboxes}
+              toggleShowCheckboxesAll={showCheckboxesAll}
               setShippingIdOrder={setShippingIdOrder}
               setOrder={handleOrderSelect}
               pedido={paginatedPedido}
@@ -113,7 +130,7 @@ export default function EnviadosTabela() {
           </tbody>
         </table>
       </div>
-      {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder}/>}
+      {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder} />}
     </div>
   );
 };

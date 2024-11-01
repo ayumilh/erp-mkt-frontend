@@ -20,6 +20,8 @@ export const RetiradaMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
         setIsOpenMenu(!isOpenMenu);
     }
 
+    console.log('shippingIdOrder', shippingIdOrder);
+
     const menuMoreVertRef = useRef(null);
     useEffect(() => {
         const handleClickOutside = (event) => {

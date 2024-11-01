@@ -3,8 +3,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import EditIcon from '@mui/icons-material/Edit';
 import { DropdownSelectOrAll } from '../../Geral/Dropdown/DropdownSelectOrAll';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
 import { BtnImprimir } from './BtnImprimir';

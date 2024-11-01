@@ -86,7 +86,7 @@ export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleS
     let orderArray = Array.isArray(shipping_id) ? shipping_id : [shipping_id];
     const orderIds = orderArray.map(order => order.order_id);
   
-    if (toggleShowCheckboxesAll || event.target.checked) {
+    if (toggleShowCheckboxesAll || isChecked) {
       setShippingIdOrder(prevItems => [...prevItems, shipping_id]);
     } else {
       setShippingIdOrder(prevItems => prevItems.filter(i => i !== shipping_id));
