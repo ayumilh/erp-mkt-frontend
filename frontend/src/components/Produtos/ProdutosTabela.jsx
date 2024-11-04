@@ -148,7 +148,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'active':
-        return 'bg-green-200 text-green-700';
+        return 'bg-green-200 text-green-600';
       case 'under_review':
         return 'bg-yellow-200 text-yellow-700';
       case 'paused':
@@ -294,7 +294,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
                   <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{product.price}</td>
                   <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{product.estoque}</td>
                   <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">
-                    <span className={`${getStatusColor(product.status)} w-24 rounded-full px-3 py-2 text-neutral-800`}>{translateStatus(product.status)}</span>
+                    <span className={`${getStatusColor(product.status)} w-24 rounded-full px-3 py-2 text-sm`}>{translateStatus(product.status)}</span>
                   </td>
                   <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
                     <button onClick={(event) => storeSkuAndOpenEditModal(event, product.sku)} className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2">

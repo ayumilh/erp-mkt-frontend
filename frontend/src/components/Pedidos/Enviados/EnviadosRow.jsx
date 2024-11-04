@@ -253,7 +253,7 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
                     </td>
                     <td className="px-3 py-3 md:py-4 dark:text-gray-200 text-sm font-medium text-center align-top">{translateTrackingMethod(pedido.tracking_method)}</td>
                     <td className="pl-3 pr-4 py-3 md:py-4 text-sm font-medium text-center align-top">
-                      <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status, pedido.substatus)}</span>
+                      <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2 text-sm`}>{translateStatus(pedido.status, pedido.substatus)}</span>
                     </td>
                     <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
                       <button
@@ -318,7 +318,7 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
                   </td>
                   <td className="px-3 py-3 md:py-4 dark:text-gray-200 text-sm font-medium text-center align-top">{translateTrackingMethod(pedido.tracking_method)}</td>
                   <td className="pl-3 pr-4 py-3 md:py-4 text-sm font-medium text-center align-top">
-                    <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2`}>{translateStatus(pedido.status, pedido.substatus)}</span>
+                    <span className={`${getStatusColor(pedido.status)} rounded-full px-3 py-2 text-sm`}>{translateStatus(pedido.status, pedido.substatus)}</span>
                   </td>
                   <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
                     <button
