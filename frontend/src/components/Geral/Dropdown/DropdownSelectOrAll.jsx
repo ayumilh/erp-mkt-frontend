@@ -14,11 +14,13 @@ export const DropdownSelectOrAll = ({ setShowCheckboxes, showCheckboxes, setShow
     const handleEmitirSelecionados = async () => {
         setShowCheckboxes(!showCheckboxes);
         setShowCheckboxesAll(false);
+        setIsOpenEmitir(!isOpenEmitir);
     }
 
     const handleEmitirTodos = async () => {
         setShowCheckboxesAll(!showCheckboxesAll);
         setShowCheckboxes(false);
+        setIsOpenEmitir(!isOpenEmitir);
     }
 
 

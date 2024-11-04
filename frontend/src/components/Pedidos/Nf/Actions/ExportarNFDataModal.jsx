@@ -29,7 +29,7 @@ const ExportarNFDataModal = ({ isOpen, onClose }) => {
         { start, end },
         {
           responseType: 'blob',
-          params: { userId }
+          userId: userId 
         }
       );
   

@@ -269,7 +269,7 @@ const ProdutosTabela = ({ onFilterStatus }) => {
               paginatedProducts.slice(0, rowsPerPage).map((product, index) => (
                 <tr
                   key={index}
-                  className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
+                  className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800'
                   onMouseEnter={() => openProductDetailsModalMouseLeave(product.sku)}
                   onMouseLeave={closeModalMouseLeave}
                 >
@@ -288,7 +288,12 @@ const ProdutosTabela = ({ onFilterStatus }) => {
                     {product.pictureUrls &&
                       <Image src={product.pictureUrls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10" />
                     }
-                    <p className="dark:text-gray-300">{product.sku}</p>
+                    <button
+                      className="text-blue-600 font-medium hover:underline focus:outline-none cursor-pointer"
+                      onClick={() => openProductDetailsModal(product.sku)}
+                    >
+                      {product.sku}
+                    </button>
                   </td>
                   <td className="break-words md:break-normal px-4 py-4 md:py-5"><p className="font-medium dark:text-gray-200">{product.title}</p></td>
                   <td className="px-4 py-4 md:py-5 text-center dark:text-gray-200">{product.price}</td>
@@ -297,13 +302,13 @@ const ProdutosTabela = ({ onFilterStatus }) => {
                     <span className={`${getStatusColor(product.status)} w-24 rounded-full px-3 py-2 text-sm`}>{translateStatus(product.status)}</span>
                   </td>
                   <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
-                    <button onClick={(event) => storeSkuAndOpenEditModal(event, product.sku)} className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2">
+                    <button onClick={(event) => storeSkuAndOpenEditModal(event, product.sku)} className="flex text-center items-center justify-center active:bg-gray-200 dark:active:bg-neutral-700 bg-opacity-80 rounded-full p-2">
                       <EditIcon
                         className="text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out"
                         fontSize="small"
                       />
                     </button>
-                    <button onClick={() => openProductDetailsModal(product.sku)} className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2">
+                    <button onClick={() => openProductDetailsModal(product.sku)} className="flex text-center items-center justify-center active:bg-gray-200 dark:active:bg-neutral-700 bg-opacity-80 rounded-full p-2">
                       <MoreVertIcon
                         className='text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out'
                         fontSize="small"

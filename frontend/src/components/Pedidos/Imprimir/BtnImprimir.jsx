@@ -37,7 +37,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         const pdfUrl = URL.createObjectURL(blob);
     
         saveAs(blob, 'documento.pdf');  // Salvar o PDF
-        printJS(pdfUrl);  // Imprimir o PDF
+        // printJS(pdfUrl);  
         setStatusRequestSync(true);
       } else {
         console.error('Erro ao imprimir pedido');

@@ -22,9 +22,8 @@ const iconsNav = [
     <DashboardIcon key="dashboard" sx={{ fontSize: '26px' }} />,
     <ProductsIcon key="products" sx={{ fontSize: '26px' }} />,
     <OrdersIcon key="orders" sx={{ fontSize: '26px' }} />,
-    <BuyIcon key="buy" sx={{ fontSize: '26px' }} />,
-    <AnalysisIcon key="analysis" sx={{ fontSize: '26px' }} />,
     <StockIcon key="stock" sx={{ fontSize: '26px' }} />,
+    <AnalysisIcon key="analysis" sx={{ fontSize: '26px' }} />,
     <SupportAgentIcon key="feedback" sx={{ fontSize: '26px' }} />,
 ];
 
@@ -41,7 +40,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
     return (<>
         <div>
             <ul className="flex flex-col px-4 my-10">
-                {["Dashboard", "Produtos", "Pedidos", "Analise", "Estoque", "Feedback"].map(
+                {["Dashboard", "Produtos", "Pedidos", "Estoque", "Analise", "Feedback"].map(
                     (text, index) => (
                         <li key={text} className="flex flex-col mb-5">
                             <Link href={`/${text.toLowerCase()}`}>

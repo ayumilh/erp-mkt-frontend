@@ -16,6 +16,7 @@ export const DropdownHeader = ({ setActiveTable }) => {
     const handleClickEmitir = (text) => {
         setActiveTable(text);
         setCurrentText(text);
+        setIsOpenLista(false);
     };
 
     useEffect(() => {

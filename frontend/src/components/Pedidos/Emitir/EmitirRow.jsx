@@ -6,7 +6,6 @@ import axios from 'axios';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
@@ -194,8 +193,7 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
                                 return (
                                     <tr
                                         key={pedido.order_id}
-                                        className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
-                                    // onClick={() => openOrderDetailsModal(shipping_id, true)}
+                                        className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800'
                                     >
                                         <td className="pl-4">
                                             {!toggleShowCheckboxesAll && (
@@ -214,7 +212,12 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
                                                 <div key={index} className="text-left flex items-center justify-center gap-4 mb-4">
                                                     <div className='w-10 h-10'>{order.pictureurls && <Image src={order.pictureurls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10 object-cover" />}</div>
                                                     <div className='flex flex-col'>
-                                                        <span className="text-blue-600 text-sm hover:underline font-medium transition duration-300 ease-out">{order.product_sku}</span>
+                                                        <button
+                                                            className="text-blue-600 text-sm font-medium hover:underline focus:outline-none cursor-pointer"
+                                                            onClick={() => openOrderDetailsModal(pedido.shipping_id, true)}
+                                                        >
+                                                            {pedido.product_sku}
+                                                        </button>
                                                         <span className='text-neutral-700 dark:text-gray-300 text-sm font-medium'>R${order.unit_price}</span>
                                                         <div className='text-neutral-700 dark:text-gray-300 text-xs font-medium'>cor: {order.color_name}</div>
                                                     </div>
@@ -242,7 +245,7 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
                                         <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
                                             <button
                                                 onClick={() => openOrderDetailsModal(pedido.shipping_id, true)}
-                                                className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2"
+                                                className="flex text-center items-center justify-center active:bg-gray-200 dark:active:bg-neutral-700 bg-opacity-80 rounded-full p-2"
                                             >
                                                 <MoreVertIcon
                                                     className='text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out'
@@ -260,7 +263,7 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
                             return (
                                 <tr
                                     key={pedido.order_id}
-                                    className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer'
+                                    className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800'
                                 >
                                     <td className="pl-4">
                                         {!toggleShowCheckboxesAll && (
@@ -277,7 +280,12 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
                                         <div className="text-left flex items-center justify-center gap-4 mb-4">
                                             <div className='w-10 h-10'>{pedido.pictureurls && <Image src={pedido.pictureurls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10 object-cover" />}</div>
                                             <div className='flex flex-col'>
-                                                <span className="text-blue-600 text-sm hover:underline font-medium transition duration-300 ease-out">{pedido.product_sku}</span>
+                                                <button
+                                                    className="text-blue-600 text-sm font-medium hover:underline focus:outline-none cursor-pointer"
+                                                    onClick={() => openOrderDetailsModal(pedido.shipping_id, true)}
+                                                >
+                                                    {pedido.product_sku}
+                                                </button>
                                                 <span className='text-neutral-700 dark:text-gray-300 text-sm font-medium'>R${pedido.unit_price}</span>
                                                 <div className='text-neutral-700 dark:text-gray-300 text-xs font-medium'>cor: {pedido.color_name}</div>
                                             </div>
@@ -307,7 +315,7 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
                                     <td className="flex pl-4 pr-6 py-2 md:py-5 justify-center gap-3">
                                         <button
                                             onClick={() => openOrderDetailsModal(pedido.shipping_id, true)}
-                                            className="flex text-center items-center justify-center active:bg-gray-200 bg-opacity-80 rounded-full p-2"
+                                            className="flex text-center items-center justify-center active:bg-gray-200 dark:active:bg-neutral-700 bg-opacity-80 rounded-full p-2"
                                         >
                                             <MoreVertIcon
                                                 className='text-neutral-600 dark:text-gray-200 hover:text-black transition duration-500 ease-in-out'

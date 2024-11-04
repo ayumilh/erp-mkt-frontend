@@ -27,7 +27,7 @@ const NfHeader = () => {
 
         try {
             await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/sync-notes', {
-                params: { userId }
+                userId: userId 
             });
             setStatusRequestSync(true);
         } catch (error) {
