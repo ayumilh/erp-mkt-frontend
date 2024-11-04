@@ -68,7 +68,7 @@ const ModalMessageAction = () => {
                 <div className={`w-[280px] absolute top-8 right-0 z-20 mt-2 rounded-md shadow-lg bg-primaria-900 dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5 transition-transform duration-300 ease-out transform ${isOpenModal ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
                     <div className='my-2 h-20' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         <div className="px-4 py-2">
-                            <h3 className="font-semibold text-white">Notificação</h3>
+                            <h3 className="font-semibold dark:text-gray-200">Notificação</h3>
                             <hr className="my-2 border-gray-300 dark:border-gray-600" />
                         </div>
                         {/* Conteúdo do menu */}

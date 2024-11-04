@@ -2,22 +2,34 @@ import { redirect } from 'next/navigation';
 import { nextAuthOptions } from '../../../app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 
+import Content from '@/components/Drawer/desktop/SidebarContent'
 import BtnBackPage from '@/components/Geral/Button/BtnBackPage';
 import FormularioCriar from '@/components/Estoque/Criar/Variante/VarianteFormularioCriar';
+import ActionsHeader from '@/components/ActionsHeader';
+import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
 
 const CriarVariante = async () => {
   const session = await getServerSession(nextAuthOptions)
-  if(!session) {
+  if (!session) {
     redirect('/login')
   }
-  
+
   return (
-    <div className="px-4 h-screen flex flex-col items-center">
-      <div className="w-full xl:max-w-[1264px] flex justify-between items-center h-12 pt-4 px-6 xl:px-0 mx-auto mb-8">
-        <BtnBackPage modal={false} title="Criar Variante"/>
+    <div className="flex max-w-full h-screen">
+      <Content />
+      <div className='w-full px-4 lg:px-0 lg:mx-5 lg:mt-4 xl:mx-8 xl:flex xl:flex-col xl:items-center'>
+        <div className="w-full flex justify-between items-center h-12 pt-4 mb-8">
+          <div className='flex items-center'>
+            <HamburgerContent />
+            <div className="w-full xl:max-w-[1264px] flex justify-between items-center h-12 pt-4 px-6 xl:px-0 mx-auto mb-8">
+              <BtnBackPage modal={false} title="Voltar" />
+            </div>
+          </div>
+          <ActionsHeader />
+        </div>
+
+        <FormularioCriar />
       </div>
-      
-      <FormularioCriar/>
     </div>
   );
 }

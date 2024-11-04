@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import { searchUserId } from '@/utils/searchUserId';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export const DropdownHeader = ({ setActiveTable }) => {
@@ -34,8 +35,13 @@ export const DropdownHeader = ({ setActiveTable }) => {
 
     useEffect(() => {
         const fetchOrderCounts = async () => {
+            const userId = searchUserId();
+            if (!userId) return;
+
             try {
-                const response = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/count-orders');
+                const response = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/count-orders', {
+                    params: { userId } 
+                });
                 setOrderCounts(response.data);
             } catch (error) {
                 console.error('Erro ao buscar a quantidade de pedidos:', error);
@@ -67,14 +73,14 @@ export const DropdownHeader = ({ setActiveTable }) => {
 
             {isOpenLista && (
                 <div className="origin-top-center absolute mt-2 rounded-md shadow-lg bg-primaria-900 dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5">
-                    <div className="w-28 my-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    <div className="w-36 my-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         <button
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm"
                             role="menuitem"
                             onClick={() => handleClickEmitir('Pedidos')}
                         >
                             <span className='dark:text-gray-200'>Pedidos</span>
-                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Pedidos || 0}</span>
+                            <span className='text-end font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.totalOrders || 0}</span>
                         </button>
                         <button
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm"
@@ -82,11 +88,11 @@ export const DropdownHeader = ({ setActiveTable }) => {
                             onClick={() => handleClickEmitir('Emitir')}
                         >
                             <span className='dark:text-gray-200'>Emitir</span>
-                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Emitir || 0}</span>
+                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.readyOrders || 0}</span>
                         </button>
                         <button onClick={() => handleClickEmitir('Enviar')} className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm" role="menuitem">
                             <span className='dark:text-gray-200'>Enviar</span>
-                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Enviar || 0}</span>
+                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.approvedOrders || 0}</span>
                         </button>
                         <button
                             onClick={() => handleClickEmitir('Imprimir')}
@@ -98,13 +104,13 @@ export const DropdownHeader = ({ setActiveTable }) => {
                             onClick={() => handleClickEmitir('Retirada')}
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm" role="menuitem">
                             <span className='dark:text-gray-200'>Retirada</span>
-                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Retirada || 0}</span>
+                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.readyPrintedOrders || 0}</span>
                         </button>
                         <button
                             onClick={() => handleClickEmitir('Enviado')}
                             className="flex justify-between w-full text-sm font-medium px-4 py-2 hover:text-black hover:bg-gray-200 dark:hover:bg-neutral-800 rounded-sm" role="menuitem">
                             <span className='dark:text-gray-200'>Enviado</span>
-                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.Enviado || 0}</span>
+                            <span className='font-medium text-neutral-600 dark:text-gray-300 opacity-90'>{orderCounts.deliveredOrders || 0}</span>
                         </button>
                     </div>
                 </div>

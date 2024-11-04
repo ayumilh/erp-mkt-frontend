@@ -159,21 +159,6 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
     }
   }
 
-  // function translateStatus(status, substatus) {
-  //   switch (status) {
-  //     case 'ready_to_ship':
-  //       if (substatus === 'picked_up') {
-  //         return 'Enviado';
-  //       }
-  //       if (substatus === 'in_hub') {
-  //         return 'Enviados';
-  //       }
-  //       return 'Enviados';
-  //     default:
-  //       return status;
-  //   }
-  // }
-
   function translateStatus(status, substatus) {
     if (status === 'ready_to_ship' && (substatus === 'picked_up' || substatus === 'in_hub')) {
       return 'Enviado';

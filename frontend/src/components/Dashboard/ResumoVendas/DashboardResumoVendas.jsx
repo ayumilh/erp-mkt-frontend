@@ -2,15 +2,20 @@
 import dynamic from "next/dynamic";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { searchUserId } from '@/utils/searchUserId';
 
 const ChartPie = dynamic(() => import('./ChartPie'), { ssr: false });
 
 export const DashboardResumoVendas = () => {
     const [data, setData] = useState([]);
+    const userId = searchUserId();
+    if (!userId) return;
 
     const handleButtonClick = async () => {
         try {
-            await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/item-visits');
+            await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/item-visits', {
+                userId: userId 
+            });
         } catch (error) {
             console.error(`Error: ${error}`);
         }
@@ -20,7 +25,9 @@ export const DashboardResumoVendas = () => {
         handleButtonClick();
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/visits');
+                const response = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/visits', {
+                    params: { userId } 
+                });    
                 const restructuredData = response.data.visits.map((data) => {
                     return {
                         conversion_rate: data.conversion_rate,
@@ -33,7 +40,7 @@ export const DashboardResumoVendas = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [userId]);
 
 
     const firstElement = data.length > 0 ? data[0] : { conversion_rate: 0, total_visits: 0 };

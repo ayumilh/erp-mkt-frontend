@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { searchUserId } from '@/utils/searchUserId';
 import axios from "axios";
-import JSZip from 'jszip';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const ExportarNFDataModal = ({ isOpen, onClose }) => {
