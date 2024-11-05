@@ -25,6 +25,8 @@ const FeedbackTabela = () => {
     useEffect(() => {
         const fetchPerguntas = async () => {
             try {
+                const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/get-questions");
+                console.log(response.data);
                 const retructuredData = [
                     {
                         text: "Qual é o prazo de entrega?",
@@ -81,7 +83,7 @@ const FeedbackTabela = () => {
                 <div key={index} className='border-b border-gray-200 dark:border-neutral-800 p-7'>
                     <div className="flex justify-between items-center">
                         <div className='flex items-center gap-2'>
-                            {product.pictureurls && <Image src={product.pictureurls} alt='Imagem do produto' width={42} height={42} className="w-10 h-10" />}
+                            {/* {product.pictureurls && <Image src={product.pictureurls} alt='Imagem do produto' width={42} height={42} className="w-10 h-10" />} */}
                             <div className="break-words md:break-normal">
                                 <p className="w-80 font-medium text-sm text-neutral-800 dark:text-gray-300 overflow-hidden whitespace-nowrap text-ellipsis">{product.product_sku}</p>
                                 <span className='text-blue-500 cursor-pointer'>{product.questions_id}</span>

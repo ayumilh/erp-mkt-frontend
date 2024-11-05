@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { searchUserId } from '@/utils/searchUserId';
+import { fetchOrders } from '@/utils/fetchOrders';
 import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsContent';
 import RetiradaRow from './RetiradaRow';
 import { RetiradaMenuMoreResponsive } from './RetiradaMenuMoreResponsive';
-import axios from 'axios';
 
 export default function RetiradaTabela() {
   const [shippingIdOrder, setShippingIdOrder] = useState([]);
@@ -28,29 +27,17 @@ export default function RetiradaTabela() {
   }
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      const userId = searchUserId();
-      if (!userId) return;
-
-      try {
-        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/orders`, {
-          params: { userId }
-        });
-        if (response.data && Array.isArray(response.data.orders)) {
-          setPedido(response.data.orders);
-          setTotalPages(Math.ceil(response.data.orders.length / rowsPerPage));
-        } else {
-          setPedido([]);
-          setTotalPages(1);
-        }
-      } catch (error) {
-        console.error(`Error: ${error}`);
+    const getOrders = async () => {
+      const ordersData = await fetchOrders();
+      if (ordersData && Array.isArray(ordersData)) {
+        setPedido(ordersData);
+        setTotalPages(Math.ceil(ordersData.length / rowsPerPage));
+      } else {
         setPedido([]);
         setTotalPages(1);
       }
     };
-
-    fetchOrders();
+    getOrders();
   }, [rowsPerPage, currentPage]);
 
   useEffect(() => {

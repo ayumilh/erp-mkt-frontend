@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { searchUserId } from '@/utils/searchUserId';
+import { fetchOrders } from '@/utils/fetchOrders';
 import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsContent';
 import EnviadosRow from './EnviadosRow';
 import { EnviadosMenuMoreResponsive } from './EnviadosMenuMoreResponsive';
-import axios from 'axios';
 
 export default function EnviadosTabela() {
   const [shippingIdOrder, setShippingIdOrder] = useState([]);
@@ -27,30 +26,19 @@ export default function EnviadosTabela() {
     setIsModalTr(true);
   }
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      const userId = searchUserId();
-      if (!userId) return;
 
-      try {
-        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/orders`, {
-          params: { userId }
-        });
-        if (response.data && Array.isArray(response.data.orders)) {
-          setPedido(response.data.orders);
-          setTotalPages(Math.ceil(response.data.orders.length / rowsPerPage));
-        } else {
-          setPedido([]);
-          setTotalPages(1);
-        }
-      } catch (error) {
-        console.error(`Error: ${error}`);
+  useEffect(() => {
+    const getOrders = async () => {
+      const ordersData = await fetchOrders();
+      if (ordersData && Array.isArray(ordersData)) {
+        setPedido(ordersData);
+        setTotalPages(Math.ceil(ordersData.length / rowsPerPage));
+      } else {
         setPedido([]);
         setTotalPages(1);
       }
     };
-
-    fetchOrders();
+    getOrders();
   }, [rowsPerPage, currentPage]);
 
   useEffect(() => {

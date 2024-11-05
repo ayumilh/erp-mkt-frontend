@@ -1,7 +1,7 @@
 'use client'
+import { useEffect, useState, useCallback } from 'react';
 import dynamic from "next/dynamic";
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { searchUserId } from '@/utils/searchUserId';
 
 const ChartPie = dynamic(() => import('./ChartPie'), { ssr: false });
@@ -9,9 +9,8 @@ const ChartPie = dynamic(() => import('./ChartPie'), { ssr: false });
 export const DashboardResumoVendas = () => {
     const [data, setData] = useState([]);
     const userId = searchUserId();
-    if (!userId) return;
 
-    const handleButtonClick = async () => {
+    const handleButtonClick = useCallback(async () => {
         try {
             await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/item-visits', {
                 userId: userId 
@@ -19,9 +18,10 @@ export const DashboardResumoVendas = () => {
         } catch (error) {
             console.error(`Error: ${error}`);
         }
-    };
+    }, [userId]);
 
     useEffect(() => {
+        if (!userId) return;
         handleButtonClick();
         const fetchData = async () => {
             try {
@@ -40,7 +40,7 @@ export const DashboardResumoVendas = () => {
             }
         };
         fetchData();
-    }, [userId]);
+    }, [userId, handleButtonClick]);
 
 
     const firstElement = data.length > 0 ? data[0] : { conversion_rate: 0, total_visits: 0 };

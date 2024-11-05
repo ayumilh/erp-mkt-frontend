@@ -1,7 +1,4 @@
-import { redirect } from 'next/navigation';
-import { nextAuthOptions } from '../../../../api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
-
+import { checkSession } from '@/utils/checkSession';
 import Content from '@/components/Drawer/desktop/SidebarContent'
 import BtnBackPage from '@/components/Geral/Button/BtnBackPage';
 import ConfigCriarFormulario from '@/components/Pedidos/Nf/Config/Criar/ConfigCriarFormulario';
@@ -10,10 +7,7 @@ import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
 
 
 const Criar = async () => { 
-  const session = await getServerSession(nextAuthOptions)
-  if(!session) {
-    redirect('/login')
-  }
+  await checkSession();
 
   return (
     <div className="flex max-w-full h-screen">

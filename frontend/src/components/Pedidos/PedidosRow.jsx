@@ -4,7 +4,6 @@ import Image from 'next/image';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
-import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const PedidosRow = ({ setOrder, pedido }) => {

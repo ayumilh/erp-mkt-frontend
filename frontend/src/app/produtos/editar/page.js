@@ -1,7 +1,4 @@
-import { redirect } from 'next/navigation';
-import { nextAuthOptions } from '../../api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
-
+import { checkSession } from '@/utils/checkSession';
 import Content from '@/components/Drawer/desktop/SidebarContent'
 import ActionsHeader from '@/components/ActionsHeader';
 import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
@@ -9,10 +6,7 @@ import BtnBackPage from '@/components/Geral/Button/BtnBackPage';
 import EditarAnuncioContent from "@/components/Produtos/Editar/EditarAnuncioContent";
 
 const Editar = async () => {
-  const session = await getServerSession(nextAuthOptions)
-  if (!session) {
-    redirect('/login')
-  }
+  await checkSession();
 
   return (
     <div className="flex max-w-full h-screen">

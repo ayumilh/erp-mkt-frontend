@@ -52,7 +52,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     if (printContent) {
       handlePrint();
     }
-  }, [printContent]);
+  }, [printContent, handlePrint]);
 
   return (
     <div>

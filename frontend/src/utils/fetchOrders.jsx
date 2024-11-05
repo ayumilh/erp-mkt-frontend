@@ -1,0 +1,18 @@
+import axios from 'axios';
+import { searchUserId } from './searchUserId';
+
+export const fetchOrders = async () => {
+    const userId = searchUserId();
+    if (!userId) return null;
+
+    try {
+        const response = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/orders', {
+            params: { userId }
+        });
+        console.log(response.data.orders);
+        return response.data.orders;
+    } catch (error) {
+        console.error('Erro ao buscar os pedidos:', error);
+        return null;
+    }
+};
