@@ -175,7 +175,6 @@ const ProdutosTabela = ({ onFilterStatus }) => {
     ? products
     : products.filter((product) => product.status === onFilterStatus);
 
-
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -213,7 +212,6 @@ const ProdutosTabela = ({ onFilterStatus }) => {
   };
 
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-
   const menuMoreVertRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -226,7 +224,6 @@ const ProdutosTabela = ({ onFilterStatus }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [menuMoreVertRef])
-
 
   return (
     <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">

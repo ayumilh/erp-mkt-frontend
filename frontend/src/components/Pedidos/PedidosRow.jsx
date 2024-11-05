@@ -124,7 +124,7 @@ const PedidosRow = ({ setOrder, pedido }) => {
   return (
     <>
       {isLoading ? (
-        <SkeletonLoader numColumns={8} />
+        <SkeletonLoader numColumns={9} />
       ) : pedido.length > 0 ? (
         Object.entries(groupOrdersProducts).map(([shipping_id, orders], groupIndex) => (
           <React.Fragment key={shipping_id}>
@@ -263,7 +263,7 @@ const PedidosRow = ({ setOrder, pedido }) => {
         ))
       ) : (
         <tr>
-          <td className="text-center" colSpan="8">
+          <td className="text-center" colSpan="9">
             <div className="w-full py-12">
               <span><ProductionQuantityLimitsIcon className='dark:text-gray-200' style={{ width: 46, height: 46 }} /></span>
               <p className="mt-8 mx-10 dark:text-gray-200">Uh-oh! Parece que não há pedidos, estamos ansiosos para apoiar suas próximas vendas!</p>

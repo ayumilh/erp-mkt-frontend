@@ -8,6 +8,7 @@ import { PedidosMenuMoreResponsive } from './Actions/PedidosMenuMoreResponsive';
 const PedidosTabela = () => {
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(1);

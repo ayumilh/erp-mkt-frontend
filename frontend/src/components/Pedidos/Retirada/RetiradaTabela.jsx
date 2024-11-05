@@ -107,12 +107,11 @@ export default function RetiradaTabela() {
           </thead>
           <tbody>
             <RetiradaRow
-              toggleShowCheckboxes={showCheckboxes}
               setToggleShowCheckboxes={setShowCheckboxes}
               toggleShowCheckboxesAll={showCheckboxesAll}
               setShippingIdOrder={setShippingIdOrder}
               setOrder={handleOrderSelect}
-              pedido={paginatedPedido}
+              paginatedPedido={paginatedPedido}
             />
           </tbody>
         </table>

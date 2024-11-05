@@ -8,49 +8,28 @@ import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
+export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder, paginatedPedido }) {
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
-  const [pedido, setPedido] = useState([]);
   const [isOpen, setIsOpen] = useState({});
   const [selectedOrders, setSelectedOrders] = useState([]);
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      const userId = searchUserId();
-      if (!userId) return;
-
-      try {
-        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/printed`, {
-          params: { userId }
-        });
-        if (response.data && Array.isArray(response.data.orders)) {
-          const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
-            if (order.shipping_id !== null) {
-              if (!groupedOrderByShippingId[order.shipping_id]) {
-                groupedOrderByShippingId[order.shipping_id] = [];
-              }
-              groupedOrderByShippingId[order.shipping_id].push(order);
-            }
-            return groupedOrderByShippingId;
-          }, {});
-          setGroupOrdersProducts(groupedOrderByShippingId)
-          setPedido(response.data.orders);
-        } else {
-          setPedido([]);
+    const groupedOrderByShippingId = paginatedPedido.reduce((groupedOrderByShippingId, order) => {
+      if (order.shipping_id !== null) {
+        if (!groupedOrderByShippingId[order.shipping_id]) {
+          groupedOrderByShippingId[order.shipping_id] = [];
         }
-      } catch (error) {
-        console.error(`Error: ${error}`);
-      } finally {
-        setIsLoading(false);
+        groupedOrderByShippingId[order.shipping_id].push(order);
       }
-    };
-
-    fetchOrders();
-  }, []);
+      return groupedOrderByShippingId;
+    }, {});
+    setGroupOrdersProducts(groupedOrderByShippingId)
+    setIsLoading(false);
+  }, [paginatedPedido]);
 
   const shippingIdCounts = {};
-  pedido.forEach(pedido => {
+  paginatedPedido.forEach(pedido => {
     if (shippingIdCounts[pedido.shipping_id]) {
       shippingIdCounts[pedido.shipping_id]++;
     } else {
@@ -61,10 +40,10 @@ export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleS
   // checkbox
   useEffect(() => {
     if (toggleShowCheckboxesAll) {
-      const allOrderIds = pedido.map(order => order.shipping_id);
+      const allOrderIds = paginatedPedido.map(order => order.shipping_id);
       setShippingIdOrder(allOrderIds);
     }
-  }, [toggleShowCheckboxesAll, pedido, setShippingIdOrder]);
+  }, [toggleShowCheckboxesAll, paginatedPedido, setShippingIdOrder]);
 
   const updateSelectedOrders = (isChecked, shipping_id) => {
     let updatedSelectedOrders;
@@ -90,7 +69,6 @@ export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleS
     }
   };
 
-
   const handleCheckboxChange = (event, shipping_id) => {
     event.stopPropagation();
     const isChecked = event.target.checked;
@@ -99,13 +77,12 @@ export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleS
     updateShippingIdOrder(isChecked, shipping_id);
   };
 
-
   const openOrderDetailsModal = (shipping_id, allOrders = false) => {
     if (allOrders) {
-      const selectedOrders = pedido.filter(p => p.shipping_id === shipping_id);
+      const selectedOrders = paginatedPedido.filter(p => p.shipping_id === shipping_id);
       setOrder(selectedOrders);
     } else {
-      const selectedOrder = pedido.find(p => p.shipping_id === shipping_id);
+      const selectedOrder = paginatedPedido.find(p => p.shipping_id === shipping_id);
       setOrder(selectedOrder);
     }
   };
@@ -124,6 +101,20 @@ export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleS
     }
 
   }, [dropdownGroupOrderRef]);
+
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const menuMoreVertRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuMoreVertRef.current && !menuMoreVertRef.current.contains(event.target)) {
+        setIsOpenMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [menuMoreVertRef])
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -154,27 +145,12 @@ export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleS
     }
   }
 
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
-
-  const menuMoreVertRef = useRef(null);
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuMoreVertRef.current && !menuMoreVertRef.current.contains(event.target)) {
-        setIsOpenMenu(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-  }, [menuMoreVertRef])
-
   const firstRender = [];
   return (<>
     {isLoading ? (
       <SkeletonLoader numColumns={9} />
-    ) : pedido.length > 0 ? (
-      Object.entries(groupOrdersProducts).map(([shipping_id, orders], groupIndex) => (
+    ) : paginatedPedido.length > 0 ? (
+      Object.entries(groupOrdersProducts).map(([shipping_id, orders]) => (
         <React.Fragment key={shipping_id}>
           <tr className='group-header'>
             <td colSpan={9} className="px-4 py-2 text-center bg-gray-100 dark:bg-neutral-800 dark:text-neutral-800 border-t border-gray-200 dark:border-neutral-800">

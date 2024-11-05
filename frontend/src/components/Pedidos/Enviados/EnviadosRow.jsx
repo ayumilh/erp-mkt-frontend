@@ -1,66 +1,34 @@
 'use client'
 import React, { useEffect, useState, useRef } from 'react';
-import { searchUserId } from '@/utils/searchUserId';
 import Image from 'next/image';
-import axios from 'axios';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
+export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder, paginatedPedido, translateStatus }) {
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
-  const [pedido, setPedido] = useState([]);
   const [isOpen, setIsOpen] = useState({});
   const [selectedOrders, setSelectedOrders] = useState([]);
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      const userId = searchUserId();
-      if (!userId) return;
-
-      try {
-        const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/delivered`, {
-          params: { userId }
-        });
-        if (response.data && Array.isArray(response.data.orders)) {
-          const filteredOrders = response.data.orders.filter(order =>
-            order.status === 'ready_to_ship' && (order.substatus === 'picked_up' || order.substatus === 'in_hub')
-          );
-
-          const ordersWithTranslatedStatus = filteredOrders.map(order => ({
-            ...order,
-            translatedStatus: translateStatus(order.status, order.substatus)
-          }));
-          console.log(ordersWithTranslatedStatus)
-
-          const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
-            if (order.shipping_id !== null) {
-              if (!groupedOrderByShippingId[order.shipping_id]) {
-                groupedOrderByShippingId[order.shipping_id] = [];
-              }
-              groupedOrderByShippingId[order.shipping_id].push(order);
-            }
-            return groupedOrderByShippingId;
-          }, {});
-          setGroupOrdersProducts(groupedOrderByShippingId)
-          setPedido(ordersWithTranslatedStatus);
-        } else {
-          setPedido([]);
+    const groupedOrderByShippingId = paginatedPedido.reduce((groupedOrderByShippingId, order) => {
+      if (order.shipping_id !== null) {
+        if (!groupedOrderByShippingId[order.shipping_id]) {
+          groupedOrderByShippingId[order.shipping_id] = [];
         }
-      } catch (error) {
-        console.error(`Error: ${error}`);
-      } finally {
-        setIsLoading(false);
+        groupedOrderByShippingId[order.shipping_id].push(order);
       }
-    };
+      return groupedOrderByShippingId;
+    }, {});
+    setGroupOrdersProducts(groupedOrderByShippingId);
+    setIsLoading(false);
+  }, [paginatedPedido]);
 
-    fetchOrders();
-  }, []);
 
   const shippingIdCounts = {};
-  pedido.forEach(pedido => {
+  paginatedPedido.forEach(pedido => {
     if (shippingIdCounts[pedido.shipping_id]) {
       shippingIdCounts[pedido.shipping_id]++;
     } else {
@@ -71,10 +39,10 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
   // checkbox
   useEffect(() => {
     if (toggleShowCheckboxesAll) {
-      const allOrderIds = pedido.map(order => order.shipping_id);
+      const allOrderIds = paginatedPedido.map(order => order.shipping_id);
       setShippingIdOrder(allOrderIds);
     }
-  }, [toggleShowCheckboxesAll, pedido, setShippingIdOrder]);
+  }, [toggleShowCheckboxesAll, paginatedPedido, setShippingIdOrder]);
 
   const updateSelectedOrders = (isChecked, shipping_id) => {
     let updatedSelectedOrders;
@@ -100,7 +68,6 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
     }
   };
 
-
   const handleCheckboxChange = (event, shipping_id) => {
     event.stopPropagation();
     const isChecked = event.target.checked;
@@ -111,10 +78,10 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
 
   const openOrderDetailsModal = (shipping_id, allOrders = false) => {
     if (allOrders) {
-      const selectedOrders = pedido.filter(p => p.shipping_id === shipping_id);
+      const selectedOrders = paginatedPedido.filter(p => p.shipping_id === shipping_id);
       setOrder(selectedOrders);
     } else {
-      const selectedOrder = pedido.find(p => p.shipping_id === shipping_id);
+      const selectedOrder = paginatedPedido.find(p => p.shipping_id === shipping_id);
       setOrder(selectedOrder);
     }
   };
@@ -133,7 +100,6 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
     }
 
   }, [dropdownGroupOrderRef]);
-
 
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const menuMoreVertRef = useRef(null);
@@ -159,13 +125,6 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
     }
   }
 
-  function translateStatus(status, substatus) {
-    if (status === 'ready_to_ship' && (substatus === 'picked_up' || substatus === 'in_hub')) {
-      return 'Enviado';
-    }
-    return status;
-  }
-
   function translateTrackingMethod(method) {
     switch (method) {
       case 'MEL Distribution':
@@ -181,14 +140,14 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
   return (<>
     {isLoading ? (
       <SkeletonLoader numColumns={9} />
-    ) : pedido.length > 0 ? (
-      Object.entries(groupOrdersProducts).map(([shipping_id, orders], groupIndex) => (
+    ) : paginatedPedido.length > 0 ? (
+      Object.entries(groupOrdersProducts).map(([shipping_id, orders]) => (
         <React.Fragment key={shipping_id}>
           <tr className='group-header'>
             <td colSpan={9} className="px-4 py-2 text-center bg-gray-100 dark:bg-neutral-800 dark:text-neutral-800 border-t border-gray-200 dark:border-neutral-800">
               <div className='text-sm font-medium'>
                 <span className='text-zinc-600 dark:text-gray-200 text-xs font-semibold'>ID da compra: {shipping_id}</span>
-                <span className='text-zinc-600 dark:text-gray-200 text-xs font-semibold'> - {orders[0].seller_nickname}</span>
+                <span className='text-zinc-600 dark:text-gray-200 text-xs font-semibold'> - {shipping_id[0].seller_nickname}</span>
               </div>
             </td>
           </tr>

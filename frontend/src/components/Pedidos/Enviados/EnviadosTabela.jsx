@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { fetchOrders } from '@/utils/fetchOrders';
+import axios from 'axios';
+import { searchUserId } from '@/utils/searchUserId';
 import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsContent';
 import EnviadosRow from './EnviadosRow';
 import { EnviadosMenuMoreResponsive } from './EnviadosMenuMoreResponsive';
@@ -10,12 +11,13 @@ export default function EnviadosTabela() {
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
-
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [pedido, setPedido] = useState([]);
-
+  
+  const userId = searchUserId();
 
   const closeModal = () => {
     setIsModalTr(false);
@@ -26,20 +28,38 @@ export default function EnviadosTabela() {
     setIsModalTr(true);
   }
 
+  function translateStatus(status, substatus) {
+    if (status === 'ready_to_ship' && (substatus === 'picked_up' || substatus === 'in_hub')) {
+      return 'Enviado';
+    }
+    return status;
+  }
 
   useEffect(() => {
     const getOrders = async () => {
-      const ordersData = await fetchOrders();
-      if (ordersData && Array.isArray(ordersData)) {
-        setPedido(ordersData);
-        setTotalPages(Math.ceil(ordersData.length / rowsPerPage));
+      if (!userId) return;
+
+      const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/delivered`, {
+        params: { userId }
+      });
+      if (response.data && Array.isArray(response.data.orders)) {
+        const filteredOrders = response.data.orders.filter(order =>
+          order.status === 'ready_to_ship' && (order.substatus === 'picked_up' || order.substatus === 'in_hub')
+        );
+        const ordersWithTranslatedStatus = filteredOrders.map(order => ({
+          ...order,
+          translatedStatus: translateStatus(order.status, order.substatus)
+        }));
+        
+        setPedido(ordersWithTranslatedStatus);
+        setTotalPages(Math.ceil(ordersWithTranslatedStatus.length / rowsPerPage));
       } else {
         setPedido([]);
         setTotalPages(1);
       }
     };
     getOrders();
-  }, [rowsPerPage, currentPage]);
+  }, [rowsPerPage, currentPage, userId]);
 
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
@@ -108,12 +128,12 @@ export default function EnviadosTabela() {
           </thead>
           <tbody>
             <EnviadosRow
-              toggleShowCheckboxes={showCheckboxes}
               setToggleShowCheckboxes={setShowCheckboxes}
               toggleShowCheckboxesAll={showCheckboxesAll}
               setShippingIdOrder={setShippingIdOrder}
               setOrder={handleOrderSelect}
-              pedido={paginatedPedido}
+              paginatedPedido={paginatedPedido}
+              translateStatus={translateStatus}
             />
           </tbody>
         </table>
