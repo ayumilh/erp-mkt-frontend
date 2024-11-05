@@ -1,15 +1,28 @@
 'use client'
+import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import StockIcon from "@mui/icons-material/Inventory";
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import { fetchOrderCounts } from '@/utils/fetchOrderCounts';
 
 const DashboardTarefas = () => {
+    const [orderCounts, setOrderCounts] = useState({});
     const router = useRouter()
 
     const handleRetiradaClick = () => {
         router.push('/pedidos?activeTable=Retirada');
     };
+
+    useEffect(() => {
+        const getOrderCounts = async () => {
+            const counts = await fetchOrderCounts();
+            if (counts) {
+                setOrderCounts(counts);
+            }
+        };
+        getOrderCounts();
+    }, []);
 
     return (
         <div className="w-full lg:mx-0 lg:mb-0">
@@ -35,7 +48,7 @@ const DashboardTarefas = () => {
                             onClick={handleRetiradaClick}
                             className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center cursor-pointer"
                         >
-                            <p className="font-semibold dark:text-gray-300">0</p>
+                            <p className="font-semibold dark:text-gray-300">{orderCounts.approvedOrders || 0}</p>
                             <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Para Emitir</p>
                         </div>
 
@@ -53,7 +66,7 @@ const DashboardTarefas = () => {
                         <div
                             onClick={handleRetiradaClick}
                             className="w-1/2 md:w-1/4 h-[60px] flex flex-col items-center justify-center">
-                            <p className="font-semibold dark:text-gray-300">0</p>
+                            <p className="font-semibold dark:text-gray-300">{orderCounts.readyPrintedOrders || 0}</p>
                             <p className="w-32 lg:w-full px-[6px] text-xs lg:text-sm text-center text-neutral-600 dark:text-gray-200 dark:hover:text-white hover:text-neutral-800 hover:cursor-pointer font-medium hover:underline transition duration-200 ease-in-out">Retirada</p>
                         </div>
                     </div>
