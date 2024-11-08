@@ -41,11 +41,14 @@ function CriarAnuncioContent() {
     try {
       await axios.post(
         "https://erp-mkt.vercel.app/api/mercadolivre/criar-anuncio", {
-          input,
-          params: { userId }
+          formData: input,
+          userId: userId 
         });
     } catch (error) {
       console.error(error);
+    }
+    finally {
+      console.log(input);
     }
   };
 
