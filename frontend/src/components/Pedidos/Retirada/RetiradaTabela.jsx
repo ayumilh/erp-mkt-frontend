@@ -16,29 +16,44 @@ export default function RetiradaTabela() {
   const [totalPages, setTotalPages] = useState(1);
   const [pedido, setPedido] = useState([]);
 
-
   const closeModal = () => {
     setIsModalTr(false);
-  }
+  };
 
   const handleOrderSelect = (order) => {
     setSelectedOrder(order);
     setIsModalTr(true);
+  };
+
+  function translateStatus(status, substatus) {
+    if (status === 'ready_to_ship' && substatus === 'printed') {
+      return 'Retirada';
+    } else if (status === 'ready_to_ship') {
+      return 'Enviar';
+    }
+    return status;
   }
 
   useEffect(() => {
     const getOrders = async () => {
       const ordersData = await fetchOrders();
       if (ordersData && Array.isArray(ordersData)) {
-        setPedido(ordersData);
-        setTotalPages(Math.ceil(ordersData.length / rowsPerPage));
+        const filteredOrders = ordersData.filter(order =>
+          order.status === 'ready_to_ship' && (order.substatus === 'printed')
+        );
+        const ordersWithTranslatedStatus = filteredOrders.map(order => ({
+          ...order,
+          translatedStatus: translateStatus(order.status, order.substatus)
+        }));
+        setPedido(ordersWithTranslatedStatus);
+        setTotalPages(Math.ceil(ordersWithTranslatedStatus.length / rowsPerPage));
       } else {
         setPedido([]);
         setTotalPages(1);
       }
     };
     getOrders();
-  }, [rowsPerPage, currentPage]);
+  }, [rowsPerPage]);
 
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
@@ -66,6 +81,15 @@ export default function RetiradaTabela() {
     handlePageChange(1);
   };
 
+  useEffect(() => {
+    if (showCheckboxesAll) {
+      const allOrderIds = paginatedPedido.map(order => order.shipping_id);
+      setShippingIdOrder(allOrderIds);
+    } else {
+      setShippingIdOrder([]);
+    }
+  }, [showCheckboxesAll, setShippingIdOrder]);
+
   const handleSelectAllChange = () => {
     setShowCheckboxesAll(!showCheckboxesAll);
   };
@@ -75,12 +99,12 @@ export default function RetiradaTabela() {
       <RetiradaMenuMoreResponsive
         currentPage={currentPage}
         totalPages={totalPages}
-        shippingIdOrder={shippingIdOrder}
         rowsPerPage={rowsPerPage}
         showCheckboxes={showCheckboxes}
         setShowCheckboxes={setShowCheckboxes}
-        setShowCheckboxesAll={setShowCheckboxesAll}
         showCheckboxesAll={showCheckboxesAll}
+        setShowCheckboxesAll={setShowCheckboxesAll}
+        shippingIdOrder={shippingIdOrder}
         handlePageChange={handlePageChange}
         handleRowsPerPageChange={handleRowsPerPageChange}
       />
@@ -112,6 +136,7 @@ export default function RetiradaTabela() {
               setShippingIdOrder={setShippingIdOrder}
               setOrder={handleOrderSelect}
               paginatedPedido={paginatedPedido}
+              translateStatus={translateStatus}
             />
           </tbody>
         </table>

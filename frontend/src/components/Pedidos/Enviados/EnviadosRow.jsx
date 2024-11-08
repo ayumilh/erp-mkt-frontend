@@ -42,7 +42,7 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
       const allOrderIds = paginatedPedido.map(order => order.shipping_id);
       setShippingIdOrder(allOrderIds);
     }
-  }, [toggleShowCheckboxesAll, paginatedPedido, setShippingIdOrder]);
+  }, [toggleShowCheckboxesAll, setShippingIdOrder]);
 
   const updateSelectedOrders = (isChecked, shipping_id) => {
     let updatedSelectedOrders;
@@ -119,7 +119,9 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
   const getStatusColor = (status) => {
     switch (status) {
       case 'ready_to_ship':
-        return 'bg-blue-200 text-blue-700';
+        return 'bg-amber-200 text-amber-700';
+        case 'delivered':
+          return 'bg-amber-200 text-amber-700';
       default:
         return '';
     }

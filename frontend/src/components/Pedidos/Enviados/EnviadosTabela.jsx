@@ -31,6 +31,8 @@ export default function EnviadosTabela() {
   function translateStatus(status, substatus) {
     if (status === 'ready_to_ship' && (substatus === 'picked_up' || substatus === 'in_hub')) {
       return 'Enviado';
+    } else if (status === 'delivered') {
+      return 'Entregue';
     }
     return status;
   }
@@ -44,13 +46,12 @@ export default function EnviadosTabela() {
       });
       if (response.data && Array.isArray(response.data.orders)) {
         const filteredOrders = response.data.orders.filter(order =>
-          order.status === 'ready_to_ship' && (order.substatus === 'picked_up' || order.substatus === 'in_hub')
+          order.status === 'delivered' || (order.status === 'ready_to_ship' && (order.substatus === 'picked_up' || order.substatus === 'in_hub'))
         );
         const ordersWithTranslatedStatus = filteredOrders.map(order => ({
           ...order,
           translatedStatus: translateStatus(order.status, order.substatus)
         }));
-        
         setPedido(ordersWithTranslatedStatus);
         setTotalPages(Math.ceil(ordersWithTranslatedStatus.length / rowsPerPage));
       } else {

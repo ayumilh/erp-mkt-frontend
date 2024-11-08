@@ -3,9 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
-import EditIcon from '@mui/icons-material/Edit';
 import { DropdownSelectOrAll } from '../../Geral/Dropdown/DropdownSelectOrAll';
 import { BtnImprimir } from '../Imprimir/BtnImprimir';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -34,7 +32,7 @@ export const EnviadosMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
     }, [menuMoreVertRef])
 
     return (
-        <div className="relative border-l-indigo-200 dark:bg-dark-primaria-900 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 top-0 left-0 z-40 bg-primaria-900 bg-dark-primaria-900" ref={menuMoreVertRef}>
+        <div className="relative border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 top-0 left-0 z-40 bg-primaria-900 dark:bg-dark-primaria-900" ref={menuMoreVertRef}>
             {isMobile ? (<>
                 <button onClick={handleOpenMenu}>
                     <MoreVertIcon 

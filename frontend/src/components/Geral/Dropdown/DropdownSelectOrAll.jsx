@@ -18,7 +18,8 @@ export const DropdownSelectOrAll = ({ setShowCheckboxes, showCheckboxes, setShow
     }
 
     const handleEmitirTodos = async () => {
-        setShowCheckboxesAll(!showCheckboxesAll);
+        // setShowCheckboxesAll(!showCheckboxesAll);
+        setShowCheckboxesAll(true);
         setShowCheckboxes(false);
         setIsOpenEmitir(!isOpenEmitir);
     }

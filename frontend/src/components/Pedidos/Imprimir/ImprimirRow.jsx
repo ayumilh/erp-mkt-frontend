@@ -6,10 +6,9 @@ import axios from 'axios';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
+export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
   const [pedido, setPedido] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
@@ -25,7 +24,6 @@ export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleS
         const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/ready`, {
           params: { userId }
         });
-        console.log(response.data.orders);
         if (response.data && Array.isArray(response.data.orders)) {
           const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
             if (order.shipping_id !== null) {
@@ -71,8 +69,9 @@ export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleS
 
 
   const updateSelectedOrders = (isChecked, orders) => {
-    let updatedSelectedOrders;
+    if (!orders) return;
 
+    let updatedSelectedOrders;
     if (isChecked) {
       updatedSelectedOrders = [...selectedOrders, orders];
     } else {
@@ -83,23 +82,17 @@ export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleS
     setToggleShowCheckboxes(updatedSelectedOrders.length > 0);
   };
 
-  const updateShippingIdOrder = (isChecked, shipping_id) => {
-    let orderArray = Array.isArray(shipping_id) ? shipping_id : [shipping_id];
-    const orderIds = orderArray.map(order => order.order_id);
-
-    if (toggleShowCheckboxesAll || isChecked) {
-      setShippingIdOrder(prevItems => [...prevItems, shipping_id]);
-    } else {
-      setShippingIdOrder(prevItems => prevItems.filter(i => i !== shipping_id));
-    }
-  };
-
   const handleCheckboxChange = (event, shipping_id) => {
     event.stopPropagation();
     const isChecked = event.target.checked;
 
     updateSelectedOrders(isChecked, shipping_id);
-    updateShippingIdOrder(isChecked, shipping_id);
+
+    if (toggleShowCheckboxesAll || isChecked) {
+      setShippingIdOrder(prevItems => [...new Set([...prevItems, shipping_id])]);
+    } else {
+      setShippingIdOrder(prevItems => prevItems.filter(i => i !== shipping_id));
+    }
   };
 
   const openOrderDetailsModal = (shipping_id, allOrders = false) => {

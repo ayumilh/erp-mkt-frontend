@@ -10,7 +10,6 @@ export default function ImprimirTabela() {
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
 
-
   const closeModal = () => {
     setIsModalTr(false);
   }
@@ -20,9 +19,7 @@ export default function ImprimirTabela() {
     setIsModalTr(true);
   }
 
-  const handleSelectAllChange = () => {
-    setShowCheckboxesAll(!showCheckboxesAll);
-  };
+  const handleSelectAllChange = () => setShowCheckboxesAll(!showCheckboxesAll);
 
   return (
     <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">
@@ -56,7 +53,6 @@ export default function ImprimirTabela() {
           </thead>
           <tbody>
             <ImprimirRow
-              toggleShowCheckboxes={showCheckboxes}
               setToggleShowCheckboxes={setShowCheckboxes}
               toggleShowCheckboxesAll={showCheckboxesAll}
               setShippingIdOrder={setShippingIdOrder}

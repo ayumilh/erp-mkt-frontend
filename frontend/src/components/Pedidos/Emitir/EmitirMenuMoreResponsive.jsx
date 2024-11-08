@@ -22,14 +22,12 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
     }
 
     const emitirPedidos = async () => {
-        if (!shippingIdOrder || shippingIdOrder.length === 0) {
-            return;
-        }
+        if (!shippingIdOrder || shippingIdOrder.length === 0) return
 
         const userId = searchUserId();
         if (!userId) return;
 
-        console.log(shippingIdOrder);
+        console.log('shippingIdOrder', shippingIdOrder);
   
         try {
             const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/issueNote', {

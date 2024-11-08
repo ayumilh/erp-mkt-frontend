@@ -1,14 +1,12 @@
 'use client'
 import React, { useEffect, useState, useRef } from 'react';
-import { searchUserId } from '@/utils/searchUserId';
 import Image from 'next/image';
-import axios from 'axios';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder, paginatedPedido }) {
+export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder, paginatedPedido, translateStatus }) {
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
   const [isOpen, setIsOpen] = useState({});
@@ -24,7 +22,7 @@ export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleS
       }
       return groupedOrderByShippingId;
     }, {});
-    setGroupOrdersProducts(groupedOrderByShippingId)
+    setGroupOrdersProducts(groupedOrderByShippingId);
     setIsLoading(false);
   }, [paginatedPedido]);
 
@@ -37,17 +35,10 @@ export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleS
     }
   });
 
-  // checkbox
-  useEffect(() => {
-    if (toggleShowCheckboxesAll) {
-      const allOrderIds = paginatedPedido.map(order => order.shipping_id);
-      setShippingIdOrder(allOrderIds);
-    }
-  }, [toggleShowCheckboxesAll, paginatedPedido, setShippingIdOrder]);
-
   const updateSelectedOrders = (isChecked, shipping_id) => {
+    if (!shipping_id) return;
+  
     let updatedSelectedOrders;
-
     if (isChecked) {
       updatedSelectedOrders = [...selectedOrders, shipping_id];
     } else {
@@ -58,23 +49,17 @@ export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleS
     setToggleShowCheckboxes(updatedSelectedOrders.length > 0);
   };
 
-  const updateShippingIdOrder = (isChecked, shipping_id) => {
-    let orderArray = Array.isArray(shipping_id) ? shipping_id : [shipping_id];
-    const orderIds = orderArray.map(order => order);
-
-    if (toggleShowCheckboxesAll || isChecked) {
-      setShippingIdOrder(prevItems => [...prevItems, ...orderIds]);
-    } else {
-      setShippingIdOrder(prevItems => prevItems.filter(i => i !== shipping_id));
-    }
-  };
-
   const handleCheckboxChange = (event, shipping_id) => {
     event.stopPropagation();
     const isChecked = event.target.checked;
 
     updateSelectedOrders(isChecked, shipping_id);
-    updateShippingIdOrder(isChecked, shipping_id);
+
+    if (toggleShowCheckboxesAll || isChecked) {
+      setShippingIdOrder(prevItems => [...new Set([...prevItems, shipping_id])]);
+    } else {
+      setShippingIdOrder(prevItems => prevItems.filter(i => i !== shipping_id));
+    }
   };
 
   const openOrderDetailsModal = (shipping_id, allOrders = false) => {
@@ -114,7 +99,7 @@ export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleS
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     }
-  }, [menuMoreVertRef])
+  }, [menuMoreVertRef]);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -123,16 +108,7 @@ export default function RetiradaRow({ setOrder, setToggleShowCheckboxes, toggleS
       default:
         return status;
     }
-  }
-
-  function translateStatus(status) {
-    switch (status) {
-      case 'ready_to_ship':
-        return 'Enviar';
-      default:
-        return status;
-    }
-  }
+  };
 
   function translateTrackingMethod(method) {
     switch (method) {

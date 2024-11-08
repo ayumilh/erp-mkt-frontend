@@ -3,9 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
-import EditIcon from '@mui/icons-material/Edit';
 import { DropdownSelectOrAll } from '../../Geral/Dropdown/DropdownSelectOrAll';
 import { BtnImprimir } from '../Imprimir/BtnImprimir';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -19,8 +17,6 @@ export const RetiradaMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
     const handleOpenMenu = () => {
         setIsOpenMenu(!isOpenMenu);
     }
-
-    console.log('shippingIdOrder', shippingIdOrder);
 
     const menuMoreVertRef = useRef(null);
     useEffect(() => {

@@ -8,7 +8,7 @@ import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
+export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
     const [pedido, setPedido] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
@@ -62,7 +62,7 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
     // checkbox
     useEffect(() => {
         if (toggleShowCheckboxesAll) {
-            const allOrderIds = pedido.map(order => order.order_id);
+            const allOrderIds = pedido.map(order => order.shipping_id);
             setShippingIdOrder(allOrderIds);
         }
     }, [toggleShowCheckboxesAll, pedido, setShippingIdOrder]);

@@ -58,7 +58,6 @@ export default function EmitirTabela() {
           </thead>
           <tbody>
             <EmitirRow
-              toggleShowCheckboxes={showCheckboxes}
               setToggleShowCheckboxes={setShowCheckboxes}
               toggleShowCheckboxesAll={showCheckboxesAll}
               setShippingIdOrder={setShippingIdOrder}

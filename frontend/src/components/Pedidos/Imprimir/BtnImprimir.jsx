@@ -24,6 +24,8 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     const userId = searchUserId();
     if (!userId) return;
 
+    console.log(shippingIdOrder);
+
     try {
       const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {
         shipping_id: shippingIdOrder,
@@ -37,7 +39,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         const pdfUrl = URL.createObjectURL(blob);
     
         saveAs(blob, 'documento.pdf');  // Salvar o PDF
-        // printJS(pdfUrl);  
+        printJS(pdfUrl);  
         setStatusRequestSync(true);
       } else {
         console.error('Erro ao imprimir pedido');
@@ -57,7 +59,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
   return (
     <div>
       <div className='left-12'>
-        <BtnActions title="Imprimir" onClick={imprimirPedido} color="ativado" padding="xs" rounded="lg" />
+        <BtnActions title="Imprimir" onClick={imprimirPedido} color="ativado" padding="xs" rounded="lg" text="xs" />
       </div>
 
       <div ref={contentPrint}></div>
