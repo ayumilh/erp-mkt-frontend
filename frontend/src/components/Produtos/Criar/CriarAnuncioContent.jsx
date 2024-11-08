@@ -1,30 +1,26 @@
 "use client";
 import { useState } from "react";
-import axios from "axios";
 import { searchUserId } from '@/utils/searchUserId';
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
+import axios from "axios";
 import BtnActions from "@/components/Geral/Button/BtnActions";
 
-const steps = [
-  { titulo: "Informações Basica", subtitulo: "Preencha as informações básicas do seu produto" },
-  { titulo: "Venda", subtitulo: "Defina a marca, garantia e o código GTIN" },
-  { titulo: "Mídia", subtitulo: "Adicione fotos e vídeos do seu produto" },
-];
+const CriarAnuncioContent = () => {
+  const [isInvalidoTitle, setIsInvalidoTitle] = useState(false);
+  const [isInvalidoQuantity, setIsInvalidoQuantity] = useState(false);
+  const [isInvalidoPreco, setIsInvalidoPreco] = useState(false);
 
-function CriarAnuncioContent() {
   const [input, setInputs] = useState({
     title: "",
     price: "",
     quantity: "",
-    listing: "",
+    // listing: "",
     condition: "",
-    description: "",
+    // description: "",
     // video_id: "",
-    garantia: "",
-    tempo_garantia: "",
-    pictures: "",
-    marca: "",
+    warrantyType: "",
+    warrantyTemp: "",
+    pictureUrls: "",
+    brand: "",
     gtin: "",
   });
 
@@ -32,264 +28,250 @@ function CriarAnuncioContent() {
     setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
+
   const handleCriar = async (e) => {
     e.preventDefault();
 
     const userId = searchUserId();
     if (!userId) return;
-
+    console.log(input)
     try {
       await axios.post(
         "https://erp-mkt.vercel.app/api/mercadolivre/criar-anuncio", {
-          formData: input,
-          userId: userId 
-        });
+        formData: input,
+        userId: userId
+      });
     } catch (error) {
       console.error(error);
     }
-    finally {
-      console.log(input);
-    }
   };
 
+  // condição da garantia
   const [garantia, setGarantia] = useState("");
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name === "garantia") {
-      setGarantia(value);
+      setInputs((prevInput) => ({
+        ...prevInput,
+        warrantyType: value,
+      }));
     }
-  };
-
-  const [activeStep, setActiveStep] = useState(0);
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setInputs((prevInput) => ({
+      ...prevInput,
+      [name]: value,
+    }));
   };
 
   return (
-    <div className='lg:flex lg:gap-28'>
-      <form className="rounded-xl w-[373px] md:w-[620px] lg:w-[548px] md:p-6 py-5 px-4">
-        <div className="flex flex-col gap-4">
-          <Stepper activeStep={activeStep} orientation="vertical">
-            {steps.map((step, index) => (
-              <Step key={step.titulo}>
-                <div>
-                  <h2 className="text-lg font-semibold opacity-90">{step.titulo}</h2>
-                  {activeStep === index && (<>
-                    <p className="text-sm md:text-base font-medium opacity-90">{step.subtitulo}</p>
-                    {index === 0 && (
-                      <div className="flex flex-col gap-6 mt-8 mb-7 ml-4">
-                        <input
-                          onChange={inputChange}
-                          name="title"
-                          className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
-                          type="text"
-                          placeholder="Nome do Produto"
-                        />
+    <div className='w-full xl:max-w-screen-lg flex flex-col mt-10'>
+      <h3 className='text-neutral-800 dark:text-gray-200 text-xl font-medium'>
+        {input.title || ""}
+      </h3>
 
-                        <input
-                          onChange={inputChange}
-                          name="description"
-                          className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
-                          type="text"
-                          placeholder="Descrição"
-                        />
+      <div className='flex gap-6 mt-5 mb-2 relative'>
+        <h3 className='text-neutral-800 dark:text-gray-200 text-lg font-semibold'>Gerais</h3>
+      </div>
 
-                        <input
-                          onChange={inputChange}
-                          name="quantity"
-                          className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
-                          type="text"
-                          placeholder="Quantidade"
-                        />
+      <div className='flex flex-wrap transition-transform duration-500 ease-in'>
+        {/* gerais */}
+        <div className='w-full flex flex-wrap mt-5 mb-7'>
+          <div className="w-full mt-3 mb-4 px-3">
+            <label htmlFor="title" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">Title <span className='text-red-600'>*</span></label>
+            <input
+              onChange={inputChange}
+              maxLength={255}
+              name='title'
+              required
+              type="text"
+              className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out ${isInvalidoTitle ? 'outline-red-500 focus:outline-red-500' : ''}`}
+            />
+          </div>
 
-                        <input
-                          onChange={inputChange}
-                          name="price"
-                          className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
-                          type="text"
-                          placeholder="R$ 00,00"
-                        />
+          <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
+            <label htmlFor="condition" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">Condição</label>
+            <div className="flex flex-col md:flex-row gap-7 mt-1">
+              <label>
+                <input
+                  type="radio"
+                  value="new"
+                  name="condition"
+                  onChange={inputChange}
+                />
+                <span className="font-normal ml-2 dark:text-gray-200">Novo</span>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="used"
+                  name="condition"
+                  onChange={inputChange}
+                />
+                <span className="font-normal ml-2 dark:text-gray-200">Usado</span>
+              </label>
+            </div>
+          </div>
 
-                        <div className="flex flex-col">
-                          <span className="mb-2 font-medium opacity-90">
-                            Listagem
-                          </span>
-                          <div className="flex flex-col md:flex-row gap-4">
-                            <label className="flex items-center">
-                              <input
-                                type="radio"
-                                value="gold_pro"
-                                name="listing"
-                                onChange={inputChange}
-                                className="text-segundaria-800"
-                              />
-                              <span className="font-normal ml-2">
-                                Premium
-                              </span>
-                            </label>
-                            <label>
-                              <input
-                                type="radio"
-                                value="gold_special"
-                                name="listing"
-                                onChange={inputChange}
-                              />
-                              <span className="font-normal ml-2">
-                                Clássico
-                              </span>
-                            </label>
-                            <label>
-                              <input
-                                type="radio"
-                                value="free"
-                                name="listing"
-                                onChange={inputChange}
-                              />
-                              <span className="font-normal ml-2">Grátis</span>
-                            </label>
-                          </div>
-                        </div>
+          <div className='w-full md:w-1/5 flex flex-col mt-3 mb-4 px-3'>
+            <label htmlFor="price" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">Preço</label>
+            <div className="relative">
+              <div className="relative flex items-center">
+                <span className="absolute left-0 pl-4 py-2 rounded-l-sm focus:rounded-lg font-medium text-neutral-600 dark:text-gray-300">R$</span>
+                <input
+                  onChange={inputChange}
+                  name='price'
+                  type="text"
+                  placeholder="0,00"
+                  className={`peer rounded-sm border w-full pl-12 pr-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out ${isInvalidoPreco ? 'outline-red-500 focus:outline-red-500' : ''}`}
+                />
+              </div>
+              {isInvalidoPreco && <span className="absolute text-red-500 text-sm ml-2 mt-1">Valor inválido</span>}
+            </div>
+          </div>
 
-                        <div className="flex flex-col">
-                          <span className="mb-2 font-medium opacity-90">
-                            Condição
-                          </span>
-                          <div className="flex flex-col md:flex-row gap-4">
-                            <label>
-                              <input
-                                type="radio"
-                                value="new"
-                                name="condition"
-                                onChange={inputChange}
-                              />
-                              <span className="font-normal ml-2">Novo</span>
-                            </label>
-                            <label>
-                              <input
-                                type="radio"
-                                value="used"
-                                name="condition"
-                                onChange={inputChange}
-                              />
-                              <span className="font-normal ml-2">Usado</span>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    {index === 1 && (
-                      <div className="flex flex-col gap-6 mt-8 mb-7 ml-4">
-                        <div className="flex flex-col">
-                          <span className="mb-2 font-medium opacity-90">
-                            Garantia
-                          </span>
-                          <div className="flex flex-col md:flex-row gap-4">
-                            <label>
-                              <input
-                                type="radio"
-                                value="Garantia do vendedor"
-                                name="garantia"
-                                onChange={inputChange}
-                              />
-                              <span className="font-normal ml-2">
-                                Garantia do vendedor
-                              </span>
-                            </label>
-                            <label>
-                              <input
-                                type="radio"
-                                value="De Fábrica"
-                                name="garantia"
-                                onChange={inputChange}
-                              />
-                              <span className="font-normal ml-2">
-                                De Fábrica
-                              </span>
-                            </label>
-                            <label>
-                              <input
-                                type="radio"
-                                value="Sem garantia"
-                                name="garantia"
-                                onChange={inputChange}
-                              />
-                              <span className="font-normal ml-2">
-                                Sem garantia
-                              </span>
-                            </label>
-                          </div>
-                        </div>
+          <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
+            <label htmlFor="quantity" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">Quantidade <span className='text-red-600'>*</span></label>
+            <input
+              onChange={inputChange}
+              maxLength={255}
+              name='quantity'
+              required
+              type="text"
+              className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out ${isInvalidoQuantity ? 'outline-red-500 focus:outline-red-500' : ''}`}
+            />
+          </div>
 
-                        {garantia !== "Sem garantia" && (
-                          <div className="flex flex-col">
-                            <input
-                              onChange={inputChange}
-                              name="tempo_garantia"
-                              className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
-                              type="text"
-                              placeholder="Tempo de garantia"
-                            />
-                          </div>
-                        )}
-
-                        <input
-                          onChange={inputChange}
-                          name="marca"
-                          className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
-                          type="text"
-                          placeholder="Marca"
-                        />
-
-                        <input
-                          onChange={inputChange}
-                          name="gtin"
-                          className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
-                          type="text"
-                          placeholder="GTIN"
-                        />
-                      </div>
-                    )}
-                    {index === 2 && (
-                      <div className="flex flex-col gap-6 mt-8 mb-7 ml-4">
-                        <input
-                          onChange={inputChange}
-                          name="video_id"
-                          className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
-                          type="url"
-                          placeholder="Vídeo ID"
-                        />
-
-                        <input
-                          onChange={inputChange}
-                          name="pictures"
-                          className="bg-primaria-900 shadow-input w-full h-12 rounded-lg overflow-hidden text-sm md:text-base font-normal pl-4 py-2 focus:outline-none focus:ring-1 focus:ring-[rgba(211,211,211,0.4)] focus:ring-offset-0"
-                          type="url"
-                          placeholder="Pictures"
-                        />
-                      </div>
-                    )}
-                  </>)}
-                </div>
-              </Step>
-            ))}
-          </Stepper>
-          <div className='flex gap-3 my-9'>
-            {activeStep > 0 && (
-              <BtnActions title="Voltar" onClick={handleBack} color="desativado" />
-            )}
-            {activeStep < 3 ? (
-              <BtnActions title="Próximo" onClick={handleNext} color="ativado" />
-            ) : (
-              <BtnActions title="Criar anúncio" onClick={handleCriar} color="ativado" />
-            )}
+          <div className="w-full mt-3 mb-4 px-3">
+            <label htmlFor="description" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">Descrição</label>
+            <textarea
+              onChange={inputChange}
+              name='description'
+              className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out`}
+            />
           </div>
         </div>
-      </form>
+
+
+        <div className='w-full'>
+          <hr style={{ border: '1px solid #d1d5db' }} />
+        </div>
+
+        {/* informações de venda */}
+        <div className='w-full flex flex-col mt-5 mb-7'>
+          <h3 className='text-neutral-800 dark:text-gray-200 text-lg font-semibold'>Informações de venda</h3>
+          <div className='w-full flex flex-wrap mt-5'>
+            <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
+              <label htmlFor="brand" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">Marca</label>
+              <input
+                onChange={inputChange}
+                maxLength={255}
+                name='brand'
+                type="text"
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out`}
+              />
+            </div>
+
+            <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
+              <label htmlFor="gtin" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">GTIN</label>
+              <input
+                onChange={inputChange}
+                maxLength={255}
+                name='gtin'
+                type="text"
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out`}
+              />
+            </div>
+
+            <div className="flex w-full items-center px-3">
+              <div className="w-full md:w-3/5 flex flex-col mt-5 mb-7">
+                <span className="mb-2 font-medium text-neutral-800 dark:text-gray-200">
+                  Garantia
+                </span>
+                <div className="flex flex-col md:flex-row gap-4">
+                  <label>
+                    <input
+                      type="radio"
+                      value="Garantia do vendedor"
+                      name="garantia"
+                      onChange={handleInputChange}
+                    />
+                    <span className="font-normal ml-2 dark:text-gray-200">
+                      Garantia do vendedor
+                    </span>
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="De Fábrica"
+                      name="garantia"
+                      onChange={handleInputChange}
+                    />
+                    <span className="font-normal ml-2 dark:text-gray-200">
+                      De Fábrica
+                    </span>
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="Sem garantia"
+                      name="garantia"
+                      onChange={handleInputChange}
+                    />
+                    <span className="font-normal ml-2 dark:text-gray-200">
+                      Sem garantia
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              {garantia !== "Sem garantia" && (
+                <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
+                  <label htmlFor="warrantyTemp" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">Tempo de garantia</label>
+                  <input
+                    onChange={inputChange}
+                    maxLength={255}
+                    name='warrantyTemp'
+                    type="text"
+                    className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out`}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className='w-full'>
+          <hr style={{ border: '1px solid #d1d5db' }} />
+        </div>
+
+        {/* mídia */}
+        <div className='w-full flex flex-col mt-5 mb-7'>
+          <h3 className='text-neutral-800 dark:text-gray-200 text-lg font-semibold'>Mídia</h3>
+          <div className='w-full flex flex-wrap mt-5'>
+            <div className="w-full mt-3 mb-4 px-3">
+              <label htmlFor="pictureUrls" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">URL da imagem</label>
+              <input
+                onChange={inputChange}
+                value={input.pictureurls || ''}
+                maxLength={255}
+                name='pictureUrls'
+                type="text"
+                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out`}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='flex justify-between mt-10'>
+        <BtnActions
+          onClick={handleCriar}
+          text='Criar Anúncio'
+          color='ativado'
+          padding='md'
+        />
+      </div>
     </div>
   );
-}
+};
 
 export default CriarAnuncioContent;

@@ -25,14 +25,6 @@ const Editar = async () => {
         <EditarAnuncioContent />
       </div>
     </div>
-
-    // <div className="p-6 mx-auto flex flex-col items-center space-x-4">
-    //   <div className="w-full xl:max-w-[1264px] flex justify-between items-center h-12 pt-4 px-6 xl:px-0 mx-auto mb-8">
-    //     <BtnBackPage title="Editar Anúncio" modal={false} />
-    //   </div>
-
-
-    // </div>
   );
 }
 export default Editar
