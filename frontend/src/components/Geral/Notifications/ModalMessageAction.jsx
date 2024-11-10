@@ -60,7 +60,7 @@ const ModalMessageAction = () => {
         <div className="relative" ref={dropdownMoreRef}>
             {renderIcon()}
             {notificationCount > 0 && (
-                <span className="absolute top-4 left-4 inline-flex items-center justify-center p-1 text-[11px] font-medium leading-none text-red-100 bg-red-600 rounded-full">
+                <span className="absolute bottom-6 left-4 inline-flex items-center justify-center p-1 text-[11px] font-medium leading-none text-red-100 bg-red-600 rounded-full">
                     {/* {notificationCount} */}
                 </span>
             )}
