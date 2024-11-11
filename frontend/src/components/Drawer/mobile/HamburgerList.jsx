@@ -44,7 +44,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
                     (text, index) => (
                         <li key={text} className="flex flex-col mb-5">
                             <Link href={`/${text.toLowerCase()}`}>
-                                <button className='flex items-center w-[170px] h-12 px-4 justify-start hover:bg-gray-100 active:bg-gray-200 dark:active:bg-neutral-800 active:text-indigo-500 rounded-full transition duration-500 ease-out'>
+                                <button className='flex items-center w-[170px] h-12 px-4 justify-start hover:bg-gray-100 dark:hover:bg-neutral-800 active:bg-gray-200 dark:active:bg-neutral-800 active:text-indigo-500 rounded-full transition duration-500 ease-out'>
                                     <span
                                         className={`flex justify-center text-neutral-700 dark:text-gray-300 ${open ? "mr-3" : "mr-auto"
                                             }`}

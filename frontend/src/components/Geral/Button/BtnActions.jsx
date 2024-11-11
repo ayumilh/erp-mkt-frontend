@@ -62,13 +62,13 @@ export default function BtnActions({title, onClick, padding, text, rounded, colo
       >
        {isLoading ? (
           <span 
-            className={span({color:color})}>
+            className={span({text:text, color:color})}>
               <CircularProgress color="inherit" className="text-white mr-2" size={12} /> 
               {title}...
           </span>
         ) : (
           <span 
-          className={`${span({text: text, color: color})} w-[72px] md:w-[120px]`} 
+          className={`${span({color: color})} w-[72px] md:w-[120px]`} 
           style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {title}
           </span>

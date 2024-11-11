@@ -43,7 +43,7 @@ const ChartMore = () => {
             </button>
 
             {isOpenMore && (
-                <div className={`w-[108px] absolute top-8 right-0 z-20 mt-2 rounded-md shadow-lg bg-primaria-900 ring-1 ring-black ring-opacity-5 transition-transform duration-300 ease-out transform ${isOpenMore ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
+                <div className={`w-[108px] absolute top-8 right-0 z-20 mt-2 rounded-md shadow-lg bg-primaria-900 dark:bg-dark-primaria-900 ring-1 ring-black ring-opacity-5 transition-transform duration-300 ease-out transform ${isOpenMore ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
                     <div className='my-2 h-20' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
 
                     </div>

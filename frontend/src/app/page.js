@@ -116,7 +116,7 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col dark:bg-white">
             <header className="w-full h-20 flex flex-row items-center justify-between px-5 xl:px-20 py-5">
                 <div className="w-full flex justify-between md:justify-normal flex-row items-center">
                     <div>

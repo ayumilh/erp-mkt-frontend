@@ -28,19 +28,42 @@ const CriarAnuncioContent = () => {
     setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setInputs((prev) => ({ ...prev, pictureUrls: file }));
+  };
+
 
   const handleCriar = async (e) => {
     e.preventDefault();
 
     const userId = searchUserId();
     if (!userId) return;
-    console.log(input)
+    const formData = new FormData();
+    formData.append('file', input.pictureUrls);
+    formData.append('data', JSON.stringify({
+      title: input.title,
+      price: input.price,
+      quantity: input.quantity,
+      condition: input.condition,
+      warrantyType: input.warrantyType,
+      warrantyTemp: input.warrantyTemp,
+      brand: input.brand,
+      gtin: input.gtin,
+    }));
+
+    formData.append('userId', userId);
+
     try {
       await axios.post(
-        "https://erp-mkt.vercel.app/api/mercadolivre/criar-anuncio", {
-        formData: input,
-        userId: userId
-      });
+        "https://erp-mkt.vercel.app/api/mercadolivre/criar-anuncio",
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      );
     } catch (error) {
       console.error(error);
     }
@@ -63,7 +86,7 @@ const CriarAnuncioContent = () => {
   };
 
   return (
-    <div className='w-full xl:max-w-screen-lg flex flex-col mt-10'>
+    <div className='w-full xl:max-w-screen-lg flex flex-col mt-10 pb-8'>
       <h3 className='text-neutral-800 dark:text-gray-200 text-xl font-medium'>
         {input.title || ""}
       </h3>
@@ -250,11 +273,8 @@ const CriarAnuncioContent = () => {
             <div className="w-full mt-3 mb-4 px-3">
               <label htmlFor="pictureUrls" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">URL da imagem</label>
               <input
-                onChange={inputChange}
-                value={input.pictureurls || ''}
-                maxLength={255}
-                name='pictureUrls'
-                type="text"
+                onChange={handleFileChange}
+                type="file"
                 className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out`}
               />
             </div>
@@ -265,7 +285,7 @@ const CriarAnuncioContent = () => {
       <div className='flex justify-between mt-10'>
         <BtnActions
           onClick={handleCriar}
-          text='Criar Anúncio'
+          title='Criar Anúncio'
           color='ativado'
           padding='md'
         />

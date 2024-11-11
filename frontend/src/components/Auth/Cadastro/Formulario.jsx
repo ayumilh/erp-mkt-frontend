@@ -99,7 +99,7 @@ const Formulario = () => {
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
                 >
-                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                  {showPassword ? <Visibility className='dark:text-neutral-700' /> : <VisibilityOff className='dark:text-neutral-700' />}
                 </IconButton>
               </div>
             </div>

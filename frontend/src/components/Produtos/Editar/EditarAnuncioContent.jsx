@@ -85,7 +85,7 @@ const EditarAnuncioContent = () => {
   };
 
   return (
-    <div className='w-full xl:max-w-screen-lg flex flex-col mt-10'>
+    <div className='w-full xl:max-w-screen-lg flex flex-col mt-10 pb-8'>
       <h3 className='text-neutral-800 dark:text-gray-200 text-xl font-medium'>
         {input.title || ""}
       </h3>
@@ -291,9 +291,9 @@ const EditarAnuncioContent = () => {
       <div className='flex justify-between mt-10'>
         <BtnActions
           onClick={handleEditar}
-          text='Editar Anúncio'
-          color='success'
-          className='w-32'
+          title='Editar Anúncio'
+          color='ativado'
+          padding='md'
         />
       </div>
     </div>
