@@ -19,7 +19,7 @@ const CriarAnuncioContent = () => {
     // video_id: "",
     warrantyType: "",
     warrantyTemp: "",
-    pictureUrls: "",
+    pictureUrls: [],
     brand: "",
     gtin: "",
   });
@@ -29,29 +29,28 @@ const CriarAnuncioContent = () => {
   };
 
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setInputs((prev) => ({ ...prev, pictureUrls: file }));
+    const files = Array.from(event.target.files);
+    setInputs((prevInput) => ({
+      ...prevInput,
+      pictureUrls: files,
+    }));
   };
 
 
   const handleCriar = async (e) => {
     e.preventDefault();
 
+    console.log(input);
+
     const userId = searchUserId();
     if (!userId) return;
-    const formData = new FormData();
-    formData.append('file', input.pictureUrls);
-    formData.append('data', JSON.stringify({
-      title: input.title,
-      price: input.price,
-      quantity: input.quantity,
-      condition: input.condition,
-      warrantyType: input.warrantyType,
-      warrantyTemp: input.warrantyTemp,
-      brand: input.brand,
-      gtin: input.gtin,
-    }));
 
+    const formData = new FormData();
+    Object.keys(input).forEach(key => {
+      if (key !== 'pictureUrls') {
+        formData.append(key, input[key]);
+      }
+    });
     formData.append('userId', userId);
 
     try {
@@ -66,8 +65,13 @@ const CriarAnuncioContent = () => {
       );
     } catch (error) {
       console.error(error);
+    } finally {
+      for (let pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+      }
     }
   };
+
 
   // condição da garantia
   const [garantia, setGarantia] = useState("");
