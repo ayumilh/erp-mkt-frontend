@@ -41,7 +41,6 @@ const PieRankingChart = () => {
       },
       theme: {
         mode: theme === 'dark' ? 'dark' : 'light',
-        // palette: 'palette1',
         monochrome: {
           enabled: false,
           color: theme === 'dark' ? '#ffffff' : '#000000',

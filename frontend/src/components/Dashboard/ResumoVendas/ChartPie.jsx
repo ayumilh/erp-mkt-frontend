@@ -1,10 +1,10 @@
 'use client'
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import { ThemeContext } from '../../../contexts/ThemeContext';
+import { useTheme } from '@mui/material/styles';
 
 const ChartPie = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const [chartData, setChartData] = useState({
     series: [100, 25, 50, 25],
@@ -26,7 +26,13 @@ const ChartPie = () => {
       },
       legend: {
         labels: {
-          colors: theme === 'dark' ? ['#ffffff'] : ['#000000']
+          colors: theme.palette.mode === 'dark' ? '#ffffff' : '#000000'
+        }
+      },
+      theme: {
+        mode: theme.palette.mode === 'dark' ? 'dark' : 'light',
+        palette: {
+          colors: theme.palette.mode === 'dark' ? ['#333', '#444', '#555', '#666'] : ['#fff', '#ddd', '#bbb', '#999']
         }
       }
     }
@@ -39,7 +45,13 @@ const ChartPie = () => {
         ...prevData.options,
         legend: {
           labels: {
-            colors: theme === 'dark' ? ['#ffffff'] : ['#000000']
+            colors: theme.palette.mode === 'dark' ? '#ffffff' : '#000000'
+          }
+        },
+        theme: {
+          mode: theme.palette.mode === 'dark' ? 'dark' : 'light',
+          palette: {
+            colors: theme.palette.mode === 'dark' ? ['#333', '#444', '#555', '#666'] : ['#fff', '#ddd', '#bbb', '#999']
           }
         }
       }

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import axios from 'axios';
 import { searchUserId } from '@/utils/searchUserId';
 
-const ChartPie = dynamic(() => import('./ChartPie'), { ssr: false });
+const ChartPie2 = dynamic(() => import('./ChartPie2'), { ssr: false });
 
 export const DashboardResumoVendas = () => {
     const [data, setData] = useState([]);
@@ -84,7 +84,7 @@ export const DashboardResumoVendas = () => {
                 </div>
 
                 <div className='w-[700px] lg:w-[780px] xl:w-[900px] h-full mt-4 hidden md:flex'>
-                    <ChartPie />
+                    <ChartPie2 />
                 </div>
             </div>
 
