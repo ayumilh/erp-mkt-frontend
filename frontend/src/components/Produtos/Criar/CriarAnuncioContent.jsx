@@ -12,7 +12,7 @@ const CriarAnuncioContent = () => {
   const [input, setInputs] = useState({
     title: "",
     price: "",
-    quantity: "",
+    quantity: 0,
     listing: "",
     condition: "",
     // description: "",

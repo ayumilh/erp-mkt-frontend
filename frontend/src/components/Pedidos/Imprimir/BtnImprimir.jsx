@@ -2,19 +2,12 @@ import { useRef, useState, useEffect } from "react";
 import { searchUserId } from '@/utils/searchUserId';
 import axios from "axios";
 import BtnActions from '@/components/Geral/Button/BtnActions';
-import { useReactToPrint } from "react-to-print";
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
-import { saveAs } from 'file-saver';
-import printJS from 'print-js';
+import { PDFDocument } from 'pdf-lib';
 
 export const BtnImprimir = ({ shippingIdOrder }) => {
-  const contentPrint = useRef();
   const [statusRequestSync, setStatusRequestSync] = useState(null);
-  const [printContent, setPrintContent] = useState(null);
-  const handlePrint = useReactToPrint({
-    content: () => contentPrint.current,
-  });
 
   const imprimirPedido = async () => {
     if (!shippingIdOrder || shippingIdOrder.length === 0) {
@@ -27,42 +20,48 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     console.log(shippingIdOrder);
 
     try {
-      const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {
-        shipping_id: shippingIdOrder,
-        userId: userId
-      }, {
-        responseType: 'arraybuffer'
-      });
-      if (response.status === 200) {
-        const pdfContent = response.data;
-        const blob = new Blob([pdfContent], { type: 'application/pdf' });
-        const pdfUrl = URL.createObjectURL(blob);
-    
-        saveAs(blob, 'documento.pdf');  // Salvar o PDF
-        printJS(pdfUrl);  
-        setStatusRequestSync(true);
-      } else {
-        console.error('Erro ao imprimir pedido');
-        setStatusRequestSync(false);
+      const pdfDoc = await PDFDocument.create();
+
+      for (const id of shippingIdOrder) {
+        const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {
+          shipping_id: id,
+          userId: userId
+        }, {
+          responseType: 'arraybuffer'
+        });
+
+        if (response.status === 200) {
+          const pdfContent = response.data;
+          const singlePdfDoc = await PDFDocument.load(pdfContent);
+          const copiedPages = await pdfDoc.copyPages(singlePdfDoc, singlePdfDoc.getPageIndices());
+          copiedPages.forEach((page) => {
+            pdfDoc.addPage(page);
+          });
+        } else {
+          console.error(`Erro ao imprimir pedido ${id}`);
+          setStatusRequestSync(false);
+          return;
+        }
       }
+
+      const pdfBytes = await pdfDoc.save();
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      
+      // Abre o PDF em uma nova aba do navegador
+      window.open(url, '_blank');
+      setStatusRequestSync(true);
     } catch (error) {
       console.error(`Error: ${error}`);
+      setStatusRequestSync(false);
     }
   }
-
-  useEffect(() => {
-    if (printContent) {
-      handlePrint();
-    }
-  }, [printContent, handlePrint]);
 
   return (
     <div>
       <div className='left-12'>
         <BtnActions title="Imprimir" onClick={imprimirPedido} color="ativado" padding="xs" rounded="lg" text="xs" />
       </div>
-
-      <div ref={contentPrint}></div>
 
       {statusRequestSync === true && <SuccessNotification message="Pedidos imprimidos com sucesso" />}
       {statusRequestSync === false && <ErrorNotification message="Erro ao imprimir produtos" />}
