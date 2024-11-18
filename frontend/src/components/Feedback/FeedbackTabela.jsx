@@ -32,35 +32,6 @@ const FeedbackTabela = () => {
                 const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/get-questions", {
                     params: { userId }
                 });
-                console.log(response.data);
-                const retructuredData = [
-                    {
-                        text: "Qual é o prazo de entrega?",
-                        answer_date_created: "2023-10-01T10:00:00Z",
-                        answer_text: "O prazo de entrega é de 5 a 7 dias úteis.",
-                        question_status: "respondida",
-                        nickname: "comprador123",
-                        registration_date: "2023-09-01T10:00:00Z",
-                        product_sku: "SKU12345",
-                        title: "Produto Exemplo",
-                        price: 99.99,
-                        available_quantity: 10,
-                        pictureurls: "/path/to/image.jpg",
-                    },
-                    {
-                        text: "Este produto tem garantia?",
-                        answer_date_created: "2023-10-02T11:00:00Z",
-                        answer_text: "Sim, o produto tem garantia de 1 ano.",
-                        question_status: "respondida",
-                        nickname: "comprador456",
-                        registration_date: "2023-09-02T11:00:00Z",
-                        product_sku: "SKU67890",
-                        title: "Outro Produto",
-                        price: 199.99,
-                        available_quantity: 5,
-                        pictureurls: "/path/to/another-image.jpg",
-                    }
-                ];
                 setProducts(response.data.questions);
             } catch (error) {
                 setProducts([]);
@@ -89,7 +60,7 @@ const FeedbackTabela = () => {
                 <div key={index} className='border-b border-gray-200 dark:border-neutral-800 p-7'>
                     <div className="flex justify-between items-center">
                         <div className='flex items-center gap-2'>
-                            {/* {product.pictureurls && <Image src={product.pictureurls} alt='Imagem do produto' width={42} height={42} className="w-10 h-10" />} */}
+                            {product.pictureurls && <Image src={product.pictureurls} alt='Imagem do produto' width={42} height={42} className="w-10 h-10" />}
                             <div className="break-words md:break-normal">
                                 <p className="w-80 font-medium text-sm text-neutral-800 dark:text-gray-300 overflow-hidden whitespace-nowrap text-ellipsis">{product.product_sku}</p>
                                 <span className='text-blue-500 cursor-pointer'>{product.questions_id}</span>
