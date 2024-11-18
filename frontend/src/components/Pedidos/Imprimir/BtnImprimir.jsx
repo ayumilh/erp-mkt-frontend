@@ -48,7 +48,6 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
       const blob = new Blob([pdfBytes], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       
-      // Abre o PDF em uma nova aba do navegador
       window.open(url, '_blank');
       setStatusRequestSync(true);
     } catch (error) {

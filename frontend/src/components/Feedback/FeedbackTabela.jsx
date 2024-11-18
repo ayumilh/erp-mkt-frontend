@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
+import { searchUserId } from '@/utils/searchUserId';
 import { FeedbackMenuMoreResponsive } from "./Actions/FeedbackMenuMoreResponsive";
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
@@ -24,8 +25,13 @@ const FeedbackTabela = () => {
 
     useEffect(() => {
         const fetchPerguntas = async () => {
+            const userId = searchUserId();
+            if (!userId) return;
+
             try {
-                const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/get-questions");
+                const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/get-questions", {
+                    params: { userId }
+                });
                 console.log(response.data);
                 const retructuredData = [
                     {
@@ -55,7 +61,7 @@ const FeedbackTabela = () => {
                         pictureurls: "/path/to/another-image.jpg",
                     }
                 ];
-                setProducts(retructuredData);
+                setProducts(response.data.questions);
             } catch (error) {
                 setProducts([]);
             }
