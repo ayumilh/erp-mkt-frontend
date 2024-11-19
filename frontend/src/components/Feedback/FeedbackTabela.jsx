@@ -32,6 +32,7 @@ const FeedbackTabela = () => {
                 const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/get-questions", {
                     params: { userId }
                 });
+                console.log(response.data.questions);
                 setProducts(response.data.questions);
             } catch (error) {
                 setProducts([]);
@@ -76,7 +77,7 @@ const FeedbackTabela = () => {
                         </div>
 
                         <div>
-                            <span className='font-medium text-sm text-neutral-800 dark:text-gray-200'>Lene Modas</span>
+                            <span className='font-medium text-sm text-neutral-800 dark:text-gray-200'>{product.nickname}</span>
                         </div>
                     </div>
 
