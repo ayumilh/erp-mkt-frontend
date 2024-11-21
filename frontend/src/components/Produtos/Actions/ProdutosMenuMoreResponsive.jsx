@@ -11,6 +11,7 @@ import BtnActions from '@/components/Geral/Button/BtnActions';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import { searchUserId } from '@/utils/searchUserId';
 
 export const ProdutosMenuMoreResponsive = ({
     showCheckboxes,
@@ -35,10 +36,15 @@ export const ProdutosMenuMoreResponsive = ({
 
     const gerarProdutos = async () => {
         if (idProduct.length === 0) return
+        const userId = searchUserId();
+        if (!userId) return
         console.log(idProduct)
 
         try {
-            await axios.get('https://erp-mkt.vercel.app/api/stock/mercadolivre/get', { params: { idProduct } });
+            await axios.get('https://erp-mkt.vercel.app/api/stock/mercadolivre/get', { 
+                params: { idProduct },
+                userId: userId
+            });
             setIsModalGerar(true);
         } catch (error) {
             console.error('Error fetching data: ', error);
