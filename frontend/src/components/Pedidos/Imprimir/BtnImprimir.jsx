@@ -82,7 +82,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
 
     // Adicionar título no topo da página
     const title = "DECLARAÇÃO DE CONTEÚDO";
-    const titleFontSize = 22;
+    const titleFontSize = 20;
     const titleWidth = estimateTextWidth(title, titleFontSize);
     const titleX = (width - titleWidth) / 2;
     const titleY = height - margin;
@@ -197,17 +197,18 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     centerText(`IDENTIFICAÇÃO DOS BENS`, margin, tableTop + cellPadding, fontSize, tableWidth);
 
     // Desenhar cabeçalhos das colunas
+    const colWidths = [30, 110, 220, 100, 40];
     const headers = ["N°", "SKU", "Descrição", "Variação", "QTD"];
     const rows = [
       [1, data.sku, data.description, data.variation, data.quantity.toString()]
     ];
 
     // Calcular larguras das colunas
-    const colWidths = headers.map((header, i) => {
-      const headerWidth = calculateTextWidth(header, fontSize);
-      const maxWidth = Math.max(headerWidth, ...rows.map(row => calculateTextWidth(row[i].toString(), fontSize)));
-      return maxWidth + 2 * cellPadding; // Adicionar padding
-    });
+    // const colWidths = headers.map((header, i) => {
+    //   const headerWidth = calculateTextWidth(header, fontSize);
+    //   const maxWidth = Math.max(headerWidth, ...rows.map(row => calculateTextWidth(row[i].toString(), fontSize)));
+    //   return maxWidth + 2 * cellPadding; // Adicionar padding
+    // });
 
     // Verificar se a largura total das colunas ultrapassa a largura da página
     const pageWidth = 595.28; // Largura da página A4 em pontos (8.27 pol * 72 pontos/pol)
@@ -289,8 +290,6 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     const userId = searchUserId();
     if (!userId) return;
 
-    console.log(shippingIdOrder);
-
     try {
       const pdfDoc = await PDFDocument.create();
 
@@ -303,23 +302,30 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         });
 
         if (response.status === 200) {
-          const pdfContent = new Uint8Array(response.data); // Cria uma cópia do ArrayBuffer
+          const pdfContent = new Uint8Array(response.data);
           const singlePdfDoc = await PDFDocument.load(pdfContent);
-          const copiedPages = await pdfDoc.copyPages(singlePdfDoc, singlePdfDoc.getPageIndices());
-          copiedPages.forEach((page, index) => {
+          const copiedPages = await pdfDoc.copyPages(singlePdfDoc, [0]);
+          for (const page of copiedPages) {
             const { width, height } = page.getSize();
-            const scale = Math.min(595.28 / width, 841.89 / height); // Escalar para preencher a página
-            page.scaleContent(scale, scale);
-            if (index === 0) {
-              // Ajustar a primeira página para ocupar todo o tamanho do papel
-              const scaledWidth = width * scale;
-              const scaledHeight = height * scale;
-              const xOffset = (595.28 - scaledWidth) / 2;
-              const yOffset = (841.89 - scaledHeight) / 2;
-              page.translateContent(xOffset, yOffset);
-            }
-            pdfDoc.addPage(page);
-          });
+            const pdfPage = pdfDoc.addPage();
+
+            // Embutir a página original no novo documento
+            const embeddedPage = await pdfDoc.embedPage(page);
+
+            const scale = 1.5;
+
+            const xOffset = (pdfPage.getWidth() - width * scale * 0.4) / 2;
+            const yOffset = (pdfPage.getHeight() - height * scale ) / 2;
+
+
+            // Desenhar a página original na posição centralizada
+            pdfPage.drawPage(embeddedPage, {
+              x: xOffset,
+              y: yOffset,
+              width: width * scale,
+              height: height * scale,
+            });
+          }
 
           // Usar pdfjsLib para extrair texto
           const loadingTask = pdfjsLib.getDocument({ data: pdfContent });
@@ -333,38 +339,30 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
               .map(item => item.str);
             pdfText += strings.join(' ');
           }
-          console.log(`PDF content: ${pdfText}`);
 
-          // const tableData = {
-          //   senderCep: '',
-          // };
+          const responseProduct = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/orderid-ready', {
+            params: {
+              shippingIds: shippingIdOrder,
+              userId: userId
+            }
+          });
+          console.log(responseProduct.data.orders);
+
+          const orderData = responseProduct.data.orders[0]; // Supondo que você esteja lidando com o primeiro pedido
 
           let tableData = {
-            senderName: 'Nome do remetente',
-            senderCpfCnpj: '123.456.789-00',
-            senderCep: '12345678',
-            recipientName: 'Nome do destinatário',
-            recipientCpfCnpj: '123.456.789-00',
-            recipientCep: '12345678',
-            sku: '1234567890',
-            description: 'Descrição do produto',
-            variation: 'Variação do produto',
-            quantity: 1,
-            total: 'R$ 100,00'
+            senderName: orderData.senderName || 'Nome do remetente',
+            senderCpfCnpj: orderData.senderCpfCnpj || '123.456.789-00',
+            senderCep: orderData.senderCep || '12345678',
+            recipientName: orderData.receiverName || 'Nome do destinatário',
+            recipientCpfCnpj: orderData.recipientCpfCnpj || '123.456.789-00',
+            recipientCep: orderData.recipientCep || '12345678',
+            sku: orderData.productSKU || '1234567890',
+            description: orderData.description || 'Descrição do produto que será impresso',
+            variation: orderData.variation || 'Variação do produto',
+            quantity: orderData.quantity || 1,
+            total: orderData.total || 'R$ 100,00'
           };
-
-          // filtrando texto
-          if (typeof pdfText === 'string') {
-            // filtrando texto
-            const cepMatch = pdfText.match(/CEP:\s*(\d{8})/);
-            if (cepMatch) {
-              tableData.senderCep = cepMatch[1];
-            }
-          } else {
-            console.error('pdfText está indefinido ou não é uma string');
-          }
-
-          console.log(tableData);
 
           await createTableInPdf(pdfDoc, tableData, [595.28, 841.89]); // Usar o tamanho da página original
         } else {
