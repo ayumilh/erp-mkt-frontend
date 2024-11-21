@@ -41,9 +41,11 @@ export const ProdutosMenuMoreResponsive = ({
         console.log(idProduct)
 
         try {
-            await axios.get('https://erp-mkt.vercel.app/api/stock/mercadolivre/get', { 
-                params: { idProduct },
-                userId: userId
+            await axios.get('https://erp-mkt.vercel.app/api/stock/mercadolivre/get', {
+                params: {
+                    idProduct: idProduct,
+                    userId: userId
+                }
             });
             setIsModalGerar(true);
         } catch (error) {

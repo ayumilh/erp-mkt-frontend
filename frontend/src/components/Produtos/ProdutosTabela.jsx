@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ModalDetailsProdutos from "./Actions/ModalDetailsProdutos";
-import ModalDetailsProdutosMouseLeave from "./Actions/ModalDetailsProdutosMouseLeave";
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import ModalGerarProdutos from "./Actions/ModalGerarProdutos";
@@ -18,8 +17,6 @@ import { ProdutosMenuMoreResponsive } from "./Actions/ProdutosMenuMoreResponsive
 const ProdutosTabela = ({ onFilterStatus }) => {
   const [products, setProducts] = useState([]);
   const [isModalTr, setIsModalTr] = useState(false);
-  const [isModalTrMouseLeave, setIsModalTrMouseLeave] = useState(false);
-  const [selectedSkuMouseLeave, setSelectedSkuMouseLeave] = useState(null);
   const [selectedSku, setSelectedSku] = useState(null);
   const [idProduct, setIdProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -68,18 +65,18 @@ const ProdutosTabela = ({ onFilterStatus }) => {
   // selecionar todos os checkboxes
   useEffect(() => {
     if (showCheckboxesAll) {
+      console.log(products)
       const allOrderIds = products.map(products => products.sku);
+      console.log(allOrderIds)
       setIdProduct(allOrderIds);
       setSelectedProducts(allOrderIds);
-    } else {
-      setIdProduct([]);
-      setSelectedProducts([]);
     }
   }, [showCheckboxesAll, products, setIdProduct]);
 
   const updateSelectedProducts = (isChecked, sku) => {
-    let updatedSelectedProducts;
+    if (!sku) return;
 
+    let updatedSelectedProducts;
     if (isChecked) {
       updatedSelectedProducts = [...selectedProducts, sku];
     } else {
@@ -106,34 +103,26 @@ const ProdutosTabela = ({ onFilterStatus }) => {
     const isChecked = event.target.checked;
 
     updateSelectedProducts(isChecked, sku);
-    updateShippingIdProducts(isChecked, sku);
+
+    if (showCheckboxesAll || isChecked) {
+      setIdProduct(prevItems => [...new Set([...prevItems, sku])]);
+    } else {
+      setIdProduct(prevItems => prevItems.filter(i => i !== sku));
+    }
   };
 
   const handleSelectAllChange = () => {
     setShowCheckboxesAll(!showCheckboxesAll);
   };
 
-
   const openProductDetailsModal = (sku) => {
     setSelectedSku(sku);
     setIsModalTr(true);
   };
 
-  const openProductDetailsModalMouseLeave = (sku) => {
-    setSelectedSkuMouseLeave(sku);
-    setIsModalTrMouseLeave(true);
-  };
-
   const closeModal = () => {
     setIsModalTr(false);
   };
-
-
-  const closeModalMouseLeave = () => {
-    setIsModalTrMouseLeave(false);
-    setSelectedSkuMouseLeave(null);
-  };
-
 
   const storeSkuAndOpenEditModal = (event, sku) => {
     event.stopPropagation();
@@ -267,8 +256,6 @@ const ProdutosTabela = ({ onFilterStatus }) => {
                 <tr
                   key={index}
                   className='border-b border-gray-200 dark:border-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-800'
-                  onMouseEnter={() => openProductDetailsModalMouseLeave(product.sku)}
-                  onMouseLeave={closeModalMouseLeave}
                 >
                   <td className="pl-4">
                     {!showCheckboxesAll && (
@@ -315,12 +302,6 @@ const ProdutosTabela = ({ onFilterStatus }) => {
                         }} />
                     </button>
                   </td>
-                  {isModalTrMouseLeave && selectedSkuMouseLeave === product.sku && (
-                    <ModalDetailsProdutosMouseLeave
-                      onClose={closeModalMouseLeave}
-                      selectedSku={selectedSkuMouseLeave}
-                    />
-                  )}
                 </tr>
               ))
             ) : (

@@ -7,7 +7,6 @@ import Image from 'next/image';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import EditIcon from '@mui/icons-material/Edit';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import ModalDetailsProdutosMouseLeave from './ModalDetailsProdutosMouseLeave';
 import Modal from '@mui/material/Modal';
 
 const ModalTableExpanded = ({ isOpen, handleClose, onFilterStatus }) => {
@@ -240,12 +239,6 @@ const ModalTableExpanded = ({ isOpen, handleClose, onFilterStatus }) => {
                         <EditIcon className="mr-1 h-4 md:h-5 w-4 md:w-5" />
                       </button>
                     </td>
-                    {isModalTrMouseLeave && selectedSkuMouseLeave === product.sku && (
-                      <ModalDetailsProdutosMouseLeave
-                        onClose={closeModalMouseLeave}
-                        selectedSku={selectedSkuMouseLeave}
-                      />
-                    )}
                   </tr>
                 ))
               ) : (

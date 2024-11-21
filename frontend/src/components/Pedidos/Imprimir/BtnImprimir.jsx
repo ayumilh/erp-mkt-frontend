@@ -183,7 +183,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     });
 
     // Identificação dos Bens
-    const tableTop = senderTop - maxHeight - 50;
+    const tableTop = senderTop - maxHeight - 35;
 
     // Desenhar cabeçalho da tabela "IDENTIFICAÇÃO DOS BENS"
     page.drawRectangle({
@@ -270,16 +270,16 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     };
 
     // Desenhar linha "Total" na parte inferior da tabela, alinhada com a coluna "QTD"
-    const totalY = yStart - totalHeight - cellHeight;
-    page.drawRectangle({
-      x: margin,
-      y: totalY,
-      width: tableWidth,
-      height: cellHeight,
-      borderColor: rgb(0, 0, 0),
-      borderWidth: 1,
-    });
-    rightAlignText(`Total: ${data.total}`, margin, totalY + cellPadding, fontSize, tableWidth);
+    // const totalY = yStart - totalHeight - cellHeight;
+    // page.drawRectangle({
+    //   x: margin,
+    //   y: totalY,
+    //   width: tableWidth,
+    //   height: cellHeight,
+    //   borderColor: rgb(0, 0, 0),
+    //   borderWidth: 1,
+    // });
+    // rightAlignText(`Total: ${data.total}`, margin, totalY + cellPadding, fontSize, tableWidth);
   };
 
   const imprimirPedido = async () => {
@@ -312,10 +312,10 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
             // Embutir a página original no novo documento
             const embeddedPage = await pdfDoc.embedPage(page);
 
-            const scale = 1.5;
+            const scale = 1.9;
 
-            const xOffset = (pdfPage.getWidth() - width * scale * 0.4) / 2;
-            const yOffset = (pdfPage.getHeight() - height * scale ) / 2;
+            const xOffset = (pdfPage.getWidth() - width * scale * 0.38) / 2;
+            const yOffset = (pdfPage.getHeight() - height * scale) / 1.1;
 
 
             // Desenhar a página original na posição centralizada
@@ -361,7 +361,6 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
             description: orderData.description || 'Descrição do produto que será impresso',
             variation: orderData.variation || 'Variação do produto',
             quantity: orderData.quantity || 1,
-            total: orderData.total || 'R$ 100,00'
           };
 
           await createTableInPdf(pdfDoc, tableData, [595.28, 841.89]); // Usar o tamanho da página original
