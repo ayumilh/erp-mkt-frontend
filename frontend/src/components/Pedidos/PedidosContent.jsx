@@ -33,7 +33,7 @@ const PedidosContent = () => {
         <ActionsHeader/>
       </div>
 
-      <div className='w-full flex flex-col items-center mt-7 lg:mb-10' style={{height: '1000px'}}>
+      <div className='w-full flex flex-col items-center mt-7 lg:mb-10'>
         <PedidosHeader setActiveTable={setActiveTable}/>
         <PedidosActionsFilter />
         {activeTable === 'Pedidos' && <PedidosTabela />}

@@ -121,7 +121,7 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
       case 'ready_to_ship':
         return 'bg-amber-200 text-amber-700';
         case 'delivered':
-          return 'bg-amber-200 text-amber-700';
+          return 'bg-green-200 text-green-700';
       default:
         return '';
     }
@@ -268,7 +268,7 @@ export default function EnviadosRow({ setOrder, setToggleShowCheckboxes, toggleS
                   </td>
                   <td className="px-3 py-3 md:py-4 text-sm font-medium text-start align-top">
                     <span className='text-emerald-500 text-sm'>Pago</span><br />
-                    <span className='whitespace-nowrap font-medium text-neutral-600'>{new Date(pedido.date_last_modified).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</span><br />
+                    <span className='whitespace-nowrap font-medium text-neutral-600 dark:text-gray-200'>{new Date(pedido.date_last_modified).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</span><br />
                     <span className='text-amber-500 font-medium text-sm'>Saída</span><br />
                     <span className='whitespace-nowrap font-medium text-neutral-600 dark:text-gray-200'>{new Date(pedido.date_created).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</span>
                   </td>

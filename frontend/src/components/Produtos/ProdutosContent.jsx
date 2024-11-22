@@ -23,7 +23,7 @@ const ProdutosContent = () => {
         <ActionsHeader/>
       </div>
 
-      <div className='w-full flex flex-col items-center mt-7 lg:mb-10' style={{height: '1000px'}}>
+      <div className='w-full flex flex-col items-center mt-7 lg:mb-10'>
         <ProdutosHeader/>
         <ProdutosActionsFilter onFilterChange={handleFilterChange}/>
         <ProdutosTabela onFilterStatus={filterStatus}/>

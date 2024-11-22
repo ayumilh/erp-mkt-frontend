@@ -98,7 +98,7 @@ function BtnDropdown({ onClickImprimir }) {
                                     className="ml-2"
                                     aria-label="Configurações de Etiqueta"
                                 >
-                                    <FaCog className="text-base text-neutral-700 hover:text-black dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-800" />
+                                    <FaCog className="text-base text-neutral-700 hover:text-black dark:text-gray-300 dark:hover:text-white transition duration-300 ease-in-out" />
                                 </button>
                             </BootstrapTooltip>
                         </div>
@@ -138,7 +138,7 @@ function BtnDropdown({ onClickImprimir }) {
                                     className="ml-2"
                                     aria-label="Informações"
                                 >
-                                    <FaInfoCircle className="text-base text-neutral-700 hover:text-black dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-800" />
+                                    <FaInfoCircle className="text-base text-neutral-700 hover:text-black dark:text-gray-300 dark:hover:text-white transition duration-300 ease-in-out" />
                                 </button>
                             </BootstrapTooltip>
                         </div>
@@ -171,7 +171,7 @@ function BtnDropdown({ onClickImprimir }) {
                                     className="ml-2"
                                     aria-label="Configurações de Pick List"
                                 >
-                                    <FaCog className="text-base text-neutral-700 hover:text-black dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-800" />
+                                    <FaCog className="text-base text-neutral-700 hover:text-black dark:text-gray-300 dark:hover:text-white transition duration-300 ease-in-out" />
                                 </button>
                             </BootstrapTooltip>
                         </div>
