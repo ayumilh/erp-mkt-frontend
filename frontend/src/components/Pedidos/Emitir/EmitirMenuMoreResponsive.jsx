@@ -28,7 +28,7 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
         if (!userId) return;
 
         console.log('shippingIdOrder', shippingIdOrder);
-  
+
         try {
             const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/issueNote', {
                 ordersBatch: shippingIdOrder,
@@ -85,22 +85,21 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
                     </div>
                 )}
             </>) : (<>
-                <DropdownSelectOrAll
+                {/* <DropdownSelectOrAll
                     title={'Emitir'}
                     setShowCheckboxes={setShowCheckboxes}
                     showCheckboxes={showCheckboxes}
                     setShowCheckboxesAll={setShowCheckboxesAll}
                     showCheckboxesAll={showCheckboxesAll}
-                />
+                /> */}
                 <BtnBorder title="Filtrar" />
                 <BtnBorder title="Editar em massa" />
             </>)}
 
-            {(showCheckboxes || showCheckboxesAll) &&
-                <div className='left-12'>
-                    <BtnActions title="Emitir" onClick={emitirPedidos} color="ativado" padding="xs" rounded="lg" />
-                </div>
-            }
+            <div className='left-12'>
+                <BtnActions title="Emitir" onClick={emitirPedidos} color="ativado" padding="xs" rounded="lg" />
+            </div>
+
             {statusRequestSync === true && <SuccessNotification message="Pedidos emitidos com sucesso" />}
             {statusRequestSync === false && <ErrorNotification message="Erro ao emitir produtos" />}
         </div>

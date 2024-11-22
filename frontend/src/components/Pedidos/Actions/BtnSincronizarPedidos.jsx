@@ -23,6 +23,7 @@ export const BtnSincronizarPedidos = ({ statusRequestSync, setStatusRequestSync 
                 });
                 setStatusRequestSync(true);
                 setLoading(false);
+                window.location.reload();
                 return;
             } catch (error) {
                 if (attempt === maxRetries) {

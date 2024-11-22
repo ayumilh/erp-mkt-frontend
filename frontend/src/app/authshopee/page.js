@@ -28,7 +28,12 @@ export default function Authshopee() {
       if (!userId) return
 
       try {
-        const res = await axios.post('https://erp-mkt.vercel.app/api/shopee/redirect', { code, nome_loja, userId, shop_id });
+        const res = await axios.post('https://erp-mkt.vercel.app/api/shopee/redirect', { 
+          code, 
+          nome_loja, 
+          userId, 
+          shop_id 
+        });
         if (res.status === 200) {
           setResData(res.data);
           setStatusRequestCodeShopee(true);

@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 
 const SuccessNotification = ({ message }) => {
   const [isOpen, setIsOpen] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsOpen(false);
+    }, 4000); 
+
+    return () => clearTimeout(timer);
+  }, []);
 
   if (!isOpen) {
     return null;
@@ -19,7 +27,7 @@ const SuccessNotification = ({ message }) => {
           <p className="font-bold">Sucesso!</p>
         </div>
         <button onClick={() => setIsOpen(false)} className="top-0 right-0 px-4 py-3">
-          <CloseIcon className="h-4 w-4 text-green-700" />
+          <CloseIcon fontSize='small' className="text-green-700" />
         </button>
       </div>
       <p>{message}</p>

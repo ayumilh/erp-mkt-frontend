@@ -1,16 +1,25 @@
-import { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import { searchUserId } from '@/utils/searchUserId';
 import axios from "axios";
-import BtnActions from '@/components/Geral/Button/BtnActions';
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
 import { PDFDocument, rgb } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
+import BtnDropdown from "./BtnDropdown";
+import ErrorImprimirEmpty from "@/components/Geral/Notifications/ErrorImprimirEmpty";
+
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 
 export const BtnImprimir = ({ shippingIdOrder }) => {
   const [statusRequestSync, setStatusRequestSync] = useState(null);
+  const [shippingIdEmpty, setShippingIdEmpty] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
 
   const breakWords = (text, maxWidth, fontSize) => {
     const words = text.split(' ');
@@ -284,7 +293,10 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
 
   const imprimirPedido = async () => {
     if (!shippingIdOrder || shippingIdOrder.length === 0) {
+      setShippingIdEmpty(true);
       return;
+    } else{
+      setShippingIdEmpty(false);
     }
 
     const userId = searchUserId();
@@ -293,9 +305,11 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     try {
       const pdfDoc = await PDFDocument.create();
 
+      const uniqueShippingIdOrder = [...new Set(shippingIdOrder)];
+
       for (const id of shippingIdOrder) {
         const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {
-          shipping_id: id,
+          shipping_id: uniqueShippingIdOrder,
           userId: userId
         }, {
           responseType: 'arraybuffer'
@@ -346,9 +360,8 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
               userId: userId
             }
           });
-          console.log(responseProduct.data.orders);
 
-          const orderData = responseProduct.data.orders[0]; // Supondo que você esteja lidando com o primeiro pedido
+          const orderData = responseProduct.data.orders[0];
 
           let tableData = {
             senderName: orderData.senderName || 'Nome do remetente',
@@ -375,8 +388,10 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
       const blob = new Blob([pdfBytes], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
-      window.open(url, '_blank');
-      setStatusRequestSync(true);
+      setStatusRequestSync(true);      
+      setTimeout(() => {
+        window.open(url, '_blank');
+      }, 1500)
     } catch (error) {
       console.error(`Error: ${error}`);
       setStatusRequestSync(false);
@@ -386,11 +401,12 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
   return (
     <div>
       <div className='left-12'>
-        <BtnActions title="Imprimir" onClick={imprimirPedido} color="ativado" padding="xs" rounded="lg" text="xs" />
+        <BtnDropdown onClickImprimir={imprimirPedido} />
       </div>
 
       {statusRequestSync === true && <SuccessNotification message="Pedidos imprimidos com sucesso" />}
       {statusRequestSync === false && <ErrorNotification message="Erro ao imprimir produtos" />}
+      {shippingIdEmpty === true && <ErrorImprimirEmpty />}
     </div>
   )
 }

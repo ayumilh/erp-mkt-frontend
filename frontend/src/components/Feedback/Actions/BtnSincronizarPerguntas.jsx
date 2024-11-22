@@ -22,6 +22,7 @@ export const BtnSincronizarPerguntas = () => {
     });
       if (response.status === 200) {
         setStatusRequestSync(true);
+        window.location.reload();
       }
     } catch (error) {
       console.error(error);
