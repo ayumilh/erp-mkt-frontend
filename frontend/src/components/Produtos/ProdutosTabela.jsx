@@ -14,7 +14,7 @@ import ModalGerarProdutos from "./Actions/ModalGerarProdutos";
 import { ProdutosMenuMoreResponsive } from "./Actions/ProdutosMenuMoreResponsive";
 
 
-const ProdutosTabela = ({ onFilterStatus }) => {
+const ProdutosTabela = ({ onFilterStatus, route }) => {
   const [products, setProducts] = useState([]);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedSku, setSelectedSku] = useState(null);
@@ -32,9 +32,16 @@ const ProdutosTabela = ({ onFilterStatus }) => {
       if (!userId) return;
 
       try {
-        const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products", {
-          params: { userId }
-        });
+        let response;
+        if (route === 'mercadolivre') {
+          response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products", {
+            params: { userId }
+          });
+        } else if (route === 'shopee'){
+          response = await axios.get("https://erp-mkt.vercel.app/api/shopee/products", {
+            params: { userId }
+          });
+        }
         if (response.data && Array.isArray(response.data.products)) {
           const restructuredData = response.data.products.map((product) => {
             return {
@@ -58,16 +65,13 @@ const ProdutosTabela = ({ onFilterStatus }) => {
       }
     };
     fetchProducts();
-
-  }, []);
+  }, [route]);
 
 
   // selecionar todos os checkboxes
   useEffect(() => {
     if (showCheckboxesAll) {
-      console.log(products)
       const allOrderIds = products.map(products => products.sku);
-      console.log(allOrderIds)
       setIdProduct(allOrderIds);
       setSelectedProducts(allOrderIds);
     }
@@ -85,17 +89,6 @@ const ProdutosTabela = ({ onFilterStatus }) => {
 
     setSelectedProducts(updatedSelectedProducts);
     setShowCheckboxes(updatedSelectedProducts.length > 0);
-  };
-
-  const updateShippingIdProducts = (isChecked, sku) => {
-    let productArray = Array.isArray(sku) ? sku : [sku];
-    const productIds = productArray.map(sku => sku.sku);
-
-    if (showCheckboxesAll || isChecked) {
-      setIdProduct(prevItems => [...prevItems, productIds]);
-    } else {
-      setIdProduct(prevItems => prevItems.filter(i => !productIds.includes(i)));
-    }
   };
 
   const handleCheckboxChange = (event, sku) => {

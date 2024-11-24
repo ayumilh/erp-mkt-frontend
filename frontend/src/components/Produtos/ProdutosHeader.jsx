@@ -4,8 +4,9 @@ import BtnActive from "../Geral/Button/BtnActive";
 import BtnRoute from "../Geral/Button/BtnRoute";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { BtnSincronizarProdutos } from './Actions/BtnSincronizarProdutos';
+import MarketplaceContent from './MarketplaceContent';
 
-const ProdutosHeader = () => {
+const ProdutosHeader = ({setRoute}) => {
     const [isOpenMore, setIsOpenMore] = useState(false);
     const [isVertical, setIsVertical] = useState(false);
     const [statusRequestSync, setStatusRequestSync] = useState('');
@@ -34,9 +35,10 @@ const ProdutosHeader = () => {
     return (
         <div className="w-full flex flex-col xl:flex-row justify-between mb-6">
             <div className="flex gap-3">
-                <BtnRoute route="/produtos" size='full' btn='base' txt='base' activePage={true}>
+                <MarketplaceContent setRoute={setRoute}/>
+                {/* <BtnRoute route="/produtos" size='full' btn='base' txt='base' activePage={true}>
                     Ativos
-                </BtnRoute>
+                </BtnRoute> */}
                 <BtnRoute route="/produtos" size='full' btn='base' txt='base'>
                     Produtos do armazém
                 </BtnRoute>
