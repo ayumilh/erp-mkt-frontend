@@ -208,16 +208,6 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     // Desenhar cabeçalhos das colunas
     const colWidths = [30, 110, 220, 100, 40];
     const headers = ["N°", "SKU", "Descrição", "Variação", "QTD"];
-    const rows = [
-      [1, data.sku, data.description, data.variation, data.quantity.toString()]
-    ];
-
-    // Calcular larguras das colunas
-    // const colWidths = headers.map((header, i) => {
-    //   const headerWidth = calculateTextWidth(header, fontSize);
-    //   const maxWidth = Math.max(headerWidth, ...rows.map(row => calculateTextWidth(row[i].toString(), fontSize)));
-    //   return maxWidth + 2 * cellPadding; // Adicionar padding
-    // });
 
     // Verificar se a largura total das colunas ultrapassa a largura da página
     const pageWidth = 595.28; // Largura da página A4 em pontos (8.27 pol * 72 pontos/pol)
@@ -241,22 +231,22 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
       });
       centerText(header, margin + colWidths.slice(0, i).reduce((a, b) => a + b, 0), tableTop - cellHeight + cellPadding, fontSize, colWidths[i]);
     });
-
+    
     // Desenhar dados da tabela
-    const yStart = tableTop - 2 * cellHeight;
-    let totalHeight = 0; // Variável para armazenar a altura total das linhas
-    rows.forEach((row, rowIndex) => {
+    let yStart = tableTop - 2 * cellHeight;   
+    data.items.forEach((item, index) => {
+      const row = [index + 1, item.sku || '', item.description || '', item.variation || '', item.quantity.toString()];
+      
       // Calcular a altura máxima necessária para a linha
       const maxCellHeight = Math.max(...row.map((cell, cellIndex) => {
-        const cellText = cell.toString();
+        const cellText = cell ? cell.toString() : '';
         const lines = breakWords(cellText, colWidths[cellIndex] - 2 * cellPadding, fontSize);
         return (fontSize + cellPadding * 2) * lines.length;
-      }));
-      totalHeight += maxCellHeight; // Acumular a altura total das linhas
-
+      })) * 1.1;
+    
       row.forEach((cell, cellIndex) => {
-        const y = yStart - rowIndex * maxCellHeight;
-        const cellText = cell.toString();
+        const y = yStart - index * maxCellHeight;
+        const cellText = cell ? cell.toString() : '';
         const lines = breakWords(cellText, colWidths[cellIndex] - 2 * cellPadding, fontSize);
         page.drawRectangle({
           x: margin + colWidths.slice(0, cellIndex).reduce((a, b) => a + b, 0),
@@ -272,11 +262,11 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
       });
     });
 
-    const rightAlignText = (text, x, y, fontSize, cellWidth) => {
-      const textWidth = estimateTextWidth(text, fontSize);
-      const rightAlignedX = x + cellWidth - textWidth;
-      page.drawText(text, { x: rightAlignedX, y, size: fontSize, color: rgb(0, 0, 0) });
-    };
+    // const rightAlignText = (text, x, y, fontSize, cellWidth) => {
+    //   const textWidth = estimateTextWidth(text, fontSize);
+    //   const rightAlignedX = x + cellWidth - textWidth;
+    //   page.drawText(text, { x: rightAlignedX, y, size: fontSize, color: rgb(0, 0, 0) });
+    // };
 
     // Desenhar linha "Total" na parte inferior da tabela, alinhada com a coluna "QTD"
     // const totalY = yStart - totalHeight - cellHeight;
@@ -295,7 +285,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     if (!shippingIdOrder || shippingIdOrder.length === 0) {
       setShippingIdEmpty(true);
       return;
-    } else{
+    } else {
       setShippingIdEmpty(false);
     }
 
@@ -306,6 +296,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
       const pdfDoc = await PDFDocument.create();
 
       const uniqueShippingIdOrder = [...new Set(shippingIdOrder)];
+      const processedShippingIds = new Set();
 
       for (const id of shippingIdOrder) {
         const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {
@@ -319,6 +310,9 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
           const pdfContent = new Uint8Array(response.data);
           const singlePdfDoc = await PDFDocument.load(pdfContent);
           const copiedPages = await pdfDoc.copyPages(singlePdfDoc, [0]);
+
+          let pageIndex = 0;
+
           for (const page of copiedPages) {
             const { width, height } = page.getSize();
             const pdfPage = pdfDoc.addPage();
@@ -328,9 +322,8 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
 
             const scale = 1.9;
 
-            const xOffset = (pdfPage.getWidth() - width * scale * 0.38) / 2;
+            const xOffset = (pdfPage.getWidth() - (width - 150) * scale * 0.4) / 2;
             const yOffset = (pdfPage.getHeight() - height * scale) / 1.1;
-
 
             // Desenhar a página original na posição centralizada
             pdfPage.drawPage(embeddedPage, {
@@ -339,6 +332,8 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
               width: width * scale,
               height: height * scale,
             });
+
+            pageIndex++;
           }
 
           // Usar pdfjsLib para extrair texto
@@ -360,23 +355,53 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
               userId: userId
             }
           });
+          console.log(responseProduct.data.orders);
 
-          const orderData = responseProduct.data.orders[0];
-
-          let tableData = {
-            senderName: orderData.senderName || 'Nome do remetente',
-            senderCpfCnpj: orderData.senderCpfCnpj || '123.456.789-00',
-            senderCep: orderData.senderCep || '12345678',
-            recipientName: orderData.receiverName || 'Nome do destinatário',
-            recipientCpfCnpj: orderData.recipientCpfCnpj || '123.456.789-00',
-            recipientCep: orderData.recipientCep || '12345678',
-            sku: orderData.productSKU || '1234567890',
-            description: orderData.description || 'Descrição do produto que será impresso',
-            variation: orderData.variation || 'Variação do produto',
-            quantity: orderData.quantity || 1,
-          };
-
-          await createTableInPdf(pdfDoc, tableData, [595.28, 841.89]); // Usar o tamanho da página original
+          const restructedData = responseProduct.data.orders.map(order => {
+            return {
+              senderName: order.senderName || '',
+              recipientCep: order.zipCode || '',
+              recipientName: order.receiverName || '',
+              description: order.Description || '',
+              sku: order.productSKU || '',
+              variation: order.variation || '',
+              quantity: order.quantity || 0,
+              shipping_id: order.shipping_id || 0,
+            };
+          });
+          
+          // Agrupar dados por shipping_id
+          const groupedData = restructedData.reduce((acc, order) => {
+            if (!acc[order.shipping_id]) {
+              acc[order.shipping_id] = [];
+            }
+            acc[order.shipping_id].push(order);
+            return acc;
+          }, {});
+          
+          // Criar uma tabela para cada grupo de shipping_id
+          for (const shippingId in groupedData) {
+            if (!processedShippingIds.has(shippingId)) {
+              const orders = groupedData[shippingId];
+              let tableData = {
+                senderName: orders[0].senderName || '',
+                senderCpfCnpj: orders[0].senderCpfCnpj || '',
+                senderCep: orders[0].senderCep || '',
+                recipientName: orders[0].recipientName || '',
+                recipientCpfCnpj: orders[0].recipientCpfCnpj || '',
+                recipientCep: orders[0].recipientCep || '',
+                items: orders.map(order => ({
+                  sku: order.sku || '',
+                  description: order.description || '',
+                  variation: order.variation || '',
+                  quantity: order.quantity || 0,
+                }))
+              };
+          
+              await createTableInPdf(pdfDoc, tableData);
+              processedShippingIds.add(shippingId); // Marcar o shipping_id como já processado
+            }
+          }
         } else {
           console.error(`Erro ao imprimir pedido ${id}`);
           setStatusRequestSync(false);
@@ -388,10 +413,10 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
       const blob = new Blob([pdfBytes], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
-      setStatusRequestSync(true);      
+      setStatusRequestSync(true);
       setTimeout(() => {
         window.open(url, '_blank');
-      }, 1500)
+      }, 1000)
     } catch (error) {
       console.error(`Error: ${error}`);
       setStatusRequestSync(false);
