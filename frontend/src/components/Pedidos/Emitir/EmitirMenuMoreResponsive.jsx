@@ -7,6 +7,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { DropdownSelectOrAll } from '@/components/Geral/Dropdown/DropdownSelectOrAll';
 import BtnActions from '@/components/Geral/Button/BtnActions';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
+import ErrorImprimirEmpty from '@/components/Geral/Notifications/ErrorImprimirEmpty';
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
 
@@ -15,6 +16,7 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const [isOpenMenu, setIsOpenMenu] = useState(false);
+    const [shippingIdEmpty, setShippingIdEmpty] = useState(false);
     const [statusRequestSync, setStatusRequestSync] = useState(null);
 
     const handleOpenMenu = () => {
@@ -22,7 +24,12 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
     }
 
     const emitirPedidos = async () => {
-        if (!shippingIdOrder || shippingIdOrder.length === 0) return
+        if (!shippingIdOrder || shippingIdOrder.length === 0) {
+            setShippingIdEmpty(true);
+            return
+        } else {
+            setShippingIdEmpty(false);
+        }
 
         const userId = searchUserId();
         if (!userId) return;
@@ -97,11 +104,12 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
             </>)}
 
             <div className='left-12'>
-                <BtnActions title="Emitir" onClick={emitirPedidos} color="ativado" padding="xs" rounded="lg" />
+                <BtnActions title="Emitir nota fiscal" onClick={emitirPedidos} color="ativado" padding="xs" rounded="lg" />
             </div>
 
             {statusRequestSync === true && <SuccessNotification message="Pedidos emitidos com sucesso" />}
             {statusRequestSync === false && <ErrorNotification message="Erro ao emitir produtos" />}
+            {shippingIdEmpty === true && <ErrorImprimirEmpty />}
         </div>
     )
 }

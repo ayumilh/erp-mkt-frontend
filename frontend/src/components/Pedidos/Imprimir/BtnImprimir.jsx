@@ -15,6 +15,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 export const BtnImprimir = ({ shippingIdOrder }) => {
   const [statusRequestSync, setStatusRequestSync] = useState(null);
   const [shippingIdEmpty, setShippingIdEmpty] = useState(false);
+  const [isModalConfigOpen, setIsModalConfigOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -425,9 +426,10 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
   return (
     <div>
       <div className='left-12'>
-        <BtnDropdown onClickImprimir={imprimirPedido} />
+        <BtnDropdown onClickImprimir={imprimirPedido} setIsModalConfigOpen={setIsModalConfigOpen} />
       </div>
-      {/* <ConfigModal /> */}
+
+      <ConfigModal isOpen={isModalConfigOpen} setIsOpen={setIsModalConfigOpen} />
 
       {statusRequestSync === true && <SuccessNotification message="Pedidos imprimidos com sucesso" />}
       {statusRequestSync === false && <ErrorNotification message="Erro ao imprimir produtos" />}

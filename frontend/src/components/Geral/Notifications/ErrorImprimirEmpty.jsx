@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from 'react';
 import ErrorIcon from '@mui/icons-material/Error';
 

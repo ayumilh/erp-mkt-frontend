@@ -4,14 +4,11 @@ import { FaCog, FaInfoCircle } from 'react-icons/fa';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CircularProgress from '@mui/material/CircularProgress';
 import { styled } from '@mui/material/styles';
-import ConfigModal from '../../Config/Imprimir/ConfigModal';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 
-function BtnDropdown({ onClickImprimir }) {
+function BtnDropdown({ onClickImprimir, setIsModalConfigOpen }) {
     const [isOpen, setIsOpen] = useState(false)
     const [loading, setLoading] = useState(false);
-
-    const [isModalConfigOpen, setIsModalConfigOpen] = useState(false);
 
     const openModalConfig = () => {
       setIsModalConfigOpen(true);
@@ -114,7 +111,6 @@ function BtnDropdown({ onClickImprimir }) {
                                 </button>
                             </BootstrapTooltip>
                         </div>
-                            {/* <ConfigModal isOpen={isModalConfigOpen} onClose={closeModalConfig} /> */}
 
                         <div
                             className='flex items-center px-4 py-2 w-full hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-800 transition duration-300 ease-in-out'

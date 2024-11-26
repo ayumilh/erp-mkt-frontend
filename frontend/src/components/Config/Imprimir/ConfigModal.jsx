@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ConfigModal = () => {
-  // if (!isOpen) return null;
+const ConfigModal = ({ isOpen, setIsOpen }) => {
+  if (!isOpen) return null;
 
   return (
     <div
@@ -13,6 +13,7 @@ const ConfigModal = () => {
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold text-neutral-800 dark:text-gray-300">Configuração de impressão</h2>
           <button
+            onClick={() => setIsOpen(false)}
             className="text-neutral-800 dark:text-gray-200 hover:text-gray-600"
           >
             <svg
