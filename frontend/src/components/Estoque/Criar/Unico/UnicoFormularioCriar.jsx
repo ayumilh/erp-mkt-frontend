@@ -667,7 +667,7 @@ export default function CriarProdutoUnicoForm() {
               onChange={(e) => setUnidade(e.target.value)}
               value={Unidade || ""}
               name='Unidade'
-              className="peer rounded-sm border w-full px-3 py-2 font-medium text-sm text-neutral-700 dark:text-gray-200 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out"
+              className="peer rounded-sm border w-full px-3 py-2 font-medium text-sm text-neutral-700 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out"
             >
               <option value="">Selecione uma unidade</option>
               <option value="Un">Unidade (Un)</option>

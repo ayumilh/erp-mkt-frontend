@@ -5,6 +5,7 @@ import SuccessNotification from '@/components/Geral/Notifications/SuccessNotific
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
 import { PDFDocument, rgb } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
+import ConfigModal from "@/components/Config/Imprimir/ConfigModal";
 import BtnDropdown from "./BtnDropdown";
 import ErrorImprimirEmpty from "@/components/Geral/Notifications/ErrorImprimirEmpty";
 
@@ -288,43 +289,42 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     } else {
       setShippingIdEmpty(false);
     }
-
+  
     const userId = searchUserId();
     if (!userId) return;
-
+  
     try {
       const pdfDoc = await PDFDocument.create();
-
+  
       const uniqueShippingIdOrder = [...new Set(shippingIdOrder)];
       const processedShippingIds = new Set();
-
-      for (const id of shippingIdOrder) {
+  
+      for (const id of uniqueShippingIdOrder) {
         const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {
-          shipping_id: uniqueShippingIdOrder,
+          shipping_id: id,
           userId: userId
         }, {
           responseType: 'arraybuffer'
         });
-
+  
         if (response.status === 200) {
           const pdfContent = new Uint8Array(response.data);
           const singlePdfDoc = await PDFDocument.load(pdfContent);
           const copiedPages = await pdfDoc.copyPages(singlePdfDoc, [0]);
-
-          let pageIndex = 0;
-
+  
+          // Adicionar a etiqueta ao documento
           for (const page of copiedPages) {
             const { width, height } = page.getSize();
             const pdfPage = pdfDoc.addPage();
-
+  
             // Embutir a página original no novo documento
             const embeddedPage = await pdfDoc.embedPage(page);
-
+  
             const scale = 1.9;
-
+  
             const xOffset = (pdfPage.getWidth() - (width - 150) * scale * 0.4) / 2;
             const yOffset = (pdfPage.getHeight() - height * scale) / 1.1;
-
+  
             // Desenhar a página original na posição centralizada
             pdfPage.drawPage(embeddedPage, {
               x: xOffset,
@@ -332,10 +332,8 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
               width: width * scale,
               height: height * scale,
             });
-
-            pageIndex++;
           }
-
+  
           // Usar pdfjsLib para extrair texto
           const loadingTask = pdfjsLib.getDocument({ data: pdfContent });
           const pdf = await loadingTask.promise;
@@ -348,15 +346,15 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
               .map(item => item.str);
             pdfText += strings.join(' ');
           }
-
+  
           const responseProduct = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/orderid-ready', {
             params: {
-              shippingIds: shippingIdOrder,
+              shippingIds: [id],
               userId: userId
             }
           });
           console.log(responseProduct.data.orders);
-
+  
           const restructedData = responseProduct.data.orders.map(order => {
             return {
               senderName: order.senderName || '',
@@ -369,7 +367,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
               shipping_id: order.shipping_id || 0,
             };
           });
-          
+  
           // Agrupar dados por shipping_id
           const groupedData = restructedData.reduce((acc, order) => {
             if (!acc[order.shipping_id]) {
@@ -378,7 +376,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
             acc[order.shipping_id].push(order);
             return acc;
           }, {});
-          
+  
           // Criar uma tabela para cada grupo de shipping_id
           for (const shippingId in groupedData) {
             if (!processedShippingIds.has(shippingId)) {
@@ -397,7 +395,8 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
                   quantity: order.quantity || 0,
                 }))
               };
-          
+  
+              // Adicionar a tabela ao documento
               await createTableInPdf(pdfDoc, tableData);
               processedShippingIds.add(shippingId); // Marcar o shipping_id como já processado
             }
@@ -408,11 +407,11 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
           return;
         }
       }
-
+  
       const pdfBytes = await pdfDoc.save();
       const blob = new Blob([pdfBytes], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
-
+  
       setStatusRequestSync(true);
       setTimeout(() => {
         window.open(url, '_blank');
@@ -428,6 +427,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
       <div className='left-12'>
         <BtnDropdown onClickImprimir={imprimirPedido} />
       </div>
+      {/* <ConfigModal /> */}
 
       {statusRequestSync === true && <SuccessNotification message="Pedidos imprimidos com sucesso" />}
       {statusRequestSync === false && <ErrorNotification message="Erro ao imprimir produtos" />}
