@@ -7,8 +7,7 @@ import { PDFDocument, rgb } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import ConfigModal from "@/components/Config/Imprimir/ConfigModal";
 import BtnDropdown from "./BtnDropdown";
-import ErrorImprimirEmpty from "@/components/Geral/Notifications/ErrorImprimirEmpty";
-
+import ErrorEmpty from "@/components/Geral/Notifications/ErrorEmpty";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 
@@ -433,7 +432,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
 
       {statusRequestSync === true && <SuccessNotification message="Pedidos imprimidos com sucesso" />}
       {statusRequestSync === false && <ErrorNotification message="Erro ao imprimir produtos" />}
-      {shippingIdEmpty === true && <ErrorImprimirEmpty />}
+      {shippingIdEmpty === true && <ErrorEmpty title='pedidos' onClose={ () => setShippingIdEmpty(false)} />}
     </div>
   )
 }

@@ -7,9 +7,10 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { DropdownSelectOrAll } from '@/components/Geral/Dropdown/DropdownSelectOrAll';
 import BtnActions from '@/components/Geral/Button/BtnActions';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
-import ErrorImprimirEmpty from '@/components/Geral/Notifications/ErrorImprimirEmpty';
+import ErrorEmpty from '@/components/Geral/Notifications/ErrorEmpty';
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
+import BtnEmitirPedidos from './BtnEmitirPedidos';
 
 
 export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, setShowCheckboxes, setShowCheckboxesAll, shippingIdOrder }) => {
@@ -67,6 +68,10 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
 
     return (
         <div className="relative border-l-indigo-200 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 top-0 left-0 z-40 bg-primaria-900 dark:bg-dark-primaria-900" ref={menuMoreVertRef}>
+            <div className='left-12'>
+                <BtnEmitirPedidos onClick={emitirPedidos} />
+            </div>
+
             {isMobile ? (<>
                 <button onClick={handleOpenMenu}>
                     <MoreVertIcon
@@ -103,13 +108,9 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
                 <BtnBorder title="Editar em massa" />
             </>)}
 
-            <div className='left-12'>
-                <BtnActions title="Emitir nota fiscal" onClick={emitirPedidos} color="ativado" padding="xs" rounded="lg" />
-            </div>
-
             {statusRequestSync === true && <SuccessNotification message="Pedidos emitidos com sucesso" />}
-            {statusRequestSync === false && <ErrorNotification message="Erro ao emitir produtos" />}
-            {shippingIdEmpty === true && <ErrorImprimirEmpty />}
+            {statusRequestSync === false && <ErrorNotification message="Erro ao emitir pedidos" />}
+            {shippingIdEmpty === true && <ErrorEmpty title='pedidos' onClose={() => setShippingIdEmpty(false)} />}
         </div>
     )
 }

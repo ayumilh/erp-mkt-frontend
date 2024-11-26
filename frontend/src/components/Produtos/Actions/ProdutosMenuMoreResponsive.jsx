@@ -9,9 +9,11 @@ import ModalTableExpanded from '@/components/Produtos/Actions/ModalTableExpanded
 import { DropdownSelectOrAll } from '@/components/Geral/Dropdown/DropdownSelectOrAll';
 import BtnActions from '@/components/Geral/Button/BtnActions';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
+import ErrorEmpty from "@/components/Geral/Notifications/ErrorEmpty";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { searchUserId } from '@/utils/searchUserId';
+import BtnGerarProdutos from './BtnGerarProdutos';
 
 export const ProdutosMenuMoreResponsive = ({
     showCheckboxes,
@@ -28,6 +30,7 @@ export const ProdutosMenuMoreResponsive = ({
 }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+    const [productIdEmpty, setProductIdEmpty] = useState(false);
     const [isOpenMenu, setIsOpenMenu] = useState(false);
 
     const handleOpenMenu = () => {
@@ -35,10 +38,15 @@ export const ProdutosMenuMoreResponsive = ({
     }
 
     const gerarProdutos = async () => {
-        if (idProduct.length === 0) return
+        if (!idProduct || idProduct.length === 0) {
+            setProductIdEmpty(true);
+            return
+        } else {
+            setProductIdEmpty(false);
+        }
+
         const userId = searchUserId();
         if (!userId) return
-        console.log(idProduct)
 
         try {
             await axios.get('https://erp-mkt.vercel.app/api/stock/mercadolivre/get', {
@@ -79,6 +87,10 @@ export const ProdutosMenuMoreResponsive = ({
 
     return (
         <div className="relative border-l-indigo-200 dark:bg-dark-primaria-900 w-full flex items-center justify-start pl-6 md:pl-4 py-4 gap-3 top-0 left-0 z-40" ref={menuMoreVertRef}>
+            <div className="left-12">
+                <BtnGerarProdutos onClick={gerarProdutos} />
+            </div>
+
             {isMobile ? (<>
                 <button onClick={handleOpenMenu}>
                     <MoreVertIcon
@@ -104,13 +116,13 @@ export const ProdutosMenuMoreResponsive = ({
                     </div>
                 )}
             </>) : (<>
-                <DropdownSelectOrAll
+                {/* <DropdownSelectOrAll
                     title={'Gerar produtos do armazém'}
                     setShowCheckboxes={setShowCheckboxes}
                     showCheckboxes={showCheckboxes}
                     setShowCheckboxesAll={setShowCheckboxesAll}
                     showCheckboxesAll={showCheckboxesAll}
-                />
+                /> */}
                 <BtnBorder title="Filtrar" />
                 <BtnBorder title="Editar em massa" />
                 <button onClick={handleOpenModal} className='md:hidden cursor-pointer transform active:-translate-y-1 active:scale-105 transition duration-700 ease-in-out'>
@@ -118,11 +130,6 @@ export const ProdutosMenuMoreResponsive = ({
                 </button>
             </>)}
 
-            {(showCheckboxes || showCheckboxesAll) &&
-                <div className="left-12">
-                    <BtnActions title="Gerar" onClick={gerarProdutos} color="ativado" padding="xs" text="sm" rounded="lg" />
-                </div>
-            }
 
             <div className="flex items-center gap-2 ml-auto">
                 <button onClick={handleOpenModal} className='md:hidden cursor-pointer transform active:-translate-y-1 active:scale-105 transition duration-700 ease-in-out'>
@@ -147,6 +154,7 @@ export const ProdutosMenuMoreResponsive = ({
                     <KeyboardArrowRightIcon className={currentPage === totalPages ? "opacity-50 dark:text-gray-200" : ""} />
                 </button>
             </div>
+            {productIdEmpty && <ErrorEmpty title='produtos' onClose={() => setProductIdEmpty(false)} />}
         </div>
     )
 }

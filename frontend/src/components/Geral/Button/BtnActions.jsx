@@ -27,6 +27,7 @@ const span = tv({
   variants: {
     text: {
       xs: 'text-xs',
+      sm: 'text-sm',
       base: 'text-base',
     },
     color: {
@@ -58,7 +59,7 @@ export default function BtnActions({title, onClick, padding, text, rounded, colo
       type="button"
       onClick={(event) => handleClick(event)}
       disabled={isLoading}
-      className={`${button({padding: padding, rounded: rounded, bg: color})} ${isLoading ? 'cursor-not-allowed' : ''}`}
+      className={`${button({padding: padding, rounded: rounded, bg: color, text:text})} ${isLoading ? 'cursor-not-allowed' : ''}`}
       >
        {isLoading ? (
           <span 
@@ -68,7 +69,7 @@ export default function BtnActions({title, onClick, padding, text, rounded, colo
           </span>
         ) : (
           <span 
-          className={`${span({color: color})} w-[72px] md:w-[120px]`} 
+          className={`${span({color: color, text:text})} w-[72px] md:w-[120px]`} 
           style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {title}
           </span>
