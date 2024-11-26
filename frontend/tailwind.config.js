@@ -37,7 +37,7 @@ module.exports = {
         },
         bgModal: 'rgba(0, 0, 0, 0.5)',
         dark: {
-          bg: "#1a202c",
+          bg: 'rgba(36, 36, 38)',
           primaria: {
             900: "#363638",
             800: "#4a5568",

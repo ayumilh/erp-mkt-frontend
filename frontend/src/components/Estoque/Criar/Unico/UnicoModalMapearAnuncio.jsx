@@ -60,15 +60,15 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
   };
 
   return (
-    <div className="bg-bgModal fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div className="bg-black bg-opacity-70 fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div className="fixed inset-0 bg-gray-700 bg-opacity-70 transition-opacity" aria-hidden="true"></div>
+        <div className="fixed inset-0 transition-opacity" aria-hidden="true"></div>
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
-          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div className="inline-block align-bottom bg-white dark:bg-dark-bg rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
+          <div className="bg-white dark:bg-dark-bg px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             {/* header */}
             <div className="modal-header flex justify-between items-center mb-4">
-              <h1 className='text-base text-neutral-700 font-semibold'>Mapear SKU do Anúncio</h1>
+              <h1 className='text-base text-neutral-700 dark:text-gray-200 font-semibold'>Mapear SKU do Anúncio</h1>
               <button type="button" onClick={onClose} className="bg-transparent border-0">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6 text-gray-600 hover:text-gray-800">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -81,9 +81,9 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
               <div className='flex flex-col gap-3 md:flex-row'>
                 <div className="flex w-full">
                   <select className="rounded p-2 w-full text-sm opacity-80 font-normal" name="lojas" id="lojas">
-                    <option className="text-sm opacity-80 font-normal" value="lojas">Lojas</option>
-                    <option className="text-sm opacity-80 font-normal" value="mercadoLivre">Mercado Livre</option>
-                    <option className="text-sm opacity-80 font-normal" value="magalu">Magalu</option>
+                    <option className="text-sm opacity-80 font-normal dark:text-gray-200" value="lojas">Lojas</option>
+                    <option className="text-sm opacity-80 font-normal dark:text-gray-200" value="mercadoLivre">Mercado Livre</option>
+                    <option className="text-sm opacity-80 font-normal dark:text-gray-200" value="magalu">Magalu</option>
                   </select>
                 </div>
 
@@ -92,15 +92,15 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
                   <input className="w-full rounded overflow-hidden text-sm font-normal pl-8 pr-3 py-2" type="text" placeholder="Pesquise por SKU" style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
                 </div>
               </div>
-              <div className='bg-primaria-800 rounded-2xl w-full h-[420px] flex flex-col mx-auto mt-5 lg:mx-0 overflow-x-auto'>
+              <div className='bg-primaria-800 dark:bg-dark-primaria-900 rounded-2xl w-full h-[420px] flex flex-col mx-auto mt-5 lg:mx-0 overflow-x-auto'>
                 <table className='table-auto min-w-full mt-4'>
                   <thead>
                     <tr>
                       <th className='pl-4'></th>
-                      <th className="pr-4 pl-6 py-2 md:py-5 text-sm font-semibold">Produtos</th>
-                      <th className="px-4 py-2 md:py-5 text-sm font-semibold">ID dos anúncios</th>
-                      <th className="px-4 py-2 md:py-5 text-sm font-semibold">Valor da variante</th>
-                      <th className="pr-6 pl-4 py-2 md:py-5 text-sm font-semibold text-center">Nome da loja</th>
+                      <th className="pr-4 pl-6 py-2 md:py-5 text-sm font-semibold dark:text-gray-200">Produtos</th>
+                      <th className="px-4 py-2 md:py-5 text-sm font-semibold dark:text-gray-200">ID dos anúncios</th>
+                      <th className="px-4 py-2 md:py-5 text-sm font-semibold dark:text-gray-200">Valor da variante</th>
+                      <th className="pr-6 pl-4 py-2 md:py-5 text-sm font-semibold text-center dark:text-gray-200">Nome da loja</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -109,10 +109,10 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
                         <td className='pl-4'>
                           <input type="checkbox" onChange={(e) => handleCheckboxChange(e, product.sku)} />
                         </td>
-                        <td className="w-[240px] pl-6 pr-4 py-2 md:py-4 font-medium">{product.title}</td>
-                        <td className="px-4 py-2 md:py-5">{product.sku}</td>
-                        <td className="px-4 py-2 md:py-5">{product.color}</td>
-                        <td className="pr-6 pl-4 py-2 md:py-5">Lojinha</td>
+                        <td className="w-[240px] pl-6 pr-4 py-2 md:py-4 font-medium dark:text-gray-200">{product.title}</td>
+                        <td className="px-4 py-2 md:py-5 dark:text-gray-200">{product.sku}</td>
+                        <td className="px-4 py-2 md:py-5 dark:text-gray-200">{product.color}</td>
+                        <td className="pr-6 pl-4 py-2 md:py-5 dark:text-gray-200">Lojinha</td>
                       </tr>
                     ))}
                   </tbody>
@@ -122,7 +122,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
           </div>
 
           {/* footer */}
-          <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <div className="bg-gray-50 dark:bg-dark-bg px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button type="button" onClick={handleMapear} className="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
               Mapear
             </button>
