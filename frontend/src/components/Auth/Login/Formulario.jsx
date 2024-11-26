@@ -2,12 +2,9 @@
 import { useState, useContext, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/contexts/AuthContext'
-
 import WithGoogle from "../WithGoogle";
 import HeaderForm from "./HeaderForm";
-
 import * as Yup from 'yup'
-
 import CircularProgress from '@mui/material/CircularProgress';
 import { Email } from "@mui/icons-material"
 import LockIcon from "@mui/icons-material/Lock"
