@@ -133,7 +133,7 @@ export default function Home() {
                             Teste Grátis
                         </a>
                     </button>
-                    <button className=" bg-segundaria-900 hover:bg-segundaria-800 shadow-md hover:shadow-lg rounded-full px-3 py-1 transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out">
+                    <button className="bg-segundaria-900 hover:bg-segundaria-800 shadow-md hover:shadow-lg rounded-full px-3 py-1 transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out">
                         <a href="/login" className="text-white font-medium text-sm">
                             Entrar
                         </a>
