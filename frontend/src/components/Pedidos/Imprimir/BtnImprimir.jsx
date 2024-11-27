@@ -320,10 +320,10 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
             // Embutir a página original no novo documento
             const embeddedPage = await pdfDoc.embedPage(page);
   
-            const scale = 1.9;
+            const scale = 1.98;
   
-            const xOffset = (pdfPage.getWidth() - (width - 150) * scale * 0.4) / 2;
-            const yOffset = (pdfPage.getHeight() - height * scale) / 1.1;
+            const xOffset = (pdfPage.getWidth() - (width - 100) * scale * 0.4) / 2;
+            const yOffset = (pdfPage.getHeight() - height * scale) / 1.19;
   
             // Desenhar a página original na posição centralizada
             pdfPage.drawPage(embeddedPage, {

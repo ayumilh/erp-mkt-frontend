@@ -12,30 +12,28 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import SuccessNotification from '../Geral/Notifications/SuccessNotification';
 import ErrorNotification from '../Geral/Notifications/ErrorNotification';
 
+
 const ProdutosContent = () => {
   const [filterStatus, setFilterStatus] = useState('all');
   const [loading, setLoading] = useState(false);
   const [requestStatus, setRequestStatus] = useState(null);
   const [route, setRoute] = useState('mercadolivre');
+  const userId = searchUserId();
 
   const handleFilterChange = (newFilter) => {
     setFilterStatus(newFilter);
   };
 
   const handleSyncProducts = async () => {
-    const userId = searchUserId();
     if (!userId) return
     setLoading(true);
 
     try {
-      const response = await axios.post('https://erp-mkt.vercel.app/api/shopee/productsSync',
+      const response = await axios.post('https://erp-mkt.vercel.app/api/shopee/auth',
         { userId: userId }
       );
-      if (response.status === 200) {
-        setRequestStatus(true);
-      } else {
-        setRequestStatus(false);
-      }
+      console.log(response.data);
+      setRequestStatus(true);
     } catch (err) {
       setRequestStatus(false);
     } finally {
@@ -59,7 +57,7 @@ const ProdutosContent = () => {
           onClick={handleSyncProducts}
           className="bg-segundaria-900 hover:bg-segundaria-800 text-white shadow-md hover:shadow-lg rounded-md px-3 py-2 transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out"
         >
-          {loading ? <CircularProgress color="inherit" size={24} /> : 'Sincronizar produtos Shopee'}
+          {loading ? <CircularProgress color="inherit" size={12} className='text-white' /> : 'Sincronizar produtos Shopee'}
         </button>
         <ProdutosActionsFilter onFilterChange={handleFilterChange} />
         <ProdutosTabela onFilterStatus={filterStatus} route={route} />
