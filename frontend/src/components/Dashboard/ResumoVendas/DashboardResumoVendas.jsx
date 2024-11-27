@@ -83,7 +83,7 @@ export const DashboardResumoVendas = () => {
                     </div>
                 </div>
 
-                <div className='w-[700px] lg:w-[780px] xl:w-[900px] h-full mt-4 hidden md:flex'>
+                <div className='w-[700px] lg:w-[780px] xl:w-[900px] h-full mt-4 hidden md:flex relative bottom-8 left-10'>
                     <ChartPie2 />
                 </div>
             </div>

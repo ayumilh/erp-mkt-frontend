@@ -72,7 +72,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
   const createTableInPdf = async (pdfDoc, data, pageSize) => {
     const page = pdfDoc.addPage(pageSize);
     const { width, height } = page.getSize();
-    const fontSize = 12;
+    const fontSize = 15;
     const margin = 50;
     const cellPadding = 3;
     const cellHeight = fontSize + cellPadding * 2;
@@ -99,7 +99,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     page.drawText(title, { x: titleX, y: titleY, size: titleFontSize, color: rgb(0, 0, 0) });
 
     // Adicionar distância entre o título e o conteúdo abaixo
-    const contentTop = titleY - 2 * fontSize - 20;
+    const contentTop = titleY - 2 * fontSize - 10;
 
     // Remetente e Destinatário
     const senderTop = contentTop;
@@ -320,9 +320,9 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
             // Embutir a página original no novo documento
             const embeddedPage = await pdfDoc.embedPage(page);
   
-            const scale = 1.98;
+            const scale = 1.99;
   
-            const xOffset = (pdfPage.getWidth() - (width - 100) * scale * 0.4) / 2;
+            const xOffset = (pdfPage.getWidth() - (width - 50) * scale * 0.4) / 2;
             const yOffset = (pdfPage.getHeight() - height * scale) / 1.19;
   
             // Desenhar a página original na posição centralizada

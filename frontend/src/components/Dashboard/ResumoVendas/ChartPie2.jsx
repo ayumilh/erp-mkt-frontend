@@ -27,7 +27,6 @@ const ChartPie2 = () => {
         ))}
       </Pie>
       <Tooltip />
-      <Legend layout="vertical" verticalAlign="middle" align="right" />
     </PieChart>
   );
 };
