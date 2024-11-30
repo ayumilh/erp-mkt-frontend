@@ -66,7 +66,7 @@ function BtnDropdown({ onClickImprimir, setIsModalConfigOpen }) {
                 onClick={handleBtn}
             >
                             {loading ? (
-                <CircularProgress color="inherit" size={12} className="mr-2" />
+                <CircularProgress color="inherit" size={12} className="mr-2 dark:text-white" />
             ) : (
                 <PrintIcon fontSize='small' className="mr-2 text-neutral-700 dark:text-gray-300" />
             )}
