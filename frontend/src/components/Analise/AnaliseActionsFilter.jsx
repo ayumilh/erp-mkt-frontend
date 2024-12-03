@@ -1,6 +1,6 @@
 import BtnActive from '@/components/Geral/Button/BtnActive';
 import SearchIcon from '@mui/icons-material/Search';
-import FilterListIcon from '@mui/icons-material/FilterList';
+import BtnActionsFilter from '../Geral/Dropdown/BtnActionsFilter';
 
 const AnliseActionsFilter = () => {
   return (
@@ -12,9 +12,7 @@ const AnliseActionsFilter = () => {
         <div className="flex items-center rounded w-full md:w-[300px] lg:w-[360px] relative">
           <SearchIcon className='h-5 w-5 absolute left-[6px] top-1/2 transform -translate-y-1/2 dark:text-gray-300'/>
           <input title='Pesquise por' className="w-full rounded overflow-hidden text-xs md:text-sm font-normal pl-8 pr-3 py-2" type="text" placeholder="Pesquise por SKU, Nome, Lojas e etc" style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
-          <button className="rounded" type="button">
-            <FilterListIcon className='h-6 w-6 ml-[6px] dark:text-gray-300 dark:hover:text-white'/>
-          </button>
+          <BtnActionsFilter />
         </div>
 
         <div className="flex mt-4 md:mt-0 xl:ml-5">

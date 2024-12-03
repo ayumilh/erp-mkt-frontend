@@ -35,7 +35,6 @@ module.exports = {
           700: "#0C21C1",
           500: "#4285F4",
         },
-        bgModal: 'rgba(0, 0, 0, 0.5)',
         dark: {
           bg: 'rgba(36, 36, 38)',
           primaria: {
@@ -52,7 +51,6 @@ module.exports = {
             700: "#2b6cb0",
             500: "#4299e1",
           },
-          bgModal: 'rgba(255, 255, 255, 0.5)',
         },
       },
       boxShadow: {

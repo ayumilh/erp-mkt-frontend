@@ -7,10 +7,12 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import ModalConectarLojas from "@/components/Config/ModalConectarLojas";
 import HamburgerList from "./HamburgerList";
 import HamburgerHeader from "./HamburgerHeader";
+import { useTheme } from '@mui/material/styles';
 
 const drawerWidth = 240;
 
 export default function HamburgerContent() {
+  const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   
@@ -58,8 +60,8 @@ export default function HamburgerContent() {
               "& .MuiDrawer-paper": {
                 width: drawerWidth,
                 boxSizing: "border-box",
-                backgroundColor: "#363638", // Define o fundo do Drawer no modo dark
-                color: "#e5e7eb", // Define a cor do texto no modo dark
+                backgroundColor: theme.palette.mode === 'dark' ? "rgba(36, 36, 38)" : "#ffffff",
+                color: theme.palette.mode === 'dark' ? "#e5e7eb" : "#000000",
               },
             }}
             variant="persistent"
@@ -78,8 +80,8 @@ export default function HamburgerContent() {
             "& .MuiDrawer-paper": {
               width: drawerWidth,
               boxSizing: "border-box",
-              backgroundColor: "#363638", // Define o fundo do Drawer no modo dark
-              color: "#e5e7eb", // Define a cor do texto no modo dark
+              backgroundColor: theme.palette.mode === 'dark' ? "#363638" : "#ffffff",
+              color: theme.palette.mode === 'dark' ? "#e5e7eb" : "#000000",
             },
           }}
           variant="persistent"

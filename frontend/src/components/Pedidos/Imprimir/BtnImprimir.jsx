@@ -15,56 +15,74 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
   const [shippingIdEmpty, setShippingIdEmpty] = useState(false);
   const [isModalConfigOpen, setIsModalConfigOpen] = useState(false);
 
-  async function arrayBufferToBase64(buffer, imageType) {
+  function arrayBufferToBase64(buffer) {
     let binary = '';
     const bytes = new Uint8Array(buffer);
     const len = bytes.byteLength;
     for (let i = 0; i < len; i++) {
       binary += String.fromCharCode(bytes[i]);
     }
-    const base64String = window.btoa(binary);
-    return `data:image/${imageType};base64,${base64String}`;
+    return window.btoa(binary);
+  }
+
+  function gerarPDF(arrayBuffer) {
+    const base64Image = arrayBufferToBase64(arrayBuffer);
+    console.log("Base64:", base64Image);
+    const docDefinition = {
+      content: [
+        {
+          image: 'data:image/jpeg;base64,/' + base64Image,
+          width: 500
+        }
+      ],
+    };
+    console.log("DocDefinition:", docDefinition);
+    
+    pdfMake.createPdf(docDefinition).open();
   }
 
   const createTableInPdf = async (data, imageBuffer) => {
     if (!imageBuffer) {
       console.error("No image data received for PDF");
-      return; // Or handle the missing image gracefully (e.g., create a PDF without the image)
+      return;
     }
 
     try {
-      const imageBase64 = await arrayBufferToBase64(imageBuffer, 'png');
+      const imageBase64 = await arrayBufferToBase64(imageBuffer, 'jpeg');
+      console.log("ImageBuffer:", imageBase64);
+
+      const currentDate = new Date();
+      const formattedDate = currentDate.toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+
       const docDefinition = {
         content: [
           {
-            table: {
-              widths: ['*'],
-              body: [
-                [
-                  {
-                    text: 'DECLARAÇÃO DE CONTEÚDO',
-                    style: 'subheader',
-                    alignment: 'center',
-                    width: '100%',
-                    fontSize: 16,
-                    margin: [0, 0, 0, 0],
-                    border: [true, true, true, true]
-                  }
-                ]
-              ]
-            },
-            layout: {
-              hLineWidth: function () { return 1; },
-              vLineWidth: function () { return 1; }
-            }
+            text: formattedDate,
+            alignment: 'right',
+            fontSize: 14,
+            margin: [0, 0, 0, 10]
+          },
+          {
+            text: 'DECLARAÇÃO DE CONTEÚDO',
+            semibold: true,
+            alignment: 'center',
+            fontSize: 20,
+            margin: [0, 0, 0, 10]
           },
           {
             table: {
-              widths: ['50%', '50%'],
+              widths: ['*', '*'],
               body: [
                 [
-                  { text: 'REMETENTE', style: 'subheader', alignment: 'center', border: [true, true, true, true], margin: [0, 0, 0, 0] },
-                  { text: 'DESTINATÁRIO', style: 'subheader', alignment: 'center', border: [true, true, true, true] }
+                  { text: 'REMETENTE', semibold: true, fontSize: 20, alignment: 'center', margin: [0, 0, 0, 0] },
+                  { text: 'DESTINATÁRIO', semibold: true, alignment: 'center' }
                 ],
                 [
                   {
@@ -73,7 +91,6 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
                       `CPF/CNPJ: ${data.senderCpfCnpj}\n`,
                       `CEP: ${data.senderCep}\n`
                     ],
-                    border: [true, true, true, true],
                     margin: [0, 0, 0, 0]
                   },
                   {
@@ -82,57 +99,58 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
                       `CPF/CNPJ: ${data.recipientCpfCnpj}\n`,
                       `CEP: ${data.recipientCep}\n`
                     ],
-                    border: [true, true, true, true],
                     margin: [0, 0, 0, 0]
                   }
                 ]
               ]
             },
             layout: {
-              hLineWidth: function () { return 1; },
-              vLineWidth: function () { return 1; }
+              hLineWidth: function () { return 2; },
+              vLineWidth: function () { return 2; }
             }
           },
           {
-            text: '', // Texto vazio para adicionar espaço
-            margin: [0, 20, 0, 0] // Margem para criar o espaço
+            text: '',
+            margin: [0, 10, 0, 0]
           },
           {
             table: {
               headerRows: 2,
-              widths: ['auto', '*', '*', '*', 'auto'],
+              widths: ['8%', '22%', '45%', '15%', '10%'],
               body: [
                 [
-                  { text: 'IDENTIFICAÇÃO DOS BENS', style: 'subheader', colSpan: 5, alignment: 'center', border: [true, true, true, true], margin: [0, 0, 0, 0], },
+                  { text: 'IDENTIFICAÇÃO DOS BENS', style: 'subheader', colSpan: 5, alignment: 'center' },
                 ],
-                ['N°', 'SKU', 'Descrição', 'Variação', 'QTD'],
+                [
+                  { text: 'N°', style: 'tableHeader', alignment: 'center' },
+                  { text: 'SKU', style: 'tableHeader' },
+                  { text: 'DESCRIÇÃO', style: 'tableHeader' },
+                  { text: 'VARIAÇÃO', style: 'tableHeader' },
+                  { text: 'QTD', style: 'tableHeader' }
+                ],
                 ...data.items.map((item, index) => [
-                  index + 1,
-                  item.sku || '',
-                  item.description || '',
-                  item.variation || '',
-                  item.quantity.toString()
-                ]),
+                  { text: index + 1, style: 'tableBody', alignment: 'center' },
+                  { text: item.sku || '', style: 'tableBody' },
+                  { text: item.description || '', style: 'tableBody' },
+                  { text: item.variation || '', style: 'tableBody' },
+                  { text: item.quantity.toString(), style: 'tableBody', alignment: 'right' }
+                ])
               ]
             },
             layout: {
-              hLineWidth: function (i, node) {
-                return (i === 0 || i === node.table.body.length) ? 2 : 1;
-              },
-              vLineWidth: function (i) {
-                return 1;
-              },
-              hLineColor: function (i) {
-                return i === 1 ? 'black' : '#aaa';
-              },
-              paddingLeft: function (i) {
-                return i === 0 ? 0 : 8;
-              },
-              paddingRight: function (i, node) {
-                return (i === node.table.widths.length - 1) ? 0 : 8;
-              }
-            }
-          }
+              hLineWidth: function () { return 2; },
+              vLineWidth: function () { return 2; },
+              hLineColor: function () { return 'black'; },
+              vLineColor: function () { return 'black'; },
+              paddingLeft: function () { return 8; },
+              paddingRight: function () { return 8; }
+            },
+          },
+          // {
+          //   image: imageBase64,
+          //   width: 500,
+          //   margin: [0, 20, 0, 0]
+          // }
         ],
         styles: {
           header: {
@@ -144,21 +162,26 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
             fontSize: 14,
             bold: true,
             margin: [0, 0, 0, 0]
+          },
+          tableHeader: {
+            fontSize: 12,
+            semibold: true,
+          },
+          tableBody: {
+            fontSize: 14
           }
         },
         defaultStyle: {
-          fontSize: 12
+          fontSize: 16
         }
       };
 
       const pdfDocGenerator = pdfMake.createPdf(docDefinition);
       pdfDocGenerator.getBase64((buffer) => {
-        console.log("PDF buffer:", buffer);
         pdfDocGenerator.open();
       });
     } catch (error) {
       console.error("Error creating PDF image:", error);
-      // Handle the error appropriately (e.g., display an error notification)
     }
   };
 
@@ -180,19 +203,22 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
       for (const id of uniqueShippingIdOrder) {
         let imageBase64 = null;
 
-        try {
+        try { 
+          // buscando dados da etiqueta do mercado livre
           const response = await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/print', {
             shipping_id: id,
             userId: userId,
           }, {
             responseType: 'arraybuffer'
           });
-
           if (response.status === 200) {
+            console.log(response.data);
             imageBase64 = response.data;
           }
         } catch (error) {
-          console.error(`Error fetching data for order ${id}:`, error);
+          console.error(`Erro ao buscar dados do pedido ${id}:`, error);
+          setStatusRequestSync(false);
+          return
         }
 
         const responseProduct = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/orderid-ready', {
@@ -247,7 +273,8 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
             };
 
             // Adicionar a tabela ao documento
-            createTableInPdf(tableData, imageBase64);
+            // createTableInPdf(tableData, imageBase64);
+            gerarPDF(imageBase64);
             processedShippingIds.add(shippingId); // Marcar o shipping_id como já processado
           }
         }

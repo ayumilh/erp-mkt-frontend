@@ -2,11 +2,11 @@
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { Divider } from "@mui/material";
+import { usePathname } from "next/navigation";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import ProductsIcon from "@mui/icons-material/Store";
 import OrdersIcon from "@mui/icons-material/ShoppingCart";
-import BuyIcon from "@mui/icons-material/LocalAtm";
 import AnalysisIcon from "@mui/icons-material/BarChart";
 import StockIcon from "@mui/icons-material/Inventory";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -37,6 +37,9 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
         onSetIsModalOpen(!onIsModalOpen);
     }
 
+    const pathname = usePathname();
+
+
     return (<>
         <div>
             <ul className="flex flex-col px-4 my-10">
@@ -46,12 +49,12 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
                             <Link href={`/${text.toLowerCase()}`}>
                                 <button className='flex items-center w-[170px] h-12 px-4 justify-start hover:bg-gray-100 dark:hover:bg-neutral-800 active:bg-gray-200 dark:active:bg-neutral-800 active:text-indigo-500 rounded-full transition duration-500 ease-out'>
                                     <span
-                                        className={`flex justify-center text-neutral-700 dark:text-gray-300 ${open ? "mr-3" : "mr-auto"
+                                        className={`flex justify-center text-neutral-700 dark:text-gray-300 ${pathname === `/${text.toLowerCase()}` ? "text-indigo-500 dark:text-indigo-500" : "text-neutral-700"} ${open ? "mr-3" : "mr-auto"
                                             }`}
                                     >
                                         {iconsNav[index]}
                                     </span>
-                                    <span className={`opacity-${open ? "100" : "0"}, text-neutral-700 dark:text-gray-300 font-medium active:text-indigo-500`}>
+                                    <span className={`opacity-${open ? "100" : "0"}, text-neutral-700 dark:text-gray-300 font-medium active:text-indigo-500 ${pathname === `/${text.toLowerCase()}` ? "text-indigo-500 dark:text-indigo-500" : "text-neutral-700"}`}>
                                         {text}
                                     </span>
                                 </button>

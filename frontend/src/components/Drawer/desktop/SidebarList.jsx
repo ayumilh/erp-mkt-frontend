@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import Tooltip from "@mui/material/Tooltip";
 import BtnExpandirDrawer from "./BtnExpandirDrawer";
-
+import { usePathname } from "next/navigation";
 import ProductsIcon from "@mui/icons-material/Store";
 import LinkIcon from '@mui/icons-material/Link';
 import OrdersIcon from "@mui/icons-material/ShoppingCart";
@@ -23,12 +23,14 @@ const iconsNav = [
 ];
 
 const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose, handleDrawerOpen }) => {
+    const pathname = usePathname();
+
     const toggleModal = () => {
         onSetIsModalOpen(!onIsModalOpen);
     }
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const isOpen = Boolean(anchorEl);
+
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -55,13 +57,13 @@ const SidebarList = ({ open, onIsModalOpen, onSetIsModalOpen, handleDrawerClose,
                                 <Link href={`/${text.toLowerCase()}`}>
                                     <Tooltip title={text} placement="bottom" TransitionComponent={Zoom} followCursor>
                                         <button
-                                            className={`flex  py-3 ${open ? "justify-start w-[124px]" : "justify-center w-[160px]"
+                                            className={`flex py-3 ${open ? "justify-start w-[124px]" : "justify-center w-[160px]"
                                                 } relative items-center group hover:text-indigo-500`}
                                         >
-                                            <span className={`relative flex justify-center text-neutral-700 dark:text-gray-300 group-hover:text-indigo-500 transition duration-300 ease-out ${open ? "mr-0" : "mr-auto"}`}>
+                                            <span className={`relative flex  justify-center text-neutral-700 dark:text-gray-300 group-hover:text-neutral-500 dark:group-hover:text-gray-400 ${pathname === `/${text.toLowerCase()}` ? "text-indigo-500 dark:text-indigo-500" : "text-neutral-700"} transition duration-300 ease-out ${open ? "mr-0" : "mr-auto"}`}>
                                                 {iconsNav[index]}
                                             </span>
-                                            <span className={`ml-3 ${open ? "opacity-100" : "opacity-0"} text-neutral-700 dark:text-gray-300 group-hover:text-indigo-500 font-medium transition duration-300 ease-out`}>
+                                            <span className={`ml-3 ${open ? "opacity-100" : "opacity-0"} ${pathname === `/${text.toLowerCase()}` ? "text-indigo-500 dark:text-indigo-500" : "text-neutral-700"} dark:text-gray-300 group-hover:text-neutral-500 dark:group-hover:text-gray-400 font-medium transition duration-300 ease-out`}>
                                                 {text}
                                             </span>
                                         </button>
