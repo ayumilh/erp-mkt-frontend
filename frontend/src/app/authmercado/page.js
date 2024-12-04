@@ -49,6 +49,7 @@ export default function Authmercado() {
     <main className="flex min-h-screen flex-row items-center justify-evenly">
       <h1 className="text-4xl font-bold text-neutral-800 dark:text-gray-200">Autenticação do Mercado Livre</h1>
       <p className="text-neutral-800 dark:text-gray-200">Código: {code}</p>
+      <p className="text-neutral-800 dark:text-gray-200">Nome da loja: {nome_loja}</p>
       {resData && <p className="text-neutral-800 dark:text-gray-200">Resposta: {JSON.stringify(resData)}</p>}
 
       {statusRequestCodeMercado === true && <SuccessNotification message="Conectado com sucesso" />}
