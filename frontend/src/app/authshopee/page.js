@@ -52,12 +52,6 @@ export default function Authshopee() {
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-evenly">
-      <h1 className="text-4xl font-bold text-neutral-800 dark:text-gray-200">Autenticação do Shopee</h1>
-      <p className="text-neutral-800 dark:text-gray-200">Código: {code}</p>
-      <p className="text-neutral-800 dark:text-gray-200">id: {shop_id}</p>
-      <p className="text-neutral-800 dark:text-gray-200">Tipo de ID: {typeof shop_id}</p>
-      {resData && <p className="text-neutral-800 dark:text-gray-200">Resposta: {JSON.stringify(resData)}</p>}
-
       {statusRequestCodeShopee === true && <SuccessNotification message="Conectado com sucesso" />}
       {statusRequestCodeShopee === false && <ErrorNotification message="Erro ao conectar" />}
     </main>

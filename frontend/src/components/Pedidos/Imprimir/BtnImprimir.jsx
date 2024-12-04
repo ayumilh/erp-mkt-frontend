@@ -31,8 +31,10 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     const docDefinition = {
       content: [
         {
-          image: 'data:image/jpeg;base64,/' + base64Image,
-          width: 500
+          image: 'data:image/png,/' + base64Image,
+          width: 500,
+          margin: [0, 20, 0, 0]
+
         }
       ],
     };
