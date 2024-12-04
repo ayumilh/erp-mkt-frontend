@@ -20,10 +20,8 @@ export default function Authmercado() {
     if (!code || !nome_loja) {
       setStatusRequestCodeMercado(false);
       return;
-    } else {
-      console.log('code:', code);
     }
-
+    
     const fetchData = async () => {
       const userId = searchUserId();
       if (!userId) return
