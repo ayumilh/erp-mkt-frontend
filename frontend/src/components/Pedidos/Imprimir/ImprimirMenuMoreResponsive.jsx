@@ -6,6 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { DropdownSelectOrAll } from '../../Geral/Dropdown/DropdownSelectOrAll';
 import { BtnBorder } from '@/components/Geral/Button/BtnBorder';
 import { BtnImprimir } from './BtnImprimir';
+import { BtnImprimirTeste } from '../Imprimir/BtnImprimirTeste';
 
 export const ImprimirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, setShowCheckboxes, setShowCheckboxesAll, shippingIdOrder }) => {
     const theme = useTheme();
@@ -70,6 +71,10 @@ export const ImprimirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, 
                 <BtnBorder title="Filtrar" />
                 <BtnBorder title="Editar em massa" />
             </>)}
+            
+            {/* <div className='left-12'>
+                <BtnImprimirTeste shippingIdOrder={shippingIdOrder} />
+            </div> */}
         </div>
     )
 }

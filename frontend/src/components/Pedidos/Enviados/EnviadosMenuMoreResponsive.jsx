@@ -9,6 +9,7 @@ import { BtnImprimir } from '../Imprimir/BtnImprimir';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
+
 export const EnviadosMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, setShowCheckboxes, setShowCheckboxesAll, shippingIdOrder, currentPage, totalPages, rowsPerPage, handlePageChange, handleRowsPerPageChange }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

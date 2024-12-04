@@ -11,11 +11,11 @@ function BtnDropdown({ onClickImprimir, setIsModalConfigOpen }) {
     const [loading, setLoading] = useState(false);
 
     const openModalConfig = () => {
-      setIsModalConfigOpen(true);
+        setIsModalConfigOpen(true);
     };
-  
+
     const closeModalConfig = () => {
-      setIsModalConfigOpen(false);
+        setIsModalConfigOpen(false);
     };
 
     const handleBtn = () => {
@@ -47,15 +47,15 @@ function BtnDropdown({ onClickImprimir, setIsModalConfigOpen }) {
 
     const BootstrapTooltip = styled(({ className, ...props }) => (
         <Tooltip {...props} arrow classes={{ popper: className }} />
-      ))(() => ({
+    ))(() => ({
         [`& .${tooltipClasses.arrow}`]: {
-          color: ['#e5e7eb', '!important'],
+            color: ['#e5e7eb', '!important'],
         },
         [`& .${tooltipClasses.tooltip}`]: {
-          backgroundColor: ['#262626', '!important'],
-          fontSize: '13px',
+            backgroundColor: ['#262626', '!important'],
+            fontSize: '13px',
         },
-      }));
+    }));
 
     return (
         <div className='relative inline-block text-left w-full' ref={menuRef}>
@@ -65,12 +65,12 @@ function BtnDropdown({ onClickImprimir, setIsModalConfigOpen }) {
                 className="w-full h-8 px-2 my-1 md:rounded-lg md:border md:border-gray-200 dark:md:border-neutral-700 md:hover:border-[#c7c7c7] focus:outline-none focus:ring-1 md:focus:ring-[#d4d4d4] flex items-center justify-start md:justify-center"
                 onClick={handleBtn}
             >
-                            {loading ? (
-                <CircularProgress color="inherit" size={12} className="mr-2 dark:text-white" />
-            ) : (
-                <PrintIcon fontSize='small' className="mr-2 text-neutral-700 dark:text-gray-300" />
-            )}
-                
+                {loading ? (
+                    <CircularProgress color="inherit" size={12} className="mr-2 dark:text-white" />
+                ) : (
+                    <PrintIcon fontSize='small' className="mr-2 text-neutral-700 dark:text-gray-300" />
+                )}
+
                 <span className="text-neutral-700 hover:text-black dark:text-gray-200 text-sm font-medium">Imprimir Etiqueta</span>
                 <KeyboardArrowDownIcon sx={{
                     width: '20px',
