@@ -9,6 +9,7 @@ export const ThemeMuiContext = createContext();
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
+    
   },
 });
 

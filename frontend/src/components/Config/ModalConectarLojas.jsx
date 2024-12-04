@@ -41,7 +41,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
         console.error('Erro ao gerar URL de autenticação da Shopee:', error);
       }
     }
-
+    console.log('selectedStore:', selectedStore);
     window.location.href = authUrl;
   };
 

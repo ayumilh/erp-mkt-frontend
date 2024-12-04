@@ -1,23 +1,27 @@
 'use client'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { searchUserId } from '@/utils/searchUserId';
 import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
 import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
 
-export default function Authmercado({ searchParams }) {
+export default function Authmercado() {
   const [statusRequestCodeMercado, setStatusRequestCodeMercado] = useState(null);
   const [resData, setResData] = useState('');
   const router = useRouter();
 
-  const code = searchParams?.code;
+  const searchParams = useSearchParams();
+
+  const code = searchParams.get('code');
   const nome_loja = typeof window !== 'undefined' ? localStorage.getItem('nome_loja') : null;
 
   useEffect(() => {
     if (!code || !nome_loja) {
       setStatusRequestCodeMercado(false);
       return;
+    } else {
+      console.log('code:', code);
     }
 
     const fetchData = async () => {
