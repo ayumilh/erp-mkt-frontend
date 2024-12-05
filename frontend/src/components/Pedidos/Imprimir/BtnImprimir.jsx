@@ -107,7 +107,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
             y: dateTimeY,
             size: dateTimeFontSize,
             color: customColor,
-            font: await pdfDoc.embedFont(StandardFonts.HelveticaBold) // Usar uma fonte semibold
+            font: await pdfDoc.embedFont(StandardFonts.HelveticaBold)
         });
 
         // Estimar a largura do texto "SIMK"
@@ -115,7 +115,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
 
         // Desenhar a data e hora ao lado do texto "SIMK"
         page.drawText(` ${dateTimeString}`, {
-            x: dateTimeX + simkWidth,
+            x: dateTimeX + simkWidth + 2,
             y: dateTimeY,
             size: dateTimeFontSize,
             color: rgb(0, 0, 0)
@@ -195,7 +195,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
 
         // Adicionar altura extra apenas se houver quebra de linha
         if (maxHeight > cellHeight) {
-            maxHeight += 45;
+            maxHeight += 40;
         }
 
         page.drawRectangle({
@@ -230,7 +230,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         centerText(`IDENTIFICAÇÃO DOS BENS`, margin, tableTop + cellPadding, fontSize, tableWidth);
 
         // Desenhar cabeçalhos das colunas
-        const colWidths = [30, 110, 220, 100, 40];
+        const colWidths = [30, 90, 250, 100, 40];
         const headers = ["N°", "SKU", "DESCRIÇÃO", "VARIAÇÃO", "QTD"];
 
         // Verificar se a largura total das colunas ultrapassa a largura da página
@@ -277,7 +277,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
             const maxCellHeight = Math.max(...row.map((cell, cellIndex) => {
                 const cellText = cell ? cell.toString() : '';
                 const lines = breakWords(cellText, colWidths[cellIndex] - 2 * cellPaddingLeftRight, fontSize);
-                return (fontSize + cellPaddingTop * cellPaddingBottom) * lines.length;
+                return (fontSize + 1) * lines.length;
             })) * 1.1;
 
             row.forEach((cell, cellIndex) => {
@@ -295,7 +295,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
                 lines.forEach((line, lineIndex) => {
                     page.drawText(line, {
                         x: margin + colWidths.slice(0, cellIndex).reduce((a, b) => a + b, 0) + cellPaddingLeftRight,
-                        y: y - lineIndex * fontSize - cellPaddingBottom,
+                        y: y - lineIndex * (fontSize + 0) - 0,
                         size: fontSize,
                         color: rgb(0, 0, 0)
                     });
