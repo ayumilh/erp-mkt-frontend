@@ -66,7 +66,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
     const createTableInPdf = async (pdfDoc, data, pageSize) => {
         const page = pdfDoc.addPage(pageSize);
         const { width, height } = page.getSize();
-        const fontSize = 15;
+        const fontSize = 16;
         const margin = 20;
         const cellPadding = 2;
         const cellHeight = fontSize + cellPadding * 2;
@@ -89,7 +89,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         const titleFontSize = 20;
         const titleWidth = estimateTextWidth(title, titleFontSize);
         const titleX = (width - titleWidth) / 2;
-        const titleY = height - margin;
+        const titleY = height - (margin + 20 + titleFontSize + 5);
         page.drawText(title, { x: titleX, y: titleY, size: titleFontSize, color: rgb(0, 0, 0) });
 
 
@@ -98,7 +98,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         const dateTimeString = now.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
         const dateTimeFontSize = 12;
         const dateTimeX = margin;
-        const dateTimeY = height - margin + 30;
+        const dateTimeY = height - margin - 8;
 
         // "SIMK" com cor roxa e estilo semibold
         const customColor = rgb(98 / 255, 77 / 255, 227 / 255);
@@ -230,12 +230,12 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         centerText(`IDENTIFICAÇÃO DOS BENS`, margin, tableTop + cellPadding, fontSize, tableWidth);
 
         // Desenhar cabeçalhos das colunas
-        const colWidths = [60, 150, 480, 150, 80];
+        const colWidths = [60, 180, 460, 150, 80];
         const headers = ["N°", "SKU", "DESCRIÇÃO", "VARIAÇÃO", "QTD"];
 
         // Verificar se a largura total das colunas ultrapassa a largura da página
         const pageWidth = 595.28; // Largura da página A4 em pontos (8.27 pol * 72 pontos/pol)
-        const totalTableWidth = colWidths.reduce((a, b) => a + b, 0) - 66;
+        const totalTableWidth = colWidths.reduce((a, b) => a + b, 0) - 67;
 
         // redefinindo larguras
         const newMargin = 20;
@@ -300,9 +300,9 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
                 });
                 lines.forEach((line, lineIndex) => {
                     page.drawText(line, {
-                        x: margin + colWidths.slice(0, cellIndex).reduce((a, b) => a + b, 0) + cellPaddingLeftRight,
+                        x: margin + colWidths.slice(0, cellIndex).reduce((a, b) => a + b, 0) + headerPaddingLeftRight,
                         y: y - lineIndex * (fontSize + 0) - 0,
-                        size: fontSize,
+                        size: 17,
                         color: rgb(0, 0, 0)
                     });
                 });
