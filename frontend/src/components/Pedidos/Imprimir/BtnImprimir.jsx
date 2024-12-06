@@ -67,7 +67,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         const page = pdfDoc.addPage(pageSize);
         const { width, height } = page.getSize();
         const fontSize = 15;
-        const margin = 50;
+        const margin = 20;
         const cellPadding = 2;
         const cellHeight = fontSize + cellPadding * 2;
         const cellWidth = (width - 2 * margin) / 6; // Ajustar a largura das células com base no tamanho da página
@@ -75,7 +75,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
 
         // Função para estimar a largura do texto
         const estimateTextWidth = (text, fontSize) => {
-            return text.length * (fontSize * 0.6); // Estimativa simples
+            return text.length * (fontSize * 0.6);
         };
 
         const centerText = (text, x, y, fontSize, cellWidth) => {
@@ -100,7 +100,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         const dateTimeX = margin;
         const dateTimeY = height - margin + 30;
 
-        // Desenhar o texto "SIMK" com cor roxa e estilo semibold
+        // "SIMK" com cor roxa e estilo semibold
         const customColor = rgb(98 / 255, 77 / 255, 227 / 255);
         page.drawText('SIMK', {
             x: dateTimeX,
@@ -188,7 +188,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         const maxRecipientHeight = calculateMaxCellHeight(recipientData, Array(recipientData.length).fill(tableWidth / 2), fontSize, cellPadding);
 
         // Definir uma altura mínima para as células
-        const minHeight = cellHeight * 2; // Ajuste este valor conforme necessário
+        const minHeight = cellHeight * 2;
 
         // Ajustar bordas com base nas alturas máximas e na altura mínima
         let maxHeight = Math.max(maxSenderHeight, maxRecipientHeight, minHeight);
@@ -230,25 +230,30 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         centerText(`IDENTIFICAÇÃO DOS BENS`, margin, tableTop + cellPadding, fontSize, tableWidth);
 
         // Desenhar cabeçalhos das colunas
-        const colWidths = [30, 90, 250, 100, 40];
+        const colWidths = [60, 150, 480, 150, 80];
         const headers = ["N°", "SKU", "DESCRIÇÃO", "VARIAÇÃO", "QTD"];
 
         // Verificar se a largura total das colunas ultrapassa a largura da página
         const pageWidth = 595.28; // Largura da página A4 em pontos (8.27 pol * 72 pontos/pol)
-        const totalTableWidth = colWidths.reduce((a, b) => a + b, 0);
-        if (totalTableWidth > pageWidth - 2 * margin) {
-            // Ajustar largura das colunas proporcionalmente para caber na página
-            const scaleFactor = (pageWidth - 2 * margin) / totalTableWidth;
-            colWidths.forEach((width, index) => {
-                colWidths[index] = width * scaleFactor;
-            });
-        }
+        const totalTableWidth = colWidths.reduce((a, b) => a + b, 0) - 66;
+
+        // redefinindo larguras
+        const newMargin = 20;
+        const newTableWidth = pageWidth - 2 * newMargin;
 
         const headerPaddingLeftRight = 4;
         const headerPaddingTop = 3;
         const cellPaddingLeftRight = 4;
         const cellPaddingTop = 8;
         const cellPaddingBottom = 0;
+
+        if (totalTableWidth > newTableWidth - 2 * newMargin) {
+            // Ajustar largura das colunas proporcionalmente para caber na página
+            const scaleFactor = (newTableWidth - 2 * margin) / totalTableWidth;
+            colWidths.forEach((width, index) => {
+                colWidths[index] = width * scaleFactor;
+            });
+        }
 
         headers.forEach((header, i) => {
             page.drawRectangle({
@@ -268,7 +273,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
         });
 
         // Desenhar dados da tabela
-        let yStart = tableTop - 2 * cellHeight;
+        let yStart = tableTop - 2 * cellHeight;       
 
         data.items.forEach((item, index) => {
             const row = [index + 1, item.sku || '', item.description || '', item.variation || '', item.quantity.toString()];
@@ -276,14 +281,15 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
             // Calcular a altura máxima necessária para a linha
             const maxCellHeight = Math.max(...row.map((cell, cellIndex) => {
                 const cellText = cell ? cell.toString() : '';
-                const lines = breakWords(cellText, colWidths[cellIndex] - 2 * cellPaddingLeftRight, fontSize);
-                return (fontSize + 1) * lines.length;
+                const lines = breakWords(cellText, colWidths[cellIndex] - 2 * cellPadding, fontSize);
+                return (fontSize + cellPadding * 2) * lines.length;
             })) * 1.1;
 
             row.forEach((cell, cellIndex) => {
                 const y = yStart - index * maxCellHeight;
                 const cellText = cell ? cell.toString() : '';
-                const lines = breakWords(cellText, colWidths[cellIndex] - 2 * cellPaddingLeftRight, fontSize);
+                const lines = breakWords(cellText, colWidths[cellIndex] - 2 * cellPadding, fontSize);
+
                 page.drawRectangle({
                     x: margin + colWidths.slice(0, cellIndex).reduce((a, b) => a + b, 0),
                     y: y - maxCellHeight + cellHeight,
