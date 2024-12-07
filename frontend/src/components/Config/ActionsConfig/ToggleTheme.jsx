@@ -30,7 +30,7 @@ function ToggleTheme() {
             ) : (
                 <DarkModeIcon fontSize='small' className='mr-2 text-neutral-700 dark:text-gray-300 group-hover:text-segundaria-900 transition duration-300 ease-out' />
             )}
-            <span className='text-sm dark:text-gray-200 font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>
+            <span className='text-xs py-1 dark:text-gray-200 font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>
                 {theme === 'dark' ? 'Modo escuro' : 'Modo claro'}
             </span>
         </button>

@@ -65,7 +65,7 @@ export const EmailAddressUser = ({ menuOpen, onMenuOpen }) => {
                         <div className="m-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                             <button onClick={toggleModal} className='flex items-center group hover:text-segundaria-900 px-2 py-1'>
                                 <span> <LinkIcon fontSize="small" className="mr-2 text-neutral-700 dark:text-gray-300 group-hover:text-segundaria-900 transition duration-300 ease-out" /> </span>
-                                <span className='text-sm dark:text-gray-200 font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>Conectar Conta</span>
+                                <span className='text-xs py-1 dark:text-gray-200 font-medium group-hover:text-segundaria-900 transition duration-300 ease-out'>Conectar Conta</span>
                             </button>
                             <ToggleTheme />
                             <BtnSignOut />
