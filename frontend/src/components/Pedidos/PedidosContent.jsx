@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import HamburgerContent from '../Drawer/mobile/HamburgerContent';
-import ActionsHeader from '../ActionsHeader';
+import ActionsContent from '../Config/ActionsConfig/ActionsContent';
 import TitlePage from '../Geral/TitlePage';
 import PedidosActionsFilter from './PedidosActionsFilter';
 import PedidosTabela from './PedidosTabela';
@@ -30,7 +30,7 @@ const PedidosContent = () => {
           <HamburgerContent/>
           <TitlePage title='Pedidos'/>
         </div>
-        <ActionsHeader/>
+        <ActionsContent/>
       </div>
 
       <div className='w-full flex flex-col items-center mt-7 lg:mb-10'>

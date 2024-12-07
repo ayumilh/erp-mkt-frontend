@@ -1,5 +1,5 @@
 import HamburgerContent from '../Drawer/mobile/HamburgerContent';
-import ActionsHeader from '../ActionsHeader';
+import ActionsContent from '../Config/ActionsConfig/ActionsContent';
 import TitlePage from '../Geral/TitlePage';
 import FeedbackHeader from './FeedbackHeader';
 import FeedbackActionsFilter from './FeedbackActionsFilter';
@@ -13,7 +13,7 @@ const FeedbackContent = () => {
           <HamburgerContent/>
           <TitlePage title='Feedback central'/>
         </div>
-        <ActionsHeader/>
+        <ActionsContent/>
       </div>
 
       <div className='w-full flex flex-col items-center mt-7 lg:mb-10' style={{height: '1500px'}}>

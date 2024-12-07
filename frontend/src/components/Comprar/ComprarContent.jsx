@@ -1,5 +1,5 @@
 import HamburgerContent from '../Drawer/mobile/HamburgerContent';
-import ActionsHeader from '../ActionsHeader';
+import ActionsContent from '../Config/ActionsConfig/ActionsContent';
 import TitlePage from '../Geral/TitlePage';
 
 
@@ -11,7 +11,7 @@ const ComprarContent = () => {
           <HamburgerContent/>
           <TitlePage title='Comprar'/>
         </div>
-        <ActionsHeader/>
+        <ActionsContent/>
       </div>
 
       <div className='mx-auto flex flex-col justify-center items-center'>

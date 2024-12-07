@@ -1,6 +1,6 @@
 'use client'
 import HamburgerContent from '../../Drawer/mobile/HamburgerContent';
-import ActionsHeader from '../../ActionsHeader';
+import ActionsContent from '../../Config/ActionsConfig/ActionsContent';
 import TitlePage from '../../Geral/TitlePage';
 import NfActionsFilter from './NfActionsFilter';
 import NfTabela from './NfTabela';
@@ -24,7 +24,7 @@ const NfContent = () => {
                     <Breadcrumbs paths={breadcrumbPaths} />
                     <TitlePage title='Notas fiscais' />
                 </div>
-                <ActionsHeader />
+                <ActionsContent />
             </div>
 
             <div className='w-full flex flex-col items-center mt-7 lg:mb-10' style={{ height: '1000px' }}>

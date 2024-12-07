@@ -1,6 +1,6 @@
 import BtnBackPage from '@/components/Geral/Button/BtnBackPage';
 import HamburgerContent from "@/components/Drawer/mobile/HamburgerContent"
-import ActionsHeader from "../../ActionsHeader"
+import ActionsContent from "../../Config/ActionsConfig/ActionsContent"
 import SincronizarActionsFilter from "./SincronizarActionsFilter"
 import Sincronizartabela from "./Sincronizartabela"
 import TitlePage from "@/components/Geral/TitlePage"
@@ -24,7 +24,7 @@ const SincronizarContent = () => {
                         <TitlePage title='Sincronizar Anúncios' />
                     </div>
                 </div>
-                <ActionsHeader />
+                <ActionsContent />
             </div>
 
             <div className='mx-auto flex flex-col justify-start items-center' style={{ height: '1000px' }}>

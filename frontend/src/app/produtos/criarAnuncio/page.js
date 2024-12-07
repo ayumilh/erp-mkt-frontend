@@ -3,7 +3,7 @@ import BtnBackPage from '@/components/Geral/Button/BtnBackPage';
 import CriarAnuncioContent from "@/components/Produtos/Criar/CriarAnuncioContent";
 import Content from '@/components/Drawer/desktop/SidebarContent'
 import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
-import ActionsHeader from '@/components/ActionsHeader';
+import ActionsContent from '@/components/Config/ActionsConfig/ActionsContent';
 
 const CriarAnuncio = async () => {
   await checkSession();
@@ -19,7 +19,7 @@ const CriarAnuncio = async () => {
               <BtnBackPage modal={false} title="Voltar" />
             </div>
           </div>
-          <ActionsHeader />
+          <ActionsContent />
         </div>
 
         <CriarAnuncioContent />

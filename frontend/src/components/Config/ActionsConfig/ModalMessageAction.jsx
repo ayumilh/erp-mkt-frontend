@@ -8,7 +8,7 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 const ModalMessageAction = () => {
     const [isNotificationActive, setIsNotificationActive] = useState(false);
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const notificationCount = 4;
+    const notificationCount = 0;
 
     const toggleModal = () => {
         setIsOpenModal(!isOpenModal);
@@ -35,21 +35,21 @@ const ModalMessageAction = () => {
         if (notificationCount > 0) {
             return (
                 <NotificationsActiveIcon
-                    className="h-6 w-6 text-neutral-700 dark:text-gray-300 dark:hover:text-white transition duration-300 ease-out cursor-pointer"
+                    className="text-neutral-700 dark:text-gray-300 dark:hover:text-white transition duration-300 ease-out cursor-pointer"
                     onClick={toggleModal}
                 />
             );
         } else if (isNotificationActive) {
             return (
                 <NotificationsIcon
-                    className="h-6 w-6 text-neutral-700 dark:text-gray-300 dark:hover:text-white transition duration-300 ease-out cursor-pointer"
+                    className="text-neutral-700 dark:text-gray-300 dark:hover:text-white transition duration-300 ease-out cursor-pointer"
                     onClick={toggleModal}
                 />
             );
         } else {
             return (
                 <NotificationsNoneIcon
-                    className="h-6 w-6 text-neutral-700 dark:text-gray-300 dark:hover:text-white transition duration-300 ease-out cursor-pointer"
+                    className="text-neutral-700 dark:text-gray-300 dark:hover:text-white transition duration-300 ease-out cursor-pointer"
                     onClick={toggleModal}
                 />
             );

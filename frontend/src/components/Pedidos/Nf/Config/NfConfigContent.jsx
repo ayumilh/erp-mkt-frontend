@@ -1,6 +1,6 @@
 'use client'
 import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
-import ActionsHeader from '@/components/ActionsHeader';
+import ActionsContent from '@/components/Config/ActionsConfig/ActionsContent';
 import TitlePage from '@/components/Geral/TitlePage';
 import NfActionsFilter from '../NfActionsFilter';
 import NfConfigHeader from './NfConfigHeader';
@@ -26,7 +26,7 @@ const NfConfigContent = () => {
                     <Breadcrumbs paths={breadcrumbPaths} />
                     <TitlePage title='Configurações da NF-e' />
                 </div>
-                <ActionsHeader />
+                <ActionsContent />
             </div>
 
             <div className='w-full flex flex-col items-center mt-7 lg:mb-10' style={{ height: '1000px' }}>

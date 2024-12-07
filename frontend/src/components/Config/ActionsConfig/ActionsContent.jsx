@@ -1,12 +1,11 @@
 'use client'
 import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ModalMessageAction from "@/components/Geral/Notifications/ModalMessageAction";
-import { EmailAddressUser } from "./Drawer/EmailAddressUser";
-import ToggleTheme from "@/components/Geral/Button/ToggleTheme";
+import ModalMessageAction from "@/components/Config/ActionsConfig/ModalMessageAction";
+import { EmailAddressUser } from "./EmailAddressUser";
+import ConfigListModal from "./ConfigListModal";
 
-
-const ActionsHeader = () => {
+const ActionsContent = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -15,7 +14,7 @@ const ActionsHeader = () => {
     return (
         <div className="items-center justify-center lg:flex hidden gap-4">
             <ModalMessageAction />
-            <ToggleTheme />
+            <ConfigListModal />
             <div onClick={toggleMenu} className="bg-primaria-900 dark:bg-neutral-700 bg-opacity-70 shadow-sm flex px-3 py-2 rounded-full cursor-pointer">
                 <AccountCircleIcon className="text-neutral-700 dark:text-gray-400" />
                 <div
@@ -29,11 +28,11 @@ const ActionsHeader = () => {
                         marginLeft: "12px",
                     }}
                 >
-                    <EmailAddressUser menuOpen={menuOpen} toggleMenuOpen={toggleMenu} />
+                    <EmailAddressUser menuOpen={menuOpen} onMenuOpen={setMenuOpen} />
                 </div>
             </div>
         </div>
     );
 };
 
-export default ActionsHeader;
+export default ActionsContent;

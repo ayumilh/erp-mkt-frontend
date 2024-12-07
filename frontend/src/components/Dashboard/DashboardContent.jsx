@@ -1,5 +1,5 @@
 import HamburgerContent from '../Drawer/mobile/HamburgerContent';
-import ActionsHeader from '../ActionsHeader';
+import ActionsContent from '../Config/ActionsConfig/ActionsContent';
 import DashboardTarefas from './DashboardTarefas';
 import ChartLojasContent from './LineVendasPorLojas/ChartLojasContent';
 import PieAnalysisContent from './PieAnalysis/PieAnalysisContent';
@@ -16,7 +16,7 @@ const DashboardContent = () => {
           <HamburgerContent />
           <TitlePage title='Dashboard' />
         </div>
-        <ActionsHeader />
+        <ActionsContent />
       </div>
 
       <div className='max-w-[373px] md:max-w-[740px] lg:max-w-[760px] xl:max-w-screen-xl 2xl:max-w-screen-2xl flex flex-col items-center lg:mb-10'>

@@ -15,8 +15,8 @@ import HelpIcon from '@mui/icons-material/Help';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LinkIcon from '@mui/icons-material/Link';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import { EmailAddressUser } from "../EmailAddressUser";
-import ToggleTheme from "@/components/Geral/Button/ToggleTheme";
+import { EmailAddressUser } from "../../Config/ActionsConfig/EmailAddressUser";
+import ToggleTheme from "@/components/Config/ActionsConfig/ToggleTheme";
 
 const iconsNav = [
     <DashboardIcon key="dashboard" sx={{ fontSize: '26px' }} />,

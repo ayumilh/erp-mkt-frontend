@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
 import HamburgerContent from '../Drawer/mobile/HamburgerContent';
-import ActionsHeader from '../ActionsHeader';
+import ActionsContent from '../Config/ActionsConfig/ActionsContent';
 import TitlePage from '../Geral/TitlePage';
 import { AnaliseHeader } from './AnaliseHeader';
 import { GeralContent } from './Geral/GeralContent';
@@ -17,7 +17,7 @@ const AnaliseContent = () => {
           <HamburgerContent/>
           <TitlePage title='Análise'/>
         </div>
-        <ActionsHeader/>
+        <ActionsContent/>
       </div>
 
       <div className='w-full flex flex-col items-center mt-7 lg:mb-10' style={{height: '1000px'}}>

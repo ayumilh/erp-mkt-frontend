@@ -1,5 +1,5 @@
 import HamburgerContent from '../../Drawer/mobile/HamburgerContent';
-import ActionsHeader from '../../ActionsHeader';
+import ActionsContent from '../../Config/ActionsConfig/ActionsContent';
 import BtnBackPage from '../../Geral/Button/BtnBackPage';
 import AnuncioCopiadoHeader from './AnuncioCopiadoHeader';
 import TitlePage from '../../Geral/TitlePage';
@@ -21,7 +21,7 @@ const AnuncioCopiadoContent = () => {
                     <Breadcrumbs paths={breadcrumbPaths} />
                     <TitlePage title='Anúncios copiados' />
                 </div>
-                <ActionsHeader />
+                <ActionsContent />
             </div>
 
             <div className='w-full flex flex-col items-center mt-7 lg:mb-10' style={{ height: '1000px' }}>

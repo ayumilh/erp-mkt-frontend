@@ -1,6 +1,6 @@
 import { checkSession } from '@/utils/checkSession';
 import Content from '@/components/Drawer/desktop/SidebarContent'
-import ActionsHeader from '@/components/ActionsHeader';
+import ActionsContent from '@/components/Config/ActionsConfig/ActionsContent';
 import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
 import BtnBackPage from '@/components/Geral/Button/BtnBackPage';
 import EditarAnuncioContent from "@/components/Produtos/Editar/EditarAnuncioContent";
@@ -19,7 +19,7 @@ const Editar = async () => {
               <BtnBackPage modal={false} title="Voltar" />
             </div>
           </div>
-          <ActionsHeader />
+          <ActionsContent />
         </div>
 
         <EditarAnuncioContent />

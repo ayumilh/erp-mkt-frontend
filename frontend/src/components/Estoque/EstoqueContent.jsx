@@ -1,5 +1,5 @@
 import HamburgerContent from '../Drawer/mobile/HamburgerContent';
-import ActionsHeader from '../ActionsHeader';
+import ActionsContent from '../Config/ActionsConfig/ActionsContent';
 import EstoqueTabela from '../Estoque/EstoqueTabela';
 import EstoqueActionsFilter from '../Estoque/EstoqueActionsFilter';
 import EstoqueHeader from '../Estoque/EstoqueHeader';
@@ -13,7 +13,7 @@ const EstoqueContent = () => {
           <HamburgerContent />
           <TitlePage title='Estoque' />
         </div>
-        <ActionsHeader />
+        <ActionsContent />
       </div>
 
       <div className='w-full flex flex-col items-center mt-7 lg:mb-10' style={{ height: '1000px' }}>

@@ -2,7 +2,7 @@ import { checkSession } from '@/utils/checkSession';
 import Content from '@/components/Drawer/desktop/SidebarContent'
 import BtnBackPage from '@/components/Geral/Button/BtnBackPage';
 import FormularioCriar from '@/components/Estoque/Criar/Variante/VarianteFormularioCriar';
-import ActionsHeader from '@/components/ActionsHeader';
+import ActionsContent from '@/components/Config/ActionsConfig/ActionsContent';
 import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
 
 const CriarVariante = async () => {
@@ -19,7 +19,7 @@ const CriarVariante = async () => {
               <BtnBackPage modal={false} title="Voltar" />
             </div>
           </div>
-          <ActionsHeader />
+          <ActionsContent />
         </div>
 
         <FormularioCriar />

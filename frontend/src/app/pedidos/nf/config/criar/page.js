@@ -2,7 +2,7 @@ import { checkSession } from '@/utils/checkSession';
 import Content from '@/components/Drawer/desktop/SidebarContent'
 import BtnBackPage from '@/components/Geral/Button/BtnBackPage';
 import ConfigCriarFormulario from '@/components/Pedidos/Nf/Config/Criar/ConfigCriarFormulario';
-import ActionsHeader from '@/components/ActionsHeader';
+import ActionsContent from '@/components/Config/ActionsConfig/ActionsContent';
 import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
 
 
@@ -20,7 +20,7 @@ const Criar = async () => {
               <BtnBackPage modal={false} title="Voltar"/>
             </div>
           </div>
-          <ActionsHeader/>
+          <ActionsContent/>
         </div>
 
         <ConfigCriarFormulario />
