@@ -97,7 +97,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
                             className={`flex justify-center text-neutral-700 dark:text-gray-300 ${open ? "mr-3" : "mr-auto"
                                 }`}
                         > <LinkIcon sx={{ fontSize: '26px' }} className="text-neutral-700 dark:text-gray-300" /> </span>
-                        <span className="text-neutral-700 dark:text-gray-300 font-medium whitespace-nowrap">Conectar Conta</span>
+                        <span className="text-neutral-700 dark:text-gray-300 font-medium whitespace-nowrap">Conectar conta</span>
                     </button>
                 </li>
 

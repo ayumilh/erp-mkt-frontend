@@ -1,18 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import SettingsIcon from "@mui/icons-material/Settings";
-import PrintConfigModal from '../ModalConfigPrint/PrintConfigModal';
 
 const ConfigListModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isRotated, setIsRotated] = useState(false);
   const dropdownRef = useRef(null);
 
-  const [isPrintModalOpen, setPrintModalOpen] = useState(false);
-  const handlePrintClick = () => {
-    setPrintModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setPrintModalOpen(false);
+  const router = useRouter();
+
+  const handleOpenConfig = () => {
+    router.push('/config');
   };
 
   const toggleDropdown = () => {
@@ -50,23 +48,31 @@ const ConfigListModal = () => {
           <div className="absolute top-0 right-1 transform -translate-x-1/2 -translate-y-full">
             <div className="w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-primaria-900 dark:border-b-dark-primaria-900"></div>
           </div>
+          
+
+          <button onClick={handleOpenConfig} className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out whitespace-nowrap">Configuração</button>
+
+          <hr className="border-t border-gray-200 dark:border-neutral-600 mb-1" />
+
           <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out">Integrações de loja</button>
           <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out whitespace-nowrap">Integrações de serviços</button>
 
-          <hr className="border-t border-gray-200 dark:border-neutral-600 py-1" />
-          <h3 className="px-4 pt-2 pb-1 text-xs font-medium text-neutral-600 dark:text-gray-300">Configurações</h3>
-          <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out whitespace-nowrap">Pedido</button>
-          <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out">Envio</button>
+
+          {/* <h3 className="px-4 pt-2 pb-1 text-xs font-medium text-neutral-600 dark:text-gray-300">Configurações</h3> */}
+
+          {/* <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out whitespace-nowrap">Pedido</button> */}
+
+          {/* config envio */}
+          {/* <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out">Envio</button> */}
 
           {/* config print */}
-          <button onClick={handlePrintClick} className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out">Impressão</button>
+          {/* <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out">Impressão</button> */}
 
-          <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out">Nota fiscal</button>
+          {/* <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out">Nota fiscal</button>
           <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out">Estoque</button>
-          <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out">Permissão</button>
+          <button className="w-full flex px-4 py-2 text-sm text-neutral-700 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-neutral-800 active:bg-gray-100 dark:active:bg-neutral-700 rounded-sm transition duration-300 ease-in-out">Permissão</button> */}
         </div>
       )}
-      <PrintConfigModal isOpen={isPrintModalOpen} onClose={handleCloseModal} />
     </div>
   );
 };

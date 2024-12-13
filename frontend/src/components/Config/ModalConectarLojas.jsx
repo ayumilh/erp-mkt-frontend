@@ -71,7 +71,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
-          <h3 className="text-lg text-neutral-800 dark:text-gray-300 font-medium">Conectar Conta</h3>
+          <h3 className="text-lg text-neutral-800 dark:text-gray-300 font-medium">Conectar conta</h3>
           <button
             onClick={onClose}
             className="text-neutral-800 hover:text-neutral-600"

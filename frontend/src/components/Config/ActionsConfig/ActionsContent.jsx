@@ -3,7 +3,7 @@ import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ModalMessageAction from "@/components/Config/ActionsConfig/ModalMessageAction";
 import { EmailAddressUser } from "./EmailAddressUser";
-import ConfigListModal from "./ConfigListModal";
+import DropdownConfig from "./DropdownConfig";
 
 const ActionsContent = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +14,7 @@ const ActionsContent = () => {
     return (
         <div className="items-center justify-center lg:flex hidden gap-4">
             <ModalMessageAction />
-            <ConfigListModal />
+            <DropdownConfig />
             <div onClick={toggleMenu} className="bg-primaria-900 dark:bg-neutral-700 bg-opacity-70 shadow-sm flex px-3 py-2 rounded-full cursor-pointer">
                 <AccountCircleIcon className="text-neutral-700 dark:text-gray-400" />
                 <div

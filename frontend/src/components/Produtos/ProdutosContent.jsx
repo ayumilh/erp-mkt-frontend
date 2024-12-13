@@ -53,12 +53,12 @@ const ProdutosContent = () => {
 
       <div className='w-full flex flex-col items-center mt-7 lg:mb-10'>
         <ProdutosHeader setRoute={setRoute} />
-        <button
+        {/* <button
           onClick={handleSyncProducts}
           className="bg-segundaria-900 hover:bg-segundaria-800 text-white shadow-md hover:shadow-lg rounded-md px-3 py-2 transform hover:-translate-y-0.5 hover:scale-60 transition duration-500 ease-in-out"
         >
           {loading ? <CircularProgress color="inherit" size={12} className='text-white' /> : 'Sincronizar produtos Shopee'}
-        </button>
+        </button> */}
         <ProdutosActionsFilter onFilterChange={handleFilterChange} />
         <ProdutosTabela onFilterStatus={filterStatus} route={route} />
       </div>
