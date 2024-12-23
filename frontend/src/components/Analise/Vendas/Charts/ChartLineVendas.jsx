@@ -11,7 +11,7 @@ const ChartLineVendas = ({ selectedItem }) => {
 	useEffect(() => {
 		const fetchSales = async () => {
 			try {
-				const response = await axios.get("https://erp-mkt.vercel.app/api/statistics/sales");
+				const response = await axios.get(`${process.env.BACKEND_URL}/api/statistics/sales`);
 				if (response.data && Array.isArray(response.data.statistics)) {
 					const restructuredData = response.data.statistics.map((sales) => {
 						return {

@@ -12,7 +12,7 @@ export default function ModalAddSKU({ onClose, onIdProduct }){
     const fetchSKU = async () => {
       try {
         axios
-        .get("https://erp-mkt.vercel.app/api/stock/products")
+        .get(`${process.env.BACKEND_URL}/api/stock/products`)
         .then((response) => {
           const restructuredData = response.data.map((product) => ({
             sku: product.sku,
@@ -41,8 +41,8 @@ export default function ModalAddSKU({ onClose, onIdProduct }){
 
   const handleSave = async () => {
     try {
-      const idProduct = selectedSKUs;
-      const response = await axios.get('https://erp-mkt.vercel.app/api/stock/product/get', { params: { idProduct } });
+      const idProduct = selectedSKUs;`${process.env.BACKEND_URL}/api/stock/product/get`
+      const response = await axios.get(`${process.env.BACKEND_URL}/api/stock/product/get`, { params: { idProduct } });
 
       const restructuredData = response.data.map((product) => ({
         sku: product.sku, 

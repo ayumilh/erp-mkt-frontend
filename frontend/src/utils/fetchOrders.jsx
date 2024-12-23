@@ -6,7 +6,7 @@ export const fetchOrders = async () => {
     if (!userId) return null;
 
     try {
-        const response = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/orders', {
+        const response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/orders`, {
             params: { userId }
         });
         return response.data.orders;

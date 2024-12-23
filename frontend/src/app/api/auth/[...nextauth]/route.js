@@ -21,7 +21,7 @@ const nextAuthOptions = {
       },
       async authorize(credentials, req) {
         try {
-          const response = await fetch("https://erp-mkt.vercel.app/api/auth/login", {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/auth/login`, {
             method: 'POST',
             body: JSON.stringify(credentials),
             headers: { "Content-Type": "application/json" }
@@ -52,11 +52,11 @@ const nextAuthOptions = {
     //     };
 
     //     try {
-    //       const loginResponse = await axios.post("https://erp-mkt.vercel.app/api/auth/login", true, { withCredentials: true });
+    //       const loginResponse = await axios.post(`${process.env.BACKEND_URL}/api/auth/login`, true, { withCredentials: true });
     //       console.log(loginResponse.data);
     //       Cookies.set('userId', JSON.stringify(loginResponse.data));
     //     } catch (registerError) {
-    //       await axios.post("https://erp-mkt.vercel.app/api/auth/register", inputs);
+    //       await axios.post(`${process.env.BACKEND_URL}/api/auth/register`, inputs);
     //     }
     //   }
 

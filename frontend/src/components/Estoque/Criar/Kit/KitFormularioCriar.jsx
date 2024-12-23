@@ -65,7 +65,7 @@ export default function FormularioCriar() {
       const SkuMercado = productsMapear.map(product => product.sku);
       const custo_de_compra = products.map(product => product.custo_de_compra);
 
-      await axios.post("https://erp-mkt.vercel.app/api/stock/productskit", {
+      await axios.post(`${process.env.BACKEND_URL}/api/stock/productskit`, {
         ...input,
         SKU: sku,
         SkuMercado: SkuMercado,

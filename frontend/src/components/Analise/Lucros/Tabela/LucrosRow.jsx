@@ -13,7 +13,7 @@ export default function LucrosRow () {
   useEffect(() => {
     const fetchLucros = async () => {
       try {
-        const response = await axios.get("https://erp-mkt.vercel.app/api/statistics/real");
+        const response = await axios.get(`${process.env.BACKEND_URL}/api/statistics/real`);
         if (response.data && Array.isArray(response.data.orders)) {
           const restructuredData = response.data.orders.map((lucro) => {
             return {

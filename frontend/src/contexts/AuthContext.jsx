@@ -22,8 +22,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (inputs) => {
     try {
-      const res = await axios.post(
-        "https://erp-mkt.vercel.app/api/auth/login",
+      const res = await axios.post(`${process.env.BACKEND_URL}/api/auth/login`,
         inputs,
         { withCredentials: true }
       );
@@ -50,8 +49,7 @@ export const AuthContextProvider = ({ children }) => {
         const userid = decodedToken.userid;
 
         try {
-          await axios.post(
-            "https://erp-mkt.vercel.app/api/userId",
+          await axios.post(`${process.env.BACKEND_URL}/api/userId`,
             { userid }
           );
         } catch (err) {
@@ -62,8 +60,7 @@ export const AuthContextProvider = ({ children }) => {
 
     const fetchUserInfo = async () => {
       try {
-        const res = await axios.get(
-          "https://erp-mkt.vercel.app/api/users/info",
+        const res = await axios.get(`${process.env.BACKEND_URL}/api/users/info`,
           { withCredentials: true }
         );
         if (res.data.user && res.data.user.length > 0) {
@@ -97,7 +94,7 @@ export const AuthContextProvider = ({ children }) => {
         userInfo,
         setCurrentUser,
         setIsAuthenticated,
-        isModalOpen, 
+        isModalOpen,
         setIsModalOpen,
         toggleModal
       }}

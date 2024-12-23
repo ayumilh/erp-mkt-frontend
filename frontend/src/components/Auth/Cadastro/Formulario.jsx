@@ -144,7 +144,7 @@ const Formulario = () => {
     }
 
     try {
-      await axios.post("https://erp-mkt.vercel.app/api/auth/register", inputs)
+      await axios.post(`${process.env.BACKEND_URL}/api/auth/register`, inputs)
       router.push('/login')
     } catch (error) {
       setRequestError('Parece que este e-mail já está em uso. Tente fazer login ou use outro endereço de e-mail.');

@@ -16,7 +16,7 @@ export const DashboardResumoVendas = () => {
 
     const handleButtonClick = useCallback(async () => {
         try {
-            await axios.post('https://erp-mkt.vercel.app/api/mercadolivre/item-visits', {
+            await axios.post(`${process.env.BACKEND_URL}/api/mercadolivre/item-visits`, {
                 userId: userId
             });
         } catch (error) {
@@ -29,7 +29,7 @@ export const DashboardResumoVendas = () => {
         handleButtonClick();
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://erp-mkt.vercel.app/api/mercadolivre/visits', {
+                const response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/visits`, {
                     params: { userId }
                 });
                 const restructuredData = response.data.visits.map((data) => {
