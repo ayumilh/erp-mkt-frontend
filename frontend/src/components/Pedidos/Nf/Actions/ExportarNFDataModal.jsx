@@ -24,7 +24,7 @@ const ExportarNFDataModal = ({ isOpen, onClose }) => {
     const end = parseInt(dataFinal.replace(/-/g, ""));
 
     try {
-      const response = await axios.post(`https://erp-mkt.vercel.app/api/mercadolivre/export-note`, 
+      const response = await axios.post(`${process.env.BACKEND_URL}/api/mercadolivre/export-notes`, 
         { start, end },
         {
           responseType: 'blob',

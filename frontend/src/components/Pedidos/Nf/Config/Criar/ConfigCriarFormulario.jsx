@@ -58,7 +58,7 @@ export default function ConfigCriarFormulario() {
     e.preventDefault()
     console.log(data)
     try {
-      await axios.post("https://erp-mkt.vercel.app/api/config/enterprise", data)
+      await axios.post(`${process.env.BACKEND_URL}/api/config/enterprise`, data)
       setStatusRequestSync(true)
     } catch (error) {
       setStatusRequestSync(false)

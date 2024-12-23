@@ -29,7 +29,7 @@ const ProdutosContent = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://erp-mkt.vercel.app/api/shopee/auth',
+      const response = await axios.post(`${process.env.BACKEND_URL}/api/shopee/auth`,
         { userId: userId }
       );
       console.log(response.data);

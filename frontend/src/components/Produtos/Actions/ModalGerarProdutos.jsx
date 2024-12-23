@@ -19,7 +19,7 @@ export default function ModalGerarProdutos({ onClose, idProduct }) {
          if (!userId) return
 
          try {
-            const response = await axios.get('https://erp-mkt.vercel.app/api/stock/mercadolivre/get', {
+            const response = await axios.get(`${process.env.BACKEND_URL}/api/stock/mercadolivre/get`, {
                params: {
                   idProduct,
                   userId
@@ -61,7 +61,7 @@ export default function ModalGerarProdutos({ onClose, idProduct }) {
       });
 
       try {
-         await axios.post('https://erp-mkt.vercel.app/api/stock/mercadolivre/sync', {
+         await axios.post(`${process.env.BACKEND_URL}/api/stock/mercadolivre/sync`, {
             productsData,
             userId:  userId 
          });

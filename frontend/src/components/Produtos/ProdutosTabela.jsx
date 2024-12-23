@@ -34,11 +34,11 @@ const ProdutosTabela = ({ onFilterStatus, route }) => {
       try {
         let response;
         if (route === 'mercadolivre') {
-          response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/products", {
+          response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/products`, {
             params: { userId }
           });
         } else if (route === 'shopee'){
-          response = await axios.get("https://erp-mkt.vercel.app/api/shopee/products", {
+          response = await axios.get(`${process.env.BACKEND_URL}/api/shopee/products`, {
             params: { userId }
           });
         }

@@ -59,8 +59,7 @@ const CriarAnuncioContent = () => {
     formData.append('userId', userId);
 
     try {
-      await axios.post(
-        "https://erp-mkt.vercel.app/api/mercadolivre/criar-anuncio",
+      await axios.post(`${process.env.BACKEND_URL}/api/mercadolivre/criar-anuncio`,
         formData,
         {
           headers: {

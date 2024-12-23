@@ -29,7 +29,7 @@ const FeedbackTabela = () => {
             if (!userId) return;
 
             try {
-                const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/get-questions", {
+                const response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/get-questions`, {
                     params: { userId }
                 });
                 console.log(response.data.questions);

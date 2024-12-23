@@ -15,7 +15,7 @@ const NfRow = () => {
             if (!userId) return
     
             try {
-                const response = await axios.get("https://erp-mkt.vercel.app/api/mercadolivre/get-notes", {
+                const response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/get-notes`, {
                     params: { userId }
                 });
                 if (response.data && Array.isArray(response.data.orders)) {

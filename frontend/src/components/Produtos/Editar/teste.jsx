@@ -46,7 +46,7 @@ const EditarAnuncioContent = () => {
 
       try {
         const response = await axios.get(
-          `https://erp-mkt.vercel.app/api/mercadolivre/productid?sku=${productSKU}`, {
+          `${process.env.BACKEND_URL}/api/mercadolivre/productid?sku=${productSKU}`, {
           params: { userId }
         });
         setInputs(response.data);
@@ -64,7 +64,7 @@ const EditarAnuncioContent = () => {
     if (!userId) return;
 
     try {
-      await axios.put(`https://erp-mkt.vercel.app/api/mercadolivre/update-anuncio`, {
+      await axios.put(`${process.env.BACKEND_URL}/api/mercadolivre/update-anuncio`, {
         ...input,
         productSKU,
         params: { userId }

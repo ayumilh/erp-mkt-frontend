@@ -41,7 +41,7 @@ export default function EnviadosTabela() {
     const getOrders = async () => {
       if (!userId) return;
 
-      const response = await axios.get(`https://erp-mkt.vercel.app/api/mercadolivre/delivered`, {
+      const response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/delivered`, {
         params: { userId }
       });
       if (response.data && Array.isArray(response.data.orders)) {
