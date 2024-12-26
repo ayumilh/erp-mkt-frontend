@@ -18,7 +18,7 @@ export const BtnSincronizarPedidos = ({ statusRequestSync, setStatusRequestSync 
     
         for (let attempt = 1; attempt <= maxRetries; attempt++) {
             try {
-                await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/ordersSync`, {
+                await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/ordersSync`, {
                     params: { userId }
                 });
                 setStatusRequestSync(true);

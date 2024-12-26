@@ -38,7 +38,7 @@ export const EmitirMenuMoreResponsive = ({ showCheckboxes, showCheckboxesAll, se
         console.log('shippingIdOrder', shippingIdOrder);
 
         try {
-            const response = await axios.post(`${process.env.BACKEND_URL}/api/mercadolivre/issueNote`, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/issueNote`, {
                 ordersBatch: shippingIdOrder,
                 userId: userId
             });

@@ -19,7 +19,7 @@ export const BtnSincronizarProdutos = ({ statusRequestSync, setStatusRequestSync
 
         for (let attempt = 1; attempt <= maxRetries; attempt++) {
             try {
-                await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/productsSync`, {
+                await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/productsSync`, {
                     params: { userId }
                 });
                 setStatusRequestSync(true);

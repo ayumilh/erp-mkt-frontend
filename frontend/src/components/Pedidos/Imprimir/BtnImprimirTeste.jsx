@@ -207,7 +207,7 @@ export const BtnImprimirTeste = ({ shippingIdOrder }) => {
 
         try { 
           // buscando dados da etiqueta do mercado livre
-          const response = await axios.post(`${process.env.BACKEND_URL}/api/mercadolivre/print`, {
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/print`, {
             shipping_id: id,
             userId: userId,
           }, {
@@ -223,7 +223,7 @@ export const BtnImprimirTeste = ({ shippingIdOrder }) => {
           return
         }
 
-        const responseProduct = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/orderid-ready`, {
+        const responseProduct = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/orderid-ready`, {
           params: {
             shippingIds: [id],
             userId: userId,

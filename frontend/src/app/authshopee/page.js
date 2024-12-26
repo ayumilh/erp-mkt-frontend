@@ -28,7 +28,7 @@ export default function Authshopee() {
       if (!userId) return
 
       try {
-        const res = await axios.post(`${process.env.BACKEND_URL}/api/shopee/redirect`, { 
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shopee/redirect`, { 
           code,
           nome_loja, 
           userId, 

@@ -6,7 +6,7 @@ export const fetchOrderCounts = async () => {
     if (!userId) return null;
 
     try {
-        const response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/count-orders`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/count-orders`, {
             params: { userId }
         });
         return response.data;

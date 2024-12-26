@@ -26,7 +26,7 @@ const NfHeader = () => {
         if (!userId) return
 
         try {
-            await axios.post(`${process.env.BACKEND_URL}/api/mercadolivre/sync-notes`, {
+            await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/sync-notes`, {
                 userId: userId 
             });
             setStatusRequestSync(true);

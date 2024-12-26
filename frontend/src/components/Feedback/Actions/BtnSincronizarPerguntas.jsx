@@ -17,7 +17,7 @@ export const BtnSincronizarPerguntas = () => {
     if (!userId) return
 
     try {
-      const response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/questions`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/questions`, {
         params: { userId }
     });
       if (response.status === 200) {

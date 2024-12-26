@@ -31,7 +31,7 @@ export default function EnviarTabela() {
       if (!userId) return;
 
       try {
-        const response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/issue`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/issue`, {
           params: { userId }
         });
 

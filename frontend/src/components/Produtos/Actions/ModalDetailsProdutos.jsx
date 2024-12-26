@@ -21,7 +21,7 @@ export default function ModalDetailsProdutos({ onClose, selectedSku }) {
       if (!userId) return
 
       try {
-        const response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/productid?sku=${productSKU}`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/productid?sku=${productSKU}`, {
           params: { userId }
         });
         setProduct(response.data.products[0]);

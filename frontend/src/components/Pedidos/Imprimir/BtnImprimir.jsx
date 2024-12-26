@@ -327,7 +327,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
             const processedShippingIds = new Set();
 
             for (const id of uniqueShippingIdOrder) {
-                const response = await axios.post(`${process.env.BACKEND_URL}/api/mercadolivre/print`, {
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/print`, {
                     shipping_id: id,
                     userId: userId
                 }, {
@@ -374,7 +374,7 @@ export const BtnImprimir = ({ shippingIdOrder }) => {
                         pdfText += strings.join(' ');
                     }
 
-                    const responseProduct = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/orderid-ready`, {
+                    const responseProduct = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/orderid-ready`, {
                         params: {
                             shippingIds: [id],
                             userId: userId

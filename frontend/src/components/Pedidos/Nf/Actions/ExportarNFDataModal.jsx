@@ -24,7 +24,7 @@ const ExportarNFDataModal = ({ isOpen, onClose }) => {
     const end = parseInt(dataFinal.replace(/-/g, ""));
 
     try {
-      const response = await axios.post(`${process.env.BACKEND_URL}/api/mercadolivre/export-notes`, 
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/export-notes`, 
         { start, end },
         {
           responseType: 'blob',

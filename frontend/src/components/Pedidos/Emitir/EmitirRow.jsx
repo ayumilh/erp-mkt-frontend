@@ -21,7 +21,7 @@ export default function EmitirRow({ setOrder, setToggleShowCheckboxes, toggleSho
             if (!userId) return;
 
             try {
-                const response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/issue`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/issue`, {
                     params: { userId }
                 });
                 if (response.data && Array.isArray(response.data.orders)) {

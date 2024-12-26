@@ -14,6 +14,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import BusinessIcon from "@mui/icons-material/Business";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Zeyada } from 'next/font/google'
+import { set } from 'date-fns'
 
 const YupValidation = Yup.object().shape({
   email: Yup.string()
@@ -25,6 +26,7 @@ const YupValidation = Yup.object().shape({
 });
 
 const Formulario = () => {
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
   const router = useRouter();
   const [errors, setErrors] = useState({})
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -144,11 +146,18 @@ const Formulario = () => {
     }
 
     try {
-      await axios.post(`${process.env.BACKEND_URL}/api/auth/register`, inputs)
+      await axios.post(`${BACKEND_URL}/api/auth/register`, inputs)
       router.push('/login')
     } catch (error) {
-      setRequestError('Parece que este e-mail já está em uso. Tente fazer login ou use outro endereço de e-mail.');
-      console.error(error)
+      if (error.response && error.response.status === 404) {
+        setRequestError('Recurso não encontrado. Por favor, verifique a URL ou tente novamente mais tarde.')
+      } else if (error.response && error.response.status === 500) {
+        setRequestError('Erro interno do servidor. Por favor, tente novamente mais tarde.')
+      } else if (error.response && error.response.status === 400) {
+        setRequestError('Erro ao criar a conta. Por favor, verifique os dados e tente novamente.')
+      } else {
+        setRequestError('Erro desconhecido. Por favor, tente novamente mais tarde.')
+      }
     } finally {
       setLoggingLoading(false)
     }

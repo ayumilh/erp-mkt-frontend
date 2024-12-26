@@ -58,7 +58,7 @@ export default function ConfigCriarFormulario() {
     e.preventDefault()
     console.log(data)
     try {
-      await axios.post(`${process.env.BACKEND_URL}/api/config/enterprise`, data)
+      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/config/enterprise`, data)
       setStatusRequestSync(true)
     } catch (error) {
       setStatusRequestSync(false)

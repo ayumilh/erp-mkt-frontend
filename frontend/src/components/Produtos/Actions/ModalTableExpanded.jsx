@@ -28,7 +28,7 @@ const ModalTableExpanded = ({ isOpen, handleClose, onFilterStatus }) => {
       if (!userId) return
 
       try {
-        const response = await axios.get(`${process.env.BACKEND_URL}/api/mercadolivre/products`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, {
           params: { userId }
         });
         if (response.data && Array.isArray(response.data.products)) {

@@ -16,7 +16,7 @@ export default function EstoqueRow ({ setSku }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${process.env.BACKEND_URL}/api/stock/products`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stock/products`);
         if (response.data && Array.isArray(response.data)) {
           const restructuredData = response.data.map((product) => {
             return {

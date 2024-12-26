@@ -43,7 +43,7 @@ const EditarAnuncioContent = () => {
 
       try {
         const response = await axios.get(
-          `${process.env.BACKEND_URL}/api/mercadolivre/productid?sku=${productSKU}`, {
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/productid?sku=${productSKU}`, {
           params: { userId }
         });
         console.log(response.data.products[0]);
@@ -61,7 +61,7 @@ const EditarAnuncioContent = () => {
     if (!userId) return;
 
     try {
-      await axios.put(`${process.env.BACKEND_URL}/api/mercadolivre/update-anuncio`, {
+      await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/update-anuncio`, {
         ...input,
         productSKU,
         params: { userId }

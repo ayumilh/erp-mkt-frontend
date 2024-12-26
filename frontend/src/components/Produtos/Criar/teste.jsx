@@ -40,7 +40,7 @@ function CriarAnuncioContent() {
 
     try {
       await axios.post(
-        `${process.env.BACKEND_URL}/api/mercadolivre/criar-anuncio`, {
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/criar-anuncio`, {
           formData: input,
           userId: userId 
         });

@@ -13,7 +13,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
   useEffect(() => {
     if (!userId) return;
     axios
-      .get(`${process.env.BACKEND_URL}/api/mercadolivre/products`, {
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, {
         params: { userId } 
       })
       .then((response) => {
@@ -47,7 +47,7 @@ export default function ModalMapearAnuncio({ onClose, onIdProduct }) {
     const idProduct = selectedItems;
 
     try { 
-      const response = await axios.get(`${process.env.BACKEND_URL}/api/stock/mercadolivre/get`, { params: { idProduct } });
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stock/mercadolivre/get`, { params: { idProduct } });
 
       const transformedData = {
         sku: response.data.sku.map(item => item),

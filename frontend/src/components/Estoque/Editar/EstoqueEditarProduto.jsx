@@ -31,7 +31,7 @@ export default function EstoqueEditarProduto() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`${process.env.BACKEND_URL}/api/stock/products/${productSKU}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stock/products/${productSKU}`);
         setInputs(response.data);
       } catch (error) {
         console.error(error);
@@ -43,7 +43,7 @@ export default function EstoqueEditarProduto() {
 
   const handleEditar = async () => {
     try { 
-      await axios.put(`${process.env.BACKEND_URL}/api/stock/update/products`, {
+      await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stock/update/products`, {
         ...input,
         productSKU,
       });
