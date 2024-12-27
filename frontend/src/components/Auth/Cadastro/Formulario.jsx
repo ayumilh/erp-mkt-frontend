@@ -13,8 +13,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import PhoneIcon from "@mui/icons-material/Phone";
 import BusinessIcon from "@mui/icons-material/Business";
 import CircularProgress from '@mui/material/CircularProgress';
-import { Zeyada } from 'next/font/google'
-import { set } from 'date-fns'
+import CheckIcon from '@mui/icons-material/Check';
+import ErrorIcon from '@mui/icons-material/Error';
 
 const YupValidation = Yup.object().shape({
   email: Yup.string()
@@ -34,6 +34,7 @@ const Formulario = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isPasswordsValid, setIsPasswordsValid] = useState(null);
   const [requestError, setRequestError] = useState('');
 
   const [inputs, setInputs] = useState({
@@ -122,6 +123,7 @@ const Formulario = () => {
         confirmarSenha: 'As senhas digitadas são diferentes. Por favor, verifique e tente novamente.'
       }));
       setIsButtonDisabled(true);
+      setIsPasswordsValid(false);
       return false;
     } else {
       setErrors((prevErrors) => {
@@ -129,7 +131,8 @@ const Formulario = () => {
         return rest;
       });
       setIsButtonDisabled(false);
-      return true;   
+      setIsPasswordsValid(true);
+      return true;
     }
   };
 
@@ -142,7 +145,7 @@ const Formulario = () => {
 
     if (!isValid || !isPasswordsValid) {
       setLoggingLoading(false)
-      return 
+      return
     }
 
     try {
@@ -260,6 +263,11 @@ const Formulario = () => {
                 onBlur={() => validatePasswords(inputs.senha, confirmPassword)}
               />
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center mb-1 md:mb-2 cursor-pointer">
+              {isPasswordsValid === null ? null : isPasswordsValid ? (
+        <CheckIcon className="text-green-500" />
+      ) : (
+        <ErrorIcon className="text-red-500" />
+      )}
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowConfirmPassword}
@@ -314,7 +322,7 @@ const Formulario = () => {
             {errors.cnpj && <span className="text-red-500 relative text-sm mt-1">{errors.cnpj}</span>}
           </div>
         </div>
-      
+
         <button type='submit' onClick={handleLogin} disabled={isButtonDisabled} className={`w-full bg-gradient-to-r from-gradient-start to-gradient-end hover:bg-gradient-to-b hover:from-gradient-start-hover hover:to-gradient-end-hover rounded-full hover:shadow-segundaria text-white text-base py-3 md:text-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-60 ${isButtonDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
           {loggingLoading ? <><CircularProgress color="inherit" className="text-white" size={12} /> Criando...</> : 'Criar minha conta'}
         </button>

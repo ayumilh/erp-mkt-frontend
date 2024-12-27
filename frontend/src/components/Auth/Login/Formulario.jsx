@@ -39,33 +39,46 @@ const Formulario = () => {
         try {
             await YupValidation.validate({ email, senha }, { abortEarly: false });
             setErrors({})
+            try {
+                await login({ email, senha });
+                const getUserId = Cookies.get('userId') ? JSON.parse(Cookies.get('userId')) : null;
 
-            await login({ email, senha });
-
-            const getUserId = Cookies.get('userId') ? JSON.parse(Cookies.get('userId')) : null;
-            if (getUserId === null) {
-                setErrors({ login: 'Usuário não encontrado. Por favor, verifique as informações inseridas e tente novamente. Se o problema persistir, entre em contato com nosso suporte.' });
-                return;
-            }
-
-            // const getToken = Cookies.get('token') ? JSON.parse(Cookies.get('token')) : null;
-            // if (getToken === null) {
-            //   setErrors({ login: 'Token não encontrado. Se o problema persistir, entre em contato com nosso suporte.' });
-            //   return;
-            // } 
-
-
-            const result = await signIn('credentials', {
-                email,
-                senha,
-                redirect: false
-            });
-
-            if (result?.error) {
-                setErrors({ login: 'Login inválido. Verifique seu e-mail e senha.' })
-                return
-            } else {
-                router.push('/dashboard')
+                if (getUserId === null) {
+                    setErrors({ login: 'Usuário não encontrado. Por favor, verifique as informações inseridas e tente novamente. Se o problema persistir, entre em contato com nosso suporte.' });
+                    return;
+                }
+                // const getToken = Cookies.get('token') ? JSON.parse(Cookies.get('token')) : null;
+                // if (getToken === null) {
+                //   setErrors({ login: 'Token não encontrado. Se o problema persistir, entre em contato com nosso suporte.' });
+                //   return;
+                // } 
+                const result = await signIn('credentials', {
+                    email,
+                    senha,
+                    redirect: false
+                });
+                if (result?.error) {
+                    setErrors({ login: 'Credenciais inválidas. Verifique seu e-mail e senha.' })
+                    return
+                } else {
+                    router.push('/dashboard')
+                }
+            } catch (error) {
+                if (error.response) {
+                    if (error.response.status === 401) {
+                        setErrors({ login: 'Credenciais inválidas. Por favor, verifique seu email e senha.' })
+                    } else if (error.response.status === 500) {
+                        setErrors({ login: 'Erro interno do servidor. Por favor, tente novamente mais tarde.' })
+                    } else {
+                        setErrors({ login: `Erro: ${error.response.status}. ${error.response.data.message || 'Por favor, tente novamente mais tarde.'}` })
+                    }
+                } else if (error.request) {
+                    // A requisição foi feita, mas nenhuma resposta foi recebida
+                    setErrors({ login: 'Nenhuma resposta do servidor. Por favor, verifique sua conexão e tente novamente.' })
+                } else {
+                    // Algo aconteceu ao configurar a requisição que acionou um erro
+                    setErrors({ login: `Erro: ${error.message}. Por favor, tente novamente mais tarde.` })
+                }
             }
 
         } catch (validationError) {
@@ -149,7 +162,7 @@ const Formulario = () => {
                                     onClick={handleClickShowPassword}
                                     onMouseDown={handleMouseDownPassword}
                                 >
-                                    {showPassword ? <Visibility className='dark:text-neutral-700'/> : <VisibilityOff className='dark:text-neutral-700' />}
+                                    {showPassword ? <Visibility className='dark:text-neutral-700' /> : <VisibilityOff className='dark:text-neutral-700' />}
                                 </IconButton>
                             </div>
                         </div>
