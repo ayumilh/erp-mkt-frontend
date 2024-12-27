@@ -9,6 +9,7 @@ import ErrorNotification from '@/components/Geral/Notifications/ErrorNotificatio
 export default function Authmercado() {
   const [statusRequestCodeMercado, setStatusRequestCodeMercado] = useState(null);
   const router = useRouter();
+  const [userId, setUserId] = useState('');
   const searchParams = useSearchParams();
 
   const code = searchParams.get('code');
@@ -23,6 +24,8 @@ export default function Authmercado() {
     const fetchData = async () => {
       const userId = searchUserId();
       if (!userId) return
+
+      setUserId(userId);
 
       try {
         const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/redirect`, { code, nome_loja, userId });
@@ -45,6 +48,7 @@ export default function Authmercado() {
       <div>
         <p>Nome da Loja: {nome_loja}</p>
         <p>Code: {code}</p>
+        <p>UserId: {userId}</p>
       </div>
       {statusRequestCodeMercado === true && <SuccessNotification message="Conectado com sucesso" />}
       {statusRequestCodeMercado === false && <ErrorNotification message="Erro ao conectar" />}
