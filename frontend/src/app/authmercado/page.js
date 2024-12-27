@@ -43,9 +43,8 @@ export default function Authmercado() {
   return (
     <main className="flex min-h-screen flex-row items-center justify-evenly">
       <div>
-        <p>Nome da Loja: {nomeLoja}</p>
+        <p>Nome da Loja: {nome_loja}</p>
         <p>Code: {code}</p>
-        <p>User ID: {userId}</p>
       </div>
       {statusRequestCodeMercado === true && <SuccessNotification message="Conectado com sucesso" />}
       {statusRequestCodeMercado === false && <ErrorNotification message="Erro ao conectar" />}
