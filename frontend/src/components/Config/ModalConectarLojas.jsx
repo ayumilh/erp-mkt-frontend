@@ -14,7 +14,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
   const sendDataStore = () => {
     let authUrl = '';
     if (selectedStore === 'Mercado Livre') {
-      const clientId = 8470533338689335;
+      const clientId = 5338784930427680;
       const redirectUri = encodeURIComponent(
         "https://erp-mkt-frontend.vercel.app/authmercado"
       );
