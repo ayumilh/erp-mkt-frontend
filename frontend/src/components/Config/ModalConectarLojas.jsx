@@ -15,9 +15,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
     let authUrl = '';
     if (selectedStore === 'Mercado Livre') {
       const clientId = 5338784930427680;
-      const redirectUri = encodeURIComponent(
-        "https://erp-mkt-frontend.vercel.app/authmercado/"
-      );
+      const redirectUri = "https://erp-mkt-frontend.vercel.app/authmercado/"
       authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
 
     } else if (selectedStore === 'Shopee') {
