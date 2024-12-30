@@ -72,7 +72,7 @@ const EditarAnuncioContent = () => {
   };
 
   // condição da garantia
-  const [garantia, setGarantia] = useState("");
+  const [garantia, setGarantia] = useState();
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name === "garantia") {
@@ -110,30 +110,34 @@ const EditarAnuncioContent = () => {
             />
           </div>
 
-          <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
+          <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
+            <span className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">
+              Listagem
+            </span>
+            <select
+              name="listing"
+              value={input.listing || ""}
+              onChange={inputChange}
+              className="peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out"
+            >
+              <option value="gold_pro">Premium</option>
+              <option value="gold_special">Clássico</option>
+              <option value="free">Grátis</option>
+            </select>
+          </div>
+
+          <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
             <label htmlFor="condition" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">Condição</label>
-            <div className="flex flex-col md:flex-row gap-7 mt-1">
-              <label>
-                <input
-                  type="radio"
-                  value="new"
-                  checked={input.condition === 'new'}
-                  name="condition"
-                  onChange={inputChange}
-                />
-                <span className="font-normal ml-2 dark:text-gray-200">Novo</span>
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  value="used"
-                  name="condition"
-                  checked={input.condition === 'used'}
-                  onChange={inputChange}
-                />
-                <span className="font-normal ml-2 dark:text-gray-200">Usado</span>
-              </label>
-            </div>
+            <select
+              id="condition"
+              name="condition"
+              value={input.condition || ""}
+              onChange={inputChange}
+              className="peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out"
+            >
+              <option value="new">Novo</option>
+              <option value="used">Usado</option>
+            </select>
           </div>
 
           <div className='w-full md:w-1/5 flex flex-col mt-3 mb-4 px-3'>
@@ -166,8 +170,17 @@ const EditarAnuncioContent = () => {
               className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out ${isInvalidoQuantity ? 'outline-red-500 focus:outline-red-500' : ''}`}
             />
           </div>
-        </div>
 
+          <div className="w-full mt-3 mb-4 px-3">
+            <label htmlFor="description" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">Descrição</label>
+            <textarea
+              onChange={inputChange}
+              name='description'
+              className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out`}
+            />
+          </div>
+
+        </div>
 
         <div className='w-full'>
           <hr style={{ border: '1px solid #d1d5db' }} />
@@ -177,7 +190,7 @@ const EditarAnuncioContent = () => {
         <div className='w-full flex flex-col mt-5 mb-7'>
           <h3 className='text-neutral-800 dark:text-gray-200 text-lg font-semibold'>Informações de venda</h3>
           <div className='w-full flex flex-wrap mt-5'>
-          <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
+            <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
               <label htmlFor="brand" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">Marca</label>
               <input
                 onChange={inputChange}
@@ -189,7 +202,7 @@ const EditarAnuncioContent = () => {
               />
             </div>
 
-            <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
+            {/* <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
               <label htmlFor="gtin" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">GTIN</label>
               <input
                 onChange={inputChange}
@@ -199,8 +212,8 @@ const EditarAnuncioContent = () => {
                 type="text"
                 className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out`}
               />
-            </div>
-            
+            </div> */}
+
             <div className="flex w-full items-center px-3">
               <div className="w-full md:w-3/5 flex flex-col mt-5 mb-7">
                 <span className="mb-2 font-medium text-neutral-800 dark:text-gray-200">
@@ -227,7 +240,7 @@ const EditarAnuncioContent = () => {
                       type="radio"
                       value="De Fábrica"
                       name="garantia"
-                      checked={input.warrantyType === "De Fábrica"}
+                      checked={input.warrantyType === "Garantia de fábrica"}
                       onChange={handleInputChange}
                     />
                     <span className="font-normal ml-2 dark:text-gray-200">
@@ -249,15 +262,16 @@ const EditarAnuncioContent = () => {
                 </div>
               </div>
 
-              {garantia !== "Sem garantia" && (
-                <div className="w-full md:w-1/5">
+              {input.warrantyType !== "Sem garantia" && (
+                <div className="w-full md:w-2/5 mt-3 mb-4 px-3">
+                  <label htmlFor="warrantyTemp" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">Tempo de garantia</label>
                   <input
-                    onChange={handleInputChange}
-                    name="tempo_garantia"
-                    value={input.warrantyTemp || ""}
+                    onChange={inputChange}
+                    maxLength={255}
+                    name='warrantyTemp'
+                    value={input.warrantyTemp || ''}
                     type="text"
-                    placeholder="Tempo de garantia"
-                    className='peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out'
+                    className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out`}
                   />
                 </div>
               )}
