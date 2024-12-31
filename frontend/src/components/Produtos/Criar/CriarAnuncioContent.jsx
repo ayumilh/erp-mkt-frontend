@@ -1,8 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { searchUserId } from '@/utils/searchUserId';
+import { CldImage } from 'next-cloudinary';
 import axios from "axios";
 import BtnActions from "@/components/Geral/Button/BtnActions";
+import AddIcon from '@mui/icons-material/Add';
 
 const CriarAnuncioContent = () => {
   const [isInvalidoTitle, setIsInvalidoTitle] = useState(false);
@@ -27,15 +29,6 @@ const CriarAnuncioContent = () => {
   const inputChange = (event) => {
     setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
-
-  const handleFileChange = (event) => {
-    const files = Array.from(event.target.files);
-    setInputs((prevInput) => ({
-      ...prevInput,
-      pictureUrls: files,
-    }));
-  };
-
 
   const handleCriar = async (e) => {
     e.preventDefault();
@@ -94,8 +87,30 @@ const CriarAnuncioContent = () => {
     }));
   };
 
+
+  const fileInputRef = useRef(null);
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const files = Array.from(event.target.files);
+    const newPictureUrls = files.map(file => URL.createObjectURL(file));
+    setInputs(prevState => ({
+      ...prevState,
+      pictureUrls: [...prevState.pictureUrls, ...newPictureUrls]
+    }));
+  };
+
   return (
     <div className='w-full xl:max-w-screen-lg flex flex-col mt-10 pb-8'>
+      {/* <div className="flex flex-wrap gap-2 mb-7 items-center">
+        <h3 className="text-sm font-semibold">Loja:</h3>
+        <p className="text-sm md:text-base font-medium opacity-90">
+          MILKA STORE
+        </p>
+      </div> */}
+
       <h3 className='text-neutral-800 dark:text-gray-200 text-xl font-medium'>
         {input.title || ""}
       </h3>
@@ -103,6 +118,8 @@ const CriarAnuncioContent = () => {
       <div className='flex gap-6 mt-5 mb-2 relative'>
         <h3 className='text-neutral-800 dark:text-gray-200 text-lg font-semibold'>Gerais</h3>
       </div>
+
+
 
       <div className='flex flex-wrap transition-transform duration-500 ease-in'>
         {/* gerais */}
@@ -121,7 +138,7 @@ const CriarAnuncioContent = () => {
 
           <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
             <span className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">
-              Listagem
+              Tipo de Anúncio
             </span>
             <select
               name="listing"
@@ -279,17 +296,54 @@ const CriarAnuncioContent = () => {
           <hr style={{ border: '1px solid #d1d5db' }} />
         </div>
 
+        {/* info de variação */}
+        <div className='w-full flex flex-col mt-5 mb-7'>
+          <h3 className='text-neutral-800 dark:text-gray-200 text-lg font-semibold'>Variações</h3>
+        </div>
+
+
         {/* mídia */}
+        {/* deixar escondido ate ter variação */}
         <div className='w-full flex flex-col mt-5 mb-7'>
           <h3 className='text-neutral-800 dark:text-gray-200 text-lg font-semibold'>Mídia</h3>
           <div className='w-full flex flex-wrap mt-5'>
             <div className="w-full mt-3 mb-4 px-3">
-              <label htmlFor="pictureUrls" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">URL da imagem</label>
-              <input
-                onChange={handleFileChange}
-                type="file"
-                className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out`}
-              />
+              {/* <label htmlFor="pictureUrls" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">URL da imagem</label> */}
+              <div className="flex flex-col items-start gap-2 bg-gray-50 py-6 px-4">
+                <div className="w-full mb-4">
+                  <button
+                    onClick={handleButtonClick}
+                    className="flex items-center peer rounded-sm w-full py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out group"
+                  >
+                    <AddIcon fontSize="small" className="mr-2 text-neutral-700 dark:text-gray-300 group-hover:text-blue-500 dark:group-hover:text-gray-200" />
+                    <p className="font-medium text-neutral-700 dark:text-gray-300 group-hover:text-blue-500 dark:group-hover:text-gray-200">Adicionar imagem</p>
+                  </button>
+                  <input
+                    ref={fileInputRef}
+                    onChange={handleFileChange}
+                    type="file"
+                    className="hidden"
+                    multiple
+                  />
+                </div>
+                <div className="w-full flex flex-wrap">
+                  {input.pictureUrls.map((url, index) => (
+                    <div key={index} className="w-28 h-28 flex items-start justify-start m-2">
+                      <CldImage
+                        src={url}
+                        width="100" // 40 * 4
+                        height="100" // 48 * 4
+                        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                        crop={{
+                          type: 'auto',
+                          source: true
+                        }}
+                        className="rounded-sm border"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

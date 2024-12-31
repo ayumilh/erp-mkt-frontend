@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { searchUserId } from '@/utils/searchUserId';
+import { CldImage } from 'next-cloudinary';
 import axios from "axios";
 import Cookies from "js-cookie";
 import BtnActions from "@/components/Geral/Button/BtnActions";
-
+import AddIcon from '@mui/icons-material/Add';
 
 const EditarAnuncioContent = () => {
   const [secaoAtiva, setSecaoAtiva] = useState('gerais');
@@ -23,7 +24,7 @@ const EditarAnuncioContent = () => {
     // video_id: "",
     warrantyType: "",
     warrantyTemp: "",
-    pictureUrls: "",
+    pictureUrls: [],
     brand: "",
     gtin: "",
   });
@@ -46,10 +47,23 @@ const EditarAnuncioContent = () => {
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/productid?sku=${productSKU}`, {
           params: { userId }
         });
-        console.log(response.data.products[0]);
+        const urls = response.data.products[0].pictureurls ?
+          (typeof response.data.products[0].pictureurls === 'string' ?
+            [response.data.products[0].pictureurls] :
+            response.data.products[0].pictureurls) :
+          [];
+        setImageUrls(urls);
         setInputs(response.data.products[0]);
+        console.log(urls);
       } catch (error) {
         console.error(error);
+        if (error.response.status === 404) {
+          console.error("Produto não encontrado");
+        } else if (error.response.status === 403) {
+          console.error("Usuário não autorizado");
+        } else {
+          console.error("Erro ao buscar produto");
+        }
       }
     };
     fetchProduct();
@@ -84,6 +98,38 @@ const EditarAnuncioContent = () => {
     }));
   };
 
+  // Imagens cloudinary
+  const [imageUrls, setImageUrls] = useState([]);
+  const fileInputRef = useRef(null);
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const files = Array.from(event.target.files);
+    const newPictureUrls = files.map(file => URL.createObjectURL(file));
+    const currentPictureUrls = typeof input.pictureurls === 'string' ? [input.pictureurls] : input.pictureurls;
+    setInputs(prevState => ({
+      ...prevState,
+      pictureurls: [...currentPictureUrls, ...newPictureUrls]
+    }));
+    // Limpar o valor do input para permitir novos uploads
+    event.target.value = null;
+  };
+
+
+  // Verificar se pictureurls é uma string e convertê-la em um array
+  const pictureUrlsArray = input.pictureurls ? (typeof input.pictureurls === 'string' ? [input.pictureurls] : input.pictureurls) : [];
+
+
+  const handleImageError = (index) => {
+    setImageUrls(prevUrls => {
+      const newUrls = [...prevUrls];
+      newUrls[index] = 'https://via.placeholder.com/100';
+      return newUrls;
+    });
+  };
+
   return (
     <div className='w-full xl:max-w-screen-lg flex flex-col mt-10 pb-8'>
       <h3 className='text-neutral-800 dark:text-gray-200 text-xl font-medium'>
@@ -112,7 +158,7 @@ const EditarAnuncioContent = () => {
 
           <div className="w-full md:w-1/5 mt-3 mb-4 px-3">
             <span className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">
-              Listagem
+              Tipo de Anúncio
             </span>
             <select
               name="listing"
@@ -284,7 +330,7 @@ const EditarAnuncioContent = () => {
         </div>
 
         {/* mídia */}
-        <div className='w-full flex flex-col mt-5 mb-7'>
+        {/* <div className='w-full flex flex-col mt-5 mb-7'>
           <h3 className='text-neutral-800 dark:text-gray-200 text-lg font-semibold'>Mídia</h3>
           <div className='w-full flex flex-wrap mt-5'>
             <div className="w-full mt-3 mb-4 px-3">
@@ -297,6 +343,53 @@ const EditarAnuncioContent = () => {
                 type="text"
                 className={`peer rounded-sm w-full border px-3 py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out`}
               />
+            </div>
+          </div>
+        </div> */}
+        <div className='w-full flex flex-col mt-5 mb-7'>
+          <h3 className='text-neutral-800 dark:text-gray-200 text-lg font-semibold'>Mídia</h3>
+          <div className='w-full flex flex-wrap mt-5'>
+            <div className="w-full mt-3 mb-4 px-3">
+              {/* <label htmlFor="pictureUrls" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">URL da imagem</label> */}
+              <div className="flex flex-col items-start gap-2 bg-gray-50 py-6 px-4">
+                <div className="w-full mb-4">
+                  <button
+                    onClick={handleButtonClick}
+                    className="flex items-center peer rounded-sm w-full py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out group"
+                  >
+                    <AddIcon fontSize="small" className="mr-2 text-neutral-700 dark:text-gray-300 group-hover:text-blue-500 dark:group-hover:text-gray-200" />
+                    <p className="font-medium text-neutral-700 dark:text-gray-300 group-hover:text-blue-500 dark:group-hover:text-gray-200">Adicionar imagem</p>
+                  </button>
+                  <input
+                    ref={fileInputRef}
+                    onChange={handleFileChange}
+                    type="file"
+                    className="hidden"
+                    multiple
+                  />
+                </div>
+                <div className="w-full flex flex-wrap">
+                  {imageUrls.map((url, index) => (
+                    url && (
+                      <div key={index} className="w-28 h-28 flex items-start justify-start m-2">
+                        <CldImage
+                          src={url}
+                          width="100"
+                          height="100"
+                          alt={`Imagem do produto ${index + 1}`}
+                          className="rounded-sm border"
+                          style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                          crop={{
+                            type: 'auto',
+                            source: true
+                          }}
+                          onError={() => handleImageError(index)}
+                        />
+                      </div>
+                    )
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

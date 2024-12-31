@@ -35,6 +35,7 @@
     "jwt-decode": "^4.0.0",
     "next": "^14.2.4",
     "next-auth": "^4.24.7",
+    "next-cloudinary": "^6.16.0",
     "next.js": "^1.0.3",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^4.8.69",
