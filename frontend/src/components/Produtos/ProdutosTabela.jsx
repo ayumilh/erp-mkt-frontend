@@ -14,7 +14,7 @@ import ModalGerarProdutos from "./Actions/ModalGerarProdutos";
 import { ProdutosMenuMoreResponsive } from "./Actions/ProdutosMenuMoreResponsive";
 
 
-const ProdutosTabela = ({ onFilterStatus, route }) => {
+const ProdutosTabela = ({ searchTerm, onFilterStatus, route }) => {
   const [products, setProducts] = useState([]);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedSku, setSelectedSku] = useState(null);
@@ -24,6 +24,7 @@ const ProdutosTabela = ({ onFilterStatus, route }) => {
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
   const router = useRouter();
+
   const [selectedProducts, setSelectedProducts] = useState([]);
 
   useEffect(() => {
@@ -32,12 +33,17 @@ const ProdutosTabela = ({ onFilterStatus, route }) => {
       if (!userId) return;
 
       try {
+        const params = { userid: userId };
+        if (searchTerm) {
+          params.title = searchTerm.toLowerCase();
+        }
+
+        console.log(params);
         let response;
         if (route === 'mercadolivre') {
-          response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, {
-            params: { userId }
-          });
-        } else if (route === 'shopee'){
+          response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, { params });
+          console.log(response.data.products);
+        } else if (route === 'shopee') {
           response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shopee/products`, {
             params: { userId }
           });
@@ -65,7 +71,7 @@ const ProdutosTabela = ({ onFilterStatus, route }) => {
       }
     };
     fetchProducts();
-  }, [route]);
+  }, [route, searchTerm]);
 
 
   // selecionar todos os checkboxes

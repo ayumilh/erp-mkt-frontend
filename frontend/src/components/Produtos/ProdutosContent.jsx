@@ -15,6 +15,7 @@ import ErrorNotification from '../Geral/Notifications/ErrorNotification';
 
 const ProdutosContent = () => {
   const [filterStatus, setFilterStatus] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');  
   const [loading, setLoading] = useState(false);
   const [requestStatus, setRequestStatus] = useState(null);
   const [route, setRoute] = useState('mercadolivre');
@@ -59,8 +60,8 @@ const ProdutosContent = () => {
         >
           {loading ? <CircularProgress color="inherit" size={12} className='text-white' /> : 'Sincronizar produtos Shopee'}
         </button> */}
-        <ProdutosActionsFilter onFilterChange={handleFilterChange} />
-        <ProdutosTabela onFilterStatus={filterStatus} route={route} />
+        <ProdutosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} onFilterChange={handleFilterChange} />
+        <ProdutosTabela searchTerm={searchTerm} setSearchTerm={setSearchTerm} onFilterStatus={filterStatus} route={route} />
       </div>
 
       {requestStatus === true && <SuccessNotification message="Produtos da Shopee sincronizados com sucesso" />}
