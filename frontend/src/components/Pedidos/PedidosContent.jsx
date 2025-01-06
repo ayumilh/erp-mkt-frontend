@@ -15,6 +15,8 @@ import EnviadosTabela from './Enviados/EnviadosTabela';
 
 const PedidosContent = () => {
   const [activeTable, setActiveTable] = useState('Pedidos');
+  const [searchTerm, setSearchTerm] = useState(null);  
+  const [searchColumn, setSearchColumn] = useState('title');
   const router = useRouter();
 
   useEffect(() => {
@@ -35,8 +37,8 @@ const PedidosContent = () => {
 
       <div className='w-full flex flex-col items-center mt-7 lg:mb-10'>
         <PedidosHeader setActiveTable={setActiveTable}/>
-        <PedidosActionsFilter />
-        {activeTable === 'Pedidos' && <PedidosTabela />}
+        <PedidosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchColumn={searchColumn} setSearchColumn={setSearchColumn} />
+        {activeTable === 'Pedidos' && <PedidosTabela searchTerm={searchTerm} />}
         {activeTable === 'Emitir' && <EmitirTabela />}
         {activeTable === 'Imprimir' && <ImprimirTabela />}
         {activeTable === 'Enviar' && <EnviarTabela />}

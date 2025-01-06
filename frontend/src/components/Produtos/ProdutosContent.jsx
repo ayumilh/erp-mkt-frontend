@@ -16,6 +16,7 @@ import ErrorNotification from '../Geral/Notifications/ErrorNotification';
 const ProdutosContent = () => {
   const [filterStatus, setFilterStatus] = useState('all');
   const [searchTerm, setSearchTerm] = useState(null);  
+  const [searchColumn, setSearchColumn] = useState('title');
   const [loading, setLoading] = useState(false);
   const [requestStatus, setRequestStatus] = useState(null);
   const [route, setRoute] = useState('mercadolivre');
@@ -33,7 +34,6 @@ const ProdutosContent = () => {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shopee/auth`,
         { userId: userId }
       );
-      console.log(response.data);
       setRequestStatus(true);
     } catch (err) {
       setRequestStatus(false);
@@ -60,8 +60,8 @@ const ProdutosContent = () => {
         >
           {loading ? <CircularProgress color="inherit" size={12} className='text-white' /> : 'Sincronizar produtos Shopee'}
         </button> */}
-        <ProdutosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} onFilterChange={handleFilterChange} />
-        <ProdutosTabela searchTerm={searchTerm} setSearchTerm={setSearchTerm} onFilterStatus={filterStatus} route={route} />
+        <ProdutosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchColumn={searchColumn} setSearchColumn={setSearchColumn} onFilterChange={handleFilterChange} />
+        <ProdutosTabela searchTerm={searchTerm} onFilterStatus={filterStatus} route={route} />
       </div>
 
       {requestStatus === true && <SuccessNotification message="Produtos da Shopee sincronizados com sucesso" />}

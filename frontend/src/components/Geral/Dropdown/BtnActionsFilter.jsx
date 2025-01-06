@@ -75,8 +75,8 @@ const BtnActionsFilter = () => {
 
   return (
     <div>
-      <button className="rounded" type="button" onClick={handleButtonClick}>
-        <FilterListIcon className='h-6 w-6 ml-[6px] dark:text-gray-300 dark:hover:text-white'/>
+      <button className="rounded mx-3" type="button" onClick={handleButtonClick}>
+        <FilterListIcon fontSize='small' className='dark:text-gray-300 dark:hover:text-white'/>
       </button>
 
       {isModalOpen && (
