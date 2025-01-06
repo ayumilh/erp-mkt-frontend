@@ -15,7 +15,7 @@ import ErrorNotification from '../Geral/Notifications/ErrorNotification';
 
 const ProdutosContent = () => {
   const [filterStatus, setFilterStatus] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');  
+  const [searchTerm, setSearchTerm] = useState(null);  
   const [loading, setLoading] = useState(false);
   const [requestStatus, setRequestStatus] = useState(null);
   const [route, setRoute] = useState('mercadolivre');

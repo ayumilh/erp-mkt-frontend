@@ -33,12 +33,11 @@ const ProdutosTabela = ({ searchTerm, onFilterStatus, route }) => {
       if (!userId) return;
 
       try {
-        const params = { userid: userId };
-        if (searchTerm) {
-          params.title = searchTerm.toLowerCase();
+        const params = { userId };
+        if (searchTerm && searchTerm.trim() !== '') {
+          params.searchTerm = searchTerm.toLowerCase();
         }
 
-        console.log(params);
         let response;
         if (route === 'mercadolivre') {
           response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, { params });

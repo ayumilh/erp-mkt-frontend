@@ -26,7 +26,6 @@ export const AuthContextProvider = ({ children }) => {
         inputs,
         { withCredentials: true }
       );
-      console.log('res', res)
       Cookies.set("userId", JSON.stringify(res.data));
       setCurrentUser(res.data);
       setIsAuthenticated(true);
