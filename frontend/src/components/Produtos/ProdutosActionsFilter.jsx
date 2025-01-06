@@ -38,7 +38,7 @@ const ProdutosActionsFilter = ({ setSearchTerm, searchTerm , onFilterChange }) =
         </div>
 
         <div className="flex justify-between mt-4 md:mt-0 xl:ml-4">
-          <BtnActive title="Pesquisar" size="btnSimple" onClick={fetchProducts} />
+          <BtnActive title="Pesquisar" size="btnSimple" />
         </div>
       </form>
     </div>

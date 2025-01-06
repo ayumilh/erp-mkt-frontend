@@ -27,48 +27,48 @@ const ProdutosTabela = ({ searchTerm, onFilterStatus, route }) => {
 
   const [selectedProducts, setSelectedProducts] = useState([]);
 
-
-  const fetchProducts = async () => {
-    const userId = searchUserId();
-    if (!userId) return;
-
-    try {
-      const params = { userid: userId };
-      if (searchTerm) {
-        params.product_sku = searchTerm.toLowerCase();
-      }
-
-      console.log(params);
-      let response;
-      if (route === 'mercadolivre') {
-        response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, { params });
-      } else if (route === 'shopee') {
-        response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shopee/products`, { params: { userId } });
-      }
-      if (response.data && Array.isArray(response.data.products)) {
-        const restructuredData = response.data.products.map((product) => {
-          return {
-            pictureUrls: product.pictureurls,
-            sku: product.product_sku,
-            title: product.title,
-            price: product.price,
-            estoque: product.available_quantity,
-            diameter: product.product_sku,
-            status: product.status,
-          };
-        });
-        setProducts(restructuredData);
-        console.log(response.data.products);
-      } else {
-        setProducts([]);
-      }
-    } catch (error) {
-      console.error(`Error: ${error}`);
-    } finally {
-      setIsLoading(false);
-    }
-  };
   useEffect(() => {
+    const fetchProducts = async () => {
+      const userId = searchUserId();
+      if (!userId) return;
+
+      try {
+        const params = { userid: userId };
+        if (searchTerm) {
+          params.product_sku = searchTerm.toLowerCase();
+        }
+
+        console.log(params);
+        let response;
+        if (route === 'mercadolivre') {
+          response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, { params });
+        } else if (route === 'shopee') {
+          response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shopee/products`, { params: { userId } });
+        }
+        if (response.data && Array.isArray(response.data.products)) {
+          const restructuredData = response.data.products.map((product) => {
+            return {
+              pictureUrls: product.pictureurls,
+              sku: product.product_sku,
+              title: product.title,
+              price: product.price,
+              estoque: product.available_quantity,
+              diameter: product.product_sku,
+              status: product.status,
+            };
+          });
+          setProducts(restructuredData);
+          console.log(response.data.products);
+        } else {
+          setProducts([]);
+        }
+      } catch (error) {
+        console.error(`Error: ${error}`);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchProducts();
   }, [route, searchTerm]);
 
