@@ -37,7 +37,7 @@ const ProdutosTabela = ({ onFilterStatus, route }) => {
           response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, {
             params: { userId }
           });
-        } else if (route === 'shopee'){
+        } else if (route === 'shopee') {
           response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shopee/products`, {
             params: { userId }
           });
@@ -55,6 +55,7 @@ const ProdutosTabela = ({ onFilterStatus, route }) => {
             };
           });
           setProducts(restructuredData);
+          console.log(response.data.products);
         } else {
           setProducts([]);
         }
