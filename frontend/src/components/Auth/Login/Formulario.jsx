@@ -35,7 +35,6 @@ const Formulario = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Credenciais', email, senha)
         setLoggingLoading(true)
         try {
             await YupValidation.validate({ email, senha }, { abortEarly: false });

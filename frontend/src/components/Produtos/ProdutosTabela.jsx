@@ -35,7 +35,7 @@ const ProdutosTabela = ({ searchTerm, onFilterStatus, route }) => {
       try {
         const params = { userid: userId };
         if (searchTerm) {
-          params.product_sku = searchTerm.toLowerCase();
+          params.title = searchTerm.toLowerCase();
         }
 
         console.log(params);
