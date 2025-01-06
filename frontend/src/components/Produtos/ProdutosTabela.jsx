@@ -41,8 +41,14 @@ const ProdutosTabela = ({ searchTerm, onFilterStatus, route }) => {
         console.log(params);
         let response;
         if (route === 'mercadolivre') {
+<<<<<<< HEAD
           response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, { params });
           console.log(response.data.products);
+=======
+          response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, {
+            params: { userId }
+          });
+>>>>>>> 74018f7c156c6f89ceeb7ea11e3e4edceeabc5e7
         } else if (route === 'shopee') {
           response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shopee/products`, {
             params: { userId }
@@ -61,6 +67,7 @@ const ProdutosTabela = ({ searchTerm, onFilterStatus, route }) => {
             };
           });
           setProducts(restructuredData);
+          console.log(response.data.products);
         } else {
           setProducts([]);
         }
