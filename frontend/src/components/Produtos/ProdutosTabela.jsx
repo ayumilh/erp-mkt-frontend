@@ -35,18 +35,15 @@ const ProdutosTabela = ({ searchTerm, onFilterStatus, route }) => {
       try {
         const params = { userid: userId };
         if (searchTerm) {
-          params.title = searchTerm.toLowerCase();
+          params.product_sku = searchTerm.toLowerCase();
         }
 
         console.log(params);
         let response;
         if (route === 'mercadolivre') {
           response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, { params });
-          console.log(response.data.products);
         } else if (route === 'shopee') {
-          response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shopee/products`, {
-            params: { userId }
-          });
+          response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shopee/products`, { params: { userId } });
         }
         if (response.data && Array.isArray(response.data.products)) {
           const restructuredData = response.data.products.map((product) => {

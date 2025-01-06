@@ -1,12 +1,8 @@
-import { useState, useEffect } from 'react';
-import { searchUserId } from '@/utils/searchUserId';
-import axios from 'axios';
 import BtnActive from '@/components/Geral/Button/BtnActive';
 import SearchIcon from '@mui/icons-material/Search';
 import BtnActionsFilter from '../Geral/Dropdown/BtnActionsFilter';
 
-const ProdutosActionsFilter = ({ onFilterChange, setSearchTerm, searchTerm  }) => {
-  
+const ProdutosActionsFilter = ({ setSearchTerm, searchTerm , onFilterChange }) => {
   return (
     <div className="bg-primaria-900 dark:bg-dark-primaria-900 hover:shadow-input transition-all ease-in duration-500 rounded-2xl xl:flex w-full min-h-max px-4 py-5 xl:px-8 xl:items-center">
       <h2 className='text-sm lg:text-base text-neutral-700 dark:text-gray-200 font-semibold'>O que você procura?</h2>
@@ -26,13 +22,6 @@ const ProdutosActionsFilter = ({ onFilterChange, setSearchTerm, searchTerm  }) =
           />
           <BtnActionsFilter />
         </div>
-        {error && <p className="text-red-500">{error}</p>}
-
-        {products.map(product => (
-            <div key={product.id}>
-              <p>{product.title}</p>
-            </div>
-          ))}
 
         <div className="flex mt-4 md:mt-0 xl:ml-5">
           <select title='Lojas' className="rounded dark:bg-neutral-800 dark:text-gray-200 px-3 py-2 mr-2 w-1/2 lg:w-[160px] xl:w-[200px] text-xs md:text-sm text-neutral-800 font-normal" name="lojas" id="lojas">
