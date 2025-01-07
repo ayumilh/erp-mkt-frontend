@@ -8,7 +8,7 @@ import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder, searchTerm, searchColumn }) {
+export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder, searchTerm, searchColumn, filteredOrders }) {
   const [pedido, setPedido] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
@@ -27,7 +27,12 @@ export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleS
           params.searchColumn = searchColumn;
         }
 
-        console.log(params);  // debug
+        if (filteredOrders.precoMin) {
+          params.precoMin = parseFloat(filteredOrders.precoMin);
+        }
+        if (filteredOrders.precoMax) {
+          params.precoMax = parseFloat(filteredOrders.precoMax);
+        }
 
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/ready`, { params });
         if (response.data && Array.isArray(response.data.orders)) {
@@ -53,7 +58,7 @@ export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleS
     };
 
     fetchOrders();
-  }, [searchTerm, searchColumn]);
+  }, [searchTerm, searchColumn, filteredOrders]);
 
 
   const shippingIdCounts = {};

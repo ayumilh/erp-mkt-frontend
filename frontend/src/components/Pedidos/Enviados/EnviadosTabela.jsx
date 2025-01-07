@@ -5,7 +5,7 @@ import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsCont
 import EnviadosRow from './EnviadosRow';
 import { EnviadosMenuMoreResponsive } from './EnviadosMenuMoreResponsive';
 
-export default function EnviadosTabela({ searchTerm, searchColumn }) {
+export default function EnviadosTabela({ searchTerm, searchColumn, filteredOrders }) {
   const [shippingIdOrder, setShippingIdOrder] = useState([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
@@ -48,7 +48,12 @@ export default function EnviadosTabela({ searchTerm, searchColumn }) {
           params.searchColumn = searchColumn;
         }
 
-        console.log('params', params);  // debug
+        if (filteredOrders.precoMin) {
+          params.precoMin = parseFloat(filteredOrders.precoMin);
+        }
+        if (filteredOrders.precoMax) {
+          params.precoMax = parseFloat(filteredOrders.precoMax);
+        }
 
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/delivered`, { params });
         if (response.data && Array.isArray(response.data.orders)) {
@@ -70,7 +75,7 @@ export default function EnviadosTabela({ searchTerm, searchColumn }) {
       }
     };
     getOrders();
-  }, [rowsPerPage, currentPage, userId, searchTerm, searchColumn]);
+  }, [rowsPerPage, currentPage, userId, searchTerm, searchColumn, filteredOrders]);
 
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {

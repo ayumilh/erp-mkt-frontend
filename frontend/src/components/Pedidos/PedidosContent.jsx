@@ -44,11 +44,11 @@ const PedidosContent = () => {
         <PedidosHeader setActiveTable={setActiveTable}/>
         <PedidosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchColumn={searchColumn} setSearchColumn={setSearchColumn} filteredOrders={fetchFilteredOrders} setFilteredOrders={setFilteredOrders} />
         {activeTable === 'Pedidos' && <PedidosTabela searchTerm={searchTerm} searchColumn={searchColumn} filteredOrders={filteredOrders} />}
-        {activeTable === 'Emitir' && <EmitirTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
-        {activeTable === 'Imprimir' && <ImprimirTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
-        {activeTable === 'Enviar' && <EnviarTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
-        {activeTable === 'Retirada' && <RetiradaTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
-        {activeTable === 'Enviado' && <EnviadosTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
+        {activeTable === 'Emitir' && <EmitirTabela searchTerm={searchTerm} searchColumn={searchColumn} filteredOrders={filteredOrders} />}
+        {activeTable === 'Imprimir' && <ImprimirTabela searchTerm={searchTerm} searchColumn={searchColumn} filteredOrders={filteredOrders} />}
+        {activeTable === 'Enviar' && <EnviarTabela searchTerm={searchTerm} searchColumn={searchColumn} filteredOrders={filteredOrders} />}
+        {activeTable === 'Retirada' && <RetiradaTabela searchTerm={searchTerm} searchColumn={searchColumn} filteredOrders={filteredOrders} />}
+        {activeTable === 'Enviado' && <EnviadosTabela searchTerm={searchTerm} searchColumn={searchColumn} filteredOrders={filteredOrders} />}
       </div>
     </div>
   )

@@ -3,7 +3,7 @@ import ImprimirRow from './ImprimirRow';
 import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsContent';
 import { ImprimirMenuMoreResponsive } from './ImprimirMenuMoreResponsive';
 
-export default function ImprimirTabela({ searchTerm, searchColumn }) {
+export default function ImprimirTabela({ searchTerm, searchColumn, filteredOrders }) {
   const [shippingIdOrder, setShippingIdOrder] = useState([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
@@ -59,6 +59,7 @@ export default function ImprimirTabela({ searchTerm, searchColumn }) {
               setOrder={handleOrderSelect}
               searchTerm={searchTerm}
               searchColumn={searchColumn}
+              filteredOrders={filteredOrders}
             />
           </tbody>
         </table>
