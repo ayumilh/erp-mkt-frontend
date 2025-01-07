@@ -5,18 +5,18 @@ import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsCont
 import EnviadosRow from './EnviadosRow';
 import { EnviadosMenuMoreResponsive } from './EnviadosMenuMoreResponsive';
 
-export default function EnviadosTabela() {
+export default function EnviadosTabela({ searchTerm, searchColumn }) {
   const [shippingIdOrder, setShippingIdOrder] = useState([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [pedido, setPedido] = useState([]);
-  
+
   const userId = searchUserId();
 
   const closeModal = () => {
@@ -41,26 +41,36 @@ export default function EnviadosTabela() {
     const getOrders = async () => {
       if (!userId) return;
 
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/delivered`, {
-        params: { userId }
-      });
-      if (response.data && Array.isArray(response.data.orders)) {
-        const filteredOrders = response.data.orders.filter(order =>
-          order.status === 'delivered' || (order.status === 'ready_to_ship' && (order.substatus === 'picked_up' || order.substatus === 'in_hub'))
-        );
-        const ordersWithTranslatedStatus = filteredOrders.map(order => ({
-          ...order,
-          translatedStatus: translateStatus(order.status, order.substatus)
-        }));
-        setPedido(ordersWithTranslatedStatus);
-        setTotalPages(Math.ceil(ordersWithTranslatedStatus.length / rowsPerPage));
-      } else {
+      try {
+        const params = { userId };
+        if (searchTerm && searchTerm.trim() !== '') {
+          params.searchTerm = searchTerm.toLowerCase();
+          params.searchColumn = searchColumn;
+        }
+
+        console.log('params', params);  // debug
+
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/delivered`, { params });
+        if (response.data && Array.isArray(response.data.orders)) {
+          const filteredOrders = response.data.orders.filter(order =>
+            order.status === 'delivered' || (order.status === 'ready_to_ship' && (order.substatus === 'picked_up' || order.substatus === 'in_hub'))
+          );
+          const ordersWithTranslatedStatus = filteredOrders.map(order => ({
+            ...order,
+            translatedStatus: translateStatus(order.status, order.substatus)
+          }));
+          setPedido(ordersWithTranslatedStatus);
+          setTotalPages(Math.ceil(ordersWithTranslatedStatus.length / rowsPerPage));
+        }
+        // testar um else ou deixar so o catch (ver se o retorno é um array vazio)
+      } catch (error) {
+        console.error('Erro ao buscar os pedidos:', error);
         setPedido([]);
         setTotalPages(1);
       }
     };
     getOrders();
-  }, [rowsPerPage, currentPage, userId]);
+  }, [rowsPerPage, currentPage, userId, searchTerm, searchColumn]);
 
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
@@ -68,7 +78,7 @@ export default function EnviadosTabela() {
     } else if (currentPage < 1) {
       setCurrentPage(1);
     }
-  }, [totalPages, currentPage]);
+  }, [totalPages, currentPage, userId]);
 
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {

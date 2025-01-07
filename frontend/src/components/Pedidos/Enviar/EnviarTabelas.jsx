@@ -3,9 +3,9 @@ import { searchUserId } from '@/utils/searchUserId';
 import EnviarRow from './EnviarRow';
 import axios from 'axios';
 import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsContent';
-import {EnviarMenuMoreResponsive} from './EnviarMenuMoreResponsive';
+import { EnviarMenuMoreResponsive } from './EnviarMenuMoreResponsive';
 
-export default function EnviarTabela() {
+export default function EnviarTabela({ searchTerm, searchColumn }) {
   const [shippingIdOrder, setShippingIdOrder] = useState([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
@@ -15,7 +15,7 @@ export default function EnviarTabela() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [pedido, setPedido] = useState([]);
-  
+
   const closeModal = () => {
     setIsModalTr(false);
   }
@@ -31,9 +31,15 @@ export default function EnviarTabela() {
       if (!userId) return;
 
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/issue`, {
-          params: { userId }
-        });
+        const params = { userId };
+        if (searchTerm && searchTerm.trim() !== '') {
+          params.searchTerm = searchTerm.toLowerCase();
+          params.searchColumn = searchColumn;
+        }
+
+        console.log('params', params);  // debug
+
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/issue`, { params });
 
         if (response.data && Array.isArray(response.data.orders)) {
           setPedido(response.data.orders);
@@ -50,7 +56,7 @@ export default function EnviarTabela() {
     };
 
     fetchOrders();
-  }, [rowsPerPage, currentPage]);
+  }, [rowsPerPage, currentPage, searchTerm, searchColumn]);
 
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
@@ -80,7 +86,7 @@ export default function EnviarTabela() {
 
   return (
     <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">
-      <EnviarMenuMoreResponsive 
+      <EnviarMenuMoreResponsive
         showCheckboxes={showCheckboxes}
         showCheckboxesAll={showCheckboxesAll}
         setShowCheckboxes={setShowCheckboxes}
@@ -108,9 +114,9 @@ export default function EnviarTabela() {
             </tr>
           </thead>
           <tbody>
-            <EnviarRow 
-              toggleShowCheckboxes={showCheckboxes} 
-              toggleShowCheckboxesAll={showCheckboxesAll} 
+            <EnviarRow
+              toggleShowCheckboxes={showCheckboxes}
+              toggleShowCheckboxesAll={showCheckboxesAll}
               setShippingIdOrder={setShippingIdOrder}
               setOrder={handleOrderSelect}
               pedido={paginatedPedido}
@@ -118,7 +124,7 @@ export default function EnviarTabela() {
           </tbody>
         </table>
       </div>
-      {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder}/>}
+      {isModalTr && <ModalDetailsContent onClose={closeModal} order={selectedOrder} />}
     </div>
   );
 };

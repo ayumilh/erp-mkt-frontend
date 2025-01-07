@@ -36,7 +36,7 @@ const PedidosTabela = ({ searchTerm, searchColumn }) => {
       }
     };
     getOrders();
-  }, [rowsPerPage, currentPage, searchTerm]);
+  }, [rowsPerPage, currentPage, searchTerm, searchColumn]);
 
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {

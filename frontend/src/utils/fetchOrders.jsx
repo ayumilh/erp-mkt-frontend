@@ -11,8 +11,6 @@ export const fetchOrders = async (searchTerm = '', searchColumn) => {
             params.searchTerm = searchTerm.toLowerCase();
             params.searchColumn = searchColumn;
         }
-
-        console.log('params:', params);
         
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/orders`, { params });
         return response.data.orders;

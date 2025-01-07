@@ -12,7 +12,7 @@ const ErrorEmpty = ({title, onClose}) => {
     }, 4000); 
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [onClose]);
 
   if (!isOpen) {
     return null;

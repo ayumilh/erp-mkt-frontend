@@ -70,7 +70,7 @@ const ProdutosTabela = ({ searchTerm, searchColumn, onFilterStatus, route }) => 
     };
 
     fetchProducts();
-  }, [route, searchTerm]);
+  }, [route, searchTerm, searchColumn]);
 
 
   // selecionar todos os checkboxes

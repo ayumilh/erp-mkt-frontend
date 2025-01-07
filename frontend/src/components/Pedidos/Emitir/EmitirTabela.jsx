@@ -5,7 +5,7 @@ import { EmitirMenuMoreResponsive } from './EmitirMenuMoreResponsive';
 import SuccessNotification from '../../Geral/Notifications/SuccessNotification';
 import ErrorNotification from '../../Geral/Notifications/ErrorNotification';
 
-export default function EmitirTabela() {
+export default function EmitirTabela({ searchTerm, searchColumn }) {
   const [shippingIdOrder, setShippingIdOrder] = useState([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
@@ -62,6 +62,8 @@ export default function EmitirTabela() {
               toggleShowCheckboxesAll={showCheckboxesAll}
               setShippingIdOrder={setShippingIdOrder}
               setOrder={handleOrderSelect}
+              searchColumn={searchColumn}
+              searchTerm={searchTerm}
             />
           </tbody>
         </table>

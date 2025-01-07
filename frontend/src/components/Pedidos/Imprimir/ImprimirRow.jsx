@@ -8,7 +8,7 @@ import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder }) {
+export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleShowCheckboxesAll, setShippingIdOrder, searchTerm, searchColumn }) {
   const [pedido, setPedido] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [groupOrdersProducts, setGroupOrdersProducts] = useState([]);
@@ -21,9 +21,15 @@ export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleS
       if (!userId) return;
 
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/ready`, {
-          params: { userId }
-        });
+        const params = { userId };
+        if (searchTerm && searchTerm.trim() !== '') {
+          params.searchTerm = searchTerm.toLowerCase();
+          params.searchColumn = searchColumn;
+        }
+
+        console.log(params);  // debug
+
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/ready`, { params });
         if (response.data && Array.isArray(response.data.orders)) {
           const groupedOrderByShippingId = response.data.orders.reduce((groupedOrderByShippingId, order) => {
             if (order.shipping_id !== null) {
@@ -47,7 +53,7 @@ export default function ImprimirRow({ setOrder, setToggleShowCheckboxes, toggleS
     };
 
     fetchOrders();
-  }, []);
+  }, [searchTerm, searchColumn]);
 
 
   const shippingIdCounts = {};

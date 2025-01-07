@@ -39,11 +39,11 @@ const PedidosContent = () => {
         <PedidosHeader setActiveTable={setActiveTable}/>
         <PedidosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchColumn={searchColumn} setSearchColumn={setSearchColumn} />
         {activeTable === 'Pedidos' && <PedidosTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
-        {activeTable === 'Emitir' && <EmitirTabela />}
-        {activeTable === 'Imprimir' && <ImprimirTabela />}
-        {activeTable === 'Enviar' && <EnviarTabela />}
-        {activeTable === 'Retirada' && <RetiradaTabela />}
-        {activeTable === 'Enviado' && <EnviadosTabela />}
+        {activeTable === 'Emitir' && <EmitirTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
+        {activeTable === 'Imprimir' && <ImprimirTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
+        {activeTable === 'Enviar' && <EnviarTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
+        {activeTable === 'Retirada' && <RetiradaTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
+        {activeTable === 'Enviado' && <EnviadosTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
@@ -43,11 +43,11 @@ const BtnActionsFilter = () => {
     });
   };
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = useCallback((event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
       handleCloseModal();
     }
-  };
+  }, [handleCloseModal]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,7 +71,7 @@ const BtnActionsFilter = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, handleClickOutside]);
 
   return (
     <div>

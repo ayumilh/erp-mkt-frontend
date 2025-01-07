@@ -9,7 +9,7 @@ const ProdutosActionsFilter = ({ setSearchTerm, searchTerm, searchColumn, setSea
 
       <form className="mt-[14px] md:flex lg:justify-start 2xl:justify-center xl:ml-5 w-full">
         <div className='flex w-full items-center'>
-          <div className="flex w-3/6">
+          <div className="flex w-2/6 md:w-3/6 xl:w-2/6 2xl:w-1/6">
             <select
               title='Coluna de Pesquisa'
               className="dark:bg-neutral-800 w-full dark:text-gray-200 h-9 rounded-l text-xs md:text-sm font-normal py-2 px-3"
