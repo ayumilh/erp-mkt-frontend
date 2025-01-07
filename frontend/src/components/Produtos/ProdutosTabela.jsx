@@ -14,7 +14,7 @@ import ModalGerarProdutos from "./Actions/ModalGerarProdutos";
 import { ProdutosMenuMoreResponsive } from "./Actions/ProdutosMenuMoreResponsive";
 
 
-const ProdutosTabela = ({ searchTerm, searchColumn, onFilterStatus, route }) => {
+const ProdutosTabela = ({ searchTerm, searchColumn, onFilterStatus, route, filteredProducts }) => {
   const [products, setProducts] = useState([]);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedSku, setSelectedSku] = useState(null);
@@ -31,14 +31,26 @@ const ProdutosTabela = ({ searchTerm, searchColumn, onFilterStatus, route }) => 
     const fetchProducts = async () => {
       const userId = searchUserId();
       if (!userId) return;
+      console.log('filteredProducts', filteredProducts);
 
       try {
         const params = { userId };
+
+        // pesquisa
         if (searchTerm && searchTerm.trim() !== '') {
           params.searchTerm = searchTerm.toLowerCase();
           params.searchColumn = searchColumn;
         }
 
+        // filtros
+        if (filteredProducts.precoMin) {
+          params.precoMin = parseFloat(filteredProducts.precoMin);
+        }
+        if (filteredProducts.precoMax) {
+          params.precoMax = parseFloat(filteredProducts.precoMax);
+        }
+
+        // rotas de busca
         let response;
         if (route === 'mercadolivre') {
           response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, { params });
@@ -70,7 +82,7 @@ const ProdutosTabela = ({ searchTerm, searchColumn, onFilterStatus, route }) => 
     };
 
     fetchProducts();
-  }, [route, searchTerm, searchColumn]);
+  }, [route, searchTerm, searchColumn, filteredProducts]);
 
 
   // selecionar todos os checkboxes

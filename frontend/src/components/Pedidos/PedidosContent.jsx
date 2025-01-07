@@ -17,6 +17,7 @@ const PedidosContent = () => {
   const [activeTable, setActiveTable] = useState('Pedidos');
   const [searchTerm, setSearchTerm] = useState(null);  
   const [searchColumn, setSearchColumn] = useState('title');
+  const [filteredOrders, setFilteredOrders] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -24,6 +25,10 @@ const PedidosContent = () => {
       setActiveTable(router.query.activeTable);
     }
   }, [router.isReady, router.query]);
+
+  const fetchFilteredOrders = async (filters) => {
+    setFilteredOrders(filters);
+  };
 
   return (
     <div className='w-full px-4 lg:mt-4 xl:mx-8 xl:flex xl:flex-col xl:items-center'>
@@ -37,8 +42,8 @@ const PedidosContent = () => {
 
       <div className='w-full flex flex-col items-center mt-7 lg:mb-10'>
         <PedidosHeader setActiveTable={setActiveTable}/>
-        <PedidosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchColumn={searchColumn} setSearchColumn={setSearchColumn} />
-        {activeTable === 'Pedidos' && <PedidosTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
+        <PedidosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchColumn={searchColumn} setSearchColumn={setSearchColumn} filteredOrders={fetchFilteredOrders} setFilteredOrders={setFilteredOrders} />
+        {activeTable === 'Pedidos' && <PedidosTabela searchTerm={searchTerm} searchColumn={searchColumn} filteredOrders={filteredOrders} />}
         {activeTable === 'Emitir' && <EmitirTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
         {activeTable === 'Imprimir' && <ImprimirTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
         {activeTable === 'Enviar' && <EnviarTabela searchTerm={searchTerm} searchColumn={searchColumn} />}

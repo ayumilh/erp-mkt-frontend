@@ -1,7 +1,10 @@
 import BtnActive from '@/components/Geral/Button/BtnActive';
 import BtnActionsFilter from '../Geral/Dropdown/BtnActionsFilter';
 
-const ProdutosActionsFilter = ({ setSearchTerm, searchTerm, searchColumn, setSearchColumn, onFilterChange }) => {
+const ProdutosActionsFilter = ({ setSearchTerm, searchTerm, searchColumn, setSearchColumn, onFilterChange, setFilteredProducts }) => {
+  const handleFilteredProductsData = (data) => {
+    setFilteredProducts(data);
+  };
 
   return (
     <div className="bg-primaria-900 dark:bg-dark-primaria-900 hover:shadow-input transition-all ease-in duration-500 rounded-2xl xl:flex w-full min-h-max px-4 py-5 xl:px-8 xl:items-center">
@@ -34,7 +37,7 @@ const ProdutosActionsFilter = ({ setSearchTerm, searchTerm, searchColumn, setSea
           </div>
 
           <div>
-            <BtnActionsFilter />
+            <BtnActionsFilter onConfirm={handleFilteredProductsData} />
           </div>
         </div>
 

@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-const BtnActionsFilter = () => {
+const BtnActionsFilter = ({ onConfirm }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef(null);
 
@@ -57,7 +57,9 @@ const BtnActionsFilter = () => {
     }));
   };
 
-  const handleConfirm = () => {
+
+  const handleConfirm = async () => {
+    onConfirm(filters);
     handleCloseModal();
   };
 
@@ -76,7 +78,7 @@ const BtnActionsFilter = () => {
   return (
     <div>
       <button className="rounded mx-3" type="button" onClick={handleButtonClick}>
-        <FilterListIcon fontSize='small' className='dark:text-gray-300 dark:hover:text-white'/>
+        <FilterListIcon fontSize='small' className='dark:text-gray-300 dark:hover:text-white' />
       </button>
 
       {isModalOpen && (
@@ -111,7 +113,7 @@ const BtnActionsFilter = () => {
               <div className="w-full mb-4 flex items-center">
                 <label className="w-1/3 text-gray-700 dark:text-gray-200">Código de Barras</label>
                 <select name="codigoBarras" placeholder="Por favor selecione" value={filters.codigoBarras} onChange={handleChange} className="w-2/3 p-2 border rounded dark:bg-neutral-700 dark:border-neutral-600 dark:text-gray-200">
-                <option value="" disabled>Por favor selecione</option>
+                  <option value="" disabled>Por favor selecione</option>
                   <option value="">Tudo</option>
                   <option value="tem">Tem códigos de barras</option>
                   <option value="nao-tem">Não tem</option>

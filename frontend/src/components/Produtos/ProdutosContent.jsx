@@ -17,6 +17,7 @@ const ProdutosContent = () => {
   const [filterStatus, setFilterStatus] = useState('all');
   const [searchTerm, setSearchTerm] = useState(null);  
   const [searchColumn, setSearchColumn] = useState('title');
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [requestStatus, setRequestStatus] = useState(null);
   const [route, setRoute] = useState('mercadolivre');
@@ -24,6 +25,10 @@ const ProdutosContent = () => {
 
   const handleFilterChange = (newFilter) => {
     setFilterStatus(newFilter);
+  };
+
+  const fetchFilteredProducts = async (filters) => {
+    setFilteredProducts(filters);
   };
 
   const handleSyncProducts = async () => {
@@ -60,8 +65,8 @@ const ProdutosContent = () => {
         >
           {loading ? <CircularProgress color="inherit" size={12} className='text-white' /> : 'Sincronizar produtos Shopee'}
         </button> */}
-        <ProdutosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchColumn={searchColumn} setSearchColumn={setSearchColumn} onFilterChange={handleFilterChange} />
-        <ProdutosTabela searchTerm={searchTerm} searchColumn={searchColumn} onFilterStatus={filterStatus} route={route} />
+        <ProdutosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchColumn={searchColumn} setSearchColumn={setSearchColumn} onFilterChange={handleFilterChange} filteredProducts={fetchFilteredProducts} setFilteredProducts={setFilteredProducts} />
+        <ProdutosTabela searchTerm={searchTerm} searchColumn={searchColumn} onFilterStatus={filterStatus} route={route} filteredProducts={filteredProducts} />
       </div>
 
       {requestStatus === true && <SuccessNotification message="Produtos da Shopee sincronizados com sucesso" />}

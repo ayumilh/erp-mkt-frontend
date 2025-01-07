@@ -1,7 +1,11 @@
 import BtnActive from '../Geral/Button/BtnActive';
 import BtnActionsFilter from '../Geral/Dropdown/BtnActionsFilter';
 
-const PedidosActionsFilter = ({ setSearchTerm, searchTerm = '', searchColumn, setSearchColumn }) => {
+const PedidosActionsFilter = ({ setSearchTerm, searchTerm = '', searchColumn, setSearchColumn, setFilteredOrders }) => {
+  const handleFilteredOrdersData = (data) => {
+    setFilteredOrders(data);
+  };
+
   return (
     <div className="bg-primaria-900 dark:bg-dark-primaria-900 hover:shadow-input transition-all ease-in duration-500 rounded-2xl xl:flex w-full min-h-max px-4 py-5 xl:px-8 xl:items-center">
       <h2 className='text-sm lg:text-base text-neutral-700 dark:text-gray-200 font-semibold whitespace-nowrap'>O que você procura?</h2>
@@ -34,7 +38,7 @@ const PedidosActionsFilter = ({ setSearchTerm, searchTerm = '', searchColumn, se
           </div>
 
           <div>
-            <BtnActionsFilter />
+            <BtnActionsFilter onConfirm={handleFilteredOrdersData} />
           </div>
         </div>
 
