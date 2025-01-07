@@ -38,7 +38,7 @@ const PedidosContent = () => {
       <div className='w-full flex flex-col items-center mt-7 lg:mb-10'>
         <PedidosHeader setActiveTable={setActiveTable}/>
         <PedidosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchColumn={searchColumn} setSearchColumn={setSearchColumn} />
-        {activeTable === 'Pedidos' && <PedidosTabela searchTerm={searchTerm} />}
+        {activeTable === 'Pedidos' && <PedidosTabela searchTerm={searchTerm} searchColumn={searchColumn} />}
         {activeTable === 'Emitir' && <EmitirTabela />}
         {activeTable === 'Imprimir' && <ImprimirTabela />}
         {activeTable === 'Enviar' && <EnviarTabela />}

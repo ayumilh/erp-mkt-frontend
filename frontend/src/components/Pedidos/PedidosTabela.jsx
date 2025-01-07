@@ -5,7 +5,7 @@ import PedidosRow from "./PedidosRow";
 import ModalDetailsContent from "./Actions/ModalDetailsPedidos/ModalDetailsContent";
 import { PedidosMenuMoreResponsive } from './Actions/PedidosMenuMoreResponsive';
 
-const PedidosTabela = ({ searchTerm }) => {
+const PedidosTabela = ({ searchTerm, searchColumn }) => {
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   
@@ -26,7 +26,7 @@ const PedidosTabela = ({ searchTerm }) => {
   useEffect(() => {
     // buscando pedidos
     const getOrders = async () => {
-      const ordersData = await fetchOrders(searchTerm);
+      const ordersData = await fetchOrders(searchTerm, searchColumn);
       if (ordersData && Array.isArray(ordersData)) {
         setPedido(ordersData);
         setTotalPages(Math.ceil(ordersData.length / rowsPerPage));

@@ -14,7 +14,7 @@ import ModalGerarProdutos from "./Actions/ModalGerarProdutos";
 import { ProdutosMenuMoreResponsive } from "./Actions/ProdutosMenuMoreResponsive";
 
 
-const ProdutosTabela = ({ searchTerm, onFilterStatus, route }) => {
+const ProdutosTabela = ({ searchTerm, searchColumn, onFilterStatus, route }) => {
   const [products, setProducts] = useState([]);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedSku, setSelectedSku] = useState(null);
@@ -36,6 +36,7 @@ const ProdutosTabela = ({ searchTerm, onFilterStatus, route }) => {
         const params = { userId };
         if (searchTerm && searchTerm.trim() !== '') {
           params.searchTerm = searchTerm.toLowerCase();
+          params.searchColumn = searchColumn;
         }
 
         let response;

@@ -61,7 +61,7 @@ const ProdutosContent = () => {
           {loading ? <CircularProgress color="inherit" size={12} className='text-white' /> : 'Sincronizar produtos Shopee'}
         </button> */}
         <ProdutosActionsFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchColumn={searchColumn} setSearchColumn={setSearchColumn} onFilterChange={handleFilterChange} />
-        <ProdutosTabela searchTerm={searchTerm} onFilterStatus={filterStatus} route={route} />
+        <ProdutosTabela searchTerm={searchTerm} searchColumn={searchColumn} onFilterStatus={filterStatus} route={route} />
       </div>
 
       {requestStatus === true && <SuccessNotification message="Produtos da Shopee sincronizados com sucesso" />}

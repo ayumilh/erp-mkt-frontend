@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { searchUserId } from './searchUserId';
 
-export const fetchOrders = async (searchTerm = '') => {
+export const fetchOrders = async (searchTerm = '', searchColumn) => {
     const userId = searchUserId();
     if (!userId) return null;
 
@@ -9,7 +9,10 @@ export const fetchOrders = async (searchTerm = '') => {
         const params = { userId };
         if (searchTerm && searchTerm.trim() !== '') {
             params.searchTerm = searchTerm.toLowerCase();
+            params.searchColumn = searchColumn;
         }
+
+        console.log('params:', params);
         
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/orders`, { params });
         return response.data.orders;

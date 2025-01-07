@@ -11,7 +11,7 @@ const PedidosActionsFilter = ({ setSearchTerm, searchTerm = '', searchColumn, se
           <div className="flex w-3/6 md:w-2/6">
             <select
               title='Coluna de Pesquisa'
-              className="dark:bg-neutral-800 w-full dark:text-gray-200 h-9 rounded-l text-xs md:text-sm font-normal py-2 px-3"
+              className="dark:bg-neutral-800 w-full dark:text-gray-200 h-9 rounded-l text-xs md:text-sm font-normal py-2 pl-2 pr-4"
               value={searchColumn}
               onChange={(e) => setSearchColumn(e.target.value)}
             >
