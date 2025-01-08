@@ -2,12 +2,14 @@
 import { useContext } from "react";
 import { signOut } from "next-auth/react";
 import { AuthContext } from "@/contexts/AuthContext";
+import Cookies from 'js-cookie';
 
 const ModalVerificationLogout = () => {
   const { isModalOpen, setIsModalOpen } = useContext(AuthContext);
   if (!isModalOpen) return null;
 
   const handleSignOut = () => {
+    Cookies.remove("userId");
     signOut();
   };
 

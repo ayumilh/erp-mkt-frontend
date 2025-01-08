@@ -31,8 +31,6 @@ const ProdutosTabela = ({ searchTerm, searchColumn, onFilterStatus, route, filte
     const fetchProducts = async () => {
       const userId = searchUserId();
       if (!userId) return;
-      console.log('filteredProducts', filteredProducts);
-
       try {
         const params = { userId };
 
