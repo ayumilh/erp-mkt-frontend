@@ -40,7 +40,7 @@ export default function Authmercado() {
       setUserId(userId);
 
       try {
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre`, { code, nome_loja, userId });
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/redirect`, { code, nome_loja, userId });
         if (res.status === 200) {
           setTitleMessageError('Conectado com sucesso.');
           setStatusRequestCodeMercado(true);
