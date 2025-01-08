@@ -10,7 +10,7 @@ const ModalVerificationLogout = () => {
 
   const handleSignOut = () => {
     Cookies.remove("userId");
-    signOut();
+    signOut({ callbackUrl: '/login' });
   };
 
   const handleCloseModal = () => {
