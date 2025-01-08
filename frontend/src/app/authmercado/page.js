@@ -32,14 +32,17 @@ export default function Authmercado() {
         if (res.status === 200) {
           setStatusRequestCodeMercado(true);
           router.push('/dashboard');
-        } else if (res.status === 409) {
-          setStatusRequestCodeMercado(false);
-          router.push('/dashboard');
         } else {
           setStatusRequestCodeMercado(false);
         }
       } catch (error) {
-        setStatusRequestCodeMercado(false);
+        if (error.response && error.response.status === 409) {
+          setStatusRequestCodeMercado(false);
+          router.push('/dashboard');
+        } else {
+          console.error('Erro ao processar a solicitação:', error);
+          setStatusRequestCodeMercado(false);
+        }
       }
     };
 
