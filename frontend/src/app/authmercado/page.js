@@ -15,7 +15,8 @@ import TitlePage from '@/components/Geral/TitlePage';
 
 export default function Authmercado() {
   const [statusRequestCodeMercado, setStatusRequestCodeMercado] = useState(null);
-  const [modalMessage, setModalMessage] = useState('');
+  const [titleMessageError, setTitleMessageError] = useState('');
+  const [messageError, setMessageError] = useState('');
   const router = useRouter();
   const [userId, setUserId] = useState('');
   const searchParams = useSearchParams();
@@ -25,14 +26,14 @@ export default function Authmercado() {
 
   useEffect(() => {
     if (!code || !nome_loja) {
-      setModalMessage('Dados de conexão não fornecidos.');
+      setMessageError('Dados de conexão não fornecidos.');
       return;
     }
 
     const fetchData = async () => {
       const userId = searchUserId();
       if (!userId) {
-        setModalMessage('Dados de conexão não fornecidos.');
+        setMessageError('Dados de conexão não fornecidos.');
         return;
       }
 
@@ -41,19 +42,38 @@ export default function Authmercado() {
       try {
         const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/redirect`, { code, nome_loja, userId });
         if (res.status === 200) {
-          setModalMessage('Conectado com sucesso.');
+          setTitleMessageError('Conectado com sucesso.');
           setStatusRequestCodeMercado(true);
-          router.push('/dashboard');
+          // router.push('/dashboard');
         } else {
-          setModalMessage('Erro ao processar a solicitação.');
+          setTitleMessageError('Erro ao processar a solicitação.');
+          setMessageError('Ocorreu um erro inesperado ao conectar sua loja. Por favor, verifique sua conexão com a internet e tente novamente mais tarde. Se o problema persistir, entre em contato com o suporte.');
           setStatusRequestCodeMercado(false);
         }
       } catch (error) {
         if (error.response && error.response.status === 409) {
-          setModalMessage('Loja já conectada.');
+          setTitleMessageError('Loja já conectada.');
+          setMessageError('Você já possui uma loja conectada a esta conta. Para conectar uma nova loja, você precisa desconectar a loja atual.');
+          setStatusRequestCodeMercado(false);
+        } else if (error.response && error.response.status === 401) {
+          setTitleMessageError('Erro de Autenticação');
+          setMessageError('As credenciais de acesso da sua loja estão incorretas. Verifique seu usuário e senha.');
+          setStatusRequestCodeMercado(false);
+        } else if (error.response && error.response.status === 403) {
+          setTitleMessageError('Acesso Negado');
+          setMessageError('Você não possui permissão para conectar esta loja. Entre em contato com o administrador.');
+          setStatusRequestCodeMercado(false);
+        } else if (error.response && error.response.status === 400) {
+          setTitleMessageError('Dados Inválidos');
+          setMessageError('Os dados fornecidos são inválidos. Verifique os campos e tente novamente.');
+          setStatusRequestCodeMercado(false);
+        } else if (error.response && error.response.status >= 500) {
+          setTitleMessageError('Erro no Servidor');
+          setMessageError('Ocorreu um problema em nossos servidores. Tente novamente mais tarde.');
           setStatusRequestCodeMercado(false);
         } else {
-          setModalMessage('Erro ao processar a solicitação.');
+          setTitleMessageError('Erro ao processar a solicitação.');
+          setMessageError('Ocorreu um erro inesperado ao conectar sua loja. Por favor, verifique sua conexão com a internet e tente novamente mais tarde. Se o problema persistir, entre em contato com o suporte.');
           setStatusRequestCodeMercado(false);
         }
       }
@@ -73,24 +93,21 @@ export default function Authmercado() {
           </div>
           <ActionsContent />
         </div>
-      </div>
+        <div className="flex flex-col items-center">
+          <div className="flex justify-center">
+            {statusRequestCodeMercado === true ? (
+              <Image src='/img/notification/sucess_request.svg' alt="Sucesso" className="w-96 h-96" width={384} height={384} />
+            ) : (
+              <Image src='/img/notification/error_bad_request.svg' alt="Erro" className="w-96 h-96" width={384} height={384} />
+            )}
+          </div>
 
-      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center">
-        <p className="mt-5 text-lg text-neutral-800 dark:text-gray-200">
-          {modalMessage}
-        </p>
+          <h1 className="text-xl text-neutral-800 dark:text-gray-200"> {titleMessageError} </h1>
+          <p> {messageError} </p>
 
-        <div className="mt-8 flex justify-center">
-          <Image src='/img/notification/error_bad_request.svg' alt="Erro" className="w-96 h-96" width={384} height={384} />
-        </div>
-        <div className="mt-8 flex justify-center">
-          {statusRequestCodeMercado === true ? (
-            <Image src='/img/notification/sucess_request.svg' alt="Sucesso" className="w-96 h-96" width={384} height={384} />
-          ) : (
-            <Image src='/img/notification/error_bad_request.svg' alt="Erro" className="w-96 h-96" width={384} height={384} />
-          )}
         </div>
       </div>
+
     </main>
   );
 }
