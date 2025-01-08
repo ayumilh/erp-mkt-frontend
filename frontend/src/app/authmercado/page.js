@@ -32,6 +32,9 @@ export default function Authmercado() {
         if (res.status === 200) {
           setStatusRequestCodeMercado(true);
           router.push('/dashboard');
+        } else if (res.status === 409) {
+          setStatusRequestCodeMercado(false);
+          router.push('/dashboard');
         } else {
           setStatusRequestCodeMercado(false);
         }
