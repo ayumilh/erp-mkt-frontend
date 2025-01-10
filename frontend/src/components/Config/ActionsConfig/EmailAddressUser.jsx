@@ -42,7 +42,7 @@ export const EmailAddressUser = ({ menuOpen, onMenuOpen }) => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         }
-    }, [dropdownRef]);
+    }, [dropdownRef, onMenuOpen]);  // add onMenuOpen, algum bug no dropdown do email, tirar dependencia
 
     return (
         <div className="w-full flex" ref={dropdownRef}>

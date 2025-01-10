@@ -309,11 +309,11 @@ const CriarAnuncioContent = () => {
           <div className='w-full flex flex-wrap mt-5'>
             <div className="w-full mt-3 mb-4 px-3">
               {/* <label htmlFor="pictureUrls" className="block mb-1 font-medium text-sm text-neutral-700 dark:text-gray-200">URL da imagem</label> */}
-              <div className="flex flex-col items-start gap-2 bg-gray-50 py-6 px-4">
+              <div className="flex flex-col items-start gap-2 bg-gray-50 dark:bg-neutral-800 py-6 px-4">
                 <div className="w-full mb-4">
                   <button
                     onClick={handleButtonClick}
-                    className="flex items-center peer rounded-sm w-full py-2 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out group"
+                    className="flex items-center peer rounded-sm w-full py-2 pl-3 font-medium text-neutral-600 dark:text-gray-200 dark:bg-neutral-600 dark:border-neutral-700 focus:rounded-lg focus:outline-2 outline-blue-400 focus:outline-blue-400 dark:outline-gray-600 dark:focus:outline-gray-600 transition-all duration-500 ease-out group"
                   >
                     <AddIcon fontSize="small" className="mr-2 text-neutral-700 dark:text-gray-300 group-hover:text-blue-500 dark:group-hover:text-gray-200" />
                     <p className="font-medium text-neutral-700 dark:text-gray-300 group-hover:text-blue-500 dark:group-hover:text-gray-200">Adicionar imagem</p>

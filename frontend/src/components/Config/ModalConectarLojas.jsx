@@ -1,8 +1,10 @@
 'use client';
 import { useEffect, useState } from "react";
 import CryptoJS from 'crypto-js';
+import { v4 as uuidv4 } from 'uuid';
 
 const ModalConectarLojas = ({ onClose, drawerClose }) => {
+  const uniqueParam = uuidv4();
   const [selectedStore, setSelectedStore] = useState('Mercado Livre');
 
   const handleStoreChange = (event) => {
@@ -16,7 +18,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
     if (selectedStore === 'Mercado Livre') {
       const clientId = 5338784930427680;
       const redirectUri = "https://erp-mkt-frontend.vercel.app/authmercado/"
-      authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
+      authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&prompt=login&state=${uniqueParam}`;
 
     } else if (selectedStore === 'Shopee') {
       const partnerId = "2009306";

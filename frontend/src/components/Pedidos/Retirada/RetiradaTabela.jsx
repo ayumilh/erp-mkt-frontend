@@ -4,7 +4,7 @@ import ModalDetailsContent from '../Actions/ModalDetailsPedidos/ModalDetailsCont
 import RetiradaRow from './RetiradaRow';
 import { RetiradaMenuMoreResponsive } from './RetiradaMenuMoreResponsive';
 
-export default function RetiradaTabela() {
+export default function RetiradaTabela({ searchTerm, searchColumn, filteredOrders }) {
   const [shippingIdOrder, setShippingIdOrder] = useState([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
@@ -36,7 +36,7 @@ export default function RetiradaTabela() {
 
   useEffect(() => {
     const getOrders = async () => {
-      const ordersData = await fetchOrders();
+      const ordersData = await fetchOrders(searchTerm, searchColumn, filteredOrders);
       if (ordersData && Array.isArray(ordersData)) {
         const filteredOrders = ordersData.filter(order =>
           order.status === 'ready_to_ship' && (order.substatus === 'printed')
@@ -53,7 +53,7 @@ export default function RetiradaTabela() {
       }
     };
     getOrders();
-  }, [rowsPerPage]);
+  }, [rowsPerPage, currentPage, searchTerm, searchColumn, filteredOrders]);
 
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {

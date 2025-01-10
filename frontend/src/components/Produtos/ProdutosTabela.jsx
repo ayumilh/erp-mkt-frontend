@@ -15,7 +15,7 @@ import { CldImage } from 'next-cloudinary';
 import { ProdutosMenuMoreResponsive } from "./Actions/ProdutosMenuMoreResponsive";
 
 
-const ProdutosTabela = ({ onFilterStatus, route }) => {
+const ProdutosTabela = ({ searchTerm, searchColumn, onFilterStatus, route, filteredProducts }) => {
   const [products, setProducts] = useState([]);
   const [isModalTr, setIsModalTr] = useState(false);
   const [selectedSku, setSelectedSku] = useState(null);
@@ -25,23 +25,36 @@ const ProdutosTabela = ({ onFilterStatus, route }) => {
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [showCheckboxesAll, setShowCheckboxesAll] = useState(false);
   const router = useRouter();
+
   const [selectedProducts, setSelectedProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       const userId = searchUserId();
       if (!userId) return;
-
       try {
+        const params = { userId };
+
+        // pesquisa
+        if (searchTerm && searchTerm.trim() !== '') {
+          params.searchTerm = searchTerm.toLowerCase();
+          params.searchColumn = searchColumn;
+        }
+
+        // filtros
+        if (filteredProducts.precoMin) {
+          params.precoMin = parseFloat(filteredProducts.precoMin);
+        }
+        if (filteredProducts.precoMax) {
+          params.precoMax = parseFloat(filteredProducts.precoMax);
+        }
+
+        // rotas de busca
         let response;
         if (route === 'mercadolivre') {
-          response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, {
-            params: { userId }
-          });
+          response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/products`, { params });
         } else if (route === 'shopee') {
-          response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shopee/products`, {
-            params: { userId }
-          });
+          response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shopee/products`, { params: { userId } });
         }
         if (response.data && Array.isArray(response.data.products)) {
           const restructuredData = response.data.products.map((product) => {
@@ -66,8 +79,9 @@ const ProdutosTabela = ({ onFilterStatus, route }) => {
         setIsLoading(false);
       }
     };
+
     fetchProducts();
-  }, [route]);
+  }, [route, searchTerm, searchColumn, filteredProducts]);
 
 
   // selecionar todos os checkboxes
