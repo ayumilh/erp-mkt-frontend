@@ -11,6 +11,7 @@ import ModalDetailsProdutos from "./Actions/ModalDetailsProdutos";
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import SkeletonLoader from "@/components/Geral/SkeletonTableRow"
 import ModalGerarProdutos from "./Actions/ModalGerarProdutos";
+import { CldImage } from 'next-cloudinary';
 import { ProdutosMenuMoreResponsive } from "./Actions/ProdutosMenuMoreResponsive";
 
 
@@ -208,6 +209,20 @@ const ProdutosTabela = ({ onFilterStatus, route }) => {
     }
   }, [menuMoreVertRef])
 
+
+  const [imageUrls, setImageUrls] = useState([]);
+  const fileInputRef = useRef(null);
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+  const handleImageError = (index) => {
+    setImageUrls(prevUrls => {
+      const newUrls = [...prevUrls];
+      newUrls[index] = 'https://via.placeholder.com/100';
+      return newUrls;
+    });
+  };
+
   return (
     <div className="bg-primaria-900 dark:bg-dark-primaria-900 rounded-2xl w-full flex flex-col mt-4 mb-10 overflow-x-auto">
       <ProdutosMenuMoreResponsive
@@ -263,8 +278,21 @@ const ProdutosTabela = ({ onFilterStatus, route }) => {
                     )}
                   </td>
                   <td className="w-[200px] xl:w-auto flex items-center gap-3 pl-6 pr-4 py-4 md:py-5">
-                    {product.pictureUrls &&
-                      <Image src={product.pictureUrls} alt='Imagem do produto' width='42' height='42' className="w-10 h-10" />
+                    {product.pictureUrls && (
+                        <CldImage
+                          src={product.pictureUrls}
+                          width='42'
+                          height='42'
+                          alt='Imagem do produto'
+                          className="w-10 h-10"
+                          style={{ objectFit: 'cover', width: '42px', height: '42px' }}
+                          crop={{
+                            type: 'auto',
+                            source: true
+                          }}
+                          onError={() => handleImageError(index)}
+                        />
+                    )
                     }
                     <button
                       className="text-blue-600 font-medium hover:underline focus:outline-none cursor-pointer"

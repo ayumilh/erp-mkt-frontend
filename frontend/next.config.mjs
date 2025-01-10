@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'http2.mlstatic.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
     ],
   },
 };
