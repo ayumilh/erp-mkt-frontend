@@ -14,7 +14,7 @@ export const AnaliseHeader = ({ setActiveTable }) => {
             <div className="flex gap-4">
                 {/* <DropdownRelatoriosHeader setActiveTable={setActiveTable} /> */}
                 <button onClick={() => handleClick('Geral')} className={`${currentText === 'Geral' ? 'border-b-2 border-segundaria-900' : 'border-transparent'} flex items-center justify-center px-2 md:px-3 py-2 border-b-2 border-segundaria-900 hover:border-b-2 hover:border-gray-300 transform focus:-translate-y-0.5 focus:scale-60 transition duration-300 ease-in-out`}>
-                    <p className="hover:text-black dark:text-gray-300 dark:hover:text-white  font-medium cursor-pointer">Geral</p>
+                    <p className="hover:text-black dark:text-gray-300 dark:hover:text-white font-medium cursor-pointer">Geral</p>
                 </button>
                 <button onClick={() => handleClick('Vendas')} className={`${currentText === 'Vendas' ? 'border-b-2 border-segundaria-900' : 'border-transparent'} flex items-center justify-center px-2 md:px-3 py-2 border-b-2 border-segundaria-900 hover:border-b-2 hover:border-gray-300 transform focus:-translate-y-0.5 focus:scale-60 transition duration-300 ease-in-out`}>
                     <p className="hover:text-black dark:text-gray-300 dark:hover:text-white  font-medium cursor-pointer">Vendas</p>

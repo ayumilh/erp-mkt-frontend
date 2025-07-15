@@ -44,7 +44,6 @@ export default function Authmercado() {
         if (res.status === 200) {
           setTitleMessageError('Conectado com sucesso.');
           setStatusRequestCodeMercado(true);
-          // router.push('/dashboard');
         } else {
           setTitleMessageError('Erro ao processar a solicitação.');
           setMessageError('Por favor, verifique sua conexão com a internet ou tente novamente mais tarde. Se o problema persistir, entre em contato com o suporte.');

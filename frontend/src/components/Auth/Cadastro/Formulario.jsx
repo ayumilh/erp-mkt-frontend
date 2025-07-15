@@ -263,11 +263,11 @@ const Formulario = () => {
                 onBlur={() => validatePasswords(inputs.senha, confirmPassword)}
               />
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center mb-1 md:mb-2 cursor-pointer">
-              {isPasswordsValid === null ? null : isPasswordsValid ? (
-        <CheckIcon className="text-green-500" />
-      ) : (
-        <ErrorIcon className="text-red-500" />
-      )}
+                {isPasswordsValid === null ? null : isPasswordsValid ? (
+                  <CheckIcon className="text-green-500" />
+                ) : (
+                  <ErrorIcon className="text-red-500" />
+                )}
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowConfirmPassword}
