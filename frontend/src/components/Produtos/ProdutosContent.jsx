@@ -8,7 +8,7 @@ import ProdutosHeader from './ProdutosHeader';
 import TitlePage from '../Geral/TitlePage';
 import axios from 'axios';
 import { searchUserId } from '../../utils/searchUserId';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 import SuccessNotification from '../Geral/Notifications/SuccessNotification';
 import ErrorNotification from '../Geral/Notifications/ErrorNotification';
 
