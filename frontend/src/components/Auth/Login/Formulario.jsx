@@ -1,7 +1,7 @@
 'use client'
 import { useState, useContext, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
-import { AuthContext } from '@/contexts/AuthContext'
+import axios from 'axios';
 import HeaderForm from "./HeaderForm";
 import * as Yup from 'yup'
 import CircularProgress from '@mui/material/CircularProgress';
@@ -37,7 +37,7 @@ const Formulario = () => {
             setErrors({})
             try {
                 const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
-                    inputs,
+                    { email, senha },
                     { withCredentials: true }
                 );
 
