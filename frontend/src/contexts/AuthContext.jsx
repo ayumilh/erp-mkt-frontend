@@ -1,7 +1,6 @@
 "use client";
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useSession, signIn } from "next-auth/react";
 
 export const AuthContext = createContext();
 
@@ -9,7 +8,6 @@ export const AuthContextProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState();
   const [userInfo, setUserInfo] = useState([]);
-  const { data: session } = useSession();
 
   // usado no BtnSignOut
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,10 +29,6 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const loginWithGoogle = async () => {
-    await signIn("google", { callbackUrl: "/dashboard" });
-  };
-
   useEffect(() => {
 
     const fetchUserInfo = async () => {
@@ -54,13 +48,6 @@ export const AuthContextProvider = ({ children }) => {
       fetchUserInfo();
     }
   }, [currentUser]);
-
-  useEffect(() => {
-    if (session) {
-      setCurrentUser(session.user);
-      setIsAuthenticated(true);
-    }
-  }, [session]);
 
   return (
     <AuthContext.Provider

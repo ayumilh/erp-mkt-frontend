@@ -3,14 +3,14 @@ import { useContext, useRef, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LinkIcon from '@mui/icons-material/Link';
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import ModalConectarLojas from "@/components/Config/ModalConectarLojas";
 import ToggleTheme from "@/components/Config/ActionsConfig/ToggleTheme";
 import BtnSignOut from "./BtnSignOut";
 
 export const EmailAddressUser = ({ menuOpen, onMenuOpen }) => {
     const { userInfo } = useContext(AuthContext);
-    const { data: session } = useSession();
+    // const { data: session } = useSession();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
@@ -46,13 +46,13 @@ export const EmailAddressUser = ({ menuOpen, onMenuOpen }) => {
 
     return (
         <div className="w-full flex" ref={dropdownRef}>
-            <span
+            {/* <span
                 className="font-medium max-w-20 md:w-full overflow-hidden text-sm"
                 style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
                 title={session?.session?.user?.email || (userInfo.length > 0 ? userInfo[0].email : "")}
             >
                 {session?.session?.user?.email || (userInfo.length > 0 ? userInfo[0].email : "")}
-            </span>
+            </span> */}
             <div className="relative">
                 <KeyboardArrowDownIcon
                     onClick={toggleDropdown}

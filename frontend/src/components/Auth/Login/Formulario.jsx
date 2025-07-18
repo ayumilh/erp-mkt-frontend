@@ -11,8 +11,6 @@ import LockIcon from "@mui/icons-material/Lock"
 import { IconButton } from "@mui/material"
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { signIn } from 'next-auth/react';
-import Cookies from 'js-cookie';
 
 
 const YupValidation = Yup.object().shape({

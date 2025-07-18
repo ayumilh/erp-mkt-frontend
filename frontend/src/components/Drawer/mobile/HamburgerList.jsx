@@ -1,6 +1,5 @@
 'use client'
 import Link from "next/link";
-import { signOut } from "next-auth/react";
 import { Divider } from "@mui/material";
 import { usePathname } from "next/navigation";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -119,7 +118,7 @@ const HamburgerList = ({ open, onIsModalOpen, onSetIsModalOpen }) => {
                 </li>
                 <li className="flex flex-col mb-1">
                     <button
-                        onClick={() => signOut()}
+                        onClick={console.log("Support clicked")}
                         className='flex w-[160px] h-12 px-4 justify-start'
                     >
                         <span
