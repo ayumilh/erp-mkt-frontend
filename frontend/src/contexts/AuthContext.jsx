@@ -21,12 +21,13 @@ export const AuthContextProvider = ({ children }) => {
 
 
   const login = async (inputs) => {
+    console.log("Login inputs:", inputs);
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
         inputs,
         { withCredentials: true }
       );
-      Cookies.set("userId", JSON.stringify(res.data));
+      console.log("Login response:", res.data);
       setCurrentUser(res.data);
       setIsAuthenticated(true);
     } catch (error) {
