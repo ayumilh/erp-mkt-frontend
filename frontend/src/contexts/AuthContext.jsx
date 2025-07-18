@@ -29,25 +29,6 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-
-    const fetchUserInfo = async () => {
-      try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/info`,
-          { withCredentials: true }
-        );
-        if (res.data.user && res.data.user.length > 0) {
-          setUserInfo(res.data.user);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    if (currentUser) {
-      fetchUserInfo();
-    }
-  }, [currentUser]);
 
   return (
     <AuthContext.Provider
