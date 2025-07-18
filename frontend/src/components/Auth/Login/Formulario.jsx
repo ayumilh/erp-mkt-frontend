@@ -41,29 +41,8 @@ const Formulario = () => {
             setErrors({})
             try {
                 await login({ email, senha });
-                const getUserId = Cookies.get('userId') ? JSON.parse(Cookies.get('userId')) : null;
 
-                if (getUserId === null) {
-                    setErrors({ login: 'Usuário não encontrado. Por favor, verifique as informações inseridas e tente novamente. Se o problema persistir, entre em contato com nosso suporte.' });
-                    return;
-                }
-                
-                // const getToken = Cookies.get('token') ? JSON.parse(Cookies.get('token')) : null;
-                // if (getToken === null) {
-                //   setErrors({ login: 'Token não encontrado. Se o problema persistir, entre em contato com nosso suporte.' });
-                //   return;
-                // } 
-                const result = await signIn('credentials', {
-                    email,
-                    senha,
-                    redirect: false
-                });
-                if (result?.error) {
-                    setErrors({ login: 'Credenciais inválidas. Verifique seu e-mail e senha.' })
-                    return
-                } else {
-                    router.push('/dashboard')
-                }
+                router.push('/dashboard')
             } catch (error) {
                 if (error.response) {
                     if (error.response.status === 401) {
