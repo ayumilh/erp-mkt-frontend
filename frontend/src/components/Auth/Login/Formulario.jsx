@@ -22,7 +22,6 @@ const YupValidation = Yup.object().shape({
 });
 
 const Formulario = () => {
-    const { login } = useContext(AuthContext)
     const router = useRouter();
 
     const [email, setEmail] = useState('');
@@ -37,9 +36,16 @@ const Formulario = () => {
             await YupValidation.validate({ email, senha }, { abortEarly: false });
             setErrors({})
             try {
-                await login({ email, senha });
+                const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
+                    inputs,
+                    { withCredentials: true }
+                );
 
-                router.push('/dashboard')
+                if (res.status === 200) {;
+                    router.push('/dashboard'); 
+                } else {
+                    router.push('/');
+                }
             } catch (error) {
                 if (error.response) {
                     if (error.response.status === 401) {
