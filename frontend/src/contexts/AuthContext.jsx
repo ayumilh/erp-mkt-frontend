@@ -55,7 +55,6 @@ export const AuthContextProvider = ({ children }) => {
         isAuthenticated,
         currentUser,
         login,
-        loginWithGoogle,
         userInfo,
         setCurrentUser,
         setIsAuthenticated,

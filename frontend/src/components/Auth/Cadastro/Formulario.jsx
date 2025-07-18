@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import * as Yup from 'yup'
-import WithGoogle from '../WithGoogle'
 import HeaderForm from "./HeaderForm";
 import { Email } from "@mui/icons-material"
 import LockIcon from "@mui/icons-material/Lock"
@@ -326,7 +325,6 @@ const Formulario = () => {
         <button type='submit' onClick={handleLogin} disabled={isButtonDisabled} className={`w-full bg-gradient-to-r from-gradient-start to-gradient-end hover:bg-gradient-to-b hover:from-gradient-start-hover hover:to-gradient-end-hover rounded-full hover:shadow-segundaria text-white text-base py-3 md:text-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-60 ${isButtonDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
           {loggingLoading ? <><CircularProgress color="inherit" className="text-white" size={12} /> Criando...</> : 'Criar minha conta'}
         </button>
-        <WithGoogle loginType='cadastro' />
       </form>
     </div>
   )

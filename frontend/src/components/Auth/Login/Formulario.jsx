@@ -2,7 +2,6 @@
 import { useState, useContext, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/contexts/AuthContext'
-import WithGoogle from "../WithGoogle";
 import HeaderForm from "./HeaderForm";
 import * as Yup from 'yup'
 import CircularProgress from '@mui/material/CircularProgress';
@@ -152,7 +151,6 @@ const Formulario = () => {
                 <button type='submit' className="w-full bg-gradient-to-r from-gradient-start to-gradient-end hover:bg-gradient-to-b hover:from-gradient-start-hover hover:to-gradient-end-hover focus:bg-gradient-to-r focus:from-gradient-start-focus focus:to-gradient-end-focus rounded-full hover:shadow-lg text-white text-base py-3 md:text-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-60">
                     {loggingLoading ? <><CircularProgress color="inherit" className="text-white" size={12} /> Entrando...</> : 'Entrar'}
                 </button>
-                <WithGoogle loginType='login' />
             </form>
         </div>
     )
