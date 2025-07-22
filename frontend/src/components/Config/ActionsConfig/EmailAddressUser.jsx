@@ -3,7 +3,6 @@ import { useContext, useRef, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LinkIcon from '@mui/icons-material/Link';
-// import { useSession } from "next-auth/react";
 import ModalConectarLojas from "@/components/Config/ModalConectarLojas";
 import ToggleTheme from "@/components/Config/ActionsConfig/ToggleTheme";
 import BtnSignOut from "./BtnSignOut";

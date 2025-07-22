@@ -148,7 +148,7 @@ const Formulario = () => {
     }
 
     try {
-      await axios.post(`${BACKEND_URL}/api/auth/register`, inputs)
+      await axios.post(`${BACKEND_URL}/api/userauth/register`, inputs)
       router.push('/login')
     } catch (error) {
       if (error.response && error.response.status === 404) {
