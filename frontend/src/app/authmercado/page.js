@@ -4,9 +4,9 @@ import axios from 'axios';
 import Image from 'next/image';
 import SidebarContent from "@/components/Drawer/desktop/SidebarContent";
 import { useRouter, useSearchParams } from 'next/navigation';
-import { searchUserId } from '@/utils/searchUserId';
 import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
 import ActionsContent from '@/components/Config/ActionsConfig/ActionsContent';
+import Cookies from 'js-cookie';
 import TitlePage from '@/components/Geral/TitlePage';
 
 
@@ -31,20 +31,20 @@ export default function Authmercado() {
     }
 
     const fetchData = async () => {
-      const userId = searchUserId();
-      console.log('[DEBUG] userId retornado:', userId);
+      const token = Cookies.get("better-auth.session_token");
+      console.log('[DEBUG] token retornado:', token);
 
-      if (!userId) {
+      if (!token) {
         setMessageError('Dados de conexão não fornecidos.');
         return;
       }
 
-      setUserId(userId);
+      setUserId(token);
 
       try {
         const res = await axios.post(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/redirect`,
-          { code, nome_loja, userId },
+          { code, nome_loja, userId: token },
           { withCredentials: true } // <-- aqui
         );
         console.log('[DEBUG] Resposta do backend:', res);
