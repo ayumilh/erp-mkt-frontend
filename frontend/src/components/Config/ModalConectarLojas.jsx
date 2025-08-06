@@ -9,6 +9,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
 
   const handleStoreChange = (event) => {
     setSelectedStore(event.target.value);
+    console.log('[SELECT] Plataforma selecionada:', event.target.value);
   };
 
   const [nomeLoja, setNomeLoja] = useState("");
@@ -16,7 +17,7 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
   const sendDataStore = () => {
     let authUrl = '';
     if (selectedStore === 'Mercado Livre') {
-      const clientId = 5338784930427680;
+      const clientId = 4616015688962163;
       const redirectUri = "https://erp-mkt-frontend.vercel.app/authmercado/"
       authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&prompt=login&state=${uniqueParam}`;
 

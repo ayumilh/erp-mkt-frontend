@@ -25,6 +25,9 @@ export default function Authmercado() {
   const nome_loja = typeof window !== 'undefined' ? localStorage.getItem('nome_loja') : null;
 
   useEffect(() => {
+    console.log('[DEBUG] Código recebido:', code);
+    console.log('[DEBUG] Nome da loja (localStorage):', nome_loja);
+
     if (!code || !nome_loja) {
       setMessageError('Dados de conexão não fornecidos.');
       return;
@@ -32,6 +35,8 @@ export default function Authmercado() {
 
     const fetchData = async () => {
       const userId = searchUserId();
+      console.log('[DEBUG] userId retornado:', userId);
+
       if (!userId) {
         setMessageError('Dados de conexão não fornecidos.');
         return;
@@ -41,6 +46,8 @@ export default function Authmercado() {
 
       try {
         const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/redirect`, { code, nome_loja, userId });
+        console.log('[DEBUG] Resposta do backend:', res);
+        
         if (res.status === 200) {
           setTitleMessageError('Conectado com sucesso.');
           setStatusRequestCodeMercado(true);
