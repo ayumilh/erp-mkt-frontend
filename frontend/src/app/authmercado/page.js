@@ -6,7 +6,6 @@ import SidebarContent from "@/components/Drawer/desktop/SidebarContent";
 import { useRouter, useSearchParams } from 'next/navigation';
 import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
 import ActionsContent from '@/components/Config/ActionsConfig/ActionsContent';
-import Cookies from 'js-cookie';
 import TitlePage from '@/components/Geral/TitlePage';
 
 
@@ -15,7 +14,6 @@ export default function Authmercado() {
   const [titleMessageError, setTitleMessageError] = useState('');
   const [messageError, setMessageError] = useState('');
   const router = useRouter();
-  const [userId, setUserId] = useState('');
   const searchParams = useSearchParams();
 
   const code = searchParams.get('code');
@@ -31,20 +29,10 @@ export default function Authmercado() {
     }
 
     const fetchData = async () => {
-      const token = Cookies.get("better-auth.session_token");
-      console.log('[DEBUG] token retornado:', token);
-
-      if (!token) {
-        setMessageError('Dados de conexão não fornecidos.');
-        return;
-      }
-
-      setUserId(token);
-
       try {
         const res = await axios.post(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/redirect`,
-          { code, nome_loja, userId: token },
+          { code, nome_loja },
           { withCredentials: true } // <-- aqui
         );
         console.log('[DEBUG] Resposta do backend:', res);
