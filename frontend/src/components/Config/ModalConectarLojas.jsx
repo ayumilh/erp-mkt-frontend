@@ -17,8 +17,8 @@ const ModalConectarLojas = ({ onClose, drawerClose }) => {
   const sendDataStore = () => {
     let authUrl = '';
     if (selectedStore === 'Mercado Livre') {
-      const clientId = 4616015688962163;
-      const redirectUri = "https://erp-mkt-frontend.vercel.app/authmercado/"
+      const clientId = 5338784930427680;
+      const redirectUri = "https://leneoficial.com/authmercado";
       authUrl = `https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&prompt=login&state=${uniqueParam}`;
 
     } else if (selectedStore === 'Shopee') {

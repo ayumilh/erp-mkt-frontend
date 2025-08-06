@@ -3,11 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import SidebarContent from "@/components/Drawer/desktop/SidebarContent";
-import ProdutosContent from "@/components/Produtos/ProdutosContent";
 import { useRouter, useSearchParams } from 'next/navigation';
 import { searchUserId } from '@/utils/searchUserId';
-import SuccessNotification from '@/components/Geral/Notifications/SuccessNotification';
-import ErrorNotification from '@/components/Geral/Notifications/ErrorNotification';
 import HamburgerContent from '@/components/Drawer/mobile/HamburgerContent';
 import ActionsContent from '@/components/Config/ActionsConfig/ActionsContent';
 import TitlePage from '@/components/Geral/TitlePage';
@@ -45,9 +42,13 @@ export default function Authmercado() {
       setUserId(userId);
 
       try {
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/redirect`, { code, nome_loja, userId });
+        const res = await axios.post(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/mercadolivre/redirect`,
+          { code, nome_loja, userId },
+          { withCredentials: true } // <-- aqui
+        );
         console.log('[DEBUG] Resposta do backend:', res);
-        
+
         if (res.status === 200) {
           setTitleMessageError('Conectado com sucesso.');
           setStatusRequestCodeMercado(true);
